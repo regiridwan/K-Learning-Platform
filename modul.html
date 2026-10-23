@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Daftar Modul Belajar - K-Learning Platform</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --bg-main: #0f172a;
+        --panel-bg: #1e293b;
+        --primary: #ffffff;
+        --accent: #e11d48;
+        --accent-hover: #be123c;
+        --border-color: rgba(255, 255, 255, 0.1);
+        --text-muted: #94a3b8;
+        --text-main: #f8fafc;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Inter", "Noto Sans KR", sans-serif;
+        background-color: var(--bg-main);
+        color: var(--text-main);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      /* Header Navigasi */
+      header {
+        background-color: rgba(15, 23, 42, 0.85);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--border-color);
+        padding: 0 32px;
+        height: 70px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-weight: 800;
+        font-size: 1.25rem;
+        color: var(--primary);
+        text-decoration: none;
+      }
+
+      .brand-logo {
+        background: linear-gradient(135deg, var(--accent), #f43f5e);
+        color: white;
+        width: 38px;
+        height: 38px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 1.1rem;
+        box-shadow: 0 4px 12px rgba(225, 29, 72, 0.3);
+      }
+
+      nav a {
+        color: var(--text-muted);
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.9rem;
+        transition: color 0.2s;
+      }
+
+      nav a:hover {
+        color: var(--primary);
+      }
+
+      /* Main Container */
+      main {
+        flex: 1;
+        max-width: 1100px;
+        width: 100%;
+        margin: 0 auto;
+        padding: 40px 24px 60px 24px;
+      }
+
+      .page-title-section {
+        text-align: center;
+        margin-bottom: 48px;
+      }
+
+      .page-title {
+        font-size: 2.25rem;
+        font-weight: 800;
+        color: var(--primary);
+        margin-bottom: 12px;
+        letter-spacing: -0.025em;
+      }
+
+      .page-subtitle {
+        color: var(--text-muted);
+        font-size: 1.05rem;
+        max-width: 600px;
+        margin: 0 auto;
+        line-height: 1.6;
+      }
+
+      /* Grid Modul/Fase */
+      .modules-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 24px;
+      }
+
+      .module-card {
+        background: rgba(30, 41, 59, 0.7);
+        border: 1px solid var(--border-color);
+        border-radius: 16px;
+        padding: 24px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .module-card:hover {
+        transform: translateY(-4px);
+        border-color: rgba(225, 29, 72, 0.5);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+      }
+
+      .module-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background: linear-gradient(90deg, var(--accent), #f43f5e);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .module-card:hover::before {
+        opacity: 1;
+      }
+
+      .module-badge {
+        display: inline-block;
+        padding: 4px 10px;
+        background: rgba(225, 29, 72, 0.15);
+        color: #fda4af;
+        border: 1px solid rgba(225, 29, 72, 0.3);
+        border-radius: 6px;
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        align-self: flex-start;
+        margin-bottom: 12px;
+      }
+
+      .module-title {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--primary);
+        margin-bottom: 8px;
+      }
+
+      .module-desc {
+        font-size: 0.9rem;
+        color: var(--text-muted);
+        line-height: 1.6;
+        margin-bottom: 20px;
+        flex: 1;
+      }
+
+      .module-meta {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-top: 1px solid var(--border-color);
+        padding-top: 16px;
+        margin-top: auto;
+      }
+
+      .module-weeks {
+        font-size: 0.825rem;
+        color: var(--text-muted);
+        font-weight: 500;
+      }
+
+      .btn-action {
+        background: var(--accent);
+        color: white;
+        padding: 8px 18px;
+        border-radius: 8px;
+        font-size: 0.875rem;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.2s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .btn-action:hover {
+        background: var(--accent-hover);
+      }
+
+      /* Footer */
+      footer {
+        background: #090d16;
+        border-top: 1px solid var(--border-color);
+        padding: 20px;
+        text-align: center;
+        font-size: 0.85rem;
+        color: var(--text-muted);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header Navigasi -->
+    <header>
+      <a href="welcome.html" class="brand">
+        <div class="brand-logo">한</div>
+        <span>K-Learning Platform</span>
+      </a>
+      <nav>
+        <a href="welcome.html">← Beranda</a>
+      </nav>
+    </header>
+
+    <!-- Konten Utama -->
+    <main>
+      <div class="page-title-section">
+        <h1 class="page-title">Pilih Kurikulum Belajar</h1>
+        <p class="page-subtitle">
+          Pilih modul fase pembelajaran sesuai dengan tingkat kemampuan Anda,
+          mulai dari fondasi paling dasar hingga level TOPIK II.
+        </p>
+      </div>
+
+      <div class="modules-grid">
+        <!-- Fase 1 -->
+        <div class="module-card">
+          <div>
+            <span class="module-badge">Level Pemula</span>
+            <h2 class="module-title">Fase 1: Fondasi Bahasa Korea</h2>
+            <p class="module-desc">
+              Pengenalan konsonan, vokal Hangeul, aturan 받침 (batchim), serta
+              tata bahasa dasar untuk menyusun kalimat sederhana.
+            </p>
+          </div>
+          <div class="module-meta">
+            <span class="module-weeks">Minggu 1 - 4</span>
+            <a href="fase1.html" class="btn-action">Buka Modul →</a>
+          </div>
+        </div>
+
+        <!-- Fase 2 -->
+        <div class="module-card">
+          <div>
+            <span class="module-badge">Level Pemula</span>
+            <h2 class="module-title">Fase 2: Perluasan Tata Bahasa</h2>
+            <p class="module-desc">
+              Pendalaman partikel tempat, waktu, kata kerja pergerakan,
+              penunjukan angka, jam, dan ekspresi keinginan harian.
+            </p>
+          </div>
+          <div class="module-meta">
+            <span class="module-weeks">Minggu 5 - 8</span>
+            <a href="fase2.html" class="btn-action">Buka Modul →</a>
+          </div>
+        </div>
+
+        <!-- Fase 3 -->
+        <div class="module-card">
+          <div>
+            <span class="module-badge">Level Menengah Pemula</span>
+            <h2 class="module-title">Fase 3: Kalimat Kompleks</h2>
+            <p class="module-desc">
+              Mempelajari bentuk kalimat majemuk, kata sifat, ungkapan cuaca,
+              kesehatan, transportasi, serta bahasa santai (Banmal).
+            </p>
+          </div>
+          <div class="module-meta">
+            <span class="module-weeks">Minggu 9 - 12</span>
+            <a href="fase3.html" class="btn-action">Buka Modul →</a>
+          </div>
+        </div>
+
+        <!-- Fase 4 -->
+        <div class="module-card">
+          <div>
+            <span class="module-badge">Level TOPIK I</span>
+            <h2 class="module-title">Fase 4: Tata Bahasa Lanjutan</h2>
+            <p class="module-desc">
+              Pembahasan Modifier, kata kerja tak beraturan, ungkapan waktu,
+              pengalaman, kewajiban, dan percakapan natural.
+            </p>
+          </div>
+          <div class="module-meta">
+            <span class="module-weeks">Minggu 13 - 17</span>
+            <a href="fase4.html" class="btn-action">Buka Modul →</a>
+          </div>
+        </div>
+
+        <!-- Fase 5 -->
+        <div class="module-card">
+          <div>
+            <span class="module-badge">Level TOPIK I</span>
+            <h2 class="module-title">Fase 5: Simulasi TOPIK I</h2>
+            <p class="module-desc">
+              Persiapan intensif TOPIK I dengan bentuk formal (-ㅂ니다),
+              kosakata tematik, serta latihan membaca & mendengar.
+            </p>
+          </div>
+          <div class="module-meta">
+            <span class="module-weeks">Minggu 18 - 20</span>
+            <a href="fase5.html" class="btn-action">Buka Modul →</a>
+          </div>
+        </div>
+
+        <!-- Fase 6 -->
+        <div class="module-card">
+          <div>
+            <span class="module-badge">Level TOPIK II</span>
+            <h2 class="module-title">Fase 6: Menengah Awal</h2>
+            <p class="module-desc">
+              Materi kata benda turunan, perubahan keadaan, kutipan langsung &
+              tak langsung, syarat, dugaan, serta gaya tulis (해라체).
+            </p>
+          </div>
+          <div class="module-meta">
+            <span class="module-weeks">Minggu 21 - 25</span>
+            <a href="fase6.html" class="btn-action">Buka Modul →</a>
+          </div>
+        </div>
+
+        <!-- Fase 7 -->
+        <div class="module-card">
+          <div>
+            <span class="module-badge">Level TOPIK II</span>
+            <h2 class="module-title">Fase 7: Persiapan TOPIK II</h2>
+            <p class="module-desc">
+              Strategi membaca cepat, mendengar percakapan panjang, penulisan
+              esai terstruktur (Soal 51-54), dan kosakata Sino-Korea.
+            </p>
+          </div>
+          <div class="module-meta">
+            <span class="module-weeks">Minggu 26 - 28</span>
+            <a href="fase7.html" class="btn-action">Buka Modul →</a>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+      <p>&copy; 2026 K-Learning Platform. All rights reserved.</p>
+    </footer>
+  </body>
+</html>

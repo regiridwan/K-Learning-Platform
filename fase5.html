@@ -1,0 +1,747 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fase 5: Simulasi TOPIK I - K-Learning Platform</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --bg-main: #f8fafc;
+        --panel-bg: #ffffff;
+        --primary: #1e293b;
+        --accent: #e11d48;
+        --border-color: #e2e8f0;
+        --text-muted: #64748b;
+        --text-main: #1e293b;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: "Inter", "Noto Sans KR", sans-serif;
+        background-color: var(--bg-main);
+        color: var(--text-main);
+        height: 100vh;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+      }
+
+      header {
+        background-color: var(--panel-bg);
+        border-bottom: 1px solid var(--border-color);
+        padding: 0 24px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-shrink: 0;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-weight: 700;
+        font-size: 1.1rem;
+        color: var(--primary);
+        text-decoration: none;
+      }
+
+      .brand-logo {
+        background: var(--accent);
+        color: white;
+        width: 32px;
+        height: 32px;
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+      }
+
+      nav {
+        display: flex;
+        gap: 16px;
+        align-items: center;
+      }
+      nav a {
+        text-decoration: none;
+        color: var(--text-muted);
+        font-weight: 500;
+        font-size: 0.9rem;
+      }
+      nav a:hover {
+        color: var(--accent);
+      }
+
+      .nav-dropdown {
+        padding: 6px 12px;
+        border: 1px solid var(--border-color);
+        border-radius: 6px;
+        font-weight: 600;
+        font-size: 0.85rem;
+        background: white;
+        color: var(--primary);
+        outline: none;
+        cursor: pointer;
+      }
+
+      .timer-widget {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background: #f1f5f9;
+        padding: 4px 12px;
+        border-radius: 6px;
+        border: 1px solid var(--border-color);
+      }
+
+      .timer-display {
+        font-family: monospace;
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--primary);
+      }
+
+      .timer-btn {
+        background: var(--primary);
+        color: white;
+        border: none;
+        padding: 4px 10px;
+        border-radius: 4px;
+        font-size: 0.8rem;
+        cursor: pointer;
+      }
+      .timer-btn.stop {
+        background: var(--accent);
+      }
+
+      .workspace {
+        display: flex;
+        flex: 1;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .left-panel {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        border-right: 1px solid var(--border-color);
+        background: #ffffff;
+        transition: all 0.3s ease;
+      }
+
+      .panel-header {
+        padding: 10px 16px;
+        border-bottom: 1px solid var(--border-color);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: #f8fafc;
+      }
+
+      .pdf-container {
+        flex: 1;
+        background: #525659;
+      }
+      .pdf-container iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+      }
+
+      /* Panel Kanan (Kosakata) & Fitur Collapse */
+      .right-panel {
+        width: 400px;
+        background: var(--panel-bg);
+        display: flex;
+        flex-direction: column;
+        flex-shrink: 0;
+        transition:
+          margin-right 0.3s ease,
+          opacity 0.2s ease;
+      }
+
+      .right-panel.collapsed {
+        margin-right: -400px;
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .vocab-header {
+        padding: 14px 16px;
+        border-bottom: 1px solid var(--border-color);
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .vocab-title-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .vocab-title {
+        font-size: 1rem;
+        font-weight: 700;
+      }
+
+      .control-btns {
+        display: flex;
+        gap: 6px;
+      }
+
+      .action-btn {
+        font-size: 0.75rem;
+        padding: 5px 10px;
+        background: #f1f5f9;
+        border: 1px solid var(--border-color);
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: 600;
+        color: var(--primary);
+        transition: all 0.2s;
+      }
+
+      .action-btn:hover {
+        background: var(--primary);
+        color: white;
+      }
+
+      .toggle-panel-btn {
+        background: var(--primary);
+        color: white;
+        border: none;
+        padding: 6px 12px;
+        border-radius: 6px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        transition: background-color 0.2s;
+      }
+
+      .toggle-panel-btn:hover {
+        background: var(--accent);
+      }
+
+      .week-filter {
+        display: flex;
+        gap: 6px;
+        overflow-x: auto;
+        padding-bottom: 4px;
+      }
+
+      .week-btn {
+        padding: 4px 12px;
+        border: 1px solid var(--border-color);
+        background: #f1f5f9;
+        border-radius: 16px;
+        font-size: 0.8rem;
+        font-weight: 500;
+        cursor: pointer;
+        white-space: nowrap;
+      }
+
+      .week-btn.active {
+        background: var(--primary);
+        color: white;
+        border-color: var(--primary);
+      }
+
+      .vocab-list {
+        flex: 1;
+        overflow-y: auto;
+        padding: 14px 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .vocab-card {
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 12px 14px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        background: #ffffff;
+        transition: background-color 0.2s;
+      }
+      .vocab-card:hover {
+        background-color: #f8fafc;
+      }
+
+      .vocab-content {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        flex: 1;
+      }
+
+      .vocab-kr {
+        font-weight: 700;
+        font-size: 0.98rem;
+        color: var(--primary);
+      }
+
+      .vocab-latin {
+        font-size: 0.75rem;
+        color: var(--accent);
+        font-weight: 600;
+        font-style: italic;
+      }
+
+      .vocab-id {
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        margin-top: 2px;
+      }
+
+      .blur-text {
+        background: #cbd5e1;
+        color: transparent !important;
+        border-radius: 4px;
+        user-select: none;
+        display: inline-block;
+        padding: 0 4px;
+      }
+
+      .item-toggle-btn {
+        background: #f1f5f9;
+        border: 1px solid var(--border-color);
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        font-size: 0.85rem;
+        flex-shrink: 0;
+        transition: background-color 0.2s;
+      }
+
+      .item-toggle-btn:hover {
+        background: #e2e8f0;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <a href="welcome.html" class="brand">
+        <div class="brand-logo">한</div>
+        <span>K-Learning Platform</span>
+      </a>
+
+      <div class="timer-widget">
+        <span
+          style="font-size: 0.75rem; color: var(--text-muted); font-weight: 600"
+          >POMODORO</span
+        >
+        <div class="timer-display" id="timer">25:00</div>
+        <button class="timer-btn" id="start-timer-btn" onclick="toggleTimer()">
+          Start
+        </button>
+        <button
+          class="timer-btn"
+          onclick="resetTimer()"
+          style="background: #cbd5e1; color: #334155"
+        >
+          Reset
+        </button>
+      </div>
+
+      <nav>
+        <select
+          class="nav-dropdown"
+          onchange="window.location.href = this.value"
+        >
+          <option value="fase1.html">Fase 1: Fondasi</option>
+          <option value="fase2.html">Fase 2: Perluasan</option>
+          <option value="fase3.html">Fase 3: Kalimat Kompleks</option>
+          <option value="fase4.html">Fase 4: Tata Bahasa Lanjutan</option>
+          <option value="fase5.html" selected>Fase 5: Simulasi TOPIK I</option>
+          <option value="fase6.html">Fase 6: Menengah Awal</option>
+          <option value="fase7.html">Fase 7: TOPIK II</option>
+        </select>
+        <a href="welcome.html">Home</a>
+      </nav>
+    </header>
+
+    <div class="workspace">
+      <!-- Panel Kiri: Modul PDF Fase 5 -->
+      <div class="left-panel">
+        <div class="panel-header">
+          <span style="font-weight: 700; color: var(--primary)"
+            >Fase 5: Latihan & Simulasi TOPIK I (Minggu 18 - 20)</span
+          >
+          <button
+            class="toggle-panel-btn"
+            onclick="toggleRightPanel()"
+            id="toggle-panel-btn"
+          >
+            <span id="panel-btn-icon">📖</span>
+            <span id="panel-btn-text">Sembunyikan Kosakata</span>
+          </button>
+        </div>
+        <div class="pdf-container">
+          <iframe
+            src="https://docs.google.com/viewer?url=https://k-learning-platform-by-regi.netlify.app/Modul_Bahasa_Korea_Fase5.pdf&embedded=true"
+          ></iframe>
+        </div>
+      </div>
+
+      <!-- Panel Kanan: Kuis & Hafalan Kosakata Tematik -->
+      <div class="right-panel" id="right-panel">
+        <div class="vocab-header">
+          <div class="vocab-title-bar">
+            <span class="vocab-title">Hafalan Kosakata</span>
+            <div class="control-btns">
+              <button class="action-btn" onclick="toggleHideTarget()">
+                Mode:
+                <span id="hide-mode-label" style="color: var(--accent)"
+                  >Sembunyi ID</span
+                >
+              </button>
+              <button class="action-btn" onclick="toggleHideAll()">
+                Sembunyi Semua
+              </button>
+            </div>
+          </div>
+          <div class="week-filter" id="week-filter-container"></div>
+        </div>
+        <div class="vocab-list" id="vocab-list"></div>
+      </div>
+    </div>
+
+    <script>
+      // Data Kosakata Tematik Lengkap Fase 5 (Minggu 18 - 20) + Latin
+      const vocabData = {
+        "Minggu 18": [
+          { kr: "아버지 / 아빠", latin: "a-beo-ji / a-ppa", id: "Ayah / papa" },
+          {
+            kr: "어머니 / 엄마",
+            latin: "eo-meo-ni / eom-ma",
+            id: "Ibu / mama",
+          },
+          { kr: "부모님", latin: "bu-mo-nim", id: "Orang tua" },
+          { kr: "할아버지", latin: "ha-ra-beo-ji", id: "Kakek" },
+          { kr: "할머니", latin: "hal-meo-ni", id: "Nenek" },
+          { kr: "형 / 오빠", latin: "hyeong / o-ppa", id: "Kakak laki-laki" },
+          { kr: "누나 / 언니", latin: "nu-na / eon-ni", id: "Kakak perempuan" },
+          { kr: "동생", latin: "dong-saeng", id: "Adik" },
+          { kr: "아들 / 딸", latin: "a-deul / ttal", id: "Putra / putri" },
+          {
+            kr: "남편 / 아내",
+            latin: "nam-pyeon / a-nae",
+            id: "Suami / istri",
+          },
+          { kr: "아이", latin: "a-i", id: "Anak" },
+          { kr: "물건", latin: "mul-geon", id: "Barang" },
+          { kr: "열쇠", latin: "yeol-ssoe", id: "Kunci" },
+          { kr: "신발", latin: "sin-bal", id: "Sepatu" },
+          { kr: "우유 / 주스", latin: "u-yu / ju-seu", id: "Susu / jus" },
+          { kr: "모자", latin: "mo-ja", id: "Topi" },
+          { kr: "차", latin: "cha", id: "Teh" },
+          { kr: "안경", latin: "an-gyeong", id: "Kacamata" },
+          { kr: "라면", latin: "ra-myeon", id: "Mi instan" },
+          { kr: "시계", latin: "si-gye", id: "Jam tangan" },
+          { kr: "과자", latin: "gwa-ja", id: "Camilan" },
+          { kr: "공책", latin: "gong-chaek", id: "Buku tulis" },
+          { kr: "케이크", latin: "ke-i-keu", id: "Kue" },
+          { kr: "은행", latin: "eun-haeng", id: "Bank" },
+          { kr: "편의점", latin: "pyeon-ui-jeom", id: "Minimarket" },
+          { kr: "우체국", latin: "u-che-guk", id: "Kantor pos" },
+          { kr: "서점", latin: "seo-jeom", id: "Toko buku" },
+          {
+            kr: "병원 / 약국",
+            latin: "byeong-won / yak-guk",
+            id: "Rumah sakit / apotek",
+          },
+          { kr: "공항", latin: "gong-hang", id: "Bandara" },
+          { kr: "공원", latin: "gong-won", id: "Taman" },
+          { kr: "호텔", latin: "ho-tel", id: "Hotel" },
+          { kr: "극장", latin: "geuk-jang", id: "Bioskop" },
+          { kr: "대학교", latin: "dae-hak-gyo", id: "Universitas" },
+          { kr: "백화점", latin: "baek-hwa-jeom", id: "Mal / dept store" },
+          { kr: "화장실", latin: "hwa-jang-sil", id: "Toilet" },
+          {
+            kr: "년 / 월 / 일",
+            latin: "nyeon / wol / il",
+            id: "Tahun / bulan / hari",
+          },
+          { kr: "올해", latin: "ol-hae", id: "Tahun ini" },
+          { kr: "주", latin: "ju", id: "Minggu" },
+          { kr: "매주", latin: "mae-ju", id: "Setiap minggu" },
+          { kr: "밤", latin: "bam", id: "Malam" },
+          { kr: "평일", latin: "pyeong-il", id: "Hari kerja" },
+          { kr: "봄 / 여름", latin: "bom / yeo-reum", id: "Semi / panas" },
+          { kr: "주말", latin: "ju-mal", id: "Akhir pekan" },
+          {
+            kr: "가을 / 겨울",
+            latin: "ga-eul / gyeo-ul",
+            id: "Gugur / dingin",
+          },
+          { kr: "요일", latin: "yo-il", id: "Nama hari" },
+          { kr: "얼굴", latin: "eol-gul", id: "Wajah" },
+          {
+            kr: "주다 / 받다",
+            latin: "ju-da / bat-da",
+            id: "Memberi / menerima",
+          },
+          {
+            kr: "코 / 입 / 귀",
+            latin: "ko / ip / gwi",
+            id: "Hidung / mulut / telinga",
+          },
+          { kr: "찾다", latin: "chat-da", id: "Mencari" },
+          { kr: "손 / 발", latin: "son / bal", id: "Tangan / kaki" },
+          { kr: "사진을 찍다", latin: "sa-jin-eul ttik-da", id: "Memotret" },
+          { kr: "다리", latin: "da-ri", id: "Kaki (tungkai)" },
+          {
+            kr: "시험을 보다",
+            latin: "si-heom-eul bo-da",
+            id: "Mengikuti ujian",
+          },
+          { kr: "몸", latin: "mom", id: "Tubuh" },
+          { kr: "가지고 오다", latin: "ga-ji-go o-da", id: "Membawa" },
+          { kr: "팔다", latin: "pal-da", id: "Menjual" },
+          { kr: "춤을 추다", latin: "chum-eul chu-da", id: "Menari" },
+          {
+            kr: "빠르다 / 느리다",
+            latin: "ppa-reu-da / neu-ri-da",
+            id: "Cepat / lambat",
+          },
+          { kr: "깨끗하다", latin: "kkae-kkeut-ha-da", id: "Bersih" },
+          {
+            kr: "무겁다 / 가볍다",
+            latin: "mu-geop-da / ga-byeop-da",
+            id: "Berat / ringan",
+          },
+          { kr: "더럽다", latin: "deo-reop-da", id: "Kotor" },
+          { kr: "친절하다", latin: "chin-jeol-ha-da", id: "Ramah" },
+          { kr: "새", latin: "sae", id: "Baru" },
+          { kr: "조용하다", latin: "jo-yong-ha-da", id: "Tenang" },
+          { kr: "오래", latin: "o-rae", id: "Lama" },
+          { kr: "복잡하다", latin: "bok-jap-ha-da", id: "Ramai / rumit" },
+          { kr: "값 / 가격", latin: "gap / ga-gyeok", id: "Harga" },
+          { kr: "안내", latin: "an-nae", id: "Informasi" },
+          { kr: "쉬다 / 휴무", latin: "swi-da / hyu-mu", id: "Libur" },
+          { kr: "모집", latin: "mo-jip", id: "Perekrutan" },
+          {
+            kr: "입구 / 출구",
+            latin: "ip-gu / chul-gu",
+            id: "Pintu masuk / keluar",
+          },
+          { kr: "신청", latin: "sin-cheong", id: "Pendaftaran" },
+          { kr: "주차", latin: "ju-cha", id: "Parkir" },
+          { kr: "문의", latin: "mun-ui", id: "Pertanyaan" },
+          { kr: "금지", latin: "geum-ji", id: "Dilarang" },
+          { kr: "무료", latin: "mu-ryo", id: "Gratis" },
+          { kr: "주의", latin: "ju-ui", id: "Perhatian" },
+          { kr: "할인", latin: "hal-in", id: "Diskon" },
+          {
+            kr: "출발 / 도착",
+            latin: "chul-bal / do-chak",
+            id: "Berangkat / tiba",
+          },
+          { kr: "예약", latin: "ye-yak", id: "Reservasi" },
+          { kr: "주소", latin: "ju-so", id: "Alamat" },
+          { kr: "영업시간", latin: "yeong-eop-si-gan", id: "Jam buka" },
+          { kr: "연락", latin: "yeol-lak", id: "Kontak / kabar" },
+        ],
+        "Minggu 19": [
+          { kr: "어디", latin: "eo-di", id: "Di mana / Ke mana" },
+          { kr: "언제", latin: "eon-je", id: "Kapan" },
+          { kr: "얼마", latin: "eol-ma", id: "Berapa (harga)" },
+          { kr: "몇", latin: "myeot", id: "Berapa (jumlah)" },
+          { kr: "뭐 / 무엇", latin: "mwo / mu-eot", id: "Apa" },
+          { kr: "왜", latin: "wae", id: "Mengapa" },
+          { kr: "누구", latin: "nu-gu", id: "Siapa" },
+          { kr: "어떻게", latin: "eo-tteok-ge", id: "Bagaimana" },
+          { kr: "무슨", latin: "mu-seun", id: "Apa / Yang mana" },
+          { kr: "어떤", latin: "eo-tteon", id: "Seperti apa" },
+          { kr: "듣기", latin: "deut-gi", id: "Mendengar" },
+          { kr: "읽기", latin: "ilk-gi", id: "Membaca" },
+          { kr: "질문", latin: "jil-mun", id: "Pertanyaan" },
+          { kr: "대화", latin: "dae-hwa", id: "Percakapan" },
+        ],
+        "Minggu 20": [
+          { kr: "모의고사", latin: "mo-ui-go-sa", id: "Ujian simulasi" },
+          { kr: "문제", latin: "mun-je", id: "Soal / Masalah" },
+          {
+            kr: "답 / 정답",
+            latin: "dap / jeong-dap",
+            id: "Jawaban / Jawaban benar",
+          },
+          { kr: "맞다", latin: "mat-da", id: "Benar" },
+          { kr: "틀리다", latin: "teul-li-da", id: "Salah" },
+          { kr: "알맞다", latin: "al-mat-da", id: "Cocok / Tepat" },
+          { kr: "고르다", latin: "go-reu-da", id: "Memilih" },
+          { kr: "순서", latin: "sun-seo", id: "Urutan" },
+          { kr: "이유", latin: "i-yu", id: "Alasan" },
+          { kr: "내용", latin: "nae-yong", id: "Isi" },
+          {
+            kr: "같은 것",
+            latin: "ga-teun geot",
+            id: "Hal yang sama / Sesuai",
+          },
+          { kr: "다른 것", latin: "da-reun geot", id: "Hal yang berbeda" },
+        ],
+      };
+
+      let currentWeek = Object.keys(vocabData)[0];
+      let hideTarget = "ID";
+      let hideStates = {};
+      let isPanelCollapsed = false;
+
+      window.onload = function () {
+        const weekContainer = document.getElementById("week-filter-container");
+        Object.keys(vocabData).forEach((week, index) => {
+          const btn = document.createElement("button");
+          btn.className = `week-btn ${index === 0 ? "active" : ""}`;
+          btn.innerText = week;
+          btn.onclick = () => selectWeek(week, btn);
+          weekContainer.appendChild(btn);
+        });
+        renderVocab();
+      };
+
+      function toggleRightPanel() {
+        const rightPanel = document.getElementById("right-panel");
+        const btnIcon = document.getElementById("panel-btn-icon");
+        const btnText = document.getElementById("panel-btn-text");
+
+        isPanelCollapsed = !isPanelCollapsed;
+
+        if (isPanelCollapsed) {
+          rightPanel.classList.add("collapsed");
+          btnIcon.innerText = "📖";
+          btnText.innerText = "Tampilkan Kosakata";
+        } else {
+          rightPanel.classList.remove("collapsed");
+          btnIcon.innerText = "📖";
+          btnText.innerText = "Sembunyikan Kosakata";
+        }
+      }
+
+      function selectWeek(week, btnElement) {
+        document
+          .querySelectorAll(".week-btn")
+          .forEach((b) => b.classList.remove("active"));
+        btnElement.classList.add("active");
+        currentWeek = week;
+        hideStates = {};
+        renderVocab();
+      }
+
+      function toggleHideTarget() {
+        hideTarget = hideTarget === "ID" ? "KR" : "ID";
+        document.getElementById("hide-mode-label").innerText =
+          hideTarget === "ID" ? "Sembunyi ID" : "Sembunyi KR";
+        renderVocab();
+      }
+
+      function toggleSingleItem(index) {
+        hideStates[index] = !hideStates[index];
+        renderVocab();
+      }
+
+      function toggleHideAll() {
+        const currentList = vocabData[currentWeek];
+        const allHidden = currentList.every((_, idx) => hideStates[idx]);
+
+        currentList.forEach((_, idx) => {
+          hideStates[idx] = !allHidden;
+        });
+        renderVocab();
+      }
+
+      function renderVocab() {
+        const vocabList = document.getElementById("vocab-list");
+        vocabList.innerHTML = "";
+
+        vocabData[currentWeek].forEach((item, index) => {
+          const isHidden = hideStates[index] || false;
+
+          const isKrHidden = isHidden && hideTarget === "KR";
+          const isIdHidden = isHidden && hideTarget === "ID";
+
+          const card = document.createElement("div");
+          card.className = "vocab-card";
+          card.innerHTML = `
+          <div class="vocab-content">
+            <div class="vocab-kr ${isKrHidden ? "blur-text" : ""}">${item.kr}</div>
+            <div class="vocab-latin ${isKrHidden ? "blur-text" : ""}">${item.latin}</div>
+            <div class="vocab-id ${isIdHidden ? "blur-text" : ""}">${item.id}</div>
+          </div>
+          <button class="item-toggle-btn" onclick="toggleSingleItem(${index})" title="Sembunyikan/Tampilkan Item Ini">
+            ${isHidden ? "👁️" : "🙈"}
+          </button>
+        `;
+          vocabList.appendChild(card);
+        });
+      }
+
+      /* Timer Functions */
+      let timerInterval = null,
+        timeLeft = 25 * 60,
+        isTimerRunning = false;
+      function updateTimerDisplay() {
+        const minutes = Math.floor(timeLeft / 60),
+          seconds = timeLeft % 60;
+        document.getElementById("timer").innerText =
+          `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+      }
+      function toggleTimer() {
+        const btn = document.getElementById("start-timer-btn");
+        if (isTimerRunning) {
+          clearInterval(timerInterval);
+          isTimerRunning = false;
+          btn.innerText = "Start";
+          btn.classList.remove("stop");
+        } else {
+          isTimerRunning = true;
+          btn.innerText = "Pause";
+          btn.classList.add("stop");
+          timerInterval = setInterval(() => {
+            if (timeLeft > 0) {
+              timeLeft--;
+              updateTimerDisplay();
+            } else {
+              clearInterval(timerInterval);
+              alert("Waktu belajar selesai! Istirahat dulu.");
+              resetTimer();
+            }
+          }, 1000);
+        }
+      }
+      function resetTimer() {
+        clearInterval(timerInterval);
+        isTimerRunning = false;
+        timeLeft = 25 * 60;
+        document.getElementById("start-timer-btn").innerText = "Start";
+        document.getElementById("start-timer-btn").classList.remove("stop");
+        updateTimerDisplay();
+      }
+      updateTimerDisplay();
+    </script>
+  </body>
+</html>

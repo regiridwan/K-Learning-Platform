@@ -1,0 +1,1094 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Latihan Kosakata - K-Learning Platform</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --bg-main: #0f172a;
+        --panel-bg: #1e293b;
+        --primary: #ffffff;
+        --accent: #e11d48;
+        --accent-hover: #be123c;
+        --border-color: rgba(255, 255, 255, 0.1);
+        --text-muted: #94a3b8;
+        --success: #22c55e;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Inter", "Noto Sans KR", sans-serif;
+        background-color: var(--bg-main);
+        color: var(--primary);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      header {
+        background-color: rgba(15, 23, 42, 0.85);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--border-color);
+        padding: 0 32px;
+        height: 70px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-weight: 800;
+        font-size: 1.25rem;
+        color: var(--primary);
+        text-decoration: none;
+      }
+
+      .brand-logo {
+        background: linear-gradient(135deg, var(--accent), #f43f5e);
+        color: white;
+        width: 38px;
+        height: 38px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+      }
+
+      nav a {
+        color: var(--text-muted);
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.9rem;
+        transition: color 0.2s;
+      }
+      nav a:hover {
+        color: var(--primary);
+      }
+
+      main {
+        flex: 1;
+        max-width: 900px;
+        width: 100%;
+        margin: 0 auto;
+        padding: 32px 24px;
+      }
+
+      /* Selection Screen */
+      .section-title {
+        font-size: 1.8rem;
+        font-weight: 800;
+        margin-bottom: 8px;
+        text-align: center;
+      }
+
+      .section-desc {
+        color: var(--text-muted);
+        text-align: center;
+        margin-bottom: 32px;
+        font-size: 0.95rem;
+      }
+
+      .phase-group {
+        margin-bottom: 28px;
+      }
+
+      .phase-title {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--accent);
+        margin-bottom: 12px;
+        padding-bottom: 6px;
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      .weeks-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 12px;
+      }
+
+      .week-card {
+        background: var(--panel-bg);
+        border: 1px solid var(--border-color);
+        padding: 16px;
+        border-radius: 12px;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .week-card:hover {
+        border-color: var(--accent);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(225, 29, 72, 0.2);
+      }
+
+      .week-name {
+        font-weight: 700;
+        font-size: 1rem;
+        margin-bottom: 4px;
+      }
+
+      .week-count {
+        font-size: 0.8rem;
+        color: var(--text-muted);
+      }
+
+      /* Quiz Screen */
+      .quiz-container {
+        background: var(--panel-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 20px;
+        padding: 32px;
+        display: none;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      }
+
+      .quiz-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 24px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      .quiz-title {
+        font-size: 1.2rem;
+        font-weight: 700;
+      }
+
+      .quiz-progress {
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: var(--accent);
+      }
+
+      .question-box {
+        text-align: center;
+        margin: 36px 0 40px 0;
+      }
+
+      .question-kr {
+        font-size: 2.6rem;
+        font-weight: 800;
+        color: var(--primary);
+        letter-spacing: 0.02em;
+      }
+
+      .options-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        margin-bottom: 24px;
+      }
+
+      .option-btn {
+        background: rgba(15, 23, 42, 0.6);
+        border: 1px solid var(--border-color);
+        color: var(--primary);
+        padding: 18px;
+        border-radius: 12px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        text-align: left;
+      }
+
+      .option-btn:hover {
+        border-color: var(--accent);
+        background: rgba(225, 29, 72, 0.1);
+      }
+
+      /* Result Screen */
+      .result-box {
+        text-align: center;
+        display: none;
+      }
+
+      .score-circle {
+        width: 140px;
+        height: 140px;
+        border-radius: 50%;
+        background: rgba(225, 29, 72, 0.15);
+        border: 4px solid var(--accent);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 24px auto;
+      }
+
+      .score-num {
+        font-size: 2.5rem;
+        font-weight: 800;
+        color: var(--accent);
+      }
+
+      .score-label {
+        font-size: 0.8rem;
+        color: var(--text-muted);
+      }
+
+      .result-stats {
+        display: flex;
+        justify-content: center;
+        gap: 24px;
+        margin-bottom: 32px;
+      }
+
+      .stat-item {
+        background: rgba(15, 23, 42, 0.6);
+        padding: 12px 20px;
+        border-radius: 10px;
+        border: 1px solid var(--border-color);
+      }
+
+      .stat-val {
+        font-size: 1.2rem;
+        font-weight: 700;
+      }
+
+      .btn-group {
+        display: flex;
+        gap: 12px;
+        justify-content: center;
+      }
+
+      .btn-action {
+        background: var(--accent);
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 10px;
+        font-size: 0.95rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+
+      .btn-action:hover {
+        background: var(--accent-hover);
+      }
+
+      .btn-secondary {
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid var(--border-color);
+        color: white;
+      }
+
+      footer {
+        background: #090d16;
+        border-top: 1px solid var(--border-color);
+        padding: 20px;
+        text-align: center;
+        font-size: 0.85rem;
+        color: var(--text-muted);
+      }
+
+      @media (max-width: 600px) {
+        .options-grid {
+          grid-template-columns: 1fr;
+        }
+        .question-kr {
+          font-size: 2rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <a href="welcome.html" class="brand">
+        <div class="brand-logo">📝</div>
+        <span>Latihan Kosakata</span>
+      </a>
+      <nav>
+        <a href="welcome.html">← Kembali</a>
+      </nav>
+    </header>
+
+    <main>
+      <!-- TAMPILAN 1: PILIH MINGGU -->
+      <div id="selection-screen">
+        <h1 class="section-title">Pilih Minggu Latihan</h1>
+        <p class="section-desc">
+          Uji hafalan karakter Hangul dan kosakata kamu per minggu.
+        </p>
+
+        <div id="weeks-container"></div>
+      </div>
+
+      <!-- TAMPILAN 2: AREA KUIS MURNI HANGUL -->
+      <div id="quiz-screen" class="quiz-container">
+        <div class="quiz-header">
+          <div class="quiz-title" id="quiz-week-label">Minggu 1</div>
+          <div class="quiz-progress" id="quiz-progress">Soal 1 / 10</div>
+        </div>
+
+        <div class="question-box">
+          <div class="question-kr" id="question-kr">안녕하세요</div>
+        </div>
+
+        <div class="options-grid" id="options-container"></div>
+      </div>
+
+      <!-- TAMPILAN 3: HASIL & SKOR -->
+      <div id="result-screen" class="quiz-container result-box">
+        <h2 style="font-size: 1.8rem; margin-bottom: 8px">
+          Hasil Latihan Selesai! 🎉
+        </h2>
+        <p
+          style="color: var(--text-muted); margin-bottom: 24px"
+          id="result-week-subtitle"
+        >
+          Minggu 1
+        </p>
+
+        <div class="score-circle">
+          <div class="score-num" id="final-score">100</div>
+          <div class="score-label">NILAI AKHIR</div>
+        </div>
+
+        <div class="result-stats">
+          <div class="stat-item">
+            <div style="color: var(--text-muted); font-size: 0.8rem">Benar</div>
+            <div
+              class="stat-val"
+              style="color: var(--success)"
+              id="stat-correct"
+            >
+              0
+            </div>
+          </div>
+          <div class="stat-item">
+            <div style="color: var(--text-muted); font-size: 0.8rem">Salah</div>
+            <div class="stat-val" style="color: var(--accent)" id="stat-wrong">
+              0
+            </div>
+          </div>
+          <div class="stat-item">
+            <div style="color: var(--text-muted); font-size: 0.8rem">
+              Total Soal
+            </div>
+            <div class="stat-val" id="stat-total">0</div>
+          </div>
+        </div>
+
+        <div class="btn-group">
+          <button class="btn-action btn-secondary" onclick="restartQuiz()">
+            Ulangi Minggu Ini
+          </button>
+          <button class="btn-action" onclick="showSelectionScreen()">
+            Pilih Minggu Lain
+          </button>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <p>&copy; 2026 K-Learning Platform. Master Hangul step-by-step!</p>
+    </footer>
+
+    <script>
+      // DATA KOSAKATA LENGKAP MINGGU 1 - 28
+      const fullVocabData = {
+        // FASE 1
+        "Minggu 1": [
+          { kr: "안녕하세요", id: "Halo / selamat (umum)" },
+          { kr: "안녕히 가세요", id: "Selamat jalan (ke yang pergi)" },
+          { kr: "안녕히 계세요", id: "Selamat tinggal (ke yang tinggal)" },
+          { kr: "만나서 반갑습니다", id: "Senang bertemu dengan Anda" },
+          { kr: "감사합니다", id: "Terima kasih" },
+          { kr: "죄송합니다", id: "Minta maaf" },
+          { kr: "네 / 예", id: "Ya" },
+          { kr: "아니요", id: "Tidak / bukan" },
+          { kr: "이름", id: "Nama" },
+          { kr: "사람", id: "Orang" },
+          { kr: "한국", id: "Korea" },
+          { kr: "인도네시아", id: "Indonesia" },
+          { kr: "선생님", id: "Guru" },
+          { kr: "학생", id: "Siswa / pelajar" },
+          { kr: "회사원", id: "Karyawan perusahaan" },
+        ],
+        "Minggu 2": [
+          { kr: "책", id: "Buku" },
+          { kr: "공책", id: "Buku tulis" },
+          { kr: "연필", id: "Pensil" },
+          { kr: "볼펜", id: "Pulpen" },
+          { kr: "지우개", id: "Penghapus" },
+          { kr: "시계", id: "Jam" },
+          { kr: "가방", id: "Tas" },
+          { kr: "모자", id: "Topi" },
+          { kr: "안경", id: "Kacamata" },
+          { kr: "우산", id: "Payung" },
+          { kr: "이것", id: "Ini (benda dekat)" },
+          { kr: "그것", id: "Itu (dekat lawan bicara)" },
+          { kr: "저것", id: "Itu (jauh dari keduanya)" },
+          { kr: "무엇 / 뭐", id: "Apa" },
+          { kr: "누구", id: "Siapa" },
+        ],
+        "Minggu 3": [
+          { kr: "자다", id: "Tidur" },
+          { kr: "일어나다", id: "Bangun tidur" },
+          { kr: "먹다", id: "Makan" },
+          { kr: "마시다", id: "Minum" },
+          { kr: "가다", id: "Pergi" },
+          { kr: "오다", id: "Datang" },
+          { kr: "보다", id: "Melihat / menonton" },
+          { kr: "듣다", id: "Mendengar" },
+          { kr: "읽다", id: "Membaca" },
+          { kr: "쓰다", id: "Menulis" },
+          { kr: "공부하다", id: "Belajar" },
+          { kr: "일하다", id: "Bekerja" },
+          { kr: "쉬다", id: "Istirahat" },
+          { kr: "운동하다", id: "Berolahraga" },
+          { kr: "만나다", id: "Bertemu" },
+        ],
+        "Minggu 4": [
+          { kr: "오늘", id: "Hari ini" },
+          { kr: "어제", id: "Kemarin" },
+          { kr: "내일", id: "Besok" },
+          { kr: "지금", id: "Sekarang" },
+          { kr: "아침", id: "Pagi" },
+          { kr: "점심", id: "Siang" },
+          { kr: "저녁", id: "Malam / sore" },
+          { kr: "월요일", id: "Senin" },
+          { kr: "화요일", id: "Selasa" },
+          { kr: "수요일", id: "Rabu" },
+          { kr: "목요일", id: "Kamis" },
+          { kr: "금요일", id: "Jumat" },
+          { kr: "토요일", id: "Sabtu" },
+          { kr: "일요일", id: "Minggu" },
+          { kr: "주말", id: "Akhir pekan" },
+        ],
+
+        // FASE 2
+        "Minggu 5": [
+          { kr: "집", id: "Rumah" },
+          { kr: "학교", id: "Sekolah" },
+          { kr: "회사", id: "Perusahaan" },
+          { kr: "식당", id: "Restoran" },
+          { kr: "카페", id: "Kafe" },
+          { kr: "시장", id: "Pasar" },
+          { kr: "마트", id: "Supermarket" },
+          { kr: "병원", id: "Rumah sakit" },
+          { kr: "약국", id: "Apotek" },
+          { kr: "은행", id: "Bank" },
+          { kr: "우체국", id: "Kantor pos" },
+          { kr: "공원", id: "Taman" },
+          { kr: "공항", id: "Bandara" },
+          { kr: "도서관", id: "Perpustakaan" },
+          { kr: "화장실", id: "Toilet" },
+        ],
+        "Minggu 6": [
+          { kr: "공부하다", id: "Belajar" },
+          { kr: "일하다", id: "Bekerja" },
+          { kr: "운동하다", id: "Berolahraga" },
+          { kr: "수영하다", id: "Berenang" },
+          { kr: "산책하다", id: "Jalan-jalan" },
+          { kr: "쇼핑하다", id: "Berbelanja" },
+          { kr: "노래하다", id: "Bernyanyi" },
+          { kr: "요리하다", id: "Memasak" },
+          { kr: "전화하다", id: "Menelepon" },
+          { kr: "청소하다", id: "Membersihkan" },
+          { kr: "빨래하다", id: "Mencuci pakaian" },
+          { kr: "이야기하다", id: "Berbicara" },
+          { kr: "질문하다", id: "Bertanya" },
+          { kr: "대답하다", id: "Menjawab" },
+          { kr: "주문하다", id: "Memesan" },
+        ],
+        "Minggu 7": [
+          { kr: "영", id: "Nol (Sino)" },
+          { kr: "일", id: "Satu (Sino)" },
+          { kr: "이", id: "Dua (Sino)" },
+          { kr: "삼", id: "Tiga (Sino)" },
+          { kr: "사", id: "Empat (Sino)" },
+          { kr: "오", id: "Lima (Sino)" },
+          { kr: "육", id: "Enam (Sino)" },
+          { kr: "칠", id: "Tujuh (Sino)" },
+          { kr: "팔", id: "Delapan (Sino)" },
+          { kr: "구", id: "Sembilan (Sino)" },
+          { kr: "십", id: "Sepuluh (Sino)" },
+          { kr: "백", id: "Ratus" },
+          { kr: "천", id: "Ribu" },
+          { kr: "만", id: "Puluh ribu" },
+          { kr: "원", id: "Won (Mata uang Korea)" },
+        ],
+        "Minggu 8": [
+          { kr: "하나 / 한", id: "Satu (Asli)" },
+          { kr: "둘 / 두", id: "Dua (Asli)" },
+          { kr: "셋 / 세", id: "Tiga (Asli)" },
+          { kr: "넷 / 네", id: "Empat (Asli)" },
+          { kr: "다섯", id: "Lima (Asli)" },
+          { kr: "여섯", id: "Enam (Asli)" },
+          { kr: "일곱", id: "Tujuh (Asli)" },
+          { kr: "여덟", id: "Delapan (Asli)" },
+          { kr: "아홉", id: "Sembilan (Asli)" },
+          { kr: "열", id: "Sepuluh (Asli)" },
+          { kr: "시", id: "Jam (titik waktu)" },
+          { kr: "분", id: "Menit" },
+          { kr: "시간", id: "Jam (durasi)" },
+          { kr: "개", id: "Buah (satuan umum)" },
+          { kr: "명", id: "Orang (satuan)" },
+        ],
+
+        // FASE 3
+        "Minggu 9": [
+          { kr: "크다", id: "Besar" },
+          { kr: "작다", id: "Kecil" },
+          { kr: "많다", id: "Banyak" },
+          { kr: "적다", id: "Sedikit" },
+          { kr: "좋다", id: "Bagus / baik" },
+          { kr: "나쁘다", id: "Buruk" },
+          { kr: "비싸다", id: "Mahal" },
+          { kr: "싸다", id: "Murah" },
+          { kr: "맛있다", id: "Enak" },
+          { kr: "맛없다", id: "Tidak enak" },
+          { kr: "재미있다", id: "Seru" },
+          { kr: "재미없다", id: "Membosankan" },
+          { kr: "어렵다", id: "Sulit" },
+          { kr: "쉽다", id: "Mudah" },
+          { kr: "바쁘다", id: "Sibuk" },
+        ],
+        "Minggu 10": [
+          { kr: "날씨", id: "Cuaca" },
+          { kr: "봄", id: "Musim semi" },
+          { kr: "여름", id: "Musim panas" },
+          { kr: "가을", id: "Musim gugur" },
+          { kr: "겨울", id: "Musim dingin" },
+          { kr: "덥다", id: "Panas" },
+          { kr: "춥다", id: "Dingin" },
+          { kr: "따뜻하다", id: "Hangat" },
+          { kr: "시원하다", id: "Sejuk" },
+          { kr: "비가 오다", id: "Hujan turun" },
+          { kr: "눈이 오다", id: "Salju turun" },
+          { kr: "바람이 불다", id: "Angin berhembus" },
+          { kr: "맑다", id: "Cerah" },
+          { kr: "흐리다", id: "Mendung" },
+          { kr: "구름", id: "Awan" },
+        ],
+        "Minggu 11": [
+          { kr: "머리", id: "Kepala / rambut" },
+          { kr: "눈", id: "Mata" },
+          { kr: "귀", id: "Telinga" },
+          { kr: "코", id: "Hidung" },
+          { kr: "입", id: "Mulut" },
+          { kr: "얼굴", id: "Wajah" },
+          { kr: "손", id: "Tangan" },
+          { kr: "발", id: "Kaki (telapak)" },
+          { kr: "다리", id: "Kaki (tungkai)" },
+          { kr: "배", id: "Perut" },
+          { kr: "아프다", id: "Sakit" },
+          { kr: "감기", id: "Flu / pilek" },
+          { kr: "열", id: "Demam" },
+          { kr: "약", id: "Obat" },
+          { kr: "주사", id: "Suntikan" },
+        ],
+        "Minggu 12": [
+          { kr: "버스", id: "Bus" },
+          { kr: "지하철", id: "Kereta bawah tanah" },
+          { kr: "택시", id: "Taksi" },
+          { kr: "기차", id: "Kereta api" },
+          { kr: "비행기", id: "Pesawat" },
+          { kr: "자전거", id: "Sepeda" },
+          { kr: "타다", id: "Naik (kendaraan)" },
+          { kr: "내리다", id: "Turun (kendaraan)" },
+          { kr: "갈아타다", id: "Transit / berganti" },
+          { kr: "걸어가다", id: "Jalan kaki" },
+          { kr: "정류장", id: "Halte bus" },
+          { kr: "역", id: "Stasiun" },
+          { kr: "표", id: "Tiket" },
+          { kr: "가깝다", id: "Dekat" },
+          { kr: "멀다", id: "Jauh" },
+        ],
+
+        // FASE 4
+        "Minggu 13": [
+          { kr: "옷", id: "Pakaian" },
+          { kr: "입다", id: "Memakai (baju)" },
+          { kr: "신다", id: "Memakai (sepatu/kaos kaki)" },
+          { kr: "쓰다", id: "Memakai (topi/kacamata)" },
+          { kr: "벗다", id: "Melepas pakaian" },
+          { kr: "신발", id: "Sepatu" },
+          { kr: "바지", id: "Celana" },
+          { kr: "치마", id: "Rok" },
+          { kr: "안경", id: "Kacamata" },
+          { kr: "길다", id: "Panjang" },
+          { kr: "짧다", id: "Pendek" },
+          { kr: "무겁다", id: "Berat" },
+          { kr: "가볍다", id: "Ringan" },
+          { kr: "어둡다", id: "Gelap" },
+          { kr: "밝다", id: "Terang" },
+        ],
+        "Minggu 14": [
+          { kr: "여행", id: "Perjalanan / liburan" },
+          { kr: "준비하다", id: "Menyiapkan" },
+          { kr: "예약하다", id: "Memesan / reservasi" },
+          { kr: "호텔", id: "Hotel" },
+          { kr: "방", id: "Kamar" },
+          { kr: "사진", id: "Foto" },
+          { kr: "찍다", id: "Memotret" },
+          { kr: "구경하다", id: "Melihat-lihat" },
+          { kr: "바다", id: "Laut" },
+          { kr: "산", id: "Gunung" },
+          { kr: "온천", id: "Pemandian air panas" },
+          { kr: "여권", id: "Paspor" },
+          { kr: "비행기 표", id: "Tiket pesawat" },
+          { kr: "짐을 싸다", id: "Mengepak barang" },
+          { kr: "도착하다", id: "Tiba" },
+        ],
+        "Minggu 15": [
+          { kr: "약속", id: "Janji" },
+          { kr: "시간이 있다", id: "Ada waktu" },
+          { kr: "시간이 없다", id: "Tidak ada waktu" },
+          { kr: "늦다", id: "Terlambat" },
+          { kr: "기다리다", id: "Menunggu" },
+          { kr: "취소하다", id: "Membatalkan" },
+          { kr: "바꾸다", id: "Mengubah / mengganti" },
+          { kr: "미안하다", id: "Maaf" },
+          { kr: "괜찮다", id: "Tidak apa-apa" },
+          { kr: "장소", id: "Tempat" },
+          { kr: "앞", id: "Depan" },
+          { kr: "뒤", id: "Belakang" },
+          { kr: "옆", id: "Samping" },
+          { kr: "안", id: "Dalam" },
+          { kr: "밖", id: "Luar" },
+        ],
+        "Minggu 16": [
+          { kr: "음식", id: "Makanan" },
+          { kr: "밥", id: "Nasi" },
+          { kr: "국", id: "Sup" },
+          { kr: "김치", id: "Kimchi" },
+          { kr: "고기", id: "Daging" },
+          { kr: "물", id: "Air" },
+          { kr: "차", id: "Teh" },
+          { kr: "커피", id: "Kopi" },
+          { kr: "달다", id: "Manis" },
+          { kr: "쓰다", id: "Pahit" },
+          { kr: "짜다", id: "Asin" },
+          { kr: "싱겁다", id: "Hambar" },
+          { kr: "맵다", id: "Pedas" },
+          { kr: "시고 달다", id: "Asam manis" },
+          { kr: "배가 고프다", id: "Lapar" },
+        ],
+        "Minggu 17": [
+          { kr: "취미", id: "Hobi" },
+          { kr: "독서하다", id: "Membaca buku" },
+          { kr: "음악을 듣다", id: "Mendengar musik" },
+          { kr: "영화를 보다", id: "Menonton film" },
+          { kr: "게임하다", id: "Bermain game" },
+          { kr: "등산하다", id: "Mendaki gunung" },
+          { kr: "사진을 찍다", id: "Memotret" },
+          { kr: "자주", id: "Sering" },
+          { kr: "가끔", id: "Kadang-kadang" },
+          { kr: "항상", id: "Selalu" },
+          { kr: "전혀", id: "Sama sekali tidak" },
+          { kr: "잘하다", id: "Mahir / pandai" },
+          { kr: "못하다", id: "Tidak bisa / tidak mahir" },
+          { kr: "축구", id: "Sepak bola" },
+          { kr: "농구", id: "Bola basket" },
+        ],
+
+        // FASE 5
+        "Minggu 18": [
+          { kr: "신청하다", id: "Mendaftar" },
+          { kr: "이용하다", id: "Menggunakan" },
+          { kr: "문의하다", id: "Bertanya / berkonsultasi" },
+          { kr: "확인하다", id: "Mengecek" },
+          { kr: "무료", id: "Gratis" },
+          { kr: "유료", id: "Berbayar" },
+          { kr: "할인", id: "Diskon" },
+          { kr: "안내", id: "Panduan" },
+          { kr: "위치", id: "Lokasi" },
+          { kr: "일시", id: "Tanggal dan waktu" },
+          { kr: "대상", id: "Target / peserta" },
+          { kr: "요금", id: "Biaya" },
+          { kr: "장소", id: "Tempat" },
+          { kr: "기간", id: "Periode" },
+          { kr: "행사", id: "Acara" },
+        ],
+        "Minggu 19": [
+          { kr: "생일", id: "Ulang tahun" },
+          { kr: "선물", id: "Hadiah" },
+          { kr: "파티", id: "Pesta" },
+          { kr: "초대하다", id: "Mengundang" },
+          { kr: "축하하다", id: "Selamat / merayakan" },
+          { kr: "모임", id: "Perkumpulan" },
+          { kr: "회비", id: "Iuran anggota" },
+          { kr: "참석하다", id: "Hadir" },
+          { kr: "불참하다", id: "Tidak hadir" },
+          { kr: "케이크", id: "Kue" },
+          { kr: "꽃다발", id: "Buket bunga" },
+          { kr: "카드", id: "Kartu" },
+          { kr: "준비물", id: "Barang persiapan" },
+          { kr: "연락처", id: "Kontak" },
+          { kr: "약속 장소", id: "Tempat janjian" },
+        ],
+        "Minggu 20": [
+          { kr: "시험", id: "Ujian" },
+          { kr: "문제", id: "Soal / masalah" },
+          { kr: "풀다", id: "Mengerjakan / memecahkan" },
+          { kr: "맞다", id: "Benar" },
+          { kr: "틀리다", id: "Salah" },
+          { kr: "점수", id: "Nilai / skor" },
+          { kr: "합격하다", id: "Lulus" },
+          { kr: "불합격하다", id: "Tidak lulus" },
+          { kr: "복습하다", id: "Mengulas pelajaran" },
+          { kr: "예습하다", id: "Mempelajari lebih dulu" },
+          { kr: "단어", id: "Kosakata" },
+          { kr: "문법", id: "Tata bahasa" },
+          { kr: "듣기", id: "Mendengar" },
+          { kr: "읽기", id: "Membaca" },
+          { kr: "쓰기", id: "Menulis" },
+        ],
+
+        // FASE 6
+        "Minggu 21": [
+          { kr: "건강", id: "Kesehatan" },
+          { kr: "결정하다", id: "Memutuskan" },
+          { kr: "습관", id: "Kebiasaan" },
+          { kr: "약속하다", id: "Berjanji" },
+          { kr: "목표", id: "Tujuan / target" },
+          { kr: "설명하다", id: "Menjelaskan" },
+          { kr: "의견", id: "Pendapat" },
+          { kr: "열심히", id: "Dengan giat" },
+          { kr: "성격", id: "Karakter" },
+          { kr: "특히", id: "Terutama" },
+          { kr: "키", id: "Tinggi badan" },
+          { kr: "보통", id: "Biasanya" },
+          { kr: "돈을 모으다", id: "Menabung" },
+          { kr: "운전하다", id: "Mengemudi" },
+          { kr: "취직하다", id: "Mendapat kerja" },
+        ],
+        "Minggu 22": [
+          { kr: "변하다", id: "Berubah" },
+          { kr: "침대", id: "Tempat tidur" },
+          { kr: "늘다", id: "Bertambah" },
+          { kr: "불", id: "Lampu / api" },
+          { kr: "줄다", id: "Berkurang" },
+          { kr: "켜다 / 끄다", id: "Menyalakan / mematikan" },
+          { kr: "점점", id: "Semakin" },
+          { kr: "이사하다", id: "Pindah rumah" },
+          { kr: "갑자기", id: "Tiba-tiba" },
+          { kr: "개월", id: "Bulan (durasi)" },
+          { kr: "드디어", id: "Akhirnya (hal baik)" },
+          { kr: "깨끗하다", id: "Bersih" },
+          { kr: "결국", id: "Pada akhirnya" },
+          { kr: "즐겁다", id: "Menyenangkan" },
+          { kr: "미리", id: "Sebelumnya" },
+        ],
+        "Minggu 23": [
+          { kr: "말하다", id: "Berkata" },
+          { kr: "생각하다", id: "Berpikir" },
+          { kr: "묻다 / 물어보다", id: "Bertanya" },
+          { kr: "충고하다", id: "Menasihati" },
+          { kr: "대답하다", id: "Menjawab" },
+          { kr: "거절하다", id: "Menolak" },
+          { kr: "부탁하다", id: "Meminta tolong" },
+          { kr: "동의하다", id: "Setuju" },
+          { kr: "소식", id: "Kabar" },
+          { kr: "제안하다", id: "Mengusulkan" },
+          { kr: "뉴스", id: "Berita" },
+          { kr: "숙제", id: "PR" },
+          { kr: "소문", id: "Kabar angin" },
+          { kr: "의사 선생님", id: "Dokter" },
+          { kr: "전하다", id: "Menyampaikan" },
+        ],
+        "Minggu 24": [
+          { kr: "도착하다", id: "Tiba" },
+          { kr: "노력하다", id: "Berusaha" },
+          { kr: "출발하다", id: "Berangkat" },
+          { kr: "걱정하다", id: "Khawatir" },
+          { kr: "아무리", id: "Seberapa pun" },
+          { kr: "놓치다", id: "Ketinggalan" },
+          { kr: "이렇게", id: "Seperti ini" },
+          { kr: "그렇게", id: "Seperti itu" },
+          { kr: "떨어지다", id: "Gagal / jatuh" },
+          { kr: "가져오다", id: "Membawa kemari" },
+          { kr: "졸업하다", id: "Lulus kuliah" },
+          { kr: "가져가다", id: "Membawa pergi" },
+          { kr: "연습하다", id: "Berlatih" },
+        ],
+        "Minggu 25": [
+          { kr: "편리하다", id: "Praktis" },
+          { kr: "문화", id: "Budaya" },
+          { kr: "복잡하다", id: "Ramai / rumit" },
+          { kr: "사회", id: "Masyarakat" },
+          { kr: "유명하다", id: "Terkenal" },
+          { kr: "경제", id: "Ekonomi" },
+          { kr: "넘어지다", id: "Terjatuh" },
+          { kr: "교육", id: "Pendidikan" },
+          { kr: "기술", id: "Teknologi" },
+          { kr: "도시", id: "Kota" },
+          { kr: "중요하다", id: "Penting" },
+          { kr: "시골", id: "Desa" },
+          { kr: "필요하다", id: "Perlu" },
+          { kr: "환경", id: "Lingkungan" },
+        ],
+
+        // FASE 7
+        "Minggu 26": [
+          { kr: "학 (學)", id: "Akar: Belajar (학교, 학생, 대학)" },
+          { kr: "국 (國)", id: "Akar: Negara (한국, 외국, 국가)" },
+          { kr: "인 (人)", id: "Akar: Orang (외국인, 한국인, 인기)" },
+          { kr: "실 (室)", id: "Akar: Ruangan (교실, 화장실, 사무실)" },
+          { kr: "장 (場)", id: "Akar: Tempat (시장, 공장, 주차장)" },
+          {
+            kr: "회 (會)",
+            id: "Akar: Pertemuan / Masyarakat (회사, 회의, 사회)",
+          },
+          {
+            kr: "전 / 후 (前 / 後)",
+            id: "Akar: Sebelum / Sesudah (오전, 오후, 식후)",
+          },
+          { kr: "화 (話)", id: "Akar: Bicara (전화, 대화, 통화)" },
+          {
+            kr: "문 (文 / 問)",
+            id: "Akar: Tulisan / Tanya (문장, 문화, 질문)",
+          },
+          { kr: "드시다", id: "Makan (Bentuk Hormat)" },
+          { kr: "주무시다", id: "Tidur (Bentuk Hormat)" },
+          { kr: "계시다", id: "Ada / Tinggal (Bentuk Hormat)" },
+          { kr: "수강생", id: "Peserta kursus" },
+          { kr: "모집", id: "Perekrutan" },
+          { kr: "재료", id: "Bahan" },
+        ],
+        "Minggu 27": [
+          { kr: "보여 주세요", id: "Tolong tunjukkan" },
+          { kr: "시설", id: "Fasilitas" },
+          { kr: "공사", id: "Konstruksi" },
+          { kr: "반납하다", id: "Mengembalikan" },
+          { kr: "문을 닫다", id: "Tutup (pintu/tempat)" },
+          { kr: "후회하다", id: "Menyesal" },
+          { kr: "추천하다", id: "Merekomendasikan" },
+          { kr: "취소하다", id: "Membatalkan" },
+          { kr: "별로", id: "Tidak begitu" },
+          { kr: "-아/어 보이다", id: "Tampak / Terlihat" },
+          { kr: "일주일에 세 번", id: "Tiga kali seminggu" },
+          { kr: "이제", id: "Sekarang, kini" },
+          { kr: "기분", id: "Suasana hati" },
+          { kr: "꾸준히", id: "Dengan konsisten" },
+          { kr: "따라서", id: "Oleh karena itu" },
+        ],
+        "Minggu 28": [
+          { kr: "분실물", id: "Barang hilang" },
+          { kr: "지갑", id: "Dompet" },
+          { kr: "학생증", id: "Kartu mahasiswa/pelajar" },
+          { kr: "연락주다", id: "Menghubungi" },
+          { kr: "조사 결과", id: "Hasil survei" },
+          { kr: "증가하다", id: "Meningkat / bertambah" },
+          { kr: "감소하다", id: "Menurun / berkurang" },
+          { kr: "반면에", id: "Sebaliknya" },
+          { kr: "첫째 / 둘째 / 셋째", id: "Pertama / Kedua / Ketiga" },
+          { kr: "결론적으로", id: "Kesimpulannya" },
+          { kr: "중요성", id: "Pentingnya" },
+          { kr: "환경 보호", id: "Perlindungan lingkungan" },
+        ],
+      };
+
+      // Pengelompokan Fase
+      const phaseMapping = {
+        "Fase 1: Fondasi Bahasa Korea": [
+          "Minggu 1",
+          "Minggu 2",
+          "Minggu 3",
+          "Minggu 4",
+        ],
+        "Fase 2: Perluasan Tata Bahasa": [
+          "Minggu 5",
+          "Minggu 6",
+          "Minggu 7",
+          "Minggu 8",
+        ],
+        "Fase 3: Kalimat Kompleks": [
+          "Minggu 9",
+          "Minggu 10",
+          "Minggu 11",
+          "Minggu 12",
+        ],
+        "Fase 4: Tata Bahasa Lanjutan": [
+          "Minggu 13",
+          "Minggu 14",
+          "Minggu 15",
+          "Minggu 16",
+          "Minggu 17",
+        ],
+        "Fase 5: Simulasi TOPIK I": ["Minggu 18", "Minggu 19", "Minggu 20"],
+        "Fase 6: Menengah Awal": [
+          "Minggu 21",
+          "Minggu 22",
+          "Minggu 23",
+          "Minggu 24",
+          "Minggu 25",
+        ],
+        "Fase 7: Persiapan TOPIK II": ["Minggu 26", "Minggu 27", "Minggu 28"],
+      };
+
+      // STATE KUIS
+      let selectedWeek = "";
+      let quizQuestions = [];
+      let currentQuestionIdx = 0;
+      let scoreCorrect = 0;
+      let scoreWrong = 0;
+
+      window.onload = function () {
+        renderSelectionScreen();
+      };
+
+      function renderSelectionScreen() {
+        const container = document.getElementById("weeks-container");
+        container.innerHTML = "";
+
+        Object.keys(phaseMapping).forEach((phaseTitle) => {
+          const groupDiv = document.createElement("div");
+          groupDiv.className = "phase-group";
+
+          const title = document.createElement("div");
+          title.className = "phase-title";
+          title.innerText = phaseTitle;
+          groupDiv.appendChild(title);
+
+          const grid = document.createElement("div");
+          grid.className = "weeks-grid";
+
+          phaseMapping[phaseTitle].forEach((week) => {
+            const count = fullVocabData[week] ? fullVocabData[week].length : 0;
+            const card = document.createElement("div");
+            card.className = "week-card";
+            card.innerHTML = `
+            <div class="week-name">${week}</div>
+            <div class="week-count">${count} Kosakata</div>
+          `;
+            card.onclick = () => startQuiz(week);
+            grid.appendChild(card);
+          });
+
+          groupDiv.appendChild(grid);
+          container.appendChild(groupDiv);
+        });
+      }
+
+      function startQuiz(week) {
+        selectedWeek = week;
+        const vocabList = [...fullVocabData[week]];
+
+        if (!vocabList || vocabList.length === 0) {
+          alert("Kosakata untuk minggu ini belum tersedia.");
+          return;
+        }
+
+        // Acak urutan soal (Shuffle)
+        vocabList.sort(() => Math.random() - 0.5);
+        quizQuestions = vocabList;
+
+        currentQuestionIdx = 0;
+        scoreCorrect = 0;
+        scoreWrong = 0;
+
+        document.getElementById("selection-screen").style.display = "none";
+        document.getElementById("result-screen").style.display = "none";
+        document.getElementById("quiz-screen").style.display = "block";
+
+        document.getElementById("quiz-week-label").innerText =
+          `Latihan: ${selectedWeek}`;
+
+        renderQuestion();
+      }
+
+      function renderQuestion() {
+        const currentItem = quizQuestions[currentQuestionIdx];
+        const total = quizQuestions.length;
+
+        document.getElementById("quiz-progress").innerText =
+          `Soal ${currentQuestionIdx + 1} / ${total}`;
+        document.getElementById("question-kr").innerText = currentItem.kr;
+
+        // Buat pilihan jawaban (1 Benar + 3 Pengecoh)
+        const currentWeekList = fullVocabData[selectedWeek];
+        let wrongOptions = currentWeekList
+          .filter((item) => item.id !== currentItem.id)
+          .map((item) => item.id);
+
+        // Acak pengecoh
+        wrongOptions.sort(() => Math.random() - 0.5);
+
+        // Ambil 3 pengecoh + 1 jawaban benar
+        let choices = [currentItem.id, ...wrongOptions.slice(0, 3)];
+        choices.sort(() => Math.random() - 0.5);
+
+        const optionsContainer = document.getElementById("options-container");
+        optionsContainer.innerHTML = "";
+
+        choices.forEach((choiceText) => {
+          const btn = document.createElement("button");
+          btn.className = "option-btn";
+          btn.innerText = choiceText;
+          btn.onclick = () => handleAnswer(choiceText, currentItem.id);
+          optionsContainer.appendChild(btn);
+        });
+      }
+
+      function handleAnswer(selectedChoice, correctChoice) {
+        if (selectedChoice === correctChoice) {
+          scoreCorrect++;
+        } else {
+          scoreWrong++;
+        }
+
+        currentQuestionIdx++;
+
+        if (currentQuestionIdx < quizQuestions.length) {
+          renderQuestion();
+        } else {
+          showResults();
+        }
+      }
+
+      function showResults() {
+        document.getElementById("quiz-screen").style.display = "none";
+        document.getElementById("result-screen").style.display = "block";
+
+        const total = quizQuestions.length;
+        const finalScore = Math.round((scoreCorrect / total) * 100);
+
+        document.getElementById("result-week-subtitle").innerText =
+          `Hasil Latihan ${selectedWeek}`;
+        document.getElementById("final-score").innerText = finalScore;
+        document.getElementById("stat-correct").innerText = scoreCorrect;
+        document.getElementById("stat-wrong").innerText = scoreWrong;
+        document.getElementById("stat-total").innerText = total;
+      }
+
+      function restartQuiz() {
+        startQuiz(selectedWeek);
+      }
+
+      function showSelectionScreen() {
+        document.getElementById("quiz-screen").style.display = "none";
+        document.getElementById("result-screen").style.display = "none";
+        document.getElementById("selection-screen").style.display = "block";
+      }
+    </script>
+  </body>
+</html>

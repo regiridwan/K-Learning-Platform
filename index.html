@@ -1,0 +1,684 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Welcome - K-Learning Platform</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --bg-main: #0f172a;
+        --panel-bg: #1e293b;
+        --primary: #ffffff;
+        --accent: #e11d48;
+        --accent-hover: #be123c;
+        --border-color: rgba(255, 255, 255, 0.1);
+        --text-muted: #94a3b8;
+        --text-main: #f8fafc;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Inter", "Noto Sans KR", sans-serif;
+        background-color: var(--bg-main);
+        color: var(--text-main);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        overflow-x: hidden;
+      }
+
+      /* Header Navigasi */
+      header {
+        background-color: rgba(15, 23, 42, 0.85);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--border-color);
+        padding: 0 32px;
+        height: 70px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-weight: 800;
+        font-size: 1.25rem;
+        color: var(--primary);
+        text-decoration: none;
+        letter-spacing: -0.025em;
+      }
+
+      .brand-logo {
+        background: linear-gradient(135deg, var(--accent), #f43f5e);
+        color: white;
+        width: 38px;
+        height: 38px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 1.1rem;
+        box-shadow: 0 4px 12px rgba(225, 29, 72, 0.3);
+      }
+
+      .btn-nav-login {
+        background: var(--accent);
+        color: white;
+        padding: 9px 20px;
+        border-radius: 8px;
+        font-size: 0.875rem;
+        font-weight: 700;
+        border: none;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        box-shadow: 0 4px 12px rgba(225, 29, 72, 0.35);
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .btn-nav-login:hover {
+        background: var(--accent-hover);
+        transform: translateY(-1px);
+        box-shadow: 0 6px 18px rgba(225, 29, 72, 0.5);
+      }
+
+      /* Hero Welcome Section */
+      .hero-section {
+        position: relative;
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 130px 24px 60px 24px;
+        background: url("welcome.jpg") no-repeat center center/cover;
+        min-height: 100vh;
+      }
+
+      .hero-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(
+          180deg,
+          rgba(15, 23, 42, 0.75) 0%,
+          rgba(15, 23, 42, 0.85) 50%,
+          rgba(15, 23, 42, 0.95) 100%
+        );
+        z-index: 1;
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 2;
+        max-width: 850px;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 24px;
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 16px;
+        background: rgba(225, 29, 72, 0.15);
+        border: 1px solid rgba(225, 29, 72, 0.3);
+        color: #fda4af;
+        border-radius: 9999px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+      }
+
+      .hero-title {
+        font-size: 3.25rem;
+        font-weight: 800;
+        line-height: 1.15;
+        letter-spacing: -0.03em;
+        background: linear-gradient(to right, #ffffff, #cbd5e1);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .hero-subtitle {
+        font-size: 1.15rem;
+        color: var(--text-muted);
+        line-height: 1.6;
+        max-width: 680px;
+      }
+
+      .btn-primary {
+        background: var(--accent);
+        color: white;
+        padding: 14px 36px;
+        border-radius: 10px;
+        font-weight: 700;
+        font-size: 1rem;
+        border: none;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        box-shadow: 0 4px 20px rgba(225, 29, 72, 0.4);
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .btn-primary:hover {
+        background: var(--accent-hover);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 24px rgba(225, 29, 72, 0.5);
+      }
+
+      /* Features Grid */
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 20px;
+        width: 100%;
+        margin-top: 40px;
+      }
+
+      .feature-card {
+        background: rgba(30, 41, 59, 0.6);
+        border: 1px solid var(--border-color);
+        backdrop-filter: blur(12px);
+        padding: 20px;
+        border-radius: 12px;
+        text-align: left;
+      }
+
+      .feature-icon {
+        font-size: 1.5rem;
+        margin-bottom: 8px;
+      }
+
+      .feature-title {
+        font-size: 0.95rem;
+        font-weight: 700;
+        color: var(--primary);
+        margin-bottom: 4px;
+      }
+
+      .feature-desc {
+        font-size: 0.825rem;
+        color: var(--text-muted);
+        line-height: 1.4;
+      }
+
+      /* Pop-up Modal Container */
+      .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(15, 23, 42, 0.85);
+        backdrop-filter: blur(8px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 200;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        padding: 20px;
+      }
+
+      .modal-overlay.active {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      /* Modal Login Box */
+      .login-card {
+        background: var(--panel-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 20px;
+        padding: 32px;
+        width: 100%;
+        max-width: 420px;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+        position: relative;
+        transform: scale(0.9);
+        transition: transform 0.3s ease;
+      }
+
+      .modal-overlay.active .login-card {
+        transform: scale(1);
+      }
+
+      .login-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, var(--accent), #f43f5e);
+        border-radius: 20px 20px 0 0;
+      }
+
+      .btn-close-modal {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        background: transparent;
+        border: none;
+        color: var(--text-muted);
+        font-size: 1.2rem;
+        cursor: pointer;
+        transition: color 0.2s;
+      }
+
+      .btn-close-modal:hover {
+        color: #ffffff;
+      }
+
+      .brand-header {
+        text-align: center;
+        margin-bottom: 24px;
+      }
+
+      .brand-title {
+        font-size: 1.25rem;
+        font-weight: 800;
+        color: #ffffff;
+      }
+
+      .brand-subtitle {
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        margin-top: 4px;
+      }
+
+      .form-step {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .hidden {
+        display: none !important;
+      }
+
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      .form-group label {
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: #cbd5e1;
+      }
+
+      .form-control {
+        background: #0f172a;
+        border: 1px solid var(--border-color);
+        border-radius: 10px;
+        padding: 12px 16px;
+        color: white;
+        font-size: 0.95rem;
+        outline: none;
+        transition: border-color 0.2s;
+      }
+
+      .form-control:focus {
+        border-color: var(--accent);
+      }
+
+      .btn-submit {
+        background: var(--accent);
+        color: white;
+        border: none;
+        border-radius: 10px;
+        padding: 12px;
+        font-size: 0.95rem;
+        font-weight: 700;
+        cursor: pointer;
+        margin-top: 8px;
+        transition:
+          background 0.2s,
+          transform 0.1s;
+      }
+
+      .btn-submit:hover {
+        background: var(--accent-hover);
+      }
+
+      .btn-submit:active {
+        transform: scale(0.98);
+      }
+
+      .alert-message {
+        background: rgba(225, 29, 72, 0.15);
+        border: 1px solid rgba(225, 29, 72, 0.3);
+        color: #fda4af;
+        padding: 10px;
+        border-radius: 8px;
+        font-size: 0.825rem;
+        text-align: center;
+        display: none;
+        margin-bottom: 16px;
+      }
+
+      .step-indicator {
+        display: flex;
+        justify-content: center;
+        gap: 6px;
+        margin-top: 20px;
+      }
+
+      .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.2);
+      }
+
+      .dot.active {
+        background: var(--accent);
+        width: 20px;
+        border-radius: 4px;
+      }
+
+      /* Footer */
+      footer {
+        background: #090d16;
+        border-top: 1px solid var(--border-color);
+        padding: 20px;
+        text-align: center;
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        z-index: 2;
+      }
+
+      @media (max-width: 768px) {
+        .hero-title {
+          font-size: 2.25rem;
+        }
+        header {
+          padding: 0 16px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header Navigasi -->
+    <header>
+      <a href="index.html" class="brand">
+        <div class="brand-logo">한</div>
+        <span>K-Learning Platform</span>
+      </a>
+
+      <nav>
+        <button class="btn-nav-login" onclick="openLoginModal()">
+          <span>🔑</span> <span>Login Akses</span>
+        </button>
+      </nav>
+    </header>
+
+    <!-- Hero Welcome Section -->
+    <section class="hero-section">
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <div class="badge">
+          <span>✨ Selamat Datang di K-Learning Platform</span>
+        </div>
+        <h1 class="hero-title">Kuasai Bahasa Korea Secara Terstruktur</h1>
+        <p class="hero-subtitle">
+          Platform pembelajaran bahasa Korea lengkap yang mengombinasikan modul
+          materi, latihan kosakata harian, audio interaktif, serta simulasi
+          ujian TOPIK.
+        </p>
+
+        <div>
+          <button class="btn-primary" onclick="openLoginModal()">
+            <span>Masuk / Login Sekarang</span>
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </button>
+        </div>
+
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon">📚</div>
+            <div class="feature-title">Modul Terintegrasi</div>
+            <div class="feature-desc">
+              Materi komprehensif lengkap dari pemula hingga level menengah
+              TOPIK II.
+            </div>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">🟨</div>
+            <div class="feature-title">Sistem Flashcard</div>
+            <div class="feature-desc">
+              Fitur kelola hafalan kosakata dengan mode latihan sembunyi
+              interaktif.
+            </div>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">⏱️</div>
+            <div class="feature-title">Timer Pomodoro</div>
+            <div class="feature-desc">
+              Pengatur waktu terpadu untuk menjaga ritme dan fokus belajar
+              harian Anda.
+            </div>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">🎮</div>
+            <div class="feature-title">Break Time Zone</div>
+            <div class="feature-desc">
+              Mini game santai di saat waktu istirahat agar pikiran tetap segar
+              tanpa medsos.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- POP-UP MODAL LOGIN -->
+    <div class="modal-overlay" id="login-modal">
+      <div class="login-card">
+        <button class="btn-close-modal" onclick="closeLoginModal()">✕</button>
+
+        <div class="brand-header">
+          <div class="brand-title">Akses Portal Belajar</div>
+          <div class="brand-subtitle" id="step-subtitle">
+            Langkah 1: Masukkan Akun Akses
+          </div>
+          <div class="brand-subtitle" id="step-subtitle">
+            Developer-only Access
+          </div>
+        </div>
+
+        <div id="alert-box" class="alert-message"></div>
+
+        <!-- LANGKAH 1: Username & Password -->
+        <form id="form-step-1" class="form-step" onsubmit="handleStep1(event)">
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input
+              type="text"
+              id="username"
+              class="form-control"
+              placeholder="Masukkan username"
+              required
+              autocomplete="off"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              class="form-control"
+              placeholder="Masukkan password"
+              required
+            />
+          </div>
+
+          <button type="submit" class="btn-submit">Lanjut Verifikasi →</button>
+        </form>
+
+        <!-- LANGKAH 2: Pertanyaan Keamanan -->
+        <form
+          id="form-step-2"
+          class="form-step hidden"
+          onsubmit="handleStep2(event)"
+        >
+          <div class="form-group">
+            <label for="creator-name"
+              >Siapa nama pacar pembuat sistem ini?</label
+            >
+            <input
+              type="text"
+              id="creator-name"
+              class="form-control"
+              placeholder="Ketik jawaban kamu"
+              required
+              autocomplete="off"
+            />
+          </div>
+
+          <button type="submit" class="btn-submit">Akses Platform 🚀</button>
+        </form>
+
+        <!-- Step Indicator -->
+        <div class="step-indicator">
+          <div class="dot active" id="dot-1"></div>
+          <div class="dot" id="dot-2"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <p>&copy; 2026 K-Learning Platform by-Regi. All rights reserved.</p>
+    </footer>
+
+    <script>
+      // =========================================================
+      // KREDENSIEL AKSES
+      // =========================================================
+      const VALID_USER = "admin";
+      const VALID_PASS = "korea2026";
+      const VALID_CREATOR = "irfanmaulana";
+      // =========================================================
+
+      const modal = document.getElementById("login-modal");
+      const alertBox = document.getElementById("alert-box");
+
+      function openLoginModal() {
+        modal.classList.add("active");
+        document.getElementById("username").focus();
+      }
+
+      function closeLoginModal() {
+        modal.classList.remove("active");
+      }
+
+      // Menutup modal jika area di luar card diklik
+      modal.addEventListener("click", function (e) {
+        if (e.target === modal) {
+          closeLoginModal();
+        }
+      });
+
+      function showAlert(msg) {
+        alertBox.innerText = msg;
+        alertBox.style.display = "block";
+      }
+
+      function hideAlert() {
+        alertBox.style.display = "none";
+      }
+
+      function handleStep1(e) {
+        e.preventDefault();
+        hideAlert();
+
+        const userInputs = document.getElementById("username").value.trim();
+        const passInputs = document.getElementById("password").value.trim();
+
+        if (userInputs === VALID_USER && passInputs === VALID_PASS) {
+          document.getElementById("form-step-1").classList.add("hidden");
+          document.getElementById("form-step-2").classList.remove("hidden");
+
+          document.getElementById("step-subtitle").innerText =
+            "Langkah 2: Verifikasi Pertanyaan Keamanan";
+          document.getElementById("dot-1").classList.remove("active");
+          document.getElementById("dot-2").classList.add("active");
+
+          document.getElementById("creator-name").focus();
+        } else {
+          showAlert("Username atau password salah!");
+        }
+      }
+
+      function handleStep2(e) {
+        e.preventDefault();
+        hideAlert();
+
+        const creatorInput = document
+          .getElementById("creator-name")
+          .value.trim()
+          .toLowerCase();
+
+        if (creatorInput === VALID_CREATOR.toLowerCase()) {
+          sessionStorage.setItem("isKLearningLoggedIn", "true");
+          window.location.href = "welcome.html";
+        } else {
+          showAlert("Jawaban tidak cocok!");
+        }
+      }
+
+      // Jika pengguna sudah login di sesi ini, langsung dialihkan ke welcome.html
+      if (sessionStorage.getItem("isKLearningLoggedIn") === "true") {
+        window.location.href = "welcome.html";
+      }
+    </script>
+  </body>
+</html>
