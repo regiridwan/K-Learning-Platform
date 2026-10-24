@@ -295,6 +295,12 @@
         flex: 1;
       }
 
+      .vocab-kr-row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
       .vocab-kr {
         font-weight: 700;
         font-size: 0.98rem;
@@ -312,6 +318,21 @@
         font-size: 0.85rem;
         color: var(--text-muted);
         margin-top: 2px;
+      }
+
+      .btn-audio-sm {
+        background: #f1f5f9;
+        border: 1px solid var(--border-color);
+        border-radius: 6px;
+        padding: 2px 6px;
+        font-size: 0.75rem;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+
+      .btn-audio-sm:hover {
+        background: #e2e8f0;
+        transform: scale(1.05);
       }
 
       .blur-text {
@@ -432,7 +453,7 @@
     </div>
 
     <script>
-      // Data Kosakata Lengkap Fase 6 (Minggu 21 - 25) + Latin
+      // Data Kosakata Lengkap Fase 6 Dipisah (Tanpa Tanda Miring '/')
       const vocabData = {
         "Minggu 21": [
           { kr: "건강", latin: "geon-gang", id: "Kesehatan" },
@@ -466,11 +487,8 @@
           { kr: "늘다", latin: "neul-da", id: "Bertambah" },
           { kr: "불", latin: "bul", id: "Lampu / api" },
           { kr: "줄다", latin: "jul-da", id: "Berkurang" },
-          {
-            kr: "켜다 / 끄다",
-            latin: "kyeo-da / kkeu-da",
-            id: "Menyalakan / mematikan",
-          },
+          { kr: "켜다", latin: "kyeo-da", id: "Menyalakan" },
+          { kr: "끄다", latin: "kkeu-da", id: "Mematikan" },
           { kr: "점점", latin: "jeom-jeom", id: "Semakin" },
           { kr: "이사하다", latin: "i-sa-ha-da", id: "Pindah rumah" },
           { kr: "갑자기", latin: "gap-ja-gi", id: "Tiba-tiba" },
@@ -489,10 +507,11 @@
         "Minggu 23": [
           { kr: "말하다", latin: "mal-ha-da", id: "Berkata" },
           { kr: "생각하다", latin: "saeng-gak-ha-da", id: "Berpikir" },
+          { kr: "묻다", latin: "mut-da", id: "Bertanya" },
           {
-            kr: "묻다 / 물어보다",
-            latin: "mut-da / mul-eo-bo-da",
-            id: "Bertanya",
+            kr: "물어보다",
+            latin: "mul-eo-bo-da",
+            id: "Bertanya / Mencoba bertanya",
           },
           { kr: "충고하다", latin: "chung-go-ha-da", id: "Menasihati" },
           { kr: "대답하다", latin: "dae-dap-ha-da", id: "Menjawab" },
@@ -518,7 +537,7 @@
           { kr: "이렇게", latin: "i-reoh-ge", id: "Seperti ini" },
           { kr: "합격하다", latin: "hap-gyeok-ha-da", id: "Lulus ujian" },
           { kr: "그렇게", latin: "geu-reoh-ge", id: "Seperti itu" },
-          { kr: "떨어지다", latin: "tteol-eo-ji-da", id: "Gagal / jatuh" },
+          { kr: "떨어지다", latin: "tteol-eo-ji-da", id: "Gagal / Jatuh" },
           { kr: "가져오다", latin: "ga-jeo-o-da", id: "Membawa kemari" },
           { kr: "졸업하다", latin: "jol-eop-ha-da", id: "Lulus kuliah" },
           { kr: "가져가다", latin: "ga-jeo-ga-da", id: "Membawa pergi" },
@@ -527,7 +546,7 @@
         "Minggu 25": [
           { kr: "편리하다", latin: "pyeon-ri-ha-da", id: "Praktis" },
           { kr: "문화", latin: "mun-hwa", id: "Budaya" },
-          { kr: "복잡하다", latin: "bok-jap-ha-da", id: "Ramai / rumit" },
+          { kr: "복잡하다", latin: "bok-jap-ha-da", id: "Ramai / Rumit" },
           { kr: "사회", latin: "sa-hoe", id: "Masyarakat" },
           { kr: "유명하다", latin: "yu-myeong-ha-da", id: "Terkenal" },
           { kr: "경제", latin: "gyeong-je", id: "Ekonomi" },
@@ -547,6 +566,19 @@
       let hideTarget = "ID";
       let hideStates = {};
       let isPanelCollapsed = false;
+
+      // FUNGSI SUARA WEBSPEECH API
+      function speakKorean(text) {
+        if ("speechSynthesis" in window) {
+          window.speechSynthesis.cancel();
+          const utterance = new SpeechSynthesisUtterance(text);
+          utterance.lang = "ko-KR";
+          utterance.rate = 0.85;
+          window.speechSynthesis.speak(utterance);
+        } else {
+          alert("Browser tidak mendukung pengucapan suara.");
+        }
+      }
 
       window.onload = function () {
         const weekContainer = document.getElementById("week-filter-container");
@@ -624,7 +656,10 @@
           card.className = "vocab-card";
           card.innerHTML = `
           <div class="vocab-content">
-            <div class="vocab-kr ${isKrHidden ? "blur-text" : ""}">${item.kr}</div>
+            <div class="vocab-kr-row">
+              <span class="vocab-kr ${isKrHidden ? "blur-text" : ""}">${item.kr}</span>
+              <button class="btn-audio-sm" onclick="speakKorean('${item.kr}')" title="Dengarkan pengucapan">🔊</button>
+            </div>
             <div class="vocab-latin ${isKrHidden ? "blur-text" : ""}">${item.latin}</div>
             <div class="vocab-id ${isIdHidden ? "blur-text" : ""}">${item.id}</div>
           </div>

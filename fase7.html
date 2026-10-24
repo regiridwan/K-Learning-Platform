@@ -295,6 +295,12 @@
         flex: 1;
       }
 
+      .vocab-kr-row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
       .vocab-kr {
         font-weight: 700;
         font-size: 0.98rem;
@@ -312,6 +318,21 @@
         font-size: 0.85rem;
         color: var(--text-muted);
         margin-top: 2px;
+      }
+
+      .btn-audio-sm {
+        background: #f1f5f9;
+        border: 1px solid var(--border-color);
+        border-radius: 6px;
+        padding: 2px 6px;
+        font-size: 0.75rem;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+
+      .btn-audio-sm:hover {
+        background: #e2e8f0;
+        transform: scale(1.05);
       }
 
       .blur-text {
@@ -432,7 +453,7 @@
     </div>
 
     <script>
-      // Data Kosakata Lengkap Fase 7 (Minggu 26 - 28) + Latin
+      // Data Kosakata Lengkap Fase 7 Dipisah (Tanpa Tanda Miring '/')
       const vocabData = {
         "Minggu 26": [
           {
@@ -466,9 +487,14 @@
             id: "Akar: Pertemuan / Masyarakat (회사, 회의, 사회)",
           },
           {
-            kr: "전 / 후 (前 / 後)",
-            latin: "jeon / hu",
-            id: "Akar: Sebelum / Sesudah (오전, 오후, 식후)",
+            kr: "전 (前)",
+            latin: "jeon",
+            id: "Akar: Sebelum / Depan (오전, 식전)",
+          },
+          {
+            kr: "후 (後)",
+            latin: "hu",
+            id: "Akar: Sesudah / Belakang (오후, 식후)",
           },
           {
             kr: "화 (話)",
@@ -476,11 +502,16 @@
             id: "Akar: Bicara (전화, 대화, 통화)",
           },
           {
-            kr: "문 (文 / 問)",
+            kr: "문 (文)",
             latin: "mun",
-            id: "Akar: Tulisan / Tanya (문장, 문화, 질문)",
+            id: "Akar: Tulisan / Sastra (문장, 문화)",
           },
-          { kr: "드시다", latin: "deu-si-da", id: "Makan (Bentuk Hormat)" },
+          { kr: "문 (問)", latin: "mun", id: "Akar: Tanya (질문, 문답)" },
+          {
+            kr: "드시다",
+            latin: "deu-si-da",
+            id: "Makan / Minum (Bentuk Hormat)",
+          },
           { kr: "주무시다", latin: "ju-mu-si-da", id: "Tidur (Bentuk Hormat)" },
           {
             kr: "계시다",
@@ -554,11 +585,9 @@
           },
           { kr: "감소하다", latin: "gam-so-ha-da", id: "Menurun / berkurang" },
           { kr: "반면에", latin: "ban-myeone", id: "Sebaliknya" },
-          {
-            kr: "첫째 / 둘째 / 셋째",
-            latin: "cheot-jjae / dul-jjae / set-jjae",
-            id: "Pertama / Kedua / Ketiga",
-          },
+          { kr: "첫째", latin: "cheot-jjae", id: "Pertama" },
+          { kr: "둘째", latin: "dul-jjae", id: "Kedua" },
+          { kr: "셋째", latin: "set-jjae", id: "Ketiga" },
           {
             kr: "결론적으로",
             latin: "gyeol-ron-jeok-eu-ro",
@@ -577,6 +606,19 @@
       let hideTarget = "ID";
       let hideStates = {};
       let isPanelCollapsed = false;
+
+      // FUNGSI SUARA WEBSPEECH API
+      function speakKorean(text) {
+        if ("speechSynthesis" in window) {
+          window.speechSynthesis.cancel();
+          const utterance = new SpeechSynthesisUtterance(text);
+          utterance.lang = "ko-KR";
+          utterance.rate = 0.85;
+          window.speechSynthesis.speak(utterance);
+        } else {
+          alert("Browser tidak mendukung pengucapan suara.");
+        }
+      }
 
       window.onload = function () {
         const weekContainer = document.getElementById("week-filter-container");
@@ -654,7 +696,10 @@
           card.className = "vocab-card";
           card.innerHTML = `
           <div class="vocab-content">
-            <div class="vocab-kr ${isKrHidden ? "blur-text" : ""}">${item.kr}</div>
+            <div class="vocab-kr-row">
+              <span class="vocab-kr ${isKrHidden ? "blur-text" : ""}">${item.kr}</span>
+              <button class="btn-audio-sm" onclick="speakKorean('${item.kr.replace(/ \(.*\)/, "")}')" title="Dengarkan pengucapan">🔊</button>
+            </div>
             <div class="vocab-latin ${isKrHidden ? "blur-text" : ""}">${item.latin}</div>
             <div class="vocab-id ${isIdHidden ? "blur-text" : ""}">${item.id}</div>
           </div>

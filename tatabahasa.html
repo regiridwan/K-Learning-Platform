@@ -1,0 +1,1273 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Tata Bahasa & Dialog Interaktif (50 Modul) - K-Learning Platform
+    </title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --bg-main: #f8fafc;
+        --panel-bg: #ffffff;
+        --primary: #1e293b;
+        --accent: #e11d48;
+        --border-color: #e2e8f0;
+        --text-muted: #64748b;
+        --text-main: #1e293b;
+        --accent-light: #fff1f2;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Inter", "Noto Sans KR", sans-serif;
+        background-color: var(--bg-main);
+        color: var(--text-main);
+        height: 100vh;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+      }
+
+      header {
+        background-color: var(--panel-bg);
+        border-bottom: 1px solid var(--border-color);
+        padding: 0 24px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-shrink: 0;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-weight: 700;
+        font-size: 1.1rem;
+        color: var(--primary);
+        text-decoration: none;
+      }
+
+      .brand-logo {
+        background: var(--accent);
+        color: white;
+        width: 32px;
+        height: 32px;
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+      }
+
+      nav {
+        display: flex;
+        gap: 16px;
+        align-items: center;
+      }
+
+      .nav-dropdown {
+        padding: 6px 12px;
+        border: 1px solid var(--border-color);
+        border-radius: 6px;
+        font-weight: 600;
+        font-size: 0.85rem;
+        background: white;
+        color: var(--primary);
+        outline: none;
+        cursor: pointer;
+      }
+
+      .timer-widget {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background: #f1f5f9;
+        padding: 4px 12px;
+        border-radius: 6px;
+        border: 1px solid var(--border-color);
+      }
+
+      .timer-display {
+        font-family: monospace;
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--primary);
+      }
+
+      .timer-btn {
+        background: var(--primary);
+        color: white;
+        border: none;
+        padding: 4px 10px;
+        border-radius: 4px;
+        font-size: 0.8rem;
+        cursor: pointer;
+      }
+
+      .workspace {
+        display: flex;
+        flex: 1;
+        overflow: hidden;
+        padding: 16px 24px;
+        gap: 16px;
+      }
+
+      /* Sidebar Kiri: Daftar Tata Bahasa */
+      .sidebar-grammar {
+        width: 360px;
+        background: var(--panel-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        flex-shrink: 0;
+      }
+
+      .search-box {
+        padding: 14px;
+        border-bottom: 1px solid var(--border-color);
+        background: #f8fafc;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .search-input {
+        width: 100%;
+        padding: 10px 14px;
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        font-size: 0.88rem;
+        outline: none;
+      }
+
+      .search-input:focus {
+        border-color: var(--accent);
+      }
+
+      .stats-badge {
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: var(--text-muted);
+      }
+
+      .grammar-list {
+        flex: 1;
+        overflow-y: auto;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .grammar-item {
+        padding: 12px 14px;
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.2s;
+        background: white;
+      }
+
+      .grammar-item:hover,
+      .grammar-item.active {
+        border-color: var(--accent);
+        background: var(--accent-light);
+      }
+
+      .grammar-tag {
+        font-size: 0.72rem;
+        font-weight: 700;
+        color: var(--accent);
+        margin-bottom: 2px;
+      }
+
+      .grammar-pattern {
+        font-weight: 700;
+        font-size: 0.95rem;
+        color: var(--primary);
+      }
+
+      .grammar-title-sub {
+        font-size: 0.82rem;
+        color: var(--text-muted);
+        margin-top: 3px;
+      }
+
+      /* Content Kanan: Detail & Dialog */
+      .content-detail {
+        flex: 1;
+        background: var(--panel-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        display: flex;
+        flex-direction: column;
+        overflow-y: auto;
+        padding: 24px;
+        gap: 20px;
+      }
+
+      .detail-header {
+        border-bottom: 1px solid var(--border-color);
+        padding-bottom: 16px;
+      }
+
+      .detail-pattern {
+        font-size: 1.6rem;
+        font-weight: 800;
+        color: var(--primary);
+      }
+
+      .detail-title {
+        font-size: 1.1rem;
+        color: var(--accent);
+        font-weight: 600;
+        margin-top: 4px;
+      }
+
+      .explanation-box {
+        background: #f8fafc;
+        border-left: 4px solid var(--accent);
+        padding: 16px 20px;
+        border-radius: 0 8px 8px 0;
+        font-size: 0.95rem;
+        line-height: 1.6;
+        color: #334155;
+      }
+
+      .dialogue-section-title {
+        font-weight: 700;
+        font-size: 1.1rem;
+        color: var(--primary);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .dialogue-card {
+        border: 1px solid var(--border-color);
+        border-radius: 10px;
+        padding: 16px;
+        background: #ffffff;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .dialogue-line {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+      }
+
+      .dialogue-text {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .dialogue-kr {
+        font-weight: 700;
+        font-size: 1.05rem;
+        color: var(--primary);
+      }
+
+      .dialogue-id {
+        font-size: 0.9rem;
+        color: var(--text-muted);
+      }
+
+      .btn-audio-circle {
+        background: #f1f5f9;
+        border: 1px solid var(--border-color);
+        border-radius: 50%;
+        width: 36px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        font-size: 0.95rem;
+        flex-shrink: 0;
+        transition: all 0.2s;
+      }
+
+      .btn-audio-circle:hover {
+        background: var(--accent-light);
+        border-color: var(--accent);
+      }
+
+      .blur-id {
+        background: #cbd5e1;
+        color: transparent !important;
+        border-radius: 4px;
+        user-select: none;
+      }
+
+      .toggle-btn {
+        font-size: 0.8rem;
+        padding: 6px 12px;
+        background: #f1f5f9;
+        border: 1px solid var(--border-color);
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: 600;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <a href="welcome.html" class="brand">
+        <div class="brand-logo">한</div>
+        <span>K-Learning Platform</span>
+      </a>
+
+      <div class="timer-widget">
+        <span
+          style="font-size: 0.75rem; color: var(--text-muted); font-weight: 600"
+          >POMODORO</span
+        >
+        <div class="timer-display" id="timer">25:00</div>
+        <button class="timer-btn" id="start-timer-btn" onclick="toggleTimer()">
+          Start
+        </button>
+      </div>
+
+      <nav>
+        <select
+          class="nav-dropdown"
+          onchange="if (this.value) window.location.href = this.value;"
+        >
+          <option value="" disabled selected>Pilih Fase Belajar...</option>
+          <option value="fase1.html">Fase 1: Fondasi</option>
+          <option value="fase2.html">Fase 2: Perluasan</option>
+          <option value="fase3.html">Fase 3: Kalimat Kompleks</option>
+          <option value="fase4.html">Fase 4: Tata Bahasa Lanjutan</option>
+          <option value="fase5.html">Fase 5: Simulasi TOPIK I</option>
+          <option value="fase6.html">Fase 6: Menengah Awal</option>
+          <option value="fase7.html">Fase 7: TOPIK II</option>
+        </select>
+
+        <select
+          class="nav-dropdown"
+          style="border-color: rgba(225, 29, 72, 0.4)"
+          onchange="if (this.value) window.location.href = this.value;"
+        >
+          <option value="" disabled>⚡ Fitur & Alat...</option>
+          <option value="latihan.html">📝 Latihan Soal</option>
+          <option value="kamus.html">📖 Kamus Interaktif</option>
+          <option value="tatabahasa.html" selected>
+            📘 Tata Bahasa & Dialog
+          </option>
+          <option value="game.html">🎮 Break Game</option>
+        </select>
+        <a href="welcome.html">Home</a>
+      </nav>
+    </header>
+
+    <div class="workspace">
+      <!-- Sidebar Kiri: Daftar Tata Bahasa -->
+      <div class="sidebar-grammar">
+        <div class="search-box">
+          <input
+            type="text"
+            class="search-input"
+            id="search-input"
+            placeholder="Cari pola Hangeul, topik, atau arti Indonesia..."
+            oninput="renderGrammarList()"
+          />
+          <span class="stats-badge" id="stats-badge">Memuat 50 Modul...</span>
+        </div>
+        <div class="grammar-list" id="grammar-list"></div>
+      </div>
+
+      <!-- Panel Kanan: Detail & Contoh Dialog -->
+      <div class="content-detail" id="content-detail">
+        <div class="detail-header">
+          <div class="detail-pattern" id="detail-pattern">
+            Pilih Tata Bahasa
+          </div>
+          <div class="detail-title" id="detail-title">
+            Silakan pilih tata bahasa dari panel di sebelah kiri
+          </div>
+        </div>
+        <div class="explanation-box" id="explanation-box">
+          Fitur ini menyajikan 50 materi tata bahasa terpopuler beserta
+          penjelasan terjemahan bahasa Indonesia dan percakapan interaktif
+          lengkap dengan audio pengucapan.
+        </div>
+        <div class="dialogue-section-title">
+          <span>Contoh Dialog Percakapan</span>
+          <button
+            class="toggle-btn"
+            onclick="toggleHideTranslation()"
+            id="toggle-hide-btn"
+          >
+            Sembunyikan Arti
+          </button>
+        </div>
+        <div
+          id="dialogue-container"
+          style="display: flex; flex-direction: column; gap: 12px"
+        ></div>
+      </div>
+    </div>
+
+    <script>
+      // Database 50 Rumus Tata Bahasa & Percakapan LENGKAP
+      const grammarData = [
+        {
+          id: 1,
+          pattern: "N은/는 N이에요/예요",
+          title: "Menyatakan Identitas (Adalah...)",
+          desc: "'은/는' adalah partikel penanda topik. Gunakan '-은' jika kata benda berakhiran konsonan, dan '-는' jika berakhiran vokal. '이에요/예요' berfungsi seperti kata kerja 'adalah'. Gunakan '이에요' untuk konsonan dan '예요' untuk vokal.",
+          dialogues: [
+            { kr: "안녕하세요?", id: "Halo / Apa kabar?" },
+            { kr: "네, 안녕하세요?", id: "Ya, halo!" },
+            { kr: "저는 유양이에요.", id: "Saya adalah Yooyang." },
+            { kr: "저는 김우빈이에요.", id: "Saya adalah Kim Woobin." },
+          ],
+        },
+        {
+          id: 2,
+          pattern: "N은/는 N이에요/예요?",
+          title: "Bentuk Pertanyaan Identitas (Apakah...?)",
+          desc: "Bentuk pertanyaan dari 'N은/는 N이에요/예요'. Digunakan untuk menanyakan profesi, kebangsaan, atau identitas seseorang.",
+          dialogues: [
+            {
+              kr: "유양 씨는 중국 사람이에요?",
+              id: "Apakah Sdri. Yooyang orang Tiongkok?",
+            },
+            { kr: "네, 저는 중국 사람이에요.", id: "Ya, saya orang Tiongkok." },
+            { kr: "학생이에요?", id: "Apakah Anda seorang pelajar?" },
+            { kr: "네, 학생이에요.", id: "Ya, saya seorang pelajar." },
+          ],
+        },
+        {
+          id: 3,
+          pattern: "N은/는 N이/가 아니에요",
+          title: "Bentuk Sangkalan (Bukan...)",
+          desc: "Bentuk negatif dari 'N이에요/예요'. Jika kata benda berakhiran konsonan gunakan '이 아니다', dan jika berakhiran vokal gunakan '가 아니다'.",
+          dialogues: [
+            {
+              kr: "우빈 씨는 학생이에요?",
+              id: "Apakah Sdr. Woobin seorang pelajar?",
+            },
+            {
+              kr: "아니요, 저는 학생이 아니에요.",
+              id: "Bukan, saya bukan pelajar.",
+            },
+            {
+              kr: "그럼 회사원이에요?",
+              id: "Kalau begitu apakah Anda karyawan perusahaan?",
+            },
+            { kr: "네, 회사원이에요.", id: "Ya, saya karyawan perusahaan." },
+          ],
+        },
+        {
+          id: 4,
+          pattern: "이/그/저 N은/는 N이에요/예요",
+          title: "Penunjuk Benda & Orang (Ini / Itu / Di sana)",
+          desc: "'이' digunakan untuk benda/orang dekat pembicara. '그' dekat pendengar. '저' jauh dari pembicara dan pendengar.",
+          dialogues: [
+            {
+              kr: "저 사람은 누구예요?",
+              id: "Siapa orang di sebelah sana itu?",
+            },
+            {
+              kr: "저 사람은 흐엉 씨예요.",
+              id: "Orang di sana itu adalah Sdri. Huong.",
+            },
+            { kr: "베트남 사람이에요?", id: "Apakah dia orang Vietnam?" },
+            { kr: "네, 베트남 사람이에요.", id: "Ya, dia orang Vietnam." },
+          ],
+        },
+        {
+          id: 5,
+          pattern: "N은/는 N의 N이에요/예요",
+          title: "Partikel Kepemilikan (Kepunyaan...)",
+          desc: "Partikel '의' ditempelkan pada kata benda untuk menyatakan kepemilikan. Dalam percakapan santai, partikel ini sering dihilangkan.",
+          dialogues: [
+            { kr: "다니엘 씨는 누구예요?", id: "Siapa Sdr. Daniel?" },
+            {
+              kr: "다니엘 씨는 스티브 씨의 남동생이에요.",
+              id: "Daniel adalah adik laki-laki Sdr. Steve.",
+            },
+            {
+              kr: "다니엘 씨는 우빈 씨의 친구예요?",
+              id: "Apakah Daniel teman Sdr. Woobin?",
+            },
+            {
+              kr: "네, 다니엘 씨는 제 친구예요.",
+              id: "Ya, Daniel adalah teman saya.",
+            },
+          ],
+        },
+        {
+          id: 6,
+          pattern: "N이/가 N이에요/예요",
+          title: "Partikel Subjek Utama (이/가)",
+          desc: "Partikel '이/가' digunakan untuk menegaskan subjek utama dalam kalimat. Gunakan '이' untuk konsonan dan '가' untuk vokal.",
+          dialogues: [
+            {
+              kr: "스티브 씨는 회사원이에요?",
+              id: "Apakah Sdr. Steve karyawan perusahaan?",
+            },
+            {
+              kr: "아니요, 회사원이 아니에요. 의사예요.",
+              id: "Bukan, dia bukan karyawan. Dia seorang dokter.",
+            },
+            {
+              kr: "그럼 누가 회사원이에요?",
+              id: "Kalau begitu siapa yang karyawan perusahaan?",
+            },
+            {
+              kr: "흐엉 씨가 회사원이에요.",
+              id: "Sdri. Huong-lah yang merupakan karyawan perusahaan.",
+            },
+          ],
+        },
+        {
+          id: 7,
+          pattern: "N이/가 Vst-아요/어요",
+          title: "Kata Kerja / Sifat Informal Sopan",
+          desc: "Akhiran '-아요/어요' digunakan untuk tindakan/keadaan secara sopan. '-아요' digunakan jika vokal terakhir ㅏ/ㅗ, dan '-어요' untuk vokal lainnya.",
+          dialogues: [
+            { kr: "헬스클럽이 어때요?", id: "Bagaimana pusat kebugarannya?" },
+            {
+              kr: "헬스클럽이 아주 넓어요.",
+              id: "Pusat kebugarannya sangat luas.",
+            },
+            { kr: "집이 어때요?", id: "Bagaimana rumahnya?" },
+            { kr: "집이 작아요.", id: "Rumahnya kecil." },
+          ],
+        },
+        {
+          id: 8,
+          pattern: "N에 N이/가 있어요/없어요",
+          title: "Keberadaan Posisi (Ada / Tidak Ada)",
+          desc: "Partikel '에' menandai tempat keberadaan suatu benda/orang, digabungkan dengan '있어요' (ada) atau '없어요' (tidak ada).",
+          dialogues: [
+            { kr: "방에 창문이 있어요?", id: "Apakah ada jendela di kamar?" },
+            {
+              kr: "네, 밝아요. 방에 창문이 있어요.",
+              id: "Ya, terang. Ada jendela di kamar.",
+            },
+            {
+              kr: "집에 애완동물이 있어요?",
+              id: "Apakah ada hewan peliharaan di rumah?",
+            },
+            {
+              kr: "아니요, 집에 애완동물이 없어요.",
+              id: "Tidak, tidak ada hewan peliharaan di rumah.",
+            },
+          ],
+        },
+        {
+          id: 9,
+          pattern: "N이/가 어디에 있어요?",
+          title: "Menanyakan Lokasi (Di mana...?)",
+          desc: "Pola kalimat tanya untuk menanyakan lokasi atau posisi suatu tempat, barang, atau orang.",
+          dialogues: [
+            {
+              kr: "회사가 어디에 있어요?",
+              id: "Di mana letak perusahaan Anda?",
+            },
+            {
+              kr: "엘리베이터는 저쪽에 있어요.",
+              id: "Lif ada di sebelah sana.",
+            },
+            { kr: "휴게실은 어디에 있어요?", id: "Di mana ruang istirahat?" },
+            {
+              kr: "휴게실은 5층에 있어요.",
+              id: "Ruang istirahat ada di lantai 5.",
+            },
+          ],
+        },
+        {
+          id: 10,
+          pattern: "N하고 N",
+          title: "Kata Hubung (Dan / Bersama)",
+          desc: "Partikel '하고' digunakan untuk menggabungkan dua kata benda atau menyatakan aktivitas bersama seseorang.",
+          dialogues: [
+            { kr: "방에 무엇이 있어요?", id: "Ada apa saja di kamar?" },
+            {
+              kr: "침대하고 책상이 있어요.",
+              id: "Ada tempat tidur dan meja belajar.",
+            },
+            { kr: "누구하고 살아요?", id: "Tinggal bersama siapa?" },
+            { kr: "친구하고 살아요.", id: "Tinggal bersama teman." },
+          ],
+        },
+        {
+          id: 11,
+          pattern: "N에서 Vst-아요/어요",
+          title: "Lokasi Kegiatan (Di...)",
+          desc: "Partikel '에서' menandai tempat terjadinya suatu aktivitas atau kegiatan.",
+          dialogues: [
+            { kr: "어디에서 공부해요?", id: "Di mana Anda belajar?" },
+            { kr: "도서관에서 공부해요.", id: "Saya belajar di perpustakaan." },
+            { kr: "어디에서 친구를 만나요?", id: "Di mana bertemu teman?" },
+            { kr: "카페에서 만나요.", id: "Bertemu di kafe." },
+          ],
+        },
+        {
+          id: 12,
+          pattern: "N을/를 Vst-아요/어요",
+          title: "Partikel Objek (을/를)",
+          desc: "Partikel '을/를' menandai objek penderita dalam kalimat. Gunakan '을' jika berakhiran konsonan dan '를' untuk vokal.",
+          dialogues: [
+            { kr: "지금 무엇을 해요?", id: "Sekarang sedang melakukan apa?" },
+            { kr: "밥을 먹어요.", id: "Makan nasi." },
+            { kr: "커피를 마셔요?", id: "Apakah minum kopi?" },
+            { kr: "네, 커피를 마셔요.", id: "Ya, minum kopi." },
+          ],
+        },
+        {
+          id: 13,
+          pattern: "N에 가다/오다",
+          title: "Arah Tujuan (Pergi / Datang ke...)",
+          desc: "Partikel '에' menandai tempat tujuan perpindahan dengan kata kerja seperti '가다' (pergi) atau '오다' (datang).",
+          dialogues: [
+            { kr: "어디에 가요?", id: "Mau pergi ke mana?" },
+            { kr: "학교에 가요.", id: "Pergi ke sekolah." },
+            { kr: "주말에 어디에 가요?", id: "Akhir pekan pergi ke mana?" },
+            { kr: "시장에 가요.", id: "Pergi ke pasar." },
+          ],
+        },
+        {
+          id: 14,
+          pattern: "N도",
+          title: "Partikel Penambah (Juga / Pun)",
+          desc: "Partikel '도' ditempelkan pada kata benda untuk menggantikan '은/는' atau '이/가' dengan arti 'juga'.",
+          dialogues: [
+            { kr: "저는 학생이에요.", id: "Saya adalah pelajar." },
+            { kr: "저도 학생이에요.", id: "Saya juga seorang pelajar." },
+            {
+              kr: "사과를 사요. 바나나도 사요.",
+              id: "Membeli apel. Membeli pisang juga.",
+            },
+          ],
+        },
+        {
+          id: 15,
+          pattern: "Vst-지 않아요",
+          title: "Bentuk Negatif Kata Kerja / Sifat (Tidak...)",
+          desc: "Ditempelkan pada akar kata kerja/sifat untuk membuat bentuk sangkalan 'tidak...'.",
+          dialogues: [
+            { kr: "오늘 바빠요?", id: "Apakah hari ini sibuk?" },
+            { kr: "아니요, 바쁘지 않아요.", id: "Tidak, tidak sibuk." },
+            { kr: "김치를 먹어요?", id: "Apakah makan kimchi?" },
+            {
+              kr: "아니요, 매워서 먹지 않아요.",
+              id: "Tidak, tidak makan karena pedas.",
+            },
+          ],
+        },
+        {
+          id: 16,
+          pattern: "안 Vst-아요/어요",
+          title: "Negasi Pendek (Tidak...)",
+          desc: "Kata '안' diletakkan sebelum kata kerja/sifat untuk menyatakan negasi secara singkat.",
+          dialogues: [
+            { kr: "아침을 먹었어요?", id: "Apakah sudah sarapan?" },
+            { kr: "아니요, 안 먹었어요.", id: "Tidak, belum makan." },
+            {
+              kr: "오늘 학교에 가요?",
+              id: "Apakah hari ini pergi ke sekolah?",
+            },
+            { kr: "아니요, 안 가요.", id: "Tidak, tidak pergi." },
+          ],
+        },
+        {
+          id: 17,
+          pattern: "Vst-고 싶다",
+          title: "Ungkapan Keinginan (Ingin...)",
+          desc: "Ditempelkan pada kata kerja untuk menyatakan keinginan pembicara melakukan sesuatu.",
+          dialogues: [
+            { kr: "무엇을 먹고 싶어요?", id: "Ingin makan apa?" },
+            {
+              kr: "한국 음식을 먹고 싶어요.",
+              id: "Saya ingin makan makanan Korea.",
+            },
+            { kr: "어디에 가고 싶어요?", id: "Ingin pergi ke mana?" },
+            {
+              kr: "제주도에 가고 싶어요.",
+              id: "Saya ingin pergi ke Pulau Jeju.",
+            },
+          ],
+        },
+        {
+          id: 18,
+          pattern: "Vst-았/었어요",
+          title: "Bentuk Lampau (Sudah...)",
+          desc: "Akhiran bentuk lampau. '-았어요' jika vokal ㅏ/ㅗ, '-었어요' untuk vokal lain, dan '했었어요/했어요' untuk 하다.",
+          dialogues: [
+            { kr: "어제 무엇을 했어요?", id: "Kemarin melakukan apa?" },
+            { kr: "친구를 만났어요.", id: "Sudah bertemu teman." },
+            { kr: "영화가 재미있었어요?", id: "Apakah filmnya seru?" },
+            { kr: "네, 아주 재미있었어요.", id: "Ya, sangat seru." },
+          ],
+        },
+        {
+          id: 19,
+          pattern: "Vst-(으)ㄹ 거예요",
+          title: "Bentuk Akan Datang / Rencana (Akan...)",
+          desc: "Menyatakan rencana atau perkiraan di masa depan. Gunakan 'ㄹ 거예요' untuk akhiran vokal dan '을 거예요' untuk konsonan.",
+          dialogues: [
+            {
+              kr: "주말에 무엇을 할 거예요?",
+              id: "Akhir pekan ini mau melakukan apa?",
+            },
+            {
+              kr: "집에서 쉬울 거예요.",
+              id: "Saya akan beristirahat di rumah.",
+            },
+            { kr: "언제 여행을 갈 거예요?", id: "Kapan akan pergi berlibur?" },
+            { kr: "다음 달에 갈 거예요.", id: "Akan pergi bulan depan." },
+          ],
+        },
+        {
+          id: 20,
+          pattern: "Vst-(으)세요",
+          title: "Kalimat Perintah Halus (Silakan...)",
+          desc: "Bentuk perintah atau permintaan sopan. Gunakan '세요' untuk vokal dan '으세요' untuk konsonan.",
+          dialogues: [
+            {
+              kr: "어서 오세요. 여기에 앉으세요.",
+              id: "Selamat datang. Silakan duduk di sini.",
+            },
+            { kr: "감사합니다.", id: "Terima kasih." },
+            { kr: "책을 읽으세요.", id: "Silakan baca bukunya." },
+          ],
+        },
+        {
+          id: 21,
+          pattern: "Vst-지 마세요",
+          title: "Larangan Halus (Jangan...)",
+          desc: "Ditempelkan pada kata kerja untuk melarang seseorang melakukan sesuatu secara sopan.",
+          dialogues: [
+            {
+              kr: "여기에 사진을 찍지 마세요.",
+              id: "Jangan mengambil foto di sini.",
+            },
+            { kr: "죄송합니다.", id: "Mohon maaf." },
+            { kr: "걱정하지 마세요.", id: "Jangan khawatir." },
+          ],
+        },
+        {
+          id: 22,
+          pattern: "Vst-(으)ㄹ까요?",
+          title: "Bentuk Usulan / Penawaran (Bagaimana kalau...?)",
+          desc: "Digunakan saat mengusulkan aktivitas bersama atau menanyakan pendapat lawan bicara.",
+          dialogues: [
+            {
+              kr: "같이 점심을 먹을까요?",
+              id: "Bagaimana kalau kita makan siang bersama?",
+            },
+            { kr: "좋아요. 같이 먹어요.", id: "Bagus. Mari makan bersama." },
+            { kr: "몇 시에 만날까요?", id: "Jam berapa kita bertemu?" },
+            { kr: "2시에 만나요.", id: "Mari bertemu jam 2." },
+          ],
+        },
+        {
+          id: 23,
+          pattern: "Vst-(으)ㅂ시다",
+          title: "Ajakan Formal (Mari...)",
+          desc: "Bentuk ajakan formal melakukan aktivitas bersama. Gunakan 'ㅂ시다' untuk vokal dan '읍시다' untuk konsonan.",
+          dialogues: [
+            {
+              kr: "날씨가 좋네요. 산책합시다.",
+              id: "Cuacanya bagus ya. Mari kita jalan-jalan.",
+            },
+            {
+              kr: "네, 그래요. 산책합시다.",
+              id: "Ya, betul. Mari jalan-jalan.",
+            },
+          ],
+        },
+        {
+          id: 24,
+          pattern: "Vst-아/어 주세요",
+          title: "Permintaan Tolong (Tolong...)",
+          desc: "Digunakan saat meminta bantuan orang lain untuk melakukan sesuatu bagi pembicara.",
+          dialogues: [
+            {
+              kr: "한국어를 가르쳐 주세요.",
+              id: "Tolong ajarkan bahasa Korea.",
+            },
+            { kr: "네, 좋아요.", id: "Ya, baiklah." },
+            { kr: "문표를 보여 주세요.", id: "Tolong tunjukkan tiketnya." },
+          ],
+        },
+        {
+          id: 25,
+          pattern: "Vst-아/어 보다",
+          title: "Pengalaman / Mencoba (Coba / Pernah...)",
+          desc: "Menyatakan pengalaman atau mencoba melakukan sesuatu.",
+          dialogues: [
+            {
+              kr: "한국 음식을 먹어 봤어요?",
+              id: "Apakah pernah mencoba makan makanan Korea?",
+            },
+            {
+              kr: "네, 비빔밥을 먹어 봤어요.",
+              id: "Ya, saya pernah mencoba bibimbap.",
+            },
+          ],
+        },
+        {
+          id: 26,
+          pattern: "Vst-(으)ㄹ 수 있다/없다",
+          title: "Kemampuan (Bisa / Tidak Bisa...)",
+          desc: "Menyatakan sanggup atau tidak sanggup melakukan suatu hal.",
+          dialogues: [
+            {
+              kr: "한국어를 할 수 있어요?",
+              id: "Apakah bisa berbahasa Korea?",
+            },
+            { kr: "네, 조금 할 수 있어요.", id: "Ya, bisa sedikit." },
+            { kr: "운전을 할 수 있어요?", id: "Apakah bisa menyetir?" },
+            { kr: "아니요, 할 수 없어요.", id: "Tidak, tidak bisa." },
+          ],
+        },
+        {
+          id: 27,
+          pattern: "Vst-아/어야 하다/되다",
+          title: "Kewajiban (Harus...)",
+          desc: "Menyatakan suatu keharusan atau kewajiban yang wajib dikerjakan.",
+          dialogues: [
+            {
+              kr: "내일 시험이 있어서 공부해야 돼요.",
+              id: "Besok ada ujian jadi harus belajar.",
+            },
+            { kr: "열심히 하세요.", id: "Semangat ya." },
+          ],
+        },
+        {
+          id: 28,
+          pattern: "Vst-지 않아도 되다",
+          title: "Bebas Kewajiban (Tidak perlu...)",
+          desc: "Menyatakan bahwa tidak ada keharusan untuk melakukan sesuatu.",
+          dialogues: [
+            {
+              kr: "내일 학교에 가야 돼요?",
+              id: "Apakah besok harus pergi ke sekolah?",
+            },
+            {
+              kr: "아니요, 휴일이라서 가가지 않아도 돼요.",
+              id: "Tidak, karena hari libur jadi tidak perlu pergi.",
+            },
+          ],
+        },
+        {
+          id: 29,
+          pattern: "Vst-(으)면 안 되다",
+          title: "Larangan Aturan (Tidak boleh...)",
+          desc: "Menyatakan larangan keras berdasarkan hukum, norma, atau aturan.",
+          dialogues: [
+            {
+              kr: "여기에 담배를 피우면 안 돼요.",
+              id: "Di sini tidak boleh merokok.",
+            },
+            { kr: "아, 죄송합니다.", id: "Ah, mohon maaf." },
+          ],
+        },
+        {
+          id: 30,
+          pattern: "Vst-고",
+          title: "Urutan / Penggabungan (Dan / Kemudian)",
+          desc: "Menghubungkan dua kata kerja atau kata sifat secara sejajar.",
+          dialogues: [
+            { kr: "주말에 뭐 했어요?", id: "Akhir pekan melakukan apa?" },
+            {
+              kr: "친구를 만나고 영화를 봤어요.",
+              id: "Bertemu teman dan menonton film.",
+            },
+          ],
+        },
+        {
+          id: 31,
+          pattern: "Vst-지만",
+          title: "Pertentangan (Tetapi / Namun)",
+          desc: "Menghubungkan dua klausa yang bertolak belakang.",
+          dialogues: [
+            { kr: "한국어가 어려워요?", id: "Apakah bahasa Korea susah?" },
+            { kr: "어렵지만 재미있어요.", id: "Susah tetapi seru." },
+          ],
+        },
+        {
+          id: 32,
+          pattern: "Vst-(으)ㄴ/는 N",
+          title: "Bentuk Modifikasi Kata Benda",
+          desc: "Mengubah kata kerja/sifat menjadi kata sifat pembatas bagi kata benda di depannya.",
+          dialogues: [
+            { kr: "어떤 음식을 좋아해요?", id: "Suka makanan yang bagaimana?" },
+            {
+              kr: "매운 음식을 좋아해요.",
+              id: "Saya menyukai makanan yang pedas.",
+            },
+          ],
+        },
+        {
+          id: 33,
+          pattern: "Vst-기 때문에",
+          title: "Sebab Akibat (Karena...)",
+          desc: "Menyatakan alasan atau penyebab terjadinya suatu hal secara jelas.",
+          dialogues: [
+            { kr: "왜 어제 안 왔어요?", id: "Mengapa kemarin tidak datang?" },
+            {
+              kr: "비가 왔기 때문에 안 갔어요.",
+              id: "Saya tidak pergi karena hujan turun.",
+            },
+          ],
+        },
+        {
+          id: 34,
+          pattern: "Vst-(으)면",
+          title: "Pengandaian (Jika / Kalau...)",
+          desc: "Menyatakan kondisi bersyarat atau pengandaian.",
+          dialogues: [
+            {
+              kr: "시간이 있으면 뭐 해요?",
+              id: "Kalau ada waktu biasanya melakukan apa?",
+            },
+            { kr: "음악을 들어요.", id: "Saya mendengarkan musik." },
+          ],
+        },
+        {
+          id: 35,
+          pattern: "Vst-(으)러 가다/오다",
+          title: "Tujuan Aktivitas (Pergi untuk...)",
+          desc: "Menjelaskan tujuan pergi ke suatu tempat.",
+          dialogues: [
+            { kr: "식당에 왜 가요?", id: "Mengapa pergi ke restoran?" },
+            { kr: "밥을 먹으러 가요.", id: "Pergi untuk makan nasi." },
+          ],
+        },
+        {
+          id: 36,
+          pattern: "Vst-(으)려고 하다",
+          title: "Niat / Rencana (Berniat untuk...)",
+          desc: "Menyatakan niat atau rencana dalam waktu dekat.",
+          dialogues: [
+            {
+              kr: "방학 때 뭐 할 거예요?",
+              id: "Saat liburan mau melakukan apa?",
+            },
+            {
+              kr: "한국에 여행을 가려고 해요.",
+              id: "Saya berniat untuk jalan-jalan ke Korea.",
+            },
+          ],
+        },
+        {
+          id: 37,
+          pattern: "Vst-기 전에",
+          title: "Urutan Waktu (Sebelum...)",
+          desc: "Menyatakan aktivitas yang dilakukan sebelum aktivitas lain.",
+          dialogues: [
+            {
+              kr: "밥을 먹기 전에 손을 씻으세요.",
+              id: "Sebelum makan tolong cuci tangan.",
+            },
+            { kr: "네, 알겠습니다.", id: "Ya, baiklah." },
+          ],
+        },
+        {
+          id: 38,
+          pattern: "Vst-(으)ㄴ 후에",
+          title: "Urutan Waktu (Setelah...)",
+          desc: "Menyatakan aktivitas yang dilakukan setelah aktivitas lain selesai.",
+          dialogues: [
+            {
+              kr: "영화가 끝난 후에 뭐 할 거예요?",
+              id: "Setelah film selesai mau apa?",
+            },
+            { kr: "카페에 갈 거예요.", id: "Akan pergi ke kafe." },
+          ],
+        },
+        {
+          id: 39,
+          pattern: "Vst-는 동안",
+          title: "Durasi Waktu (Selama / Sembari...)",
+          desc: "Menyatakan durasi waktu berlangsungnya suatu aktivitas.",
+          dialogues: [
+            {
+              kr: "내가 요리하는 동안 음악을 들어라.",
+              id: "Selama aku memasak, dengarkanlah musik.",
+            },
+          ],
+        },
+        {
+          id: 40,
+          pattern: "Vst-(으)ㄹ 때",
+          title: "Keterangan Waktu (Ketika / Saat...)",
+          desc: "Menyatakan momen waktu terjadinya suatu aktivitas.",
+          dialogues: [
+            {
+              kr: "비가 올 때 우산을 쓰세요.",
+              id: "Saat hujan turun pakailah payung.",
+            },
+          ],
+        },
+        {
+          id: 41,
+          pattern: "N보다 더",
+          title: "Perbandingan (Lebih... daripada)",
+          desc: "Digunakan untuk membandingkan dua entitas.",
+          dialogues: [
+            {
+              kr: "버스보다 지하철이 더 빠릅니다.",
+              id: "Kereta bawah tanah lebih cepat daripada bus.",
+            },
+          ],
+        },
+        {
+          id: 42,
+          pattern: "N만큼",
+          title: "Kesetaraan (Sebanyak / Sebesar...)",
+          desc: "Menyatakan kesetaraan kadar atau jumlah.",
+          dialogues: [
+            {
+              kr: "한국어만큼 한국 문화도 재미있어요.",
+              id: "Budaya Korea sama serunya seperti bahasa Korea.",
+            },
+          ],
+        },
+        {
+          id: 43,
+          pattern: "Vst-아/어 보이다",
+          title: "Kesan / Tampak (Kelihatannya...)",
+          desc: "Menyatakan persepsi visual atau kesan luar.",
+          dialogues: [
+            { kr: "오늘 피곤해 보여요.", id: "Hari ini Anda terlihat lelah." },
+            { kr: "네, 잠을 못 잤어요.", id: "Ya, saya tidak bisa tidur." },
+          ],
+        },
+        {
+          id: 44,
+          pattern: "Vst-(으)ㄴ 적이 있다/없다",
+          title: "Pengalaman Hidup (Pernah / Belum pernah...)",
+          desc: "Menyatakan riwayat pengalaman di masa lalu.",
+          dialogues: [
+            {
+              kr: "한옥에서 묵은 적이 있어요?",
+              id: "Pernahkah menginap di rumah tradisional Hanok?",
+            },
+            { kr: "네, 있어요.", id: "Ya, pernah." },
+          ],
+        },
+        {
+          id: 45,
+          pattern: "Vst-게 되다",
+          title: "Perubahan Kondisi (Menjadi / Terjadi...)",
+          desc: "Menyatakan perubahan keadaan yang terjadi karena faktor luar.",
+          dialogues: [
+            {
+              kr: "다음 달에 한국으로 이사하게 되었어요.",
+              id: "Bulan depan saya jadi pindah ke Korea.",
+            },
+          ],
+        },
+        {
+          id: 46,
+          pattern: "Vst-기로 하다",
+          title: "Keputusan (Memutuskan untuk...)",
+          desc: "Menyatakan janji atau keputusan tegas.",
+          dialogues: [
+            {
+              kr: "친구하고 내일 영화를 보기로 했어요.",
+              id: "Saya memutuskan untuk menonton film besok bersama teman.",
+            },
+          ],
+        },
+        {
+          id: 47,
+          pattern: "Vst-는 게 어때요?",
+          title: "Saran / Rekomendasi (Bagaimana kalau...?)",
+          desc: "Memberikan saran aktivitas secara halus.",
+          dialogues: [
+            { kr: "머리가 아파요.", id: "Kepala saya sakit." },
+            {
+              kr: "약국에서 약을 사 먹는 게 어때요?",
+              id: "Bagaimana kalau beli obat di apotek?",
+            },
+          ],
+        },
+        {
+          id: 48,
+          pattern: "Vst-(으)ㄴ 지 N이/가 되다",
+          title: "Durasi Sejak (Sudah berapa lama sejak...)",
+          desc: "Menyatakan rentang waktu yang berlalu sejak suatu peristiwa terjadi.",
+          dialogues: [
+            {
+              kr: "한국에 온 지 얼마나 되었어요?",
+              id: "Sudah berapa lama sejak datang ke Korea?",
+            },
+            { kr: "1년이 되었어요.", id: "Sudah 1 tahun." },
+          ],
+        },
+        {
+          id: 49,
+          pattern: "Vst-기 쉽다/어렵다",
+          title: "Tingkat Kesulitan (Mudah / Sulit untuk...)",
+          desc: "Menyatakan bahwa suatu aktivitas mudah atau sulit dilakukan.",
+          dialogues: [
+            { kr: "이 책은 읽기 쉬워요.", id: "Buku ini mudah untuk dibaca." },
+          ],
+        },
+        {
+          id: 50,
+          pattern: "Vst-(으)ㄹ 뿐이다",
+          title: "Pembatasan (Hanya / Cuma...)",
+          desc: "Menyatakan tidak ada pilihan lain selain hal tersebut.",
+          dialogues: [
+            {
+              kr: "최선을 다할 뿐입니다.",
+              id: "Saya hanya melakukan yang terbaik.",
+            },
+          ],
+        },
+      ];
+
+      let selectedGrammarId = 1;
+      let isHideTranslation = false;
+
+      // Audio Web Speech API
+      function speakKorean(text) {
+        if ("speechSynthesis" in window) {
+          window.speechSynthesis.cancel();
+          const utterance = new SpeechSynthesisUtterance(text);
+          utterance.lang = "ko-KR";
+          utterance.rate = 0.85;
+          window.speechSynthesis.speak(utterance);
+        } else {
+          alert("Browser tidak mendukung pengucapan suara.");
+        }
+      }
+
+      window.onload = function () {
+        renderGrammarList();
+        selectGrammar(1);
+      };
+
+      function renderGrammarList() {
+        const query = document
+          .getElementById("search-input")
+          .value.toLowerCase()
+          .trim();
+        const list = document.getElementById("grammar-list");
+        list.innerHTML = "";
+
+        const filtered = grammarData.filter(
+          (g) =>
+            g.pattern.toLowerCase().includes(query) ||
+            g.title.toLowerCase().includes(query),
+        );
+
+        document.getElementById("stats-badge").innerText =
+          `Menampilkan ${filtered.length} dari ${grammarData.length} Modul`;
+
+        filtered.forEach((g) => {
+          const item = document.createElement("div");
+          item.className = `grammar-item ${g.id === selectedGrammarId ? "active" : ""}`;
+          item.onclick = () => selectGrammar(g.id);
+          item.innerHTML = `
+            <div class="grammar-tag">TATA BAHASA #${g.id}</div>
+            <div class="grammar-pattern">${g.pattern}</div>
+            <div class="grammar-title-sub">${g.title}</div>
+          `;
+          list.appendChild(item);
+        });
+      }
+
+      function selectGrammar(id) {
+        selectedGrammarId = id;
+        renderGrammarList();
+
+        const data = grammarData.find((g) => g.id === id);
+        if (!data) return;
+
+        document.getElementById("detail-pattern").innerText = data.pattern;
+        document.getElementById("detail-title").innerText = data.title;
+        document.getElementById("explanation-box").innerText = data.desc;
+
+        const container = document.getElementById("dialogue-container");
+        container.innerHTML = "";
+
+        data.dialogues.forEach((d) => {
+          const card = document.createElement("div");
+          card.className = "dialogue-card";
+          card.innerHTML = `
+            <div class="dialogue-line">
+              <div class="dialogue-text">
+                <span class="dialogue-kr">${d.kr}</span>
+                <span class="dialogue-id ${isHideTranslation ? "blur-id" : ""}">${d.id}</span>
+              </div>
+              <button class="btn-audio-circle" onclick="speakKorean('${d.kr}')">🔊</button>
+            </div>
+          `;
+          container.appendChild(card);
+        });
+      }
+
+      function toggleHideTranslation() {
+        isHideTranslation = !isHideTranslation;
+        document.getElementById("toggle-hide-btn").innerText = isHideTranslation
+          ? "Tampilkan Arti"
+          : "Sembunyikan Arti";
+        selectGrammar(selectedGrammarId);
+      }
+
+      /* Timer Pomodoro */
+      let timerInterval = null,
+        timeLeft = 25 * 60,
+        isTimerRunning = false;
+      function updateTimerDisplay() {
+        const minutes = Math.floor(timeLeft / 60),
+          seconds = timeLeft % 60;
+        document.getElementById("timer").innerText =
+          `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+      }
+      function toggleTimer() {
+        const btn = document.getElementById("start-timer-btn");
+        if (isTimerRunning) {
+          clearInterval(timerInterval);
+          isTimerRunning = false;
+          btn.innerText = "Start";
+        } else {
+          isTimerRunning = true;
+          btn.innerText = "Pause";
+          timerInterval = setInterval(() => {
+            if (timeLeft > 0) {
+              timeLeft--;
+              updateTimerDisplay();
+            } else {
+              clearInterval(timerInterval);
+              alert("Waktu belajar selesai!");
+            }
+          }, 1000);
+        }
+      }
+      updateTimerDisplay();
+    </script>
+  </body>
+</html>

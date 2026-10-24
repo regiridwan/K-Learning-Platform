@@ -295,6 +295,12 @@
         flex: 1;
       }
 
+      .vocab-kr-row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
       .vocab-kr {
         font-weight: 700;
         font-size: 0.98rem;
@@ -312,6 +318,21 @@
         font-size: 0.85rem;
         color: var(--text-muted);
         margin-top: 2px;
+      }
+
+      .btn-audio-sm {
+        background: #f1f5f9;
+        border: 1px solid var(--border-color);
+        border-radius: 6px;
+        padding: 2px 6px;
+        font-size: 0.75rem;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+
+      .btn-audio-sm:hover {
+        background: #e2e8f0;
+        transform: scale(1.05);
       }
 
       .blur-text {
@@ -432,50 +453,30 @@
     </div>
 
     <script>
-      // Data Kosakata Lengkap Fase 3 (Minggu 9 - 12) + Latin
+      // Data Kosakata Lengkap Fase 3 Dipisah (Tanpa Tanda Miring '/')
       const vocabData = {
         "Minggu 9": [
-          { kr: "크다 / 작다", latin: "keu-da / jak-da", id: "Besar / kecil" },
-          {
-            kr: "많다 / 적다",
-            latin: "man-ta / jeok-da",
-            id: "Banyak / sedikit",
-          },
-          {
-            kr: "길다 / 짧다",
-            latin: "gil-da / jjal-da",
-            id: "Panjang / pendek",
-          },
-          {
-            kr: "높다 / 낮다",
-            latin: "nop-da / nat-da",
-            id: "Tinggi / rendah",
-          },
+          { kr: "크다", latin: "keu-da", id: "Besar" },
+          { kr: "작다", latin: "jak-da", id: "Kecil" },
+          { kr: "많다", latin: "man-ta", id: "Banyak" },
+          { kr: "적다", latin: "jeok-da", id: "Sedikit" },
+          { kr: "길다", latin: "gil-da", id: "Panjang" },
+          { kr: "짧다", latin: "jjal-da", id: "Pendek" },
+          { kr: "높다", latin: "nop-da", id: "Tinggi" },
+          { kr: "낮다", latin: "nat-da", id: "Rendah" },
           { kr: "예쁘다", latin: "ye-ppeu-da", id: "Cantik" },
           { kr: "바쁘다", latin: "ba-ppeu-da", id: "Sibuk" },
           { kr: "아프다", latin: "a-peu-da", id: "Sakit" },
           { kr: "배고프다", latin: "bae-go-peu-da", id: "Lapar" },
           { kr: "피곤하다", latin: "pi-gon-ha-da", id: "Lelah" },
-          {
-            kr: "좋다 / 싫다",
-            latin: "jo-ta / sil-ta",
-            id: "Baik, suka / tidak suka",
-          },
-          {
-            kr: "재미있다 / 재미없다",
-            latin: "jae-mi-it-da / jae-mi-eop-da",
-            id: "Seru / membosankan",
-          },
-          {
-            kr: "맛있다 / 맛없다",
-            latin: "ma-sit-da / ma-deop-da",
-            id: "Enak / tidak enak",
-          },
-          {
-            kr: "어렵다 / 쉽다",
-            latin: "eo-ryeop-da / swip-da",
-            id: "Sulit / mudah",
-          },
+          { kr: "좋다", latin: "jo-ta", id: "Bagus / Suka" },
+          { kr: "싫다", latin: "sil-ta", id: "Tidak suka" },
+          { kr: "재미있다", latin: "jae-mi-it-da", id: "Seru / Menarik" },
+          { kr: "재미없다", latin: "jae-mi-eop-da", id: "Membosankan" },
+          { kr: "맛있다", latin: "ma-sit-da", id: "Enak" },
+          { kr: "맛없다", latin: "ma-deop-da", id: "Tidak enak" },
+          { kr: "어렵다", latin: "eo-ryeop-da", id: "Sulit" },
+          { kr: "쉽다", latin: "swip-da", id: "Mudah" },
           { kr: "방", latin: "bang", id: "Kamar" },
           { kr: "음식", latin: "eum-sik", id: "Makanan" },
           { kr: "시험", latin: "si-heom", id: "Ujian" },
@@ -520,23 +521,20 @@
           { kr: "정류장", latin: "jeong-ryu-jang", id: "Halte" },
           { kr: "길", latin: "gil", id: "Jalan" },
           { kr: "근처", latin: "geun-cheo", id: "Sekitar / dekat sini" },
-          { kr: "여기 / 저기", latin: "yeo-gi / jeo-gi", id: "Sini / sana" },
+          { kr: "여기", latin: "yeo-gi", id: "Sini" },
+          { kr: "저기", latin: "jeo-gi", id: "Sana" },
           { kr: "오른쪽", latin: "o-reun-jjok", id: "Kanan" },
           { kr: "왼쪽", latin: "oen-jjok", id: "Kiri" },
           { kr: "똑바로", latin: "ttok-ba-ro", id: "Lurus" },
-          { kr: "앞 / 뒤", latin: "ap / dwi", id: "Depan / belakang" },
+          { kr: "앞", latin: "ap", id: "Depan" },
+          { kr: "뒤", latin: "dwi", id: "Belakang" },
           { kr: "옆", latin: "yeop", id: "Samping" },
-          { kr: "위 / 아래", latin: "wi / a-rae", id: "Atas / bawah" },
-          {
-            kr: "가깝다 / 멀다",
-            latin: "ga-kkap-da / meol-da",
-            id: "Dekat / jauh",
-          },
-          {
-            kr: "타다 / 내리다",
-            latin: "ta-da / nae-ri-da",
-            id: "Naik / turun",
-          },
+          { kr: "위", latin: "wi", id: "Atas" },
+          { kr: "아래", latin: "a-rae", id: "Bawah" },
+          { kr: "가깝다", latin: "ga-kkap-da", id: "Dekat" },
+          { kr: "멀다", latin: "meol-da", id: "Jauh" },
+          { kr: "타다", latin: "ta-da", id: "Naik (kendaraan)" },
+          { kr: "내리다", latin: "nae-ri-da", id: "Turun (kendaraan)" },
           { kr: "갈아타다", latin: "gal-a-ta-da", id: "Pindah (kendaraan)" },
           { kr: "걸리다", latin: "geol-li-da", id: "Memakan (waktu)" },
           { kr: "걸어서", latin: "geol-eo-seo", id: "Dengan berjalan kaki" },
@@ -547,31 +545,24 @@
           { kr: "운전", latin: "un-jeon", id: "Mengemudi" },
         ],
         "Minggu 12": [
-          { kr: "나 / 내", latin: "na / nae", id: "Aku / milikku (santai)" },
-          { kr: "너 / 네", latin: "neo / ne", id: "Kamu / milikmu (santai)" },
+          { kr: "나", latin: "na", id: "Aku (santai)" },
+          { kr: "내", latin: "nae", id: "Milikku (santai)" },
+          { kr: "너", latin: "neo", id: "Kamu (santai)" },
+          { kr: "네", latin: "ne", id: "Milikmu (santai)" },
           { kr: "응", latin: "eung", id: "Ya (santai)" },
           { kr: "아니", latin: "a-ni", id: "Tidak (santai)" },
           { kr: "고마워", latin: "go-ma-wo", id: "Terima kasih (santai)" },
           { kr: "미안해", latin: "mi-an-hae", id: "Maaf (santai)" },
           { kr: "존댓말", latin: "jon-daet-mal", id: "Bahasa sopan" },
           { kr: "반말", latin: "ban-mal", id: "Bahasa santai" },
-          {
-            kr: "형 / 오빠",
-            latin: "hyeong / o-ppa",
-            id: "Kakak Laki-laki (oleh Pria/Wanita)",
-          },
-          {
-            kr: "누나 / 언니",
-            latin: "nu-na / eon-ni",
-            id: "Kakak Perempuan (oleh Pria/Wanita)",
-          },
+          { kr: "형", latin: "hyeong", id: "Kakak Laki-laki (oleh pria)" },
+          { kr: "오빠", latin: "o-ppa", id: "Kakak Laki-laki (oleh wanita)" },
+          { kr: "누나", latin: "nu-na", id: "Kakak Perempuan (oleh pria)" },
+          { kr: "언니", latin: "eon-ni", id: "Kakak Perempuan (oleh wanita)" },
           { kr: "뭐해?", latin: "mwo-hae?", id: "Sedang apa?" },
           { kr: "같이 하자", latin: "ga-chi ha-ja", id: "Ayo lakukan bersama" },
-          {
-            kr: "정말 / 진짜",
-            latin: "jeong-mal / jin-jja",
-            id: "Sungguh / beneran",
-          },
+          { kr: "정말", latin: "jeong-mal", id: "Sungguh" },
+          { kr: "진짜", latin: "jin-jja", id: "Beneran" },
           { kr: "우리", latin: "u-ri", id: "Kita" },
         ],
       };
@@ -580,6 +571,19 @@
       let hideTarget = "ID";
       let hideStates = {};
       let isPanelCollapsed = false;
+
+      // FUNGSI SUARA WEBSPEECH API
+      function speakKorean(text) {
+        if ("speechSynthesis" in window) {
+          window.speechSynthesis.cancel();
+          const utterance = new SpeechSynthesisUtterance(text);
+          utterance.lang = "ko-KR";
+          utterance.rate = 0.85;
+          window.speechSynthesis.speak(utterance);
+        } else {
+          alert("Browser tidak mendukung pengucapan suara.");
+        }
+      }
 
       window.onload = function () {
         const weekContainer = document.getElementById("week-filter-container");
@@ -657,7 +661,10 @@
           card.className = "vocab-card";
           card.innerHTML = `
           <div class="vocab-content">
-            <div class="vocab-kr ${isKrHidden ? "blur-text" : ""}">${item.kr}</div>
+            <div class="vocab-kr-row">
+              <span class="vocab-kr ${isKrHidden ? "blur-text" : ""}">${item.kr}</span>
+              <button class="btn-audio-sm" onclick="speakKorean('${item.kr}')" title="Dengarkan pengucapan">🔊</button>
+            </div>
             <div class="vocab-latin ${isKrHidden ? "blur-text" : ""}">${item.latin}</div>
             <div class="vocab-id ${isIdHidden ? "blur-text" : ""}">${item.id}</div>
           </div>

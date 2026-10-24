@@ -295,6 +295,12 @@
         flex: 1;
       }
 
+      .vocab-kr-row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
       .vocab-kr {
         font-weight: 700;
         font-size: 0.98rem;
@@ -312,6 +318,21 @@
         font-size: 0.85rem;
         color: var(--text-muted);
         margin-top: 2px;
+      }
+
+      .btn-audio-sm {
+        background: #f1f5f9;
+        border: 1px solid var(--border-color);
+        border-radius: 6px;
+        padding: 2px 6px;
+        font-size: 0.75rem;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+
+      .btn-audio-sm:hover {
+        background: #e2e8f0;
+        transform: scale(1.05);
       }
 
       .blur-text {
@@ -545,6 +566,19 @@
       let hideStates = {};
       let isPanelCollapsed = false;
 
+      // FUNGSI SUARA WEBSPEECH API
+      function speakKorean(text) {
+        if ("speechSynthesis" in window) {
+          window.speechSynthesis.cancel();
+          const utterance = new SpeechSynthesisUtterance(text);
+          utterance.lang = "ko-KR";
+          utterance.rate = 0.85;
+          window.speechSynthesis.speak(utterance);
+        } else {
+          alert("Browser tidak mendukung pengucapan suara.");
+        }
+      }
+
       window.onload = function () {
         const weekContainer = document.getElementById("week-filter-container");
         Object.keys(vocabData).forEach((week, index) => {
@@ -621,7 +655,10 @@
           card.className = "vocab-card";
           card.innerHTML = `
           <div class="vocab-content">
-            <div class="vocab-kr ${isKrHidden ? "blur-text" : ""}">${item.kr}</div>
+            <div class="vocab-kr-row">
+              <span class="vocab-kr ${isKrHidden ? "blur-text" : ""}">${item.kr}</span>
+              <button class="btn-audio-sm" onclick="speakKorean('${item.kr}')" title="Dengarkan pengucapan">🔊</button>
+            </div>
             <div class="vocab-latin ${isKrHidden ? "blur-text" : ""}">${item.latin}</div>
             <div class="vocab-id ${isIdHidden ? "blur-text" : ""}">${item.id}</div>
           </div>

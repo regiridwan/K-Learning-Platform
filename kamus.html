@@ -1,0 +1,1593 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kamus Interaktif Lengkap - K-Learning Platform</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --bg-main: #f8fafc;
+        --panel-bg: #ffffff;
+        --primary: #1e293b;
+        --accent: #e11d48;
+        --border-color: #e2e8f0;
+        --text-muted: #64748b;
+        --text-main: #1e293b;
+        --accent-light: #fff1f2;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Inter", "Noto Sans KR", sans-serif;
+        background-color: var(--bg-main);
+        color: var(--text-main);
+        height: 100vh;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+      }
+
+      header {
+        background-color: var(--panel-bg);
+        border-bottom: 1px solid var(--border-color);
+        padding: 0 24px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-shrink: 0;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-weight: 700;
+        font-size: 1.1rem;
+        color: var(--primary);
+        text-decoration: none;
+      }
+
+      .brand-logo {
+        background: var(--accent);
+        color: white;
+        width: 32px;
+        height: 32px;
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+      }
+
+      nav {
+        display: flex;
+        gap: 16px;
+        align-items: center;
+      }
+
+      nav a {
+        text-decoration: none;
+        color: var(--text-muted);
+        font-weight: 500;
+        font-size: 0.9rem;
+      }
+
+      nav a:hover {
+        color: var(--accent);
+      }
+
+      .nav-dropdown {
+        padding: 6px 12px;
+        border: 1px solid var(--border-color);
+        border-radius: 6px;
+        font-weight: 600;
+        font-size: 0.85rem;
+        background: white;
+        color: var(--primary);
+        outline: none;
+        cursor: pointer;
+      }
+
+      .timer-widget {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background: #f1f5f9;
+        padding: 4px 12px;
+        border-radius: 6px;
+        border: 1px solid var(--border-color);
+      }
+
+      .timer-display {
+        font-family: monospace;
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--primary);
+      }
+
+      .timer-btn {
+        background: var(--primary);
+        color: white;
+        border: none;
+        padding: 4px 10px;
+        border-radius: 4px;
+        font-size: 0.8rem;
+        cursor: pointer;
+      }
+
+      .timer-btn.stop {
+        background: var(--accent);
+      }
+
+      .workspace {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        overflow: hidden;
+        padding: 16px 24px;
+        gap: 16px;
+      }
+
+      .builder-card {
+        background: var(--panel-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        padding: 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      }
+
+      .builder-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .builder-title {
+        font-size: 1rem;
+        font-weight: 700;
+        color: var(--primary);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .sentence-canvas {
+        min-height: 56px;
+        background: #f8fafc;
+        border: 2px dashed var(--border-color);
+        border-radius: 8px;
+        padding: 10px 14px;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .sentence-placeholder {
+        color: var(--text-muted);
+        font-size: 0.88rem;
+        font-style: italic;
+      }
+
+      .token-chip {
+        background: var(--primary);
+        color: white;
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        animation: fadeIn 0.2s ease-in-out;
+      }
+
+      .token-chip.particle {
+        background: var(--accent);
+      }
+
+      .token-chip.custom {
+        background: #0284c7;
+      }
+
+      .token-remove {
+        cursor: pointer;
+        font-weight: bold;
+        opacity: 0.8;
+      }
+
+      .token-remove:hover {
+        opacity: 1;
+      }
+
+      .builder-controls {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .custom-input-row {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+      }
+
+      .custom-input {
+        flex: 1;
+        padding: 8px 12px;
+        border: 1px solid var(--border-color);
+        border-radius: 6px;
+        font-size: 0.88rem;
+        outline: none;
+      }
+
+      .custom-input:focus {
+        border-color: #0284c7;
+      }
+
+      .particles-bar {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        flex-wrap: wrap;
+      }
+
+      .particle-btn {
+        background: #f1f5f9;
+        border: 1px solid var(--border-color);
+        border-radius: 16px;
+        padding: 4px 10px;
+        font-size: 0.78rem;
+        font-weight: 600;
+        color: var(--primary);
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+
+      .particle-btn:hover {
+        background: var(--accent-light);
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+
+      .action-btns {
+        display: flex;
+        gap: 8px;
+      }
+
+      .btn-primary {
+        background: var(--primary);
+        color: white;
+        border: none;
+        padding: 8px 14px;
+        border-radius: 6px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .btn-primary:hover {
+        background: #0f172a;
+      }
+
+      .btn-custom-add {
+        background: #0284c7;
+        color: white;
+        border: none;
+        padding: 8px 14px;
+        border-radius: 6px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      .btn-custom-add:hover {
+        background: #0369a1;
+      }
+
+      .btn-outline {
+        background: white;
+        color: var(--primary);
+        border: 1px solid var(--border-color);
+        padding: 8px 12px;
+        border-radius: 6px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      .btn-outline:hover {
+        background: #f1f5f9;
+      }
+
+      .dictionary-container {
+        flex: 1;
+        background: var(--panel-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+      }
+
+      .dictionary-filter-bar {
+        padding: 14px 16px;
+        border-bottom: 1px solid var(--border-color);
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        background: #f8fafc;
+      }
+
+      .search-box-row {
+        display: flex;
+        gap: 10px;
+      }
+
+      .search-input {
+        flex: 1;
+        padding: 10px 14px;
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        font-size: 0.9rem;
+        outline: none;
+      }
+
+      .search-input:focus {
+        border-color: var(--accent);
+      }
+
+      .cat-tabs {
+        display: flex;
+        gap: 8px;
+        overflow-x: auto;
+        padding-bottom: 4px;
+      }
+
+      .cat-tab {
+        padding: 6px 14px;
+        border: 1px solid var(--border-color);
+        background: white;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        cursor: pointer;
+        white-space: nowrap;
+        color: var(--text-muted);
+      }
+
+      .cat-tab.active {
+        background: var(--primary);
+        color: white;
+        border-color: var(--primary);
+      }
+
+      .vocab-grid {
+        flex: 1;
+        overflow-y: auto;
+        padding: 16px;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 12px;
+      }
+
+      .vocab-card-item {
+        border: 1px solid var(--border-color);
+        border-radius: 10px;
+        padding: 14px;
+        background: #ffffff;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 10px;
+        transition:
+          transform 0.15s,
+          box-shadow 0.15s;
+      }
+
+      .vocab-card-item:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+      }
+
+      .card-top {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+      }
+
+      .card-kr {
+        font-weight: 700;
+        font-size: 1.05rem;
+        color: var(--primary);
+      }
+
+      .card-latin {
+        font-size: 0.8rem;
+        color: var(--accent);
+        font-weight: 600;
+        font-style: italic;
+      }
+
+      .card-id {
+        font-size: 0.88rem;
+        color: var(--text-muted);
+        margin-top: 4px;
+      }
+
+      .card-actions {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 6px;
+        padding-top: 8px;
+        border-top: 1px solid #f1f5f9;
+      }
+
+      .btn-audio-circle {
+        background: #f1f5f9;
+        border: 1px solid var(--border-color);
+        border-radius: 50%;
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        font-size: 0.85rem;
+        transition: all 0.2s;
+      }
+
+      .btn-audio-circle:hover {
+        background: var(--accent-light);
+        border-color: var(--accent);
+      }
+
+      .btn-add-sentence {
+        background: #f1f5f9;
+        border: 1px solid var(--border-color);
+        border-radius: 6px;
+        padding: 4px 10px;
+        font-size: 0.78rem;
+        font-weight: 600;
+        color: var(--primary);
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+
+      .btn-add-sentence:hover {
+        background: var(--primary);
+        color: white;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: scale(0.95);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <a href="welcome.html" class="brand">
+        <div class="brand-logo">한</div>
+        <span>K-Learning Platform</span>
+      </a>
+
+      <div class="timer-widget">
+        <span
+          style="font-size: 0.75rem; color: var(--text-muted); font-weight: 600"
+          >POMODORO</span
+        >
+        <div class="timer-display" id="timer">25:00</div>
+        <button class="timer-btn" id="start-timer-btn" onclick="toggleTimer()">
+          Start
+        </button>
+        <button
+          class="timer-btn"
+          onclick="resetTimer()"
+          style="background: #cbd5e1; color: #334155"
+        >
+          Reset
+        </button>
+      </div>
+
+      <nav>
+        <select
+          class="nav-dropdown"
+          onchange="if (this.value) window.location.href = this.value;"
+        >
+          <option value="" disabled selected>Pilih Fase Belajar...</option>
+          <option value="fase1.html">Fase 1: Fondasi</option>
+          <option value="fase2.html">Fase 2: Perluasan</option>
+          <option value="fase3.html">Fase 3: Kalimat Kompleks</option>
+          <option value="fase4.html">Fase 4: Tata Bahasa Lanjutan</option>
+          <option value="fase5.html">Fase 5: Simulasi TOPIK I</option>
+          <option value="fase6.html">Fase 6: Menengah Awal</option>
+          <option value="fase7.html">Fase 7: TOPIK II</option>
+        </select>
+
+        <select
+          class="nav-dropdown"
+          style="border-color: rgba(225, 29, 72, 0.4)"
+          onchange="if (this.value) window.location.href = this.value;"
+        >
+          <option value="" disabled>⚡ Fitur & Alat...</option>
+          <option value="latihan.html">📝 Latihan Soal</option>
+          <option value="kamus.html" selected>📖 Kamus Interaktif</option>
+          <option value="tatabahasa.html">📘 Tata Bahasa & Dialog</option>
+          <option value="game.html">🎮 Break Game</option>
+        </select>
+        <a href="welcome.html">Home</a>
+      </nav>
+    </header>
+
+    <div class="workspace">
+      <!-- Area Penyusun Kalimat -->
+      <div class="builder-card">
+        <div class="builder-header">
+          <div class="builder-title">
+            <span>✨</span>
+            <span>Penyusun Kalimat Percakapan</span>
+          </div>
+          <div class="action-btns">
+            <button class="btn-primary" onclick="speakAssembledSentence()">
+              🔊 Dengarkan Kalimat
+            </button>
+            <button class="btn-outline" onclick="copySentence()">
+              📋 Salin
+            </button>
+            <button class="btn-outline" onclick="removeLastToken()">
+              🧹 Hapus
+            </button>
+            <button class="btn-outline" onclick="clearCanvas()">
+              ❌ Reset
+            </button>
+          </div>
+        </div>
+
+        <div class="sentence-canvas" id="sentence-canvas">
+          <span class="sentence-placeholder" id="sentence-placeholder"
+            >Klik kosakata di bawah atau ketik kata manual untuk menyusun
+            kalimat...</span
+          >
+        </div>
+
+        <div class="builder-controls">
+          <!-- Input Teks Korea Custom/Manual -->
+          <div class="custom-input-row">
+            <input
+              type="text"
+              class="custom-input"
+              id="custom-text-input"
+              placeholder="Ketik kata/kalimat Korea buatan sendiri jika tidak ada di kamus..."
+              onkeypress="handleCustomKeyPress(event)"
+            />
+            <button class="btn-custom-add" onclick="addCustomText()">
+              + Masukkan ke Kalimat
+            </button>
+          </div>
+
+          <!-- Partikel & Akhiran (Semua Dipisah) -->
+          <div class="particles-bar">
+            <span
+              style="
+                font-size: 0.8rem;
+                font-weight: 700;
+                color: var(--text-muted);
+              "
+              >Partikel:</span
+            >
+            <button class="particle-btn" onclick="addParticle('은')">은</button>
+            <button class="particle-btn" onclick="addParticle('는')">는</button>
+            <button class="particle-btn" onclick="addParticle('이')">이</button>
+            <button class="particle-btn" onclick="addParticle('가')">가</button>
+            <button class="particle-btn" onclick="addParticle('을')">을</button>
+            <button class="particle-btn" onclick="addParticle('를')">를</button>
+            <button class="particle-btn" onclick="addParticle('에')">에</button>
+            <button class="particle-btn" onclick="addParticle('에서')">
+              에서
+            </button>
+            <button class="particle-btn" onclick="addParticle('하고')">
+              하고
+            </button>
+            <button class="particle-btn" onclick="addParticle('와')">와</button>
+            <button class="particle-btn" onclick="addParticle('과')">과</button>
+            <button class="particle-btn" onclick="addParticle('도')">도</button>
+            <button class="particle-btn" onclick="addParticle('의')">의</button>
+            <span
+              style="
+                font-size: 0.8rem;
+                font-weight: 700;
+                color: var(--text-muted);
+                margin-left: 6px;
+              "
+              >Akhiran:</span
+            >
+            <button class="particle-btn" onclick="addParticle('입니다')">
+              입니다
+            </button>
+            <button class="particle-btn" onclick="addParticle('예요')">
+              예요
+            </button>
+            <button class="particle-btn" onclick="addParticle('이에요')">
+              이에요
+            </button>
+            <button class="particle-btn" onclick="addParticle('습니까')">
+              습니까
+            </button>
+            <button class="particle-btn" onclick="addParticle('ㅂ니까')">
+              ㅂ니까
+            </button>
+            <button class="particle-btn" onclick="addParticle('습니다')">
+              습니다
+            </button>
+            <button class="particle-btn" onclick="addParticle('ㅂ니다')">
+              ㅂ니다
+            </button>
+            <button class="particle-btn" onclick="addParticle('아')">아</button>
+            <button class="particle-btn" onclick="addParticle('어')">어</button>
+            <button class="particle-btn" onclick="addParticle('여요')">
+              여요
+            </button>
+            <button class="particle-btn" onclick="addParticle('그리고')">
+              그리고
+            </button>
+            <button class="particle-btn" onclick="addParticle('그래서')">
+              그래서
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Area Kamus & Pencarian Dataset -->
+      <div class="dictionary-container">
+        <div class="dictionary-filter-bar">
+          <div class="search-box-row">
+            <input
+              type="text"
+              class="search-input"
+              id="search-input"
+              placeholder="Cari kosakata Hangeul, Latin, atau arti Indonesia..."
+              oninput="handleSearch()"
+            />
+          </div>
+          <div class="cat-tabs" id="cat-tabs-container"></div>
+        </div>
+        <div class="vocab-grid" id="vocab-grid"></div>
+      </div>
+    </div>
+
+    <script>
+      // Database Super Lengkap Kosakata Korea - Indonesia
+      const rawDictionary = [
+        // Bahasa Gaul & Slang
+        {
+          kr: "대박",
+          latin: "dae-bak",
+          id_tr: "Luar biasa / Keren banget",
+          cat: "Bahasa Gaul & Slang",
+        },
+        {
+          kr: "꿀잼",
+          latin: "kkul-jaem",
+          id_tr: "Sangat seru / Asik banget",
+          cat: "Bahasa Gaul & Slang",
+        },
+        {
+          kr: "노잼",
+          latin: "no-jaem",
+          id_tr: "Membosankan / Gak asik",
+          cat: "Bahasa Gaul & Slang",
+        },
+        {
+          kr: "심쿵",
+          latin: "sim-khung",
+          id_tr: "Bikin berdebar / Bikin baper",
+          cat: "Bahasa Gaul & Slang",
+        },
+        {
+          kr: "멘붕",
+          latin: "men-bung",
+          id_tr: "Mental breakdown / Pusing banget",
+          cat: "Bahasa Gaul & Slang",
+        },
+        {
+          kr: "TMI",
+          latin: "thi-em-i",
+          id_tr: "Terlalu banyak informasi tidak penting",
+          cat: "Bahasa Gaul & Slang",
+        },
+        {
+          kr: "치맥",
+          latin: "chi-maek",
+          id_tr: "Ayam goreng dan bir",
+          cat: "Bahasa Gaul & Slang",
+        },
+        {
+          kr: "불금",
+          latin: "bul-geum",
+          id_tr: "Jumat malam yang seru",
+          cat: "Bahasa Gaul & Slang",
+        },
+        {
+          kr: "남친",
+          latin: "nam-chin",
+          id_tr: "Pacar laki-laki",
+          cat: "Bahasa Gaul & Slang",
+        },
+        {
+          kr: "여친",
+          latin: "yeo-chin",
+          id_tr: "Pacar perempuan",
+          cat: "Bahasa Gaul & Slang",
+        },
+
+        // Arah & Posisi
+        { kr: "왼쪽", latin: "oen-jjok", id_tr: "Kiri", cat: "Arah & Posisi" },
+        {
+          kr: "오른쪽",
+          latin: "o-reun-jjok",
+          id_tr: "Kanan",
+          cat: "Arah & Posisi",
+        },
+        { kr: "위", latin: "wi", id_tr: "Atas", cat: "Arah & Posisi" },
+        { kr: "아래", latin: "a-rae", id_tr: "Bawah", cat: "Arah & Posisi" },
+        {
+          kr: "밑",
+          latin: "mit",
+          id_tr: "Bawah / Dasar",
+          cat: "Arah & Posisi",
+        },
+        { kr: "앞", latin: "ap", id_tr: "Depan", cat: "Arah & Posisi" },
+        { kr: "뒤", latin: "dwi", id_tr: "Belakang", cat: "Arah & Posisi" },
+        { kr: "안", latin: "an", id_tr: "Dalam", cat: "Arah & Posisi" },
+        { kr: "밖", latin: "bak", id_tr: "Luar", cat: "Arah & Posisi" },
+        { kr: "옆", latin: "yeop", id_tr: "Samping", cat: "Arah & Posisi" },
+        { kr: "사이", latin: "sa-i", id_tr: "Antara", cat: "Arah & Posisi" },
+        {
+          kr: "건너편",
+          latin: "geon-neo-pyyeon",
+          id_tr: "Seberang",
+          cat: "Arah & Posisi",
+        },
+
+        // Warna
+        {
+          kr: "빨간색",
+          latin: "kkal-gan-saek",
+          id_tr: "Warna Merah",
+          cat: "Warna",
+        },
+        {
+          kr: "파란색",
+          latin: "pha-ran-saek",
+          id_tr: "Warna Biru",
+          cat: "Warna",
+        },
+        {
+          kr: "노란색",
+          latin: "no-ran-saek",
+          id_tr: "Warna Kuning",
+          cat: "Warna",
+        },
+        {
+          kr: "초록색",
+          latin: "cho-rok-saek",
+          id_tr: "Warna Hijau",
+          cat: "Warna",
+        },
+        {
+          kr: "하얀색",
+          latin: "ha-yan-saek",
+          id_tr: "Warna Putih",
+          cat: "Warna",
+        },
+        {
+          kr: "까만색",
+          latin: "kka-man-saek",
+          id_tr: "Warna Hitam",
+          cat: "Warna",
+        },
+        {
+          kr: "보라색",
+          latin: "bo-ra-saek",
+          id_tr: "Warna Ungu",
+          cat: "Warna",
+        },
+        {
+          kr: "분홍색",
+          latin: "bun-hong-saek",
+          id_tr: "Warna Merah Muda / Pink",
+          cat: "Warna",
+        },
+        {
+          kr: "주황색",
+          latin: "ju-hwang-saek",
+          id_tr: "Warna Jingga / Oranye",
+          cat: "Warna",
+        },
+        { kr: "갈색", latin: "gal-saek", id_tr: "Warna Cokelat", cat: "Warna" },
+
+        // Anatomi Tubuh
+        {
+          kr: "머리",
+          latin: "meo-ri",
+          id_tr: "Kepala / Rambut",
+          cat: "Anatomi Tubuh",
+        },
+        { kr: "얼굴", latin: "eol-gul", id_tr: "Wajah", cat: "Anatomi Tubuh" },
+        { kr: "눈", latin: "nun", id_tr: "Mata", cat: "Anatomi Tubuh" },
+        { kr: "코", latin: "ko", id_tr: "Hidung", cat: "Anatomi Tubuh" },
+        { kr: "입", latin: "ip", id_tr: "Mulut", cat: "Anatomi Tubuh" },
+        { kr: "귀", latin: "gwi", id_tr: "Telinga", cat: "Anatomi Tubuh" },
+        {
+          kr: "목",
+          latin: "mok",
+          id_tr: "Leher / Tenggorokan",
+          cat: "Anatomi Tubuh",
+        },
+        { kr: "어깨", latin: "eo-kkae", id_tr: "Bahu", cat: "Anatomi Tubuh" },
+        { kr: "손", latin: "son", id_tr: "Tangan", cat: "Anatomi Tubuh" },
+        {
+          kr: "손가락",
+          latin: "son-ga-rak",
+          id_tr: "Jari tangan",
+          cat: "Anatomi Tubuh",
+        },
+        { kr: "배", latin: "bae", id_tr: "Perut", cat: "Anatomi Tubuh" },
+        {
+          kr: "다리",
+          latin: "da-ri",
+          id_tr: "Kaki / Tungkai",
+          cat: "Anatomi Tubuh",
+        },
+        { kr: "발", latin: "bal", id_tr: "Telapak kaki", cat: "Anatomi Tubuh" },
+        {
+          kr: "몸",
+          latin: "mom",
+          id_tr: "Tubuh / Badan",
+          cat: "Anatomi Tubuh",
+        },
+
+        // Alat Tulis & Kantor
+        {
+          kr: "연필",
+          latin: "yeon-phil",
+          id_tr: "Pensil",
+          cat: "Alat Tulis & Kantor",
+        },
+        {
+          kr: "볼펜",
+          latin: "bol-phen",
+          id_tr: "Pulpen / Ballpoint",
+          cat: "Alat Tulis & Kantor",
+        },
+        {
+          kr: "지우개",
+          latin: "ji-u-gae",
+          id_tr: "Penghapus",
+          cat: "Alat Tulis & Kantor",
+        },
+        {
+          kr: "공책",
+          latin: "gong-chaek",
+          id_tr: "Buku tulis",
+          cat: "Alat Tulis & Kantor",
+        },
+        { kr: "책", latin: "chaek", id_tr: "Buku", cat: "Alat Tulis & Kantor" },
+        {
+          kr: "사전",
+          latin: "sa-jeon",
+          id_tr: "Kamus",
+          cat: "Alat Tulis & Kantor",
+        },
+        {
+          kr: "가위",
+          latin: "ga-wi",
+          id_tr: "Gunting",
+          cat: "Alat Tulis & Kantor",
+        },
+        { kr: "풀", latin: "phul", id_tr: "Lem", cat: "Alat Tulis & Kantor" },
+        {
+          kr: "필통",
+          latin: "phil-thong",
+          id_tr: "Kotak pensil",
+          cat: "Alat Tulis & Kantor",
+        },
+        {
+          kr: "책상",
+          latin: "chaek-sang",
+          id_tr: "Meja belajar / kerja",
+          cat: "Alat Tulis & Kantor",
+        },
+        {
+          kr: "의자",
+          latin: "ui-ja",
+          id_tr: "Kursi",
+          cat: "Alat Tulis & Kantor",
+        },
+        {
+          kr: "시계",
+          latin: "si-gye",
+          id_tr: "Jam",
+          cat: "Alat Tulis & Kantor",
+        },
+        {
+          kr: "달력",
+          latin: "dal-ryeok",
+          id_tr: "Kalender",
+          cat: "Alat Tulis & Kantor",
+        },
+
+        // Angka & Bilangan
+        {
+          kr: "하나",
+          latin: "ha-na",
+          id_tr: "Satu (Native)",
+          cat: "Angka & Bilangan",
+        },
+        {
+          kr: "둘",
+          latin: "dul",
+          id_tr: "Dua (Native)",
+          cat: "Angka & Bilangan",
+        },
+        {
+          kr: "셋",
+          latin: "set",
+          id_tr: "Tiga (Native)",
+          cat: "Angka & Bilangan",
+        },
+        {
+          kr: "넷",
+          latin: "net",
+          id_tr: "Empat (Native)",
+          cat: "Angka & Bilangan",
+        },
+        {
+          kr: "다섯",
+          latin: "da-seot",
+          id_tr: "Lima (Native)",
+          cat: "Angka & Bilangan",
+        },
+        {
+          kr: "여섯",
+          latin: "yeo-seot",
+          id_tr: "Enam (Native)",
+          cat: "Angka & Bilangan",
+        },
+        {
+          kr: "일곱",
+          latin: "il-gop",
+          id_tr: "Tujuh (Native)",
+          cat: "Angka & Bilangan",
+        },
+        {
+          kr: "여덟",
+          latin: "yeo-deolp",
+          id_tr: "Delapan (Native)",
+          cat: "Angka & Bilangan",
+        },
+        {
+          kr: "아홉",
+          latin: "a-hop",
+          id_tr: "Sembilan (Native)",
+          cat: "Angka & Bilangan",
+        },
+        {
+          kr: "열",
+          latin: "yeol",
+          id_tr: "Sepuluh (Native)",
+          cat: "Angka & Bilangan",
+        },
+        {
+          kr: "일",
+          latin: "il",
+          id_tr: "Satu (Sino-Korea)",
+          cat: "Angka & Bilangan",
+        },
+        {
+          kr: "이",
+          latin: "i",
+          id_tr: "Dua (Sino-Korea)",
+          cat: "Angka & Bilangan",
+        },
+        {
+          kr: "삼",
+          latin: "sam",
+          id_tr: "Tiga (Sino-Korea)",
+          cat: "Angka & Bilangan",
+        },
+        {
+          kr: "사",
+          latin: "sa",
+          id_tr: "Empat (Sino-Korea)",
+          cat: "Angka & Bilangan",
+        },
+        {
+          kr: "오",
+          latin: "o",
+          id_tr: "Lima (Sino-Korea)",
+          cat: "Angka & Bilangan",
+        },
+        {
+          kr: "육",
+          latin: "yuk",
+          id_tr: "Enam (Sino-Korea)",
+          cat: "Angka & Bilangan",
+        },
+        {
+          kr: "칠",
+          latin: "chil",
+          id_tr: "Tujuh (Sino-Korea)",
+          cat: "Angka & Bilangan",
+        },
+        {
+          kr: "팔",
+          latin: "phal",
+          id_tr: "Delapan (Sino-Korea)",
+          cat: "Angka & Bilangan",
+        },
+        {
+          kr: "구",
+          latin: "gu",
+          id_tr: "Sembilan (Sino-Korea)",
+          cat: "Angka & Bilangan",
+        },
+        {
+          kr: "십",
+          latin: "sip",
+          id_tr: "Sepuluh (Sino-Korea)",
+          cat: "Angka & Bilangan",
+        },
+        { kr: "백", latin: "baek", id_tr: "Seratus", cat: "Angka & Bilangan" },
+        { kr: "천", latin: "cheon", id_tr: "Seribu", cat: "Angka & Bilangan" },
+        {
+          kr: "만",
+          latin: "man",
+          id_tr: "Sepuluh ribu",
+          cat: "Angka & Bilangan",
+        },
+
+        // Salam & Percakapan
+        {
+          kr: "안녕하세요",
+          latin: "an-nyeong-ha-se-yo",
+          id_tr: "Halo / Apa kabar",
+          cat: "Salam & Percakapan",
+        },
+        {
+          kr: "감사합니다",
+          latin: "gam-sa-ham-ni-da",
+          id_tr: "Terima kasih",
+          cat: "Salam & Percakapan",
+        },
+        {
+          kr: "죄송합니다",
+          latin: "joe-song-ham-ni-da",
+          id_tr: "Mohon maaf",
+          cat: "Salam & Percakapan",
+        },
+        {
+          kr: "괜찮아요",
+          latin: "gwaen-chan-a-yo",
+          id_tr: "Tidak apa-apa",
+          cat: "Salam & Percakapan",
+        },
+        { kr: "네", latin: "ne", id_tr: "Ya", cat: "Salam & Percakapan" },
+        {
+          kr: "아니요",
+          latin: "a-ni-yo",
+          id_tr: "Tidak / Bukan",
+          cat: "Salam & Percakapan",
+        },
+
+        // Keluarga & Orang
+        { kr: "나", latin: "na", id_tr: "Aku", cat: "Keluarga & Orang" },
+        {
+          kr: "저",
+          latin: "jeo",
+          id_tr: "Saya (Formal)",
+          cat: "Keluarga & Orang",
+        },
+        {
+          kr: "우리",
+          latin: "u-ri",
+          id_tr: "Kami / Kita",
+          cat: "Keluarga & Orang",
+        },
+        {
+          kr: "아버지",
+          latin: "a-beo-ji",
+          id_tr: "Ayah",
+          cat: "Keluarga & Orang",
+        },
+        { kr: "아빠", latin: "a-ppa", id_tr: "Papa", cat: "Keluarga & Orang" },
+        {
+          kr: "어머니",
+          latin: "eo-meo-ni",
+          id_tr: "Ibu",
+          cat: "Keluarga & Orang",
+        },
+        { kr: "엄마", latin: "eom-ma", id_tr: "Mama", cat: "Keluarga & Orang" },
+        {
+          kr: "부모님",
+          latin: "bu-mo-nim",
+          id_tr: "Orang tua",
+          cat: "Keluarga & Orang",
+        },
+        {
+          kr: "할아버지",
+          latin: "ha-ra-beo-ji",
+          id_tr: "Kakek",
+          cat: "Keluarga & Orang",
+        },
+        {
+          kr: "할머니",
+          latin: "hal-meo-ni",
+          id_tr: "Nenek",
+          cat: "Keluarga & Orang",
+        },
+        {
+          kr: "형",
+          latin: "hyeong",
+          id_tr: "Kakak laki-laki (pria)",
+          cat: "Keluarga & Orang",
+        },
+        {
+          kr: "오빠",
+          latin: "o-ppa",
+          id_tr: "Kakak laki-laki (wanita)",
+          cat: "Keluarga & Orang",
+        },
+        {
+          kr: "누나",
+          latin: "nu-na",
+          id_tr: "Kakak perempuan (pria)",
+          cat: "Keluarga & Orang",
+        },
+        {
+          kr: "언니",
+          latin: "eon-ni",
+          id_tr: "Kakak perempuan (wanita)",
+          cat: "Keluarga & Orang",
+        },
+        {
+          kr: "동생",
+          latin: "dong-saeng",
+          id_tr: "Adik",
+          cat: "Keluarga & Orang",
+        },
+        {
+          kr: "친구",
+          latin: "chin-gu",
+          id_tr: "Teman",
+          cat: "Keluarga & Orang",
+        },
+        {
+          kr: "학생",
+          latin: "hak-saeng",
+          id_tr: "Siswa / Pelajar",
+          cat: "Keluarga & Orang",
+        },
+        {
+          kr: "선생님",
+          latin: "seon-saeng-nim",
+          id_tr: "Guru",
+          cat: "Keluarga & Orang",
+        },
+        {
+          kr: "회사원",
+          latin: "hoe-sa-won",
+          id_tr: "Karyawan perusahaan",
+          cat: "Keluarga & Orang",
+        },
+        {
+          kr: "의사",
+          latin: "ui-sa",
+          id_tr: "Dokter",
+          cat: "Keluarga & Orang",
+        },
+
+        // Tempat
+        { kr: "집", latin: "jip", id_tr: "Rumah", cat: "Tempat" },
+        { kr: "방", latin: "bang", id_tr: "Kamar", cat: "Tempat" },
+        { kr: "학교", latin: "hak-gyo", id_tr: "Sekolah", cat: "Tempat" },
+        {
+          kr: "대학교",
+          latin: "dae-hak-gyo",
+          id_tr: "Universitas",
+          cat: "Tempat",
+        },
+        { kr: "회사", latin: "hoe-sa", id_tr: "Perusahaan", cat: "Tempat" },
+        { kr: "은행", latin: "eun-haeng", id_tr: "Bank", cat: "Tempat" },
+        {
+          kr: "병원",
+          latin: "byeong-won",
+          id_tr: "Rumah sakit",
+          cat: "Tempat",
+        },
+        { kr: "약국", latin: "yak-guk", id_tr: "Apotek", cat: "Tempat" },
+        { kr: "공항", latin: "gong-hang", id_tr: "Bandara", cat: "Tempat" },
+        { kr: "공원", latin: "gong-won", id_tr: "Taman", cat: "Tempat" },
+        { kr: "식당", latin: "sik-dang", id_tr: "Restoran", cat: "Tempat" },
+        { kr: "카페", latin: "ka-pe", id_tr: "Kafe", cat: "Tempat" },
+        { kr: "화장실", latin: "hwa-jang-sil", id_tr: "Toilet", cat: "Tempat" },
+
+        // Makanan & Minuman
+        { kr: "밥", latin: "bap", id_tr: "Nasi", cat: "Makanan & Minuman" },
+        { kr: "물", latin: "mul", id_tr: "Air", cat: "Makanan & Minuman" },
+        {
+          kr: "고기",
+          latin: "go-gi",
+          id_tr: "Daging",
+          cat: "Makanan & Minuman",
+        },
+        {
+          kr: "생선",
+          latin: "saeng-seon",
+          id_tr: "Ikan",
+          cat: "Makanan & Minuman",
+        },
+        {
+          kr: "채소",
+          latin: "chae-so",
+          id_tr: "Sayur",
+          cat: "Makanan & Minuman",
+        },
+        {
+          kr: "과일",
+          latin: "gwa-il",
+          id_tr: "Buah",
+          cat: "Makanan & Minuman",
+        },
+        {
+          kr: "라면",
+          latin: "ra-myeon",
+          id_tr: "Mi instan",
+          cat: "Makanan & Minuman",
+        },
+        { kr: "우유", latin: "u-yu", id_tr: "Susu", cat: "Makanan & Minuman" },
+        {
+          kr: "커피",
+          latin: "keo-pi",
+          id_tr: "Kopi",
+          cat: "Makanan & Minuman",
+        },
+        { kr: "차", latin: "cha", id_tr: "Teh", cat: "Makanan & Minuman" },
+
+        // Kata Kerja
+        { kr: "가다", latin: "ga-da", id_tr: "Pergi", cat: "Kata Kerja" },
+        { kr: "오다", latin: "o-da", id_tr: "Datang", cat: "Kata Kerja" },
+        { kr: "먹다", latin: "meok-da", id_tr: "Makan", cat: "Kata Kerja" },
+        { kr: "마시다", latin: "ma-si-da", id_tr: "Minum", cat: "Kata Kerja" },
+        { kr: "자다", latin: "ja-da", id_tr: "Tidur", cat: "Kata Kerja" },
+        {
+          kr: "공부하다",
+          latin: "gong-bu-ha-da",
+          id_tr: "Belajar",
+          cat: "Kata Kerja",
+        },
+        {
+          kr: "일하다",
+          latin: "il-ha-da",
+          id_tr: "Bekerja",
+          cat: "Kata Kerja",
+        },
+        {
+          kr: "운동하다",
+          latin: "un-dong-ha-da",
+          id_tr: "Berolahraga",
+          cat: "Kata Kerja",
+        },
+        { kr: "사다", latin: "sa-da", id_tr: "Membeli", cat: "Kata Kerja" },
+        { kr: "팔다", latin: "pal-da", id_tr: "Menjual", cat: "Kata Kerja" },
+        { kr: "보다", latin: "bo-da", id_tr: "Melihat", cat: "Kata Kerja" },
+        { kr: "듣다", latin: "deut-da", id_tr: "Mendengar", cat: "Kata Kerja" },
+        {
+          kr: "말하다",
+          latin: "mal-ha-da",
+          id_tr: "Bicara",
+          cat: "Kata Kerja",
+        },
+        { kr: "읽다", latin: "ilk-da", id_tr: "Membaca", cat: "Kata Kerja" },
+        { kr: "쓰다", latin: "sseu-da", id_tr: "Menulis", cat: "Kata Kerja" },
+        {
+          kr: "만나다",
+          latin: "man-na-da",
+          id_tr: "Bertemu",
+          cat: "Kata Kerja",
+        },
+
+        // Kata Sifat
+        { kr: "크다", latin: "keu-da", id_tr: "Besar", cat: "Kata Sifat" },
+        { kr: "작다", latin: "jak-da", id_tr: "Kecil", cat: "Kata Sifat" },
+        {
+          kr: "좋다",
+          latin: "jo-ta",
+          id_tr: "Bagus / Baik",
+          cat: "Kata Sifat",
+        },
+        {
+          kr: "나쁘다",
+          latin: "na-ppeu-da",
+          id_tr: "Buruk",
+          cat: "Kata Sifat",
+        },
+        { kr: "비싸다", latin: "bi-ssa-da", id_tr: "Mahal", cat: "Kata Sifat" },
+        { kr: "싸다", latin: "ssa-da", id_tr: "Murah", cat: "Kata Sifat" },
+        { kr: "맛있다", latin: "ma-sit-da", id_tr: "Enak", cat: "Kata Sifat" },
+        {
+          kr: "바쁘다",
+          latin: "ba-ppeu-da",
+          id_tr: "Sibuk",
+          cat: "Kata Sifat",
+        },
+        {
+          kr: "예쁘다",
+          latin: "ye-ppeu-da",
+          id_tr: "Cantik",
+          cat: "Kata Sifat",
+        },
+
+        // Waktu
+        { kr: "오늘", latin: "o-neul", id_tr: "Hari ini", cat: "Waktu" },
+        { kr: "내일", latin: "nae-il", id_tr: "Besok", cat: "Waktu" },
+        { kr: "어제", latin: "eo-je", id_tr: "Kemarin", cat: "Waktu" },
+        { kr: "지금", latin: "ji-geum", id_tr: "Sekarang", cat: "Waktu" },
+        { kr: "아침", latin: "a-chim", id_tr: "Pagi", cat: "Waktu" },
+        { kr: "점심", latin: "jeom-sim", id_tr: "Siang", cat: "Waktu" },
+        { kr: "저녁", latin: "jeo-nyeok", id_tr: "Malam", cat: "Waktu" },
+      ];
+
+      let selectedCategory = "Semua";
+      let sentenceTokens = [];
+
+      function speakKorean(text) {
+        if ("speechSynthesis" in window) {
+          window.speechSynthesis.cancel();
+          const utterance = new SpeechSynthesisUtterance(text);
+          utterance.lang = "ko-KR";
+          utterance.rate = 0.85;
+          window.speechSynthesis.speak(utterance);
+        } else {
+          alert("Browser tidak mendukung pengucapan suara.");
+        }
+      }
+
+      window.onload = function () {
+        initCategoryTabs();
+        renderDictionary();
+      };
+
+      function initCategoryTabs() {
+        const categories = [
+          "Semua",
+          ...new Set(rawDictionary.map((item) => item.cat)),
+        ];
+        const container = document.getElementById("cat-tabs-container");
+        container.innerHTML = "";
+
+        categories.forEach((cat) => {
+          const tab = document.createElement("button");
+          tab.className = `cat-tab ${cat === selectedCategory ? "active" : ""}`;
+          tab.innerText = cat;
+          tab.onclick = () => {
+            document
+              .querySelectorAll(".cat-tab")
+              .forEach((t) => t.classList.remove("active"));
+            tab.classList.add("active");
+            selectedCategory = cat;
+            renderDictionary();
+          };
+          container.appendChild(tab);
+        });
+      }
+
+      function handleSearch() {
+        renderDictionary();
+      }
+
+      function renderDictionary() {
+        const query = document
+          .getElementById("search-input")
+          .value.toLowerCase()
+          .trim();
+        const grid = document.getElementById("vocab-grid");
+        grid.innerHTML = "";
+
+        const filtered = rawDictionary.filter((item) => {
+          const matchCat =
+            selectedCategory === "Semua" || item.cat === selectedCategory;
+          const matchQuery =
+            item.kr.toLowerCase().includes(query) ||
+            item.latin.toLowerCase().includes(query) ||
+            item.id_tr.toLowerCase().includes(query);
+          return matchCat && matchQuery;
+        });
+
+        if (filtered.length === 0) {
+          grid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 30px;">Tidak ditemukan kosakata yang sesuai.</div>`;
+          return;
+        }
+
+        filtered.forEach((item) => {
+          const card = document.createElement("div");
+          card.className = "vocab-card-item";
+          card.innerHTML = `
+            <div>
+              <div class="card-top">
+                <span class="card-kr">${item.kr}</span>
+                <button class="btn-audio-circle" onclick="speakKorean('${item.kr}')" title="Dengarkan Suara">🔊</button>
+              </div>
+              <div class="card-latin">${item.latin}</div>
+              <div class="card-id">${item.id_tr}</div>
+            </div>
+            <div class="card-actions">
+              <span style="font-size: 0.72rem; background: #f1f5f9; padding: 2px 8px; border-radius: 12px; color: var(--text-muted); font-weight: 600;">${item.cat}</span>
+              <button class="btn-add-sentence" onclick="addWordToSentence('${item.kr}', 'vocab')">+ Tambah ke Kalimat</button>
+            </div>
+          `;
+          grid.appendChild(card);
+        });
+      }
+
+      /* Logika Penyusun Kalimat */
+      function addWordToSentence(text, type = "vocab") {
+        sentenceTokens.push({ text, type });
+        renderSentenceCanvas();
+      }
+
+      function addParticle(particleText) {
+        addWordToSentence(particleText, "particle");
+      }
+
+      function addCustomText() {
+        const input = document.getElementById("custom-text-input");
+        const val = input.value.trim();
+        if (val) {
+          addWordToSentence(val, "custom");
+          input.value = "";
+        }
+      }
+
+      function handleCustomKeyPress(e) {
+        if (e.key === "Enter") {
+          addCustomText();
+        }
+      }
+
+      function removeToken(index) {
+        sentenceTokens.splice(index, 1);
+        renderSentenceCanvas();
+      }
+
+      function removeLastToken() {
+        sentenceTokens.pop();
+        renderSentenceCanvas();
+      }
+
+      function clearCanvas() {
+        sentenceTokens = [];
+        renderSentenceCanvas();
+      }
+
+      function renderSentenceCanvas() {
+        const canvas = document.getElementById("sentence-canvas");
+        if (sentenceTokens.length === 0) {
+          canvas.innerHTML = `<span class="sentence-placeholder" id="sentence-placeholder">Klik kosakata di bawah atau ketik kata manual untuk menyusun kalimat...</span>`;
+          return;
+        }
+
+        canvas.innerHTML = "";
+        sentenceTokens.forEach((token, index) => {
+          const chip = document.createElement("div");
+          chip.className = `token-chip ${token.type}`;
+          chip.innerHTML = `
+            <span>${token.text}</span>
+            <span class="token-remove" onclick="removeToken(${index})">×</span>
+          `;
+          canvas.appendChild(chip);
+        });
+      }
+
+      function getAssembledText() {
+        return sentenceTokens.map((t) => t.text).join(" ");
+      }
+
+      function speakAssembledSentence() {
+        const text = getAssembledText();
+        if (!text) {
+          alert(
+            "Kalimat masih kosong! Silakan tambahkan kosakata terlebih dahulu.",
+          );
+          return;
+        }
+        speakKorean(text);
+      }
+
+      function copySentence() {
+        const text = getAssembledText();
+        if (!text) {
+          alert("Kalimat masih kosong!");
+          return;
+        }
+        navigator.clipboard.writeText(text).then(() => {
+          alert("Kalimat berhasil disalin: " + text);
+        });
+      }
+
+      /* Timer Functions */
+      let timerInterval = null,
+        timeLeft = 25 * 60,
+        isTimerRunning = false;
+
+      function updateTimerDisplay() {
+        const minutes = Math.floor(timeLeft / 60),
+          seconds = timeLeft % 60;
+        document.getElementById("timer").innerText =
+          `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+      }
+
+      function toggleTimer() {
+        const btn = document.getElementById("start-timer-btn");
+        if (isTimerRunning) {
+          clearInterval(timerInterval);
+          isTimerRunning = false;
+          btn.innerText = "Start";
+          btn.classList.remove("stop");
+        } else {
+          isTimerRunning = true;
+          btn.innerText = "Pause";
+          btn.classList.add("stop");
+          timerInterval = setInterval(() => {
+            if (timeLeft > 0) {
+              timeLeft--;
+              updateTimerDisplay();
+            } else {
+              clearInterval(timerInterval);
+              alert("Waktu belajar selesai! Istirahat dulu.");
+              resetTimer();
+            }
+          }, 1000);
+        }
+      }
+
+      function resetTimer() {
+        clearInterval(timerInterval);
+        isTimerRunning = false;
+        timeLeft = 25 * 60;
+        document.getElementById("start-timer-btn").innerText = "Start";
+        document.getElementById("start-timer-btn").classList.remove("stop");
+        updateTimerDisplay();
+      }
+
+      updateTimerDisplay();
+    </script>
+  </body>
+</html>

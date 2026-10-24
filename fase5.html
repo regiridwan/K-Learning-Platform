@@ -295,6 +295,12 @@
         flex: 1;
       }
 
+      .vocab-kr-row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
       .vocab-kr {
         font-weight: 700;
         font-size: 0.98rem;
@@ -312,6 +318,21 @@
         font-size: 0.85rem;
         color: var(--text-muted);
         margin-top: 2px;
+      }
+
+      .btn-audio-sm {
+        background: #f1f5f9;
+        border: 1px solid var(--border-color);
+        border-radius: 6px;
+        padding: 2px 6px;
+        font-size: 0.75rem;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+
+      .btn-audio-sm:hover {
+        background: #e2e8f0;
+        transform: scale(1.05);
       }
 
       .blur-text {
@@ -432,32 +453,31 @@
     </div>
 
     <script>
-      // Data Kosakata Tematik Lengkap Fase 5 (Minggu 18 - 20) + Latin
+      // Data Kosakata Tematik Lengkap Fase 5 Dipisah (Tanpa Tanda Miring '/')
       const vocabData = {
         "Minggu 18": [
-          { kr: "아버지 / 아빠", latin: "a-beo-ji / a-ppa", id: "Ayah / papa" },
-          {
-            kr: "어머니 / 엄마",
-            latin: "eo-meo-ni / eom-ma",
-            id: "Ibu / mama",
-          },
+          { kr: "아버지", latin: "a-beo-ji", id: "Ayah" },
+          { kr: "아빠", latin: "a-ppa", id: "Papa" },
+          { kr: "어머니", latin: "eo-meo-ni", id: "Ibu" },
+          { kr: "엄마", latin: "eom-ma", id: "Mama" },
           { kr: "부모님", latin: "bu-mo-nim", id: "Orang tua" },
           { kr: "할아버지", latin: "ha-ra-beo-ji", id: "Kakek" },
           { kr: "할머니", latin: "hal-meo-ni", id: "Nenek" },
-          { kr: "형 / 오빠", latin: "hyeong / o-ppa", id: "Kakak laki-laki" },
-          { kr: "누나 / 언니", latin: "nu-na / eon-ni", id: "Kakak perempuan" },
+          { kr: "형", latin: "hyeong", id: "Kakak laki-laki (oleh pria)" },
+          { kr: "오빠", latin: "o-ppa", id: "Kakak laki-laki (oleh wanita)" },
+          { kr: "누나", latin: "nu-na", id: "Kakak perempuan (oleh pria)" },
+          { kr: "언니", latin: "eon-ni", id: "Kakak perempuan (oleh wanita)" },
           { kr: "동생", latin: "dong-saeng", id: "Adik" },
-          { kr: "아들 / 딸", latin: "a-deul / ttal", id: "Putra / putri" },
-          {
-            kr: "남편 / 아내",
-            latin: "nam-pyeon / a-nae",
-            id: "Suami / istri",
-          },
+          { kr: "아들", latin: "a-deul", id: "Putra" },
+          { kr: "딸", latin: "ttal", id: "Putri" },
+          { kr: "남편", latin: "nam-pyeon", id: "Suami" },
+          { kr: "아내", latin: "a-nae", id: "Istri" },
           { kr: "아이", latin: "a-i", id: "Anak" },
           { kr: "물건", latin: "mul-geon", id: "Barang" },
           { kr: "열쇠", latin: "yeol-ssoe", id: "Kunci" },
           { kr: "신발", latin: "sin-bal", id: "Sepatu" },
-          { kr: "우유 / 주스", latin: "u-yu / ju-seu", id: "Susu / jus" },
+          { kr: "우유", latin: "u-yu", id: "Susu" },
+          { kr: "주스", latin: "ju-seu", id: "Jus" },
           { kr: "모자", latin: "mo-ja", id: "Topi" },
           { kr: "차", latin: "cha", id: "Teh" },
           { kr: "안경", latin: "an-gyeong", id: "Kacamata" },
@@ -470,49 +490,38 @@
           { kr: "편의점", latin: "pyeon-ui-jeom", id: "Minimarket" },
           { kr: "우체국", latin: "u-che-guk", id: "Kantor pos" },
           { kr: "서점", latin: "seo-jeom", id: "Toko buku" },
-          {
-            kr: "병원 / 약국",
-            latin: "byeong-won / yak-guk",
-            id: "Rumah sakit / apotek",
-          },
+          { kr: "병원", latin: "byeong-won", id: "Rumah sakit" },
+          { kr: "약국", latin: "yak-guk", id: "Apotek" },
           { kr: "공항", latin: "gong-hang", id: "Bandara" },
           { kr: "공원", latin: "gong-won", id: "Taman" },
           { kr: "호텔", latin: "ho-tel", id: "Hotel" },
           { kr: "극장", latin: "geuk-jang", id: "Bioskop" },
           { kr: "대학교", latin: "dae-hak-gyo", id: "Universitas" },
-          { kr: "백화점", latin: "baek-hwa-jeom", id: "Mal / dept store" },
+          { kr: "백화점", latin: "baek-hwa-jeom", id: "Mal / Dept store" },
           { kr: "화장실", latin: "hwa-jang-sil", id: "Toilet" },
-          {
-            kr: "년 / 월 / 일",
-            latin: "nyeon / wol / il",
-            id: "Tahun / bulan / hari",
-          },
+          { kr: "년", latin: "nyeon", id: "Tahun" },
+          { kr: "월", latin: "wol", id: "Bulan" },
+          { kr: "일", latin: "il", id: "Hari / Tanggal" },
           { kr: "올해", latin: "ol-hae", id: "Tahun ini" },
           { kr: "주", latin: "ju", id: "Minggu" },
           { kr: "매주", latin: "mae-ju", id: "Setiap minggu" },
           { kr: "밤", latin: "bam", id: "Malam" },
           { kr: "평일", latin: "pyeong-il", id: "Hari kerja" },
-          { kr: "봄 / 여름", latin: "bom / yeo-reum", id: "Semi / panas" },
+          { kr: "봄", latin: "bom", id: "Musim semi" },
+          { kr: "여름", latin: "yeo-reum", id: "Musim panas" },
           { kr: "주말", latin: "ju-mal", id: "Akhir pekan" },
-          {
-            kr: "가을 / 겨울",
-            latin: "ga-eul / gyeo-ul",
-            id: "Gugur / dingin",
-          },
+          { kr: "가을", latin: "ga-eul", id: "Musim gugur" },
+          { kr: "겨울", latin: "gyeo-ul", id: "Musim dingin" },
           { kr: "요일", latin: "yo-il", id: "Nama hari" },
           { kr: "얼굴", latin: "eol-gul", id: "Wajah" },
-          {
-            kr: "주다 / 받다",
-            latin: "ju-da / bat-da",
-            id: "Memberi / menerima",
-          },
-          {
-            kr: "코 / 입 / 귀",
-            latin: "ko / ip / gwi",
-            id: "Hidung / mulut / telinga",
-          },
+          { kr: "주다", latin: "ju-da", id: "Memberi" },
+          { kr: "받다", latin: "bat-da", id: "Menerima" },
+          { kr: "코", latin: "ko", id: "Hidung" },
+          { kr: "입", latin: "ip", id: "Mulut" },
+          { kr: "귀", latin: "gwi", id: "Telinga" },
           { kr: "찾다", latin: "chat-da", id: "Mencari" },
-          { kr: "손 / 발", latin: "son / bal", id: "Tangan / kaki" },
+          { kr: "손", latin: "son", id: "Tangan" },
+          { kr: "발", latin: "bal", id: "Kaki (telapak)" },
           { kr: "사진을 찍다", latin: "sa-jin-eul ttik-da", id: "Memotret" },
           { kr: "다리", latin: "da-ri", id: "Kaki (tungkai)" },
           {
@@ -521,35 +530,28 @@
             id: "Mengikuti ujian",
           },
           { kr: "몸", latin: "mom", id: "Tubuh" },
-          { kr: "가지고 오다", latin: "ga-ji-go o-da", id: "Membawa" },
+          { kr: "가지고 오다", latin: "ga-ji-go o-da", id: "Membawa kemari" },
           { kr: "팔다", latin: "pal-da", id: "Menjual" },
           { kr: "춤을 추다", latin: "chum-eul chu-da", id: "Menari" },
-          {
-            kr: "빠르다 / 느리다",
-            latin: "ppa-reu-da / neu-ri-da",
-            id: "Cepat / lambat",
-          },
+          { kr: "빠르다", latin: "ppa-reu-da", id: "Cepat" },
+          { kr: "느리다", latin: "neu-ri-da", id: "Lambat" },
           { kr: "깨끗하다", latin: "kkae-kkeut-ha-da", id: "Bersih" },
-          {
-            kr: "무겁다 / 가볍다",
-            latin: "mu-geop-da / ga-byeop-da",
-            id: "Berat / ringan",
-          },
+          { kr: "무겁다", latin: "mu-geop-da", id: "Berat" },
+          { kr: "가볍다", latin: "ga-byeop-da", id: "Ringan" },
           { kr: "더럽다", latin: "deo-reop-da", id: "Kotor" },
           { kr: "친절하다", latin: "chin-jeol-ha-da", id: "Ramah" },
           { kr: "새", latin: "sae", id: "Baru" },
           { kr: "조용하다", latin: "jo-yong-ha-da", id: "Tenang" },
           { kr: "오래", latin: "o-rae", id: "Lama" },
-          { kr: "복잡하다", latin: "bok-jap-ha-da", id: "Ramai / rumit" },
-          { kr: "값 / 가격", latin: "gap / ga-gyeok", id: "Harga" },
-          { kr: "안내", latin: "an-nae", id: "Informasi" },
-          { kr: "쉬다 / 휴무", latin: "swi-da / hyu-mu", id: "Libur" },
+          { kr: "복잡하다", latin: "bok-jap-ha-da", id: "Ramai / Rumit" },
+          { kr: "값", latin: "gap", id: "Harga" },
+          { kr: "가격", latin: "ga-gyeok", id: "Harga" },
+          { kr: "안내", latin: "an-nae", id: "Informasi / Panduan" },
+          { kr: "쉬다", latin: "swi-da", id: "Istirahat" },
+          { kr: "휴무", latin: "hyu-mu", id: "Libur kerja" },
           { kr: "모집", latin: "mo-jip", id: "Perekrutan" },
-          {
-            kr: "입구 / 출구",
-            latin: "ip-gu / chul-gu",
-            id: "Pintu masuk / keluar",
-          },
+          { kr: "입구", latin: "ip-gu", id: "Pintu masuk" },
+          { kr: "출구", latin: "chul-gu", id: "Pintu keluar" },
           { kr: "신청", latin: "sin-cheong", id: "Pendaftaran" },
           { kr: "주차", latin: "ju-cha", id: "Parkir" },
           { kr: "문의", latin: "mun-ui", id: "Pertanyaan" },
@@ -557,22 +559,20 @@
           { kr: "무료", latin: "mu-ryo", id: "Gratis" },
           { kr: "주의", latin: "ju-ui", id: "Perhatian" },
           { kr: "할인", latin: "hal-in", id: "Diskon" },
-          {
-            kr: "출발 / 도착",
-            latin: "chul-bal / do-chak",
-            id: "Berangkat / tiba",
-          },
+          { kr: "출발", latin: "chul-bal", id: "Keberangkatan" },
+          { kr: "도착", latin: "do-chak", id: "Kedatangan" },
           { kr: "예약", latin: "ye-yak", id: "Reservasi" },
           { kr: "주소", latin: "ju-so", id: "Alamat" },
-          { kr: "영업시간", latin: "yeong-eop-si-gan", id: "Jam buka" },
-          { kr: "연락", latin: "yeol-lak", id: "Kontak / kabar" },
+          { kr: "영업시간", latin: "yeong-eop-si-gan", id: "Jam operasional" },
+          { kr: "연락", latin: "yeol-lak", id: "Kontak / Kabar" },
         ],
         "Minggu 19": [
           { kr: "어디", latin: "eo-di", id: "Di mana / Ke mana" },
           { kr: "언제", latin: "eon-je", id: "Kapan" },
           { kr: "얼마", latin: "eol-ma", id: "Berapa (harga)" },
           { kr: "몇", latin: "myeot", id: "Berapa (jumlah)" },
-          { kr: "뭐 / 무엇", latin: "mwo / mu-eot", id: "Apa" },
+          { kr: "뭐", latin: "mwo", id: "Apa" },
+          { kr: "무엇", latin: "mu-eot", id: "Apa" },
           { kr: "왜", latin: "wae", id: "Mengapa" },
           { kr: "누구", latin: "nu-gu", id: "Siapa" },
           { kr: "어떻게", latin: "eo-tteok-ge", id: "Bagaimana" },
@@ -586,11 +586,8 @@
         "Minggu 20": [
           { kr: "모의고사", latin: "mo-ui-go-sa", id: "Ujian simulasi" },
           { kr: "문제", latin: "mun-je", id: "Soal / Masalah" },
-          {
-            kr: "답 / 정답",
-            latin: "dap / jeong-dap",
-            id: "Jawaban / Jawaban benar",
-          },
+          { kr: "답", latin: "dap", id: "Jawaban" },
+          { kr: "정답", latin: "jeong-dap", id: "Jawaban benar" },
           { kr: "맞다", latin: "mat-da", id: "Benar" },
           { kr: "틀리다", latin: "teul-li-da", id: "Salah" },
           { kr: "알맞다", latin: "al-mat-da", id: "Cocok / Tepat" },
@@ -611,6 +608,19 @@
       let hideTarget = "ID";
       let hideStates = {};
       let isPanelCollapsed = false;
+
+      // FUNGSI SUARA WEBSPEECH API
+      function speakKorean(text) {
+        if ("speechSynthesis" in window) {
+          window.speechSynthesis.cancel();
+          const utterance = new SpeechSynthesisUtterance(text);
+          utterance.lang = "ko-KR";
+          utterance.rate = 0.85;
+          window.speechSynthesis.speak(utterance);
+        } else {
+          alert("Browser tidak mendukung pengucapan suara.");
+        }
+      }
 
       window.onload = function () {
         const weekContainer = document.getElementById("week-filter-container");
@@ -688,7 +698,10 @@
           card.className = "vocab-card";
           card.innerHTML = `
           <div class="vocab-content">
-            <div class="vocab-kr ${isKrHidden ? "blur-text" : ""}">${item.kr}</div>
+            <div class="vocab-kr-row">
+              <span class="vocab-kr ${isKrHidden ? "blur-text" : ""}">${item.kr}</span>
+              <button class="btn-audio-sm" onclick="speakKorean('${item.kr}')" title="Dengarkan pengucapan">🔊</button>
+            </div>
             <div class="vocab-latin ${isKrHidden ? "blur-text" : ""}">${item.latin}</div>
             <div class="vocab-id ${isIdHidden ? "blur-text" : ""}">${item.id}</div>
           </div>
