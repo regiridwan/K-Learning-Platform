@@ -6,6 +6,14 @@
     <title>
       K-Learning Platform - Platform Belajar Bahasa Korea Interaktif
     </title>
+
+    <!-- Favicon / Logo Tab Browser (SVG Inline) -->
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23e11d48'/><text x='50%' y='55%' dominant-baseline='central' text-anchor='middle' fill='white' font-size='60' font-family='sans-serif' font-weight='bold'>한</text></svg>"
+    />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -43,7 +51,7 @@
 
       /* Header Navigasi */
       header {
-        background-color: rgba(15, 23, 42, 0.8);
+        background-color: rgba(15, 23, 42, 0.85);
         backdrop-filter: blur(12px);
         border-bottom: 1px solid var(--border-color);
         padding: 0 32px;
@@ -123,7 +131,7 @@
         padding: 10px;
       }
 
-      /* Dropdown Fitur & Alat (Sama Netral & Elegan) */
+      /* Dropdown Fitur & Alat */
       .nav-dropdown-tools {
         border-color: rgba(255, 255, 255, 0.15);
         background-color: rgba(30, 41, 59, 0.7);
@@ -275,42 +283,6 @@
         border-color: rgba(255, 255, 255, 0.2);
       }
 
-      /* Stat Fitur Utama */
-      .features-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-        gap: 20px;
-        width: 100%;
-        margin-top: 40px;
-      }
-
-      .feature-card {
-        background: rgba(30, 41, 59, 0.6);
-        border: 1px solid var(--border-color);
-        backdrop-filter: blur(12px);
-        padding: 20px;
-        border-radius: 12px;
-        text-align: left;
-      }
-
-      .feature-icon {
-        font-size: 1.5rem;
-        margin-bottom: 8px;
-      }
-
-      .feature-title {
-        font-size: 0.95rem;
-        font-weight: 700;
-        color: var(--primary);
-        margin-bottom: 4px;
-      }
-
-      .feature-desc {
-        font-size: 0.825rem;
-        color: var(--text-muted);
-        line-height: 1.4;
-      }
-
       /* Footer */
       footer {
         background: #090d16;
@@ -345,6 +317,7 @@
         <div class="brand-logo">한</div>
         <span>K-Learning Platform</span>
       </a>
+      <script src="kamus-widget.js"></script>
 
       <nav>
         <!-- Dropdown Pilihan Fase Modul -->
@@ -352,7 +325,8 @@
           class="nav-dropdown"
           onchange="if (this.value) window.location.href = this.value;"
         >
-          <option value="" disabled selected>Pilih Fase Belajar...</option>
+          <option value="" disabled selected>Pilih Modul Belajar...</option>
+          <option value="hangeul.html">Hangeul: Belajar Membaca</option>
           <option value="fase1.html">Fase 1: Fondasi Bahasa Korea</option>
           <option value="fase2.html">Fase 2: Perluasan Tata Bahasa</option>
           <option value="fase3.html">Fase 3: Kalimat Kompleks</option>
@@ -360,18 +334,21 @@
           <option value="fase5.html">Fase 5: Simulasi TOPIK I</option>
           <option value="fase6.html">Fase 6: Menengah Awal</option>
           <option value="fase7.html">Fase 7: Persiapan TOPIK II</option>
+          <option value="fase8.html">Fase 8: Dunia Kerja</option>
+          <option value="fase9.html">Fase 9: Menuju Level 4</option>
+          <option value="gabungan.html">Review Gabungan Fase 1-8</option>
         </select>
 
-        <!-- Dropdown Netral: Fitur & Alat Belajar Interaktif -->
+        <!-- Dropdown Fitur & Alat Belajar Interaktif -->
         <select
           class="nav-dropdown nav-dropdown-tools"
           onchange="if (this.value) window.location.href = this.value;"
         >
-          <option value="" disabled selected>⚡ Fitur & Alat...</option>
-          <option value="latihan.html">📝 Latihan Soal</option>
-          <option value="kamus.html">📖 Kamus Interaktif</option>
-          <option value="tatabahasa.html">📘 Tata Bahasa & Dialog</option>
-          <option value="game.html">🎮 Break Game</option>
+          <option value="" disabled selected>Fitur & Alat...</option>
+          <option value="latihan.html">Latihan Soal</option>
+          <option value="kosakata.html">Kosakata</option>
+          <option value="tatabahasa.html">Tata Bahasa & Dialog</option>
+          <option value="game.html">Break Game</option>
         </select>
 
         <!-- Tombol Logout -->
@@ -424,6 +401,7 @@
           </a>
           <a href="modul.html" class="btn-secondary"> Lihat Semua Modul </a>
         </div>
+      </div>
     </section>
 
     <!-- Footer -->

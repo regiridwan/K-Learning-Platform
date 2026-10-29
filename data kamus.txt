@@ -1,0 +1,2990 @@
+      // ---------- BAGIAN 1: DASAR · Salam, perkenalan, ungkapan sopan ----------
+      add("dasar", "1a. Salam harian", [
+        ["안녕하세요.", "annyeonghaseyo", "Halo / selamat pagi-siang-sore."],
+        [
+          "안녕하세요? 잘 지내세요?",
+          "annyeonghaseyo? jal jinaeseyo?",
+          "Halo, apa kabar?",
+        ],
+        ["네, 잘 지내요.", "ne, jal jinaeyo", "Ya, saya baik-baik saja."],
+        ["오랜만이에요.", "oraenmanieyo", "Lama tidak bertemu."],
+        ["만나서 반가워요.", "mannaseo bangawoyo", "Senang bertemu denganmu."],
+        ["좋은 아침이에요.", "joeun achimieyo", "Selamat pagi."],
+        [
+          "안녕히 가세요.",
+          "annyeonghi gaseyo",
+          "Selamat jalan (kamu yang pergi).",
+        ],
+        [
+          "안녕히 계세요.",
+          "annyeonghi gyeseyo",
+          "Selamat tinggal (aku yang pergi, kamu tetap).",
+        ],
+        ["잘 자요.", "jal jayo", "Selamat tidur."],
+        ["내일 봐요.", "naeil bwayo", "Sampai jumpa besok."],
+      ]);
+
+      add("dasar", "1b. Perkenalan diri", [
+        [
+          "저는 [nama]이에요 / 예요.",
+          "jeoneun [nama]ieyo / yeyo",
+          "Saya [nama].",
+        ],
+        [
+          "제 이름은 [nama]이에요.",
+          "je ireumeun [nama]ieyo",
+          "Nama saya [nama].",
+        ],
+        ["이름이 뭐예요?", "ireumi mwoyeyo", "Siapa namamu?"],
+        [
+          "저는 인도네시아 사람이에요.",
+          "jeoneun indonesia saramieyo",
+          "Saya orang Indonesia.",
+        ],
+        [
+          "저는 반둥에서 왔어요.",
+          "jeoneun bandungeseo wasseoyo",
+          "Saya berasal dari Bandung.",
+        ],
+        ["어디에서 왔어요?", "eodieseo wasseoyo", "Kamu berasal dari mana?"],
+        [
+          "저는 학생이에요.",
+          "jeoneun hakssaengieyo",
+          "Saya pelajar / mahasiswa.",
+        ],
+        ["직업이 뭐예요?", "jigeobi mwoyeyo", "Pekerjaanmu apa?"],
+        [
+          "한국어를 공부하고 있어요.",
+          "hangugeoreul gongbuhago isseoyo",
+          "Saya sedang belajar bahasa Korea.",
+        ],
+        [
+          "아직 한국어를 잘 못해요.",
+          "ajik hangugeoreul jal mothaeyo",
+          "Saya belum bisa bahasa Korea dengan baik.",
+        ],
+        [
+          "천천히 말해 주세요.",
+          "cheoncheonhi malhae juseyo",
+          "Tolong bicara pelan-pelan.",
+        ],
+        [
+          "다시 한번 말해 주세요.",
+          "dasi hanbeon malhae juseyo",
+          "Tolong katakan sekali lagi.",
+        ],
+        ["무슨 뜻이에요?", "museun tteusieyo", "Apa artinya?"],
+        [
+          "이해했어요. / 이해 못 했어요.",
+          "ihaehaesseoyo / ihae mot haesseoyo",
+          "Saya mengerti. / Saya tidak mengerti.",
+        ],
+        [
+          "영어 할 수 있어요?",
+          "yeongeo hal su isseoyo",
+          "Bisa bahasa Inggris?",
+        ],
+      ]);
+
+      add("dasar", "2. Ungkapan sopan sehari-hari", [
+        ["감사합니다.", "gamsahamnida", "Terima kasih (formal)."],
+        ["고마워요.", "gomawoyo", "Terima kasih (santai-sopan)."],
+        ["정말 고마워요.", "jeongmal gomawoyo", "Terima kasih banyak."],
+        ["천만에요.", "cheonmaneyo", "Sama-sama."],
+        ["괜찮아요.", "gwaenchanayo", "Tidak apa-apa / baik-baik saja."],
+        ["죄송합니다.", "joesonghamnida", "Mohon maaf (formal)."],
+        ["미안해요.", "mianhaeyo", "Maaf."],
+        ["실례합니다.", "sillyehamnida", "Permisi (mau lewat atau bertanya)."],
+        ["잠깐만요.", "jamkkanmanyo", "Sebentar ya."],
+        ["잠시만요.", "jamsimanyo", "Permisi sebentar (saat minta jalan)."],
+        ["네. / 아니요.", "ne / aniyo", "Ya. / Tidak."],
+        ["맞아요.", "majayo", "Benar."],
+        ["잘 모르겠어요.", "jal moreugesseoyo", "Saya kurang tahu."],
+        [
+          "잘 먹겠습니다.",
+          "jal meokgetseumnida",
+          "Selamat makan (diucapkan sebelum makan).",
+        ],
+        [
+          "잘 먹었습니다.",
+          "jal meogeotseumnida",
+          "Terima kasih atas makanannya (setelah makan).",
+        ],
+        [
+          "수고하셨어요.",
+          "sugohasyeosseoyo",
+          "Terima kasih atas kerja kerasnya.",
+        ],
+        ["축하해요!", "chukahaeyo", "Selamat!"],
+        ["조심하세요.", "josimhaseyo", "Hati-hati."],
+        ["도와주세요.", "dowajuseyo", "Tolong bantu saya."],
+        ["화이팅!", "hwaiting", "Semangat!"],
+      ]);
+
+      // ---------- KAMUS KATA (bagian 1) ----------
+      addW(`안녕하세요=halo / selamat (sopan)
+      
+잘=dengan baik
+지내세요=apakah Anda baik-baik (hormat)
+네=ya
+지내요=baik-baik saja
+오랜만이에요=lama tidak bertemu
+만나서=bertemu (lalu...)
+반가워요=senang
+좋은=bagus
+아침이에요=(adalah) pagi
+안녕히=dengan selamat
+가세요=pergilah
+계세요=tinggallah / tetap di sana
+자요=tidur
+내일=besok
+봐요=lihat / bertemu
+저는=saya (topik)
+[nama]이에요=(adalah) [nama]
+/=atau
+예요=adalah
+제=saya (milik)
+이름은=nama (topik)
+이름이=nama (subjek)
+뭐예요=apa
+인도네시아=Indonesia
+사람이에요=(adalah) orang
+반둥에서=dari Bandung
+왔어요=sudah datang
+어디에서=dari mana
+학생이에요=(adalah) pelajar
+직업이=pekerjaan
+한국어를=bahasa Korea (objek)
+공부하고=sedang belajar
+있어요=ada / sedang
+아직=masih / belum
+못해요=tidak bisa
+천천히=pelan-pelan
+말해=bicara
+주세요=tolong berikan
+다시=lagi
+한번=sekali
+무슨=apa
+뜻이에요=artinya
+이해했어요=saya mengerti
+이해=pengertian
+못=tidak bisa
+했어요=melakukan (lampau)
+영어=bahasa Inggris
+할=melakukan
+수=kemungkinan (할 수 있어요 = bisa)
+감사합니다=terima kasih (formal)
+고마워요=terima kasih (santai-sopan)
+정말=sungguh
+천만에요=sama-sama
+괜찮아요=tidak apa-apa
+죄송합니다=mohon maaf (formal)
+미안해요=maaf
+실례합니다=permisi
+잠깐만요=sebentar ya
+잠시만요=permisi sebentar
+아니요=tidak
+맞아요=benar
+모르겠어요=tidak tahu
+먹겠습니다=akan makan (selamat makan)
+먹었습니다=sudah makan
+수고하셨어요=terima kasih atas kerja kerasnya
+축하해요=selamat
+조심하세요=hati-hati
+도와주세요=tolong bantu
+화이팅=semangat`);
+      // ---------- BAGIAN 2: DASAR · Restoran, kafe, belanja ----------
+      add("dasar", "3a. Restoran: masuk dan memesan", [
+        ["어서 오세요.", "eoseo oseyo", "Selamat datang (diucapkan pegawai)."],
+        ["두 명이에요.", "du myeongieyo", "Berdua."],
+        ["자리 있어요?", "jari isseoyo", "Ada tempat kosong?"],
+        ["저기요!", "jeogiyo", "Permisi! (memanggil pelayan)"],
+        ["메뉴판 주세요.", "menyupan juseyo", "Tolong minta menunya."],
+        [
+          "추천 메뉴가 뭐예요?",
+          "chucheon menyuga mwoyeyo",
+          "Menu rekomendasinya apa?",
+        ],
+        ["이거 주세요.", "igeo juseyo", "Tolong yang ini."],
+        [
+          "김치찌개 하나 주세요.",
+          "gimchijjigae hana juseyo",
+          "Tolong satu kimchi jjigae.",
+        ],
+        ["물 좀 주세요.", "mul jom juseyo", "Tolong minta air."],
+        [
+          "안 맵게 해 주세요.",
+          "an maepge hae juseyo",
+          "Tolong jangan terlalu pedas.",
+        ],
+        [
+          "돼지고기는 못 먹어요.",
+          "dwaejigogineun mot meogeoyo",
+          "Saya tidak bisa makan daging babi.",
+        ],
+        [
+          "이거 뭐가 들어 있어요?",
+          "igeo mwoga deureo isseoyo",
+          "Ini isinya apa saja?",
+        ],
+        [
+          "포장해 주세요.",
+          "pojanghae juseyo",
+          "Tolong dibungkus (dibawa pulang).",
+        ],
+        ["여기서 먹을게요.", "yeogiseo meogeulgeyo", "Saya makan di sini."],
+      ]);
+
+      add("dasar", "3b. Restoran: makan dan membayar", [
+        ["정말 맛있어요!", "jeongmal masisseoyo", "Enak sekali!"],
+        ["너무 매워요.", "neomu maewoyo", "Terlalu pedas."],
+        [
+          "반찬 더 주세요.",
+          "banchan deo juseyo",
+          "Tolong tambah lauk pendampingnya.",
+        ],
+        ["계산해 주세요.", "gyesanhae juseyo", "Tolong hitung tagihannya."],
+        ["얼마예요?", "eolmayeyo", "Berapa harganya?"],
+        [
+          "카드로 계산할게요.",
+          "kadeuro gyesanhalgeyo",
+          "Saya bayar pakai kartu.",
+        ],
+        ["영수증 주세요.", "yeongsujeung juseyo", "Tolong minta struknya."],
+      ]);
+
+      add("dasar", "3c. Di kafe", [
+        [
+          "아이스 아메리카노 한 잔 주세요.",
+          "aiseu amerikano han jan juseyo",
+          "Tolong satu es americano.",
+        ],
+        [
+          "따뜻한 걸로 주세요.",
+          "ttatteutan geollo juseyo",
+          "Tolong yang panas.",
+        ],
+        [
+          "사이즈는 어떤 걸로 하시겠어요?",
+          "saijeuneun eotteon geollo hasigesseoyo",
+          "Mau ukuran yang mana?",
+        ],
+        [
+          "와이파이 비밀번호가 뭐예요?",
+          "waipai bimilbeonhoga mwoyeyo",
+          "Kata sandi Wi-Fi-nya apa?",
+        ],
+      ]);
+
+      add("dasar", "4. Belanja dan tawar-menawar", [
+        [
+          "그냥 구경하는 거예요.",
+          "geunyang gugyeonghaneun geoyeyo",
+          "Saya hanya melihat-lihat.",
+        ],
+        ["이거 얼마예요?", "igeo eolmayeyo", "Ini berapa harganya?"],
+        ["너무 비싸요.", "neomu bissayo", "Mahal sekali."],
+        [
+          "좀 깎아 주세요.",
+          "jom kkakka juseyo",
+          "Tolong kurangi sedikit harganya.",
+        ],
+        ["더 싼 거 있어요?", "deo ssan geo isseoyo", "Ada yang lebih murah?"],
+        ["다른 색깔 있어요?", "dareun saekkkal isseoyo", "Ada warna lain?"],
+        [
+          "더 큰 사이즈 있어요?",
+          "deo keun saijeu isseoyo",
+          "Ada ukuran lebih besar?",
+        ],
+        ["입어 봐도 돼요?", "ibeo bwado dwaeyo", "Boleh saya coba pakai?"],
+        ["탈의실이 어디예요?", "taruisiri eodiyeyo", "Ruang ganti di mana?"],
+        ["이걸로 할게요.", "igeollo halgeyo", "Saya ambil yang ini."],
+        ["두 개 주세요.", "du gae juseyo", "Tolong dua buah."],
+        ["봉투 필요해요?", "bongtu piryohaeyo", "Perlu kantong plastik?"],
+        [
+          "봉투는 괜찮아요.",
+          "bongtuneun gwaenchanayo",
+          "Tidak usah pakai kantong.",
+        ],
+        [
+          "환불할 수 있어요?",
+          "hwanbulhal su isseoyo",
+          "Bisa dikembalikan uangnya (refund)?",
+        ],
+        ["면세 되나요?", "myeonse doenayo", "Bisa bebas pajak (tax-free)?"],
+        [
+          "포인트 적립해 드릴까요?",
+          "pointeu jeongnipae deurilkkayo",
+          "Mau dikumpulkan poinnya? (ucapan kasir)",
+        ],
+        ["현금으로 낼게요.", "hyeongeumeuro naelgeyo", "Saya bayar tunai."],
+      ]);
+
+      // ---------- KAMUS KATA (bagian 2) ----------
+      addW(`어서=segera / silakan
+오세요=datanglah
+두=dua (penghitung)
+명이에요=(adalah) ... orang
+자리=tempat duduk
+저기요=permisi (memanggil)
+메뉴판=daftar menu
+추천=rekomendasi
+메뉴가=menu (subjek)
+이거=ini
+김치찌개=sup kimchi
+하나=satu
+물=air
+좀=sedikit / tolong
+안=tidak
+맵게=pedas (adv.)
+해=lakukan
+돼지고기는=daging babi (topik)
+먹어요=makan
+뭐가=apa (subjek)
+들어=masuk / terkandung
+포장해=bungkus
+여기서=di / dari sini
+먹을게요=saya makan (niat)
+맛있어요=enak
+너무=terlalu
+매워요=pedas
+반찬=lauk pendamping
+더=lebih / tambah
+계산해=hitung / bayar
+얼마예요=berapa harganya
+카드로=dengan kartu
+계산할게요=saya bayar
+영수증=struk
+아이스=es
+아메리카노=americano
+한=satu (penghitung)
+잔=gelas / cangkir
+따뜻한=hangat / panas
+걸로=dengan yang itu
+사이즈는=ukuran (topik)
+어떤=yang mana
+하시겠어요=mau (hormat)
+와이파이=Wi-Fi
+비밀번호가=kata sandi (subjek)
+그냥=hanya / sekadar
+구경하는=sedang melihat-lihat
+거예요=(adalah) hal / sedang
+비싸요=mahal
+깎아=kurangi harga
+싼=murah
+거=barang / hal
+다른=lain
+색깔=warna
+큰=besar
+사이즈=ukuran
+입어=pakai (baju)
+봐도=boleh dicoba
+돼요=boleh
+탈의실이=ruang ganti
+어디예요=di mana
+이걸로=dengan yang ini
+할게요=saya ambil / lakukan
+개=buah (penghitung)
+봉투=kantong plastik
+필요해요=perlu
+봉투는=kantong (topik)
+환불할=mengembalikan uang
+수=kemungkinan
+면세=bebas pajak
+되나요=bisakah
+포인트=poin
+적립해=kumpulkan
+드릴까요=mau saya (lakukan)?
+현금으로=dengan uang tunai
+낼게요=saya bayar`);
+
+      // ---------- BAGIAN 3: DASAR · Transportasi, arah, teman, perasaan, basa-basi ----------
+      add("dasar", "5a. Bertanya arah", [
+        [
+          "지하철역이 어디예요?",
+          "jihacheollyeogi eodiyeyo",
+          "Stasiun subway di mana?",
+        ],
+        ["화장실이 어디예요?", "hwajangsiri eodiyeyo", "Toilet di mana?"],
+        [
+          "여기에 어떻게 가요?",
+          "yeogie eotteoke gayo",
+          "Bagaimana cara ke sini?",
+        ],
+        [
+          "서울역에 가고 싶어요.",
+          "seoulyeoge gago sipeoyo",
+          "Saya ingin ke Stasiun Seoul.",
+        ],
+        ["여기서 멀어요?", "yeogiseo meoreoyo", "Jauh dari sini?"],
+        [
+          "걸어서 얼마나 걸려요?",
+          "georeoseo eolmana geollyeoyo",
+          "Berapa lama kalau jalan kaki?",
+        ],
+        ["똑바로 가세요.", "ttokbaro gaseyo", "Lurus saja."],
+        ["오른쪽으로 가세요.", "oreunjjogeuro gaseyo", "Belok kanan."],
+        ["왼쪽으로 가세요.", "oenjjogeuro gaseyo", "Belok kiri."],
+        ["길을 잃어버렸어요.", "gireul ireobeoryeosseoyo", "Saya tersesat."],
+      ]);
+
+      add("dasar", "5b. Subway, bus, dan taksi", [
+        [
+          "교통카드 어디서 살 수 있어요?",
+          "gyotongkadeu eodiseo sal su isseoyo",
+          "Di mana beli kartu transportasi?",
+        ],
+        [
+          "이 버스 명동에 가요?",
+          "i beoseu myeongdonge gayo",
+          "Apakah bus ini ke Myeongdong?",
+        ],
+        [
+          "몇 번 출구예요?",
+          "myeot beon chulguyeyo",
+          "Pintu keluar nomor berapa?",
+        ],
+        ["어디서 갈아타요?", "eodiseo garatayo", "Pindah (transit) di mana?"],
+        [
+          "다음 역은 어디예요?",
+          "daeum yeogeun eodiyeyo",
+          "Stasiun berikutnya apa?",
+        ],
+        ["여기서 내릴게요.", "yeogiseo naerilgeyo", "Saya turun di sini."],
+        ["택시 타고 싶어요.", "taeksi tago sipeoyo", "Saya ingin naik taksi."],
+        [
+          "이 주소로 가 주세요.",
+          "i jusoro ga juseyo",
+          "Tolong antar ke alamat ini.",
+        ],
+        [
+          "여기서 세워 주세요.",
+          "yeogiseo sewo juseyo",
+          "Tolong berhenti di sini.",
+        ],
+      ]);
+
+      add("dasar", "6a. Teman: ajakan dan rencana", [
+        ["뭐 해요?", "mwo haeyo", "Lagi apa?"],
+        ["오늘 시간 있어요?", "oneul sigan isseoyo", "Hari ini ada waktu?"],
+        ["같이 밥 먹을래요?", "gachi bap meogeullaeyo", "Mau makan bareng?"],
+        [
+          "같이 영화 볼까요?",
+          "gachi yeonghwa bolkkayo",
+          "Nonton film bareng yuk?",
+        ],
+        [
+          "주말에 뭐 할 거예요?",
+          "jumare mwo hal geoyeyo",
+          "Akhir pekan mau ngapain?",
+        ],
+        ["좋아요! 그렇게 해요.", "joayo! geureoke haeyo", "Boleh! Ayo begitu."],
+        [
+          "미안해요, 오늘은 바빠요.",
+          "mianhaeyo, oneureun bappayo",
+          "Maaf, hari ini saya sibuk.",
+        ],
+        [
+          "다음에 같이 가요.",
+          "daeume gachi gayo",
+          "Lain kali kita pergi bareng.",
+        ],
+        [
+          "몇 시에 만날까요?",
+          "myeot sie mannalkkayo",
+          "Kita ketemu jam berapa?",
+        ],
+        ["어디서 만날까요?", "eodiseo mannalkkayo", "Ketemu di mana?"],
+        ["지금 가고 있어요.", "jigeum gago isseoyo", "Saya sedang di jalan."],
+        [
+          "조금 늦을 것 같아요.",
+          "jogeum neujeul geot gatayo",
+          "Sepertinya saya agak terlambat.",
+        ],
+      ]);
+
+      add("dasar", "6b. Teman: perasaan dan pendapat", [
+        ["기분이 좋아요.", "gibuni joayo", "Saya senang / suasana hati bagus."],
+        ["너무 피곤해요.", "neomu pigonhaeyo", "Capek sekali."],
+        ["배고파요.", "baegopayo", "Saya lapar."],
+        ["졸려요.", "jollyeoyo", "Saya mengantuk."],
+        ["심심해요.", "simsimhaeyo", "Saya bosan."],
+        ["재미있어요!", "jaemiisseoyo", "Seru! / Menarik!"],
+        ["정말요?", "jeongmallyo", "Benarkah?"],
+        ["대박!", "daebak", "Keren banget! / Wah!"],
+        [
+          "저도 그렇게 생각해요.",
+          "jeodo geureoke saenggakhaeyo",
+          "Saya juga berpikir begitu.",
+        ],
+        ["잘 모르겠어요.", "jal moreugesseoyo", "Saya tidak yakin."],
+        ["걱정하지 마세요.", "geokjeonghaji maseyo", "Jangan khawatir."],
+        ["보고 싶어요.", "bogo sipeoyo", "Saya kangen kamu."],
+      ]);
+
+      add("dasar", "6c. Teman: basa-basi sehari-hari", [
+        [
+          "밥 먹었어요?",
+          "bap meogeosseoyo",
+          "Sudah makan? (cara menyapa akrab khas Korea)",
+        ],
+        ["오늘 어땠어요?", "oneul eottaesseoyo", "Hari ini bagaimana?"],
+        ["취미가 뭐예요?", "chwimiga mwoyeyo", "Hobimu apa?"],
+        [
+          "한국 음식 좋아해요?",
+          "hanguk eumsik joahaeyo",
+          "Suka makanan Korea?",
+        ],
+        [
+          "한국에는 얼마나 있었어요?",
+          "hangugeneun eolmana isseosseoyo",
+          "Sudah berapa lama di Korea?",
+        ],
+        ["인스타 해요?", "inseuta haeyo", "Kamu main Instagram?"],
+        [
+          "연락처 알려 줄래요?",
+          "yeollakcheo allyeo jullaeyo",
+          "Boleh minta kontakmu?",
+        ],
+      ]);
+
+      // ---------- KAMUS KATA (bagian 3) ----------
+      addW(`지하철역이=stasiun subway (subjek)
+화장실이=toilet (subjek)
+여기에=ke sini / di sini
+어떻게=bagaimana
+가요=pergi
+서울역에=ke Stasiun Seoul
+가고=pergi (lalu...)
+싶어요=ingin
+멀어요=jauh
+걸어서=dengan berjalan kaki
+얼마나=berapa lama / seberapa
+걸려요=memakan waktu
+똑바로=lurus
+오른쪽으로=ke arah kanan
+왼쪽으로=ke arah kiri
+길을=jalan (objek)
+잃어버렸어요=(sudah) hilang / tersesat
+교통카드=kartu transportasi
+어디서=di mana
+살=membeli (살 수 있어요 = bisa beli)
+이=ini
+버스=bus
+명동에=ke Myeongdong
+몇=berapa
+번=nomor
+출구예요=(adalah) pintu keluar
+갈아타요=berpindah (transit)
+다음=berikutnya
+역은=stasiun (topik)
+택시=taksi
+타고=naik (lalu...)
+주소로=ke alamat
+가=pergi / antar
+세워=hentikan
+뭐=apa
+해요=lakukan / lagi apa
+오늘=hari ini
+시간=waktu
+같이=bareng
+밥=nasi / makan
+먹을래요=mau makan?
+영화=film
+볼까요=mau lihat?
+주말에=pada akhir pekan
+할=akan melakukan
+거예요=akan
+좋아요=bagus / boleh
+그렇게=begitu
+바빠요=sibuk
+오늘은=hari ini (topik)
+다음에=lain kali
+몇=berapa
+시에=pada jam
+만날까요=mau bertemu?
+지금=sekarang
+조금=sedikit
+늦을=akan terlambat
+것=hal
+같아요=sepertinya
+기분이=suasana hati
+피곤해요=capek
+배고파요=lapar
+졸려요=mengantuk
+심심해요=bosan
+재미있어요=seru / menarik
+정말요=benarkah
+대박=keren banget
+저도=saya juga
+생각해요=berpikir
+걱정하지=khawatir (ingkar)
+마세요=jangan
+보고=melihat / merindukan
+먹었어요=sudah makan
+어땠어요=bagaimana (tadi)
+취미가=hobi (subjek)
+한국=Korea
+음식=makanan
+좋아해요=suka
+한국에는=di Korea (topik)
+있었어요=(sudah) berada
+인스타=Instagram
+연락처=kontak
+알려=beri tahu
+줄래요=maukah memberi`);
+      // ---------- BAGIAN 4: DASAR · Hotel, rumah sakit, darurat, angka, waktu ----------
+      add("dasar", "7a. Di hotel", [
+        ["예약했어요.", "yeyakhaesseoyo", "Saya sudah memesan."],
+        ["체크인하고 싶어요.", "chekeuinhago sipeoyo", "Saya ingin check-in."],
+        [
+          "체크아웃은 몇 시예요?",
+          "chekeuauseun myeot siyeyo",
+          "Check-out jam berapa?",
+        ],
+        [
+          "아침 식사 포함이에요?",
+          "achim siksa pohamieyo",
+          "Sudah termasuk sarapan?",
+        ],
+        [
+          "방에 수건이 없어요.",
+          "bange sugeoni eopseoyo",
+          "Di kamar tidak ada handuk.",
+        ],
+        ["에어컨이 안 돼요.", "eeokeoni an dwaeyo", "AC-nya tidak berfungsi."],
+        [
+          "짐을 맡길 수 있어요?",
+          "jimeul matgil su isseoyo",
+          "Bisa titip bagasi?",
+        ],
+      ]);
+
+      add("dasar", "7b. Di rumah sakit dan apotek", [
+        ["몸이 안 좋아요.", "momi an joayo", "Badan saya tidak enak."],
+        ["머리가 아파요.", "meoriga apayo", "Kepala saya sakit."],
+        ["배가 아파요.", "baega apayo", "Perut saya sakit."],
+        ["열이 나요.", "yeori nayo", "Saya demam."],
+        ["기침이 나요.", "gichimi nayo", "Saya batuk."],
+        ["알레르기가 있어요.", "allereugiga isseoyo", "Saya punya alergi."],
+        [
+          "병원에 가고 싶어요.",
+          "byeongwone gago sipeoyo",
+          "Saya ingin ke rumah sakit.",
+        ],
+        ["약국이 어디예요?", "yakgugi eodiyeyo", "Apotek di mana?"],
+        [
+          "이 약은 어떻게 먹어요?",
+          "i yageun eotteoke meogeoyo",
+          "Obat ini cara minumnya bagaimana?",
+        ],
+      ]);
+
+      add("dasar", "7c. Keadaan darurat", [
+        ["도와주세요!", "dowajuseyo", "Tolong!"],
+        [
+          "경찰을 불러 주세요.",
+          "gyeongchareul bulleo juseyo",
+          "Tolong panggilkan polisi.",
+        ],
+        [
+          "구급차를 불러 주세요.",
+          "gugeupchareul bulleo juseyo",
+          "Tolong panggilkan ambulans.",
+        ],
+        [
+          "지갑을 잃어버렸어요.",
+          "jigabeul ireobeoryeosseoyo",
+          "Dompet saya hilang.",
+        ],
+        [
+          "여권을 잃어버렸어요.",
+          "yeogwoneul ireobeoryeosseoyo",
+          "Paspor saya hilang.",
+        ],
+        ["도둑이야!", "dodugiya", "Pencuri!"],
+      ]);
+
+      add("dasar", "8a. Angka Sino-Korea (uang, tanggal, menit)", [
+        ["일", "il", "1"],
+        ["이", "i", "2"],
+        ["삼", "sam", "3"],
+        ["사", "sa", "4"],
+        ["오", "o", "5"],
+        ["육", "yuk", "6"],
+        ["칠", "chil", "7"],
+        ["팔", "pal", "8"],
+        ["구", "gu", "9"],
+        ["십", "sip", "10"],
+      ]);
+
+      add("dasar", "8b. Angka asli Korea (jumlah, jam, usia)", [
+        ["하나 / 한", "hana / han", "1"],
+        ["둘 / 두", "dul / du", "2"],
+        ["셋 / 세", "set / se", "3"],
+        ["넷 / 네", "net / ne", "4"],
+        ["다섯", "daseot", "5"],
+        ["여섯", "yeoseot", "6"],
+        ["일곱", "ilgop", "7"],
+        ["여덟", "yeodeol", "8"],
+        ["아홉", "ahop", "9"],
+        ["열", "yeol", "10"],
+      ]);
+
+      add("dasar", "8c. Uang", [
+        ["백", "baek", "100"],
+        ["천", "cheon", "1.000"],
+        ["만", "man", "10.000"],
+        ["오천 원", "ocheon won", "5.000 won"],
+      ]);
+
+      add("dasar", "8d. Hari dalam seminggu", [
+        ["월요일", "woryoil", "Senin"],
+        ["화요일", "hwayoil", "Selasa"],
+        ["수요일", "suyoil", "Rabu"],
+        ["목요일", "mogyoil", "Kamis"],
+        ["금요일", "geumyoil", "Jumat"],
+        ["토요일", "toyoil", "Sabtu"],
+        ["일요일", "iryoil", "Minggu"],
+      ]);
+
+      add("dasar", "8e. Waktu, tanggal, dan usia", [
+        ["지금 몇 시예요?", "jigeum myeot siyeyo", "Sekarang jam berapa?"],
+        ["세 시 삼십 분이에요.", "se si samsip buniyeyo", "Jam 3.30."],
+        [
+          "오늘이 며칠이에요?",
+          "oneuri myeochirieyo",
+          "Hari ini tanggal berapa?",
+        ],
+        [
+          "오늘은 시월 이십구 일이에요.",
+          "oneureun siwol isipgu irieyo",
+          "Hari ini 29 Oktober.",
+        ],
+        ["무슨 요일이에요?", "museun yoirieyo", "Hari apa?"],
+        ["목요일이에요.", "mogyoirieyo", "Hari Kamis."],
+        ["내일", "naeil", "Besok"],
+        ["어제", "eoje", "Kemarin"],
+        ["몇 살이에요?", "myeot sarieyo", "Usiamu berapa?"],
+        ["스물다섯 살이에요.", "seumuldaseot sarieyo", "Usia saya 25 tahun."],
+      ]);
+
+      // ---------- KAMUS KATA (bagian 4) ----------
+      addW(`예약했어요=sudah memesan
+체크인하고=check-in (lalu...)
+체크아웃은=check-out (topik)
+시예요=(adalah) jam
+아침=pagi
+식사=makan / hidangan
+포함이에요=termasuk
+방에=di kamar
+수건이=handuk
+없어요=tidak ada
+에어컨이=AC
+짐을=bagasi (objek)
+맡길=menitipkan
+몸이=badan
+머리가=kepala
+아파요=sakit
+배가=perut
+열이=demam
+나요=timbul / keluar
+기침이=batuk
+알레르기가=alergi
+병원에=ke rumah sakit
+약국이=apotek
+약은=obat (topik)
+경찰을=polisi (objek)
+불러=panggil
+구급차를=ambulans (objek)
+지갑을=dompet (objek)
+여권을=paspor (objek)
+도둑이야=pencuri
+일=1 (Sino-Korea)
+이=ini / 2 (Sino-Korea)
+삼=3 (Sino-Korea)
+사=4 (Sino-Korea)
+오=5 (Sino-Korea)
+육=6 (Sino-Korea)
+칠=7 (Sino-Korea)
+팔=8 (Sino-Korea)
+구=9 (Sino-Korea)
+십=10 (Sino-Korea)
+둘=2 (asli Korea)
+셋=3 (asli Korea)
+세=3 (sebelum penghitung)
+넷=4 (asli Korea)
+네=ya / 4 (sebelum penghitung)
+다섯=5 (asli Korea)
+여섯=6 (asli Korea)
+일곱=7 (asli Korea)
+여덟=8 (asli Korea)
+아홉=9 (asli Korea)
+열=10 (asli Korea)
+백=100
+천=1.000
+만=10.000
+오천=5.000
+원=won (mata uang Korea)
+월요일=Senin
+화요일=Selasa
+수요일=Rabu
+목요일=Kamis
+금요일=Jumat
+토요일=Sabtu
+일요일=Minggu
+시=jam
+삼십=30
+분이에요=(adalah) menit
+오늘이=hari ini (subjek)
+며칠이에요=tanggal berapa
+시월=Oktober
+이십구=29
+일이에요=(adalah) tanggal ...
+요일이에요=(adalah) hari
+목요일이에요=(adalah) hari Kamis
+어제=kemarin
+살이에요=(berusia) ... tahun
+스물다섯=25 (asli Korea, untuk usia)`);
+
+      // ---------- BAGIAN 5: MENENGAH · Pola penghubung, pendapat, permintaan & negosiasi ----------
+      add("menengah", "1a. Pola penghubung", [
+        [
+          "어제 갔는데 문이 닫혀 있었어요.",
+          "eoje gatneunde muni dachyeo isseosseoyo",
+          "Kemarin saya ke sana, tapi pintunya tutup. (-는데: latar belakang, kontras ringan)",
+        ],
+        [
+          "지금 못 가요. 일이 많거든요.",
+          "jigeum mot gayo. iri mankeodeunyo",
+          "Sekarang saya tidak bisa pergi. Soalnya pekerjaan saya banyak. (-거든요: alasan)",
+        ],
+        [
+          "내일 시험이 있잖아요.",
+          "naeil siheomi itjanayo",
+          "Besok kan ada ujian. (-잖아요: mengingatkan)",
+        ],
+        [
+          "피곤할 텐데 좀 쉬세요.",
+          "pigonhal tende jom swiseyo",
+          "Kamu pasti capek, istirahatlah sebentar. (-(으)ㄹ 텐데: dugaan + saran)",
+        ],
+        [
+          "걷다가 친구를 만났어요.",
+          "geotdaga chingureul mannasseoyo",
+          "Saat berjalan saya bertemu teman. (-다가: tindakan terputus)",
+        ],
+        [
+          "비가 오니까 우산을 가져가세요.",
+          "biga onikka usaneul gajyeogaseyo",
+          "Karena hujan, bawalah payung. (-(으)니까: alasan kuat)",
+        ],
+        [
+          "맛있을 뿐만 아니라 싸요.",
+          "masisseul ppunman anira ssayo",
+          "Tidak hanya enak, tapi juga murah. (-(으)ㄹ 뿐만 아니라)",
+        ],
+      ]);
+
+      add("menengah", "1b. Perbedaan yang sering membingungkan", [
+        [
+          "-아서/어서 vs -(으)니까",
+          "-aseo/eoseo vs -(eu)nikka",
+          "Keduanya berarti 'karena'. -(으)니까 boleh diikuti perintah atau ajakan, -아서/어서 tidak.",
+        ],
+        [
+          "-는데 vs -지만",
+          "-neunde vs -jiman",
+          "-는데 lebih lembut dan sering hanya membuka topik, -지만 lebih tegas menyatakan kontras ('tetapi').",
+        ],
+        [
+          "-거든요 vs -잖아요",
+          "-geodeunyo vs -janayo",
+          "-거든요 memberi informasi baru, -잖아요 mengingatkan hal yang seharusnya sudah diketahui. Hati-hati: -잖아요 bisa terdengar menegur ke orang yang lebih tua.",
+        ],
+      ]);
+
+      add("menengah", "2a. Pola untuk menyatakan pendapat", [
+        [
+          "늦었기 때문에 택시를 탔어요.",
+          "neujeotgi ttaemune taeksireul tasseoyo",
+          "Karena terlambat, saya naik taksi. (-기 때문에: alasan formal)",
+        ],
+        [
+          "배울수록 재미있어요.",
+          "baeulsurok jaemiisseoyo",
+          "Semakin dipelajari, semakin seru. (-(으)ㄹ수록)",
+        ],
+        [
+          "월급이 높은 반면에 일이 힘들어요.",
+          "wolgeubi nopeun banmyeone iri himdeureoyo",
+          "Gajinya tinggi, tetapi kerjaannya berat. (-(으)ㄴ/는 반면에)",
+        ],
+      ]);
+
+      add("menengah", "2b. Menyampaikan pendapat", [
+        [
+          "제 생각에는 이 방법이 더 좋은 것 같아요.",
+          "je saenggageneun i bangbeobi deo joeun geot gatayo",
+          "Menurut saya, cara ini sepertinya lebih baik.",
+        ],
+        [
+          "개인적으로는 반대예요.",
+          "gaeinjeogeuroneun bandaeyeyo",
+          "Secara pribadi saya tidak setuju.",
+        ],
+        [
+          "제가 보기에는 문제가 있어요.",
+          "jega bogieneun munjega isseoyo",
+          "Dari sudut pandang saya, ada masalah.",
+        ],
+        [
+          "솔직히 말하면 잘 모르겠어요.",
+          "soljikhi malhamyeon jal moreugesseoyo",
+          "Jujur saja, saya kurang yakin.",
+        ],
+        [
+          "어떻게 생각하세요?",
+          "eotteoke saenggakhaseyo",
+          "Bagaimana pendapat Anda?",
+        ],
+        [
+          "의견을 들려 주시겠어요?",
+          "uigyeoneul deullyeo jusigesseoyo",
+          "Bolehkah Anda menyampaikan pendapat?",
+        ],
+      ]);
+
+      add("menengah", "2c. Setuju", [
+        [
+          "맞는 말씀이에요.",
+          "manneun malsseumieyo",
+          "Yang Anda katakan benar.",
+        ],
+        [
+          "저도 같은 생각이에요.",
+          "jeodo gateun saenggagieyo",
+          "Saya juga berpikir sama.",
+        ],
+        [
+          "그 점에 동의해요.",
+          "geu jeome donguihaeyo",
+          "Saya setuju dengan poin itu.",
+        ],
+        ["바로 그거예요!", "baro geugeoyeyo", "Nah, itu dia!"],
+        [
+          "듣고 보니까 그렇네요.",
+          "deutgo bonikka geureonneyo",
+          "Setelah dipikir-pikir, memang benar.",
+        ],
+      ]);
+
+      add("menengah", "2d. Tidak setuju dengan halus", [
+        [
+          "그럴 수도 있지만 저는 좀 다르게 생각해요.",
+          "geureol sudo itjiman jeoneun jom dareuge saenggakhaeyo",
+          "Bisa jadi begitu, tapi saya berpikir agak berbeda.",
+        ],
+        [
+          "말씀은 이해하는데 현실적으로 어려울 것 같아요.",
+          "malsseumeun ihaehaneunde hyeonsiljeogeuro eoryeoul geot gatayo",
+          "Saya paham maksud Anda, tapi secara realistis sepertinya sulit.",
+        ],
+        [
+          "그 부분은 좀 다시 생각해 봐야 할 것 같아요.",
+          "geu bubuneun jom dasi saenggakhae bwaya hal geot gatayo",
+          "Bagian itu sepertinya perlu dipikirkan ulang.",
+        ],
+        [
+          "꼭 그런 건 아닌 것 같아요.",
+          "kkok geureon geon anin geot gatayo",
+          "Sepertinya tidak selalu begitu.",
+        ],
+        [
+          "제 입장에서는 받아들이기 어려워요.",
+          "je ipjangeseoneun badadeurigi eoryeowoyo",
+          "Dari posisi saya, itu sulit diterima.",
+        ],
+      ]);
+
+      add("menengah", "2e. Memberi tanggapan sambil mendengarkan", [
+        ["아, 그렇군요.", "a, geureokunyo", "Oh, begitu ya."],
+        [
+          "정말 그런 일이 있었어요?",
+          "jeongmal geureon iri isseosseoyo",
+          "Benarkah ada kejadian seperti itu?",
+        ],
+        [
+          "그래서 어떻게 됐어요?",
+          "geuraeseo eotteoke dwaesseoyo",
+          "Lalu bagaimana akhirnya?",
+        ],
+        [
+          "충분히 이해돼요.",
+          "chungbunhi ihaedwaeyo",
+          "Saya sangat bisa memahaminya.",
+        ],
+        ["그럴 만도 하죠.", "geureol mando hajyo", "Wajar saja kalau begitu."],
+      ]);
+
+      add("menengah", "3a. Meminta dengan halus", [
+        [
+          "혹시 부탁 하나 해도 될까요?",
+          "hoksi butak hana haedo doelkkayo",
+          "Kalau boleh, bisakah saya minta tolong sesuatu?",
+        ],
+        [
+          "이것 좀 도와주실 수 있을까요?",
+          "igeot jom dowajusil su isseulkkayo",
+          "Mungkinkah Anda membantu saya soal ini?",
+        ],
+        [
+          "시간 되시면 한번 봐 주시겠어요?",
+          "sigan doesimyeon hanbeon bwa jusigesseoyo",
+          "Kalau ada waktu, bisakah Anda melihatnya sekali?",
+        ],
+        [
+          "죄송하지만 자리를 좀 바꿔 주실 수 있어요?",
+          "joesonghajiman jarireul jom bakkwo jusil su isseoyo",
+          "Maaf, bisakah kita bertukar tempat duduk?",
+        ],
+        [
+          "가능하면 내일까지 부탁드려요.",
+          "ganeunghamyeon naeilkkaji butakdeuryeoyo",
+          "Kalau memungkinkan, mohon selesai sampai besok.",
+        ],
+        [
+          "괜찮으시면 제가 먼저 해도 될까요?",
+          "gwaenchanheusimyeon jega meonjeo haedo doelkkayo",
+          "Kalau tidak keberatan, bolehkah saya duluan?",
+        ],
+      ]);
+
+      add("menengah", "3b. Menolak tanpa menyinggung", [
+        [
+          "아쉽지만 이번에는 어려울 것 같아요.",
+          "aswipjiman ibeoneneun eoryeoul geot gatayo",
+          "Sayang sekali, kali ini sepertinya sulit.",
+        ],
+        [
+          "마음은 있는데 일정이 안 맞아요.",
+          "maeumeun inneunde iljeongi an majayo",
+          "Niatnya ada, tapi jadwalnya tidak cocok.",
+        ],
+        [
+          "생각해 보고 다시 연락드려도 될까요?",
+          "saenggakhae bogo dasi yeollakdeuryeodo doelkkayo",
+          "Bolehkah saya pikirkan dulu dan menghubungi Anda lagi?",
+        ],
+        [
+          "제안은 감사한데 이번에는 사양할게요.",
+          "jeanen gamsahande ibeoneneun sayanghalgeyo",
+          "Terima kasih atas tawarannya, tapi kali ini saya tolak dulu.",
+        ],
+        [
+          "다음 기회에 꼭 같이 하고 싶어요.",
+          "daeum gihoee kkok gachi hago sipeoyo",
+          "Lain kali saya pasti ingin ikut.",
+        ],
+        [
+          "그건 제가 결정할 수 있는 부분이 아니에요.",
+          "geugeon jega gyeoljeonghal su inneun bubuni anieyo",
+          "Itu bukan bagian yang bisa saya putuskan.",
+        ],
+      ]);
+
+      add("menengah", "3c. Bernegosiasi", [
+        [
+          "조건을 조금 조정할 수 있을까요?",
+          "jogeoneul jogeum jojeonghal su isseulkkayo",
+          "Bisakah syaratnya disesuaikan sedikit?",
+        ],
+        [
+          "중간에서 만나는 건 어떨까요?",
+          "jung-ganeseo mannaneun geon eotteolkkayo",
+          "Bagaimana kalau kita ambil jalan tengah?",
+        ],
+        [
+          "그 가격이면 조금 부담스러워요.",
+          "geu gagyeogimyeon jogeum budamseureowoyo",
+          "Dengan harga itu agak memberatkan bagi saya.",
+        ],
+        [
+          "대신 이 부분을 양보해 주시면 어떨까요?",
+          "daesin i bubuneul yangbohae jusimyeon eotteolkkayo",
+          "Sebagai gantinya, bagaimana kalau Anda mengalah di bagian ini?",
+        ],
+        [
+          "서로 윈윈할 수 있는 방법을 찾아봐요.",
+          "seoro winwinhal su inneun bangbeobeul chajabwayo",
+          "Mari cari cara yang menguntungkan kita berdua.",
+        ],
+        [
+          "일단 이 조건으로 진행해 볼게요.",
+          "ildan i jogeoneuro jinhaenghae bolgeyo",
+          "Untuk sementara saya coba lanjut dengan syarat ini.",
+        ],
+      ]);
+
+      // ---------- KAMUS KATA (bagian 5) ----------
+      addW(`vs=lawan / dibandingkan
+갔는데=sudah pergi, (dan/tapi)
+문이=pintu
+닫혀=tertutup
+일이=pekerjaan / urusan
+많거든요=soalnya banyak
+시험이=ujian
+있잖아요=kan ada
+피곤할=akan capek / pasti capek
+텐데=pasti, (jadi...)
+쉬세요=istirahatlah
+걷다가=saat berjalan
+친구를=teman (objek)
+만났어요=sudah bertemu
+비가=hujan (subjek)
+오니까=karena turun / datang
+우산을=payung (objek)
+가져가세요=bawalah
+맛있을=enak
+뿐만=tidak hanya
+아니라=melainkan
+싸요=murah
+늦었기=karena terlambat
+때문에=karena
+택시를=taksi (objek)
+탔어요=sudah naik
+배울수록=semakin belajar
+월급이=gaji (subjek)
+높은=tinggi
+반면에=sebaliknya / di sisi lain
+힘들어요=berat / susah
+생각에는=menurut pikiran
+방법이=cara (subjek)
+개인적으로는=secara pribadi
+반대예요=(adalah) menentang
+제가=saya (subjek)
+보기에는=dari sudut pandang
+문제가=masalah (subjek)
+있어요=ada
+솔직히=jujur saja
+말하면=kalau berkata
+생각하세요=berpikir (hormat)
+의견을=pendapat (objek)
+들려=perdengarkan
+주시겠어요=bersediakah memberi (hormat)
+맞는=yang benar
+말씀이에요=(adalah) perkataan (hormat)
+같은=sama
+생각이에요=(adalah) pikiran
+그=itu
+점에=pada poin
+동의해요=setuju
+바로=tepat / nah
+그거예요=(adalah) itu
+듣고=mendengar (lalu...)
+보니까=setelah dilihat
+그렇네요=memang begitu ya
+그럴=begitu
+수도=bisa jadi
+있지만=ada, tapi
+다르게=berbeda
+말씀은=perkataan (topik, hormat)
+이해하는데=paham, (tapi...)
+현실적으로=secara realistis
+어려울=akan sulit
+부분은=bagian (topik)
+다시=lagi
+생각해=pikirkan
+봐야=harus mencoba
+할=akan melakukan
+꼭=pasti
+그런=seperti itu
+건=hal (topik, singkatan)
+아닌=yang bukan
+입장에서는=dari posisi
+받아들이기=menerima (nomina)
+어려워요=sulit
+그렇군요=oh begitu ya
+아=oh
+그런=seperti itu
+있었어요=(tadi) ada / terjadi
+그래서=karena itu / lalu
+됐어요=menjadi (lampau)
+충분히=cukup / sepenuhnya
+이해돼요=bisa dipahami
+만도=pantas
+하죠=ya kan / memang
+혹시=kalau boleh
+부탁=permintaan
+해도=boleh melakukan
+될까요=bolehkah
+이것=ini (hal)
+도와주실=membantu (hormat)
+있을까요=mungkinkah ada
+시간=waktu
+되시면=kalau ada / jadi (hormat)
+한번=sekali
+봐=lihat
+죄송하지만=mohon maaf, tapi
+자리를=tempat duduk (objek)
+바꿔=tukar
+주실=memberi (hormat)
+가능하면=kalau memungkinkan
+내일까지=sampai besok
+부탁드려요=mohon (hormat)
+괜찮으시면=kalau tidak keberatan (hormat)
+먼저=duluan
+아쉽지만=sayang sekali, tapi
+이번에는=kali ini
+마음은=hati / niat (topik)
+있는데=ada, (tapi...)
+일정이=jadwal (subjek)
+맞아요=cocok
+연락드려도=boleh menghubungi (hormat)
+제안은=tawaran (topik)
+감사한데=terima kasih, (tapi...)
+사양할게요=saya tolak (halus)
+기회에=pada kesempatan
+그건=itu (topik, singkatan)
+결정할=memutuskan
+있는=yang bisa / ada
+부분이=bagian (subjek)
+아니에요=bukan
+조건을=syarat (objek)
+조정할=menyesuaikan
+중간에서=di tengah
+만나는=bertemu
+어떨까요=bagaimana kalau
+가격이면=kalau harganya
+부담스러워요=terasa memberatkan
+대신=sebagai gantinya
+부분을=bagian (objek)
+양보해=mengalah
+주시면=kalau Anda berikan (hormat)
+서로=satu sama lain
+윈윈할=saling menguntungkan
+방법을=cara (objek)
+찾아봐요=mari cari
+일단=untuk sementara
+조건으로=dengan syarat
+진행해=lanjutkan
+볼게요=saya coba`);
+
+      // ---------- BAGIAN 6: MENENGAH · Bahasa hormat, kantor, kutipan tidak langsung, bercerita ----------
+      add("menengah", "4a. Kata hormat yang wajib hafal", [
+        [
+          "먹다 → 드시다 / 잡수시다",
+          "meokda → deusida / japsusida",
+          "Makan (bentuk hormat)",
+        ],
+        ["자다 → 주무시다", "jada → jumusida", "Tidur (bentuk hormat)"],
+        ["있다 → 계시다", "itda → gyesida", "Ada, untuk orang (bentuk hormat)"],
+        [
+          "말하다 → 말씀하시다",
+          "malhada → malsseumhasida",
+          "Berbicara (bentuk hormat)",
+        ],
+        ["주다 → 드리다", "juda → deurida", "Memberi ke orang yang dihormati"],
+        [
+          "사람 / 이름 / 나이 → 분 / 성함 / 연세",
+          "saram / ireum / nai → bun / seongham / yeonse",
+          "Orang / nama / usia (bentuk hormat)",
+        ],
+      ]);
+
+      add("menengah", "4b. Kalimat di kantor", [
+        [
+          "안녕하십니까? 처음 뵙겠습니다.",
+          "annyeonghasimnikka? cheoeum boepgetseumnida",
+          "Selamat pagi. Senang berkenalan dengan Anda.",
+        ],
+        [
+          "회의 자료는 메일로 보내드리겠습니다.",
+          "hoeui jaryoneun meillo bonaedeurigetseumnida",
+          "Materi rapat akan saya kirim lewat email.",
+        ],
+        [
+          "부장님께서 지금 회의 중이십니다.",
+          "bujangnimkkeseo jigeum hoeui jungisimnida",
+          "Kepala bagian sedang rapat sekarang.",
+        ],
+        [
+          "보고드릴 내용이 있습니다.",
+          "bogodeuril naeyongi itseumnida",
+          "Ada hal yang ingin saya laporkan.",
+        ],
+        [
+          "확인 후 연락드리겠습니다.",
+          "hwagin hu yeollakdeurigetseumnida",
+          "Setelah saya cek, saya akan menghubungi Anda.",
+        ],
+        [
+          "일정을 조정해도 괜찮으시겠습니까?",
+          "iljeongeul jojeonghaedo gwaenchanheusigetseumnikka",
+          "Apakah tidak keberatan jika jadwal diatur ulang?",
+        ],
+        [
+          "말씀하신 대로 진행하겠습니다.",
+          "malsseumhasin daero jinhaenghagetseumnida",
+          "Akan saya lanjutkan sesuai arahan Anda.",
+        ],
+        [
+          "제가 담당하겠습니다.",
+          "jega damdanghagetseumnida",
+          "Saya yang akan menangani.",
+        ],
+        [
+          "마감 기한이 언제입니까?",
+          "magam gihani eonjeimnikka",
+          "Kapan batas waktunya?",
+        ],
+        [
+          "수고하셨습니다. 먼저 퇴근하겠습니다.",
+          "sugohasyeotseumnida. meonjeo toegeunhagetseumnida",
+          "Terima kasih atas kerja kerasnya. Saya pulang duluan.",
+        ],
+      ]);
+
+      add("menengah", "4c. Cara memanggil orang di kantor", [
+        [
+          "팀장님 / 부장님",
+          "timjangnim / bujangnim",
+          "Jabatan + 님: kepala tim / kepala bagian. Jangan panggil nama langsung ke atasan.",
+        ],
+        [
+          "민수 씨",
+          "minsu ssi",
+          "Nama + 씨, untuk rekan setara. Jangan dipakai ke orang yang lebih tua atau atasan.",
+        ],
+        [
+          "선배님 / 선배",
+          "seonbaenim / seonbae",
+          "Untuk senior di sekolah atau kampus.",
+        ],
+      ]);
+
+      add("menengah", "5a. Bentuk kutipan tidak langsung", [
+        [
+          "-다고 했어요 → -대요",
+          "-dago haesseoyo → -daeyo",
+          "Pernyataan: bentuk lengkap → bentuk pendek percakapan.",
+        ],
+        [
+          "-냐고 했어요 → -냬요",
+          "-nyago haesseoyo → -nyaeyo",
+          "Pertanyaan: bentuk lengkap → bentuk pendek percakapan.",
+        ],
+        [
+          "-자고 했어요 → -재요",
+          "-jago haesseoyo → -jaeyo",
+          "Ajakan: bentuk lengkap → bentuk pendek percakapan.",
+        ],
+        [
+          "-(으)라고 했어요 → -래요",
+          "-(eu)rago haesseoyo → -raeyo",
+          "Perintah: bentuk lengkap → bentuk pendek percakapan.",
+        ],
+      ]);
+
+      add("menengah", "5b. Contoh kutipan pendek", [
+        [
+          "내일 비가 온대요.",
+          "naeil biga ondaeyo",
+          "Katanya besok hujan. (pernyataan)",
+        ],
+        [
+          "어디 가냬요.",
+          "eodi ganyaeyo",
+          "Dia tanya mau ke mana. (pertanyaan)",
+        ],
+        [
+          "같이 가재요.",
+          "gachi gajaeyo",
+          "Dia mengajak pergi bareng. (ajakan)",
+        ],
+        [
+          "빨리 오래요.",
+          "ppalli oraeyo",
+          "Dia menyuruh cepat datang. (perintah)",
+        ],
+      ]);
+
+      add("menengah", "5c. Kalimat bercerita", [
+        [
+          "친구가 그러는데 그 식당이 진짜 맛있대요.",
+          "chinguga geureoneunde geu sikdangi jinjja masitdaeyo",
+          "Kata teman saya, restoran itu enak sekali.",
+        ],
+        [
+          "뉴스에서 봤는데 다음 주부터 지하철 요금이 오른대요.",
+          "nyuseueseo bwanneunde daeum jubuteo jihacheol yogeumi oreundaeyo",
+          "Saya lihat di berita, mulai minggu depan tarif subway naik.",
+        ],
+        [
+          "선생님이 숙제를 내일까지 내라고 하셨어요.",
+          "seonsaengnimi sukjereul naeilkkaji naerago hasyeosseoyo",
+          "Guru menyuruh kami mengumpulkan PR sampai besok.",
+        ],
+        [
+          "어제 있었던 일인데 들어 볼래요?",
+          "eoje isseotdeon irinde deureo bollaeyo",
+          "Ini kejadian kemarin, mau dengar?",
+        ],
+        [
+          "처음에는 몰랐는데 알고 보니까 아는 사람이었어요.",
+          "cheoeumeneun mollanneunde algo bonikka aneun saramieosseoyo",
+          "Awalnya saya tidak tahu, tapi ternyata dia orang yang saya kenal.",
+        ],
+        [
+          "그러다가 결국 포기하고 말았어요.",
+          "geureodaga gyeolguk pogihago marasseoyo",
+          "Lalu akhirnya saya menyerah juga.",
+        ],
+        [
+          "결과적으로 잘 해결됐어요.",
+          "gyeolgwajeogeuro jal haegyeoldwaesseoyo",
+          "Pada akhirnya masalahnya terselesaikan dengan baik.",
+        ],
+        [
+          "생각보다 훨씬 어려웠어요.",
+          "saenggakboda hwolssin eoryeowosseoyo",
+          "Ternyata jauh lebih sulit daripada dugaan saya.",
+        ],
+      ]);
+
+      add("menengah", "5d. Kata penyambung cerita", [
+        ["그런데", "geureonde", "Tetapi / ngomong-ngomong"],
+        ["그래서", "geuraeseo", "Karena itu / jadi"],
+        ["그러다가", "geureodaga", "Lalu pada suatu saat"],
+        ["결국", "gyeolguk", "Akhirnya"],
+        ["사실은", "sasireun", "Sebenarnya"],
+        ["게다가", "gedaga", "Lagi pula"],
+        ["어쨌든", "eojjaetdeun", "Bagaimanapun juga"],
+      ]);
+
+      // ---------- KAMUS KATA (bagian 6) ----------
+      addW(`→=menjadi / bentuk hormatnya
+먹다=makan (biasa)
+드시다=makan (hormat)
+잡수시다=makan (hormat tinggi)
+자다=tidur (biasa)
+주무시다=tidur (hormat)
+있다=ada (biasa)
+계시다=ada (hormat, untuk orang)
+말하다=berbicara (biasa)
+말씀하시다=berbicara (hormat)
+주다=memberi (biasa)
+드리다=memberi (ke orang yang dihormati)
+사람=orang
+이름=nama
+나이=usia
+분=orang (hormat)
+성함=nama (hormat)
+연세=usia (hormat)
+안녕하십니까=selamat (sangat formal)
+처음=pertama kali
+뵙겠습니다=akan bertemu (hormat tinggi)
+회의=rapat
+자료는=materi (topik)
+메일로=lewat email
+보내드리겠습니다=akan mengirimkan (hormat)
+부장님께서=kepala bagian (subjek, hormat)
+중이십니다=sedang dalam (proses) (hormat)
+보고드릴=akan melaporkan (hormat)
+내용이=isi / hal (subjek)
+있습니다=ada (formal)
+확인=pengecekan
+후=setelah
+연락드리겠습니다=akan menghubungi (hormat)
+일정을=jadwal (objek)
+조정해도=boleh diatur ulang
+괜찮으시겠습니까=apakah tidak keberatan (hormat)
+말씀하신=yang Anda katakan (hormat)
+대로=sesuai
+진행하겠습니다=akan melanjutkan
+담당하겠습니다=akan menangani
+마감=tenggat
+기한이=batas waktu (subjek)
+언제입니까=kapan (formal)
+수고하셨습니다=terima kasih atas kerja kerasnya (formal)
+퇴근하겠습니다=akan pulang kerja
+팀장님=kepala tim (hormat)
+부장님=kepala bagian (hormat)
+님=akhiran hormat untuk jabatan
+민수=Minsu (nama contoh)
+씨=akhiran sopan setelah nama (rekan setara)
+선배님=senior (hormat)
+선배=senior
+-다고=kutipan pernyataan
+-냐고=kutipan pertanyaan
+-자고=kutipan ajakan
+-(으)라고=kutipan perintah
+-대요=katanya (pernyataan)
+-냬요=dia tanya (pertanyaan)
+-재요=katanya mengajak
+-래요=katanya menyuruh
+온대요=katanya (akan) turun
+어디=di mana / ke mana
+가냬요=dia tanya (mau) pergi
+가재요=katanya mengajak pergi
+빨리=cepat
+오래요=katanya menyuruh datang
+친구가=teman (subjek)
+그러는데=(dia) bilang begitu, (dan...)
+식당이=restoran (subjek)
+진짜=benar-benar
+맛있대요=katanya enak
+뉴스에서=di berita
+봤는데=saya lihat, (dan...)
+주부터=mulai minggu
+지하철=subway
+요금이=tarif (subjek)
+오른대요=katanya naik
+선생님이=guru (subjek)
+숙제를=PR (objek)
+내라고=suruh kumpulkan (kutipan)
+하셨어요=(dia) bilang / melakukan (hormat)
+있었던=yang pernah terjadi
+일인데=kejadiannya, (dan...)
+들어=dengarkan
+볼래요=mau coba
+처음에는=awalnya
+몰랐는데=tidak tahu, (tapi...)
+알고=tahu (lalu...)
+아는=yang (saya) kenal
+사람이었어요=(ternyata) orang
+그러다가=lalu pada suatu saat
+결국=akhirnya
+포기하고=menyerah (lalu...)
+말았어요=akhirnya (melakukan)
+결과적으로=pada akhirnya
+해결됐어요=terselesaikan
+생각보다=daripada dugaan
+훨씬=jauh lebih
+어려웠어요=(tadinya) sulit
+그런데=tetapi / ngomong-ngomong
+사실은=sebenarnya
+게다가=lagi pula
+어쨌든=bagaimanapun juga`);
+
+      // ---------- BAGIAN 7: MENENGAH · Idiom, gaul, 눈치 & 정, telepon, KakaoTalk, singkatan ----------
+      add("menengah", "6a. Idiom populer", [
+        [
+          "발이 넓다",
+          "bari neolbda",
+          "Pergaulannya luas. (harfiah: kakinya lebar)",
+        ],
+        [
+          "손이 크다",
+          "soni keuda",
+          "Royal / suka memberi banyak. (harfiah: tangannya besar)",
+        ],
+        [
+          "입이 무겁다",
+          "ibi mugeopda",
+          "Pandai menyimpan rahasia. (harfiah: mulutnya berat)",
+        ],
+        [
+          "입이 가볍다",
+          "ibi gabyeopda",
+          "Mulut ember. (harfiah: mulutnya ringan)",
+        ],
+        [
+          "눈이 높다",
+          "nuni nopda",
+          "Standarnya tinggi, pemilih. (harfiah: matanya tinggi)",
+        ],
+        [
+          "귀가 얇다",
+          "gwiga yalbda",
+          "Mudah terpengaruh omongan orang. (harfiah: telinganya tipis)",
+        ],
+        [
+          "간이 크다",
+          "gani keuda",
+          "Nekat / berani sekali. (harfiah: hatinya besar)",
+        ],
+        [
+          "하늘의 별 따기",
+          "haneurui byeol ttagi",
+          "Sangat sulit dicapai. (harfiah: memetik bintang di langit)",
+        ],
+        [
+          "식은 죽 먹기",
+          "sigeun juk meokgi",
+          "Gampang sekali. (harfiah: makan bubur dingin)",
+        ],
+        [
+          "누워서 떡 먹기",
+          "nuwoseo tteok meokgi",
+          "Mudah sekali. (harfiah: makan kue beras sambil berbaring)",
+        ],
+        ["배가 아프다", "baega apeuda", "Iri hati. (harfiah: perutnya sakit)"],
+        [
+          "시치미를 떼다",
+          "sichimireul ttaeda",
+          "Pura-pura tidak tahu. (harfiah: mencopot sichimi)",
+        ],
+      ]);
+
+      add("menengah", "6b. Ekspresi gaul (hanya untuk teman sebaya)", [
+        ["헐", "heol", "Hah? / Astaga!"],
+        ["대박", "daebak", "Keren banget / luar biasa"],
+        ["진짜?", "jinjja", "Beneran?"],
+        ["어이없다", "eoieopda", "Tidak habis pikir / konyol"],
+        ["소름 돋았어.", "soreum dodasseo", "Merinding."],
+        ["꿀잼 / 노잼", "kkuljaem / nojaem", "Seru banget / garing"],
+        ["갓생", "gatsaeng", "Hidup produktif dan teratur"],
+        ["존맛", "jonmat", "Enak banget (kasar, hanya ke teman)"],
+        ["인정", "injeong", "Setuju / diakui"],
+        ["아무튼", "amuteun", "Pokoknya / bagaimanapun"],
+        [
+          "눈치가 없다 / 눈치가 빠르다",
+          "nunchiga eopda / nunchiga ppareuda",
+          "Tidak peka / peka membaca situasi",
+        ],
+        ["쏘리", "ssori", "Maaf (dipinjam dari bahasa Inggris, santai)"],
+      ]);
+
+      add("menengah", "6c. Budaya: 눈치 dan 정", [
+        ["눈치", "nunchi", "Kemampuan membaca suasana."],
+        ["눈치 보다", "nunchi boda", "Menjaga perasaan orang."],
+        ["눈치 없다", "nunchi eopda", "Tidak peka."],
+        [
+          "정",
+          "jeong",
+          "Rasa kedekatan dan kasih sayang yang tumbuh dari waktu bersama.",
+        ],
+        ["정이 들다", "jeongi deulda", "Menjadi dekat dan sayang."],
+      ]);
+
+      add("menengah", "7a. Telepon", [
+        ["여보세요?", "yeoboseyo", "Halo? (mengangkat telepon)"],
+        [
+          "저는 [nama]인데요, [nama]씨 계세요?",
+          "jeoneun [nama]indeyo, [nama]ssi gyeseyo",
+          "Saya [nama], apakah [nama] ada?",
+        ],
+        [
+          "잠시만 기다려 주세요.",
+          "jamsiman gidaryeo juseyo",
+          "Mohon tunggu sebentar.",
+        ],
+        [
+          "지금 통화 괜찮으세요?",
+          "jigeum tonghwa gwaenchanheuseyo",
+          "Apakah sekarang tidak mengganggu untuk telepon?",
+        ],
+        [
+          "잘 안 들려요. 다시 말씀해 주시겠어요?",
+          "jal an deullyeoyo. dasi malsseumhae jusigesseoyo",
+          "Suaranya kurang jelas. Bisa diulang?",
+        ],
+        [
+          "나중에 다시 전화드릴게요.",
+          "najunge dasi jeonhwadeurilgeyo",
+          "Nanti saya telepon kembali.",
+        ],
+        [
+          "메시지 남겨 드릴까요?",
+          "mesiji namgyeo deurilkkayo",
+          "Mau meninggalkan pesan?",
+        ],
+        [
+          "전화 잘못 거셨어요.",
+          "jeonhwa jalmot geosyeosseoyo",
+          "Anda salah sambung.",
+        ],
+        [
+          "끊을게요. 들어가세요.",
+          "kkeuneulgeyo. deureogaseyo",
+          "Saya tutup ya. Selamat beristirahat.",
+        ],
+      ]);
+
+      add("menengah", "7b. Chat KakaoTalk (sopan)", [
+        [
+          "확인했습니다. 감사합니다.",
+          "hwaginhaetseumnida. gamsahamnida",
+          "Sudah saya cek. Terima kasih.",
+        ],
+        [
+          "답장이 늦어서 죄송합니다.",
+          "dapjangi neujeoseo joesonghamnida",
+          "Maaf balasnya terlambat.",
+        ],
+        [
+          "오늘 안에 보내 드리겠습니다.",
+          "oneul ane bonae deurigetseumnida",
+          "Akan saya kirim hari ini juga.",
+        ],
+        ["사진 보내 주세요.", "sajin bonae juseyo", "Tolong kirim fotonya."],
+        [
+          "도착하면 연락드릴게요.",
+          "dochakhamyeon yeollakdeurilgeyo",
+          "Kalau sudah sampai, saya kabari.",
+        ],
+        [
+          "읽씹하지 말아 주세요.",
+          "ikssiphaji mara juseyo",
+          "Jangan cuma dibaca tanpa dibalas ya.",
+        ],
+      ]);
+
+      add("menengah", "7c. Singkatan chat dengan teman", [
+        ["ㅇㅋ", "okei", "Oke (dari 오케이)"],
+        ["ㄱㅅ", "gamsa", "Makasih (dari 감사)"],
+        ["ㅊㅋ", "chukha", "Selamat (dari 축하)"],
+        ["ㅇㅇ", "eung", "Iya (dari 응)"],
+        ["ㄴㄴ", "nono", "Tidak, tidak (dari 노노)"],
+        ["ㅋㅋㅋ", "kkk", "Hahaha"],
+        ["ㅠㅠ / ㅜㅜ", "yuyu", "Ekspresi menangis / sedih"],
+        ["ㄱㄱ", "gogo", "Ayo berangkat (dari 고고)"],
+        ["넵", "nep", "Baik (lebih santun dari 네 di chat)"],
+        ["헉", "heok", "Astaga (kaget)"],
+      ]);
+
+      // ---------- KAMUS KATA (bagian 7) ----------
+      addW(`발이=kaki (subjek)
+넓다=lebar / luas
+손이=tangan (subjek)
+크다=besar
+입이=mulut (subjek)
+무겁다=berat
+가볍다=ringan
+눈이=mata (subjek)
+높다=tinggi
+귀가=telinga (subjek)
+얇다=tipis
+간이=hati / nyali (subjek)
+하늘의=milik langit
+별=bintang
+따기=memetik (nomina)
+식은=yang sudah dingin
+죽=bubur
+먹기=makan (nomina)
+누워서=sambil berbaring
+떡=kue beras
+아프다=sakit
+시치미를=sichimi (objek)
+떼다=mencopot / melepas
+헐=hah / astaga
+대박=keren banget
+어이없다=tidak habis pikir
+소름=bulu kuduk
+돋았어=(sudah) muncul
+꿀잼=seru banget
+노잼=garing
+갓생=hidup produktif
+존맛=enak banget (kasar)
+인정=diakui / setuju
+아무튼=pokoknya
+눈치가=nunchi (subjek)
+없다=tidak ada
+빠르다=cepat
+쏘리=maaf (santai)
+눈치=kepekaan membaca suasana
+보다=melihat / menjaga (눈치 보다)
+정=rasa kedekatan
+정이=jeong (subjek)
+들다=masuk / tumbuh
+여보세요=halo (di telepon)
+[nama]인데요=(saya) [nama], (nih)
+[nama]씨=Tuan/Nona [nama]
+잠시만=sebentar saja
+기다려=tunggu
+통화=percakapan telepon
+괜찮으세요=apakah baik-baik saja (hormat)
+들려요=terdengar
+말씀해=katakan (hormat)
+나중에=nanti
+전화드릴게요=akan menelepon (hormat)
+메시지=pesan
+남겨=tinggalkan
+전화=telepon
+잘못=salah
+거셨어요=(Anda) menelepon (hormat)
+끊을게요=saya tutup (telepon)
+들어가세요=silakan masuk / beristirahat
+확인했습니다=sudah saya cek
+답장이=balasan (subjek)
+늦어서=karena terlambat
+안에=di dalam (batas waktu)
+보내=kirim
+드리겠습니다=akan memberikan (hormat)
+사진=foto
+도착하면=kalau sudah tiba
+연락드릴게요=akan menghubungi (hormat)
+읽씹하지=membaca tanpa membalas
+말아=jangan
+ㅇㅋ=oke (singkatan 오케이)
+ㄱㅅ=makasih (singkatan 감사)
+ㅊㅋ=selamat (singkatan 축하)
+ㅇㅇ=iya (singkatan 응)
+ㄴㄴ=tidak (singkatan 노노)
+ㅋㅋㅋ=hahaha
+ㅠㅠ=menangis / sedih
+ㅜㅜ=menangis / sedih
+ㄱㄱ=ayo berangkat (singkatan 고고)
+넵=baik (santun, di chat)
+헉=astaga (kaget)
+보니까=setelah dilihat / ternyata`);
+
+      // ---------- BAGIAN 8: MENENGAH · Topik sosial, karier, perasaan kompleks ----------
+      add("menengah", "8a. Membahas isu sosial", [
+        [
+          "요즘 물가가 너무 올라서 생활이 힘들어요.",
+          "yojeum mulgaga neomu ollaseo saenghwari himdeureoyo",
+          "Belakangan harga naik terus, jadi hidup terasa berat.",
+        ],
+        [
+          "저출산 문제가 심각해지고 있어요.",
+          "jeochulsan munjega simgakhaejigo isseoyo",
+          "Masalah angka kelahiran rendah makin serius.",
+        ],
+        [
+          "환경 보호를 위해 일회용품을 줄여야 해요.",
+          "hwangyeong bohoreul wihae ilhoeyongpumeul jurieoya haeyo",
+          "Demi lingkungan, kita harus mengurangi barang sekali pakai.",
+        ],
+        [
+          "이 문제에 대해 어떻게 생각하세요?",
+          "i munjee daehae eotteoke saenggakhaseyo",
+          "Bagaimana pendapat Anda tentang masalah ini?",
+        ],
+        [
+          "장점도 있지만 단점도 무시할 수 없어요.",
+          "jangjeomdo itjiman danjeomdo musihal su eopseoyo",
+          "Ada kelebihannya, tapi kekurangannya tidak bisa diabaikan.",
+        ],
+        [
+          "정부의 정책이 효과가 있을지 의문이에요.",
+          "jeongbuui jeongchaegi hyogwaga isseulji uimunieyo",
+          "Saya ragu apakah kebijakan pemerintah akan efektif.",
+        ],
+      ]);
+
+      add("menengah", "8b. Pekerjaan dan karier", [
+        [
+          "이직을 고민하고 있어요.",
+          "ijigeul gominhago isseoyo",
+          "Saya sedang mempertimbangkan pindah kerja.",
+        ],
+        [
+          "워라밸이 중요해요.",
+          "worabaeri jungyohaeyo",
+          "Keseimbangan kerja dan hidup itu penting.",
+        ],
+        [
+          "야근이 너무 많아서 지쳤어요.",
+          "yageuni neomu manaseo jichyeosseoyo",
+          "Lembur terlalu banyak, jadi saya kelelahan.",
+        ],
+        [
+          "경력을 쌓고 싶어요.",
+          "gyeongnyeogeul ssako sipeoyo",
+          "Saya ingin menambah pengalaman kerja.",
+        ],
+        [
+          "면접에서 긴장해서 실수했어요.",
+          "myeonjeobeseo ginjanghaeseo silsuhaesseoyo",
+          "Saya gugup saat wawancara dan membuat kesalahan.",
+        ],
+      ]);
+
+      add("menengah", "8c. Perasaan yang kompleks", [
+        [
+          "기쁘기도 하지만 한편으로는 불안해요.",
+          "gippeugido hajiman hanpyeoneuroneun buranhaeyo",
+          "Memang senang, tapi di sisi lain juga cemas.",
+        ],
+        [
+          "섭섭하다",
+          "seopseopada",
+          "Kecewa karena orang dekat kurang memperhatikan.",
+        ],
+        [
+          "서운해요.",
+          "seounhaeyo",
+          "Hati terasa kecewa / sedih karena tidak diperhatikan.",
+        ],
+        ["부담스럽다", "budamseureopda", "Merasa terbebani / tidak enak."],
+        ["아쉬워요.", "aswiwoyo", "Sayang sekali / masih ingin lebih."],
+        ["후련해요.", "huryeonhaeyo", "Lega setelah beban hilang."],
+        [
+          "막막해요.",
+          "magmakhaeyo",
+          "Bingung dan buntu, tidak tahu harus bagaimana.",
+        ],
+        ["마음이 복잡해요.", "maeumi bokjaphaeyo", "Perasaan saya rumit."],
+        [
+          "그냥 위로가 필요해요.",
+          "geunyang wirooga piryohaeyo",
+          "Saya hanya butuh dihibur.",
+        ],
+        [
+          "힘들 때 곁에 있어 줘서 고마워요.",
+          "himdeul ttae gyeote isseo jwoseo gomawoyo",
+          "Terima kasih sudah menemani saat saya kesulitan.",
+        ],
+      ]);
+
+      // ---------- KAMUS KATA (bagian 8) ----------
+      addW(`요즘=belakangan ini
+물가가=harga barang (subjek)
+올라서=karena naik
+생활이=kehidupan (subjek)
+힘들어요=berat / susah
+저출산=angka kelahiran rendah
+문제가=masalah (subjek)
+심각해지고=makin serius
+환경=lingkungan
+보호를=perlindungan (objek)
+위해=demi / untuk
+일회용품을=barang sekali pakai (objek)
+줄여야=harus dikurangi
+해요=lakukan / harus
+문제에=pada masalah
+대해=tentang
+생각하세요=berpikir (hormat)
+장점도=kelebihan juga
+단점도=kekurangan juga
+무시할=mengabaikan
+없어요=tidak ada / tidak bisa
+정부의=milik pemerintah
+정책이=kebijakan (subjek)
+효과가=efek / hasil (subjek)
+있을지=apakah akan ada
+의문이에요=(adalah) keraguan
+이직을=pindah kerja (objek)
+고민하고=sedang bimbang
+워라밸이=keseimbangan kerja-hidup (subjek)
+중요해요=penting
+야근이=lembur (subjek)
+많아서=karena banyak
+지쳤어요=kelelahan
+경력을=pengalaman kerja (objek)
+쌓고=menumpuk / menambah (lalu...)
+면접에서=di wawancara
+긴장해서=karena gugup
+실수했어요=berbuat kesalahan
+기쁘기도=memang senang
+하지만=tetapi
+한편으로는=di sisi lain
+불안해요=cemas
+섭섭하다=kecewa (orang dekat kurang perhatian)
+서운해요=sedih / kecewa karena kurang diperhatikan
+부담스럽다=terbebani
+아쉬워요=sayang sekali
+마음이=hati (subjek)
+복잡해요=rumit
+위로가=penghiburan (subjek)
+필요해요=butuh
+힘들=sedang susah
+때=saat
+곁에=di sisi
+줘서=karena memberi
+고마워요=terima kasih`);
+
+      // ---------- BAGIAN 8: MENENGAH · Topik sosial, karier, perasaan kompleks ----------
+      add("menengah", "8a. Membahas isu sosial", [
+        [
+          "요즘 물가가 너무 올라서 생활이 힘들어요.",
+          "yojeum mulgaga neomu ollaseo saenghwari himdeureoyo",
+          "Belakangan harga naik terus, jadi hidup terasa berat.",
+        ],
+        [
+          "저출산 문제가 심각해지고 있어요.",
+          "jeochulsan munjega simgakhaejigo isseoyo",
+          "Masalah angka kelahiran rendah makin serius.",
+        ],
+        [
+          "환경 보호를 위해 일회용품을 줄여야 해요.",
+          "hwangyeong bohoreul wihae ilhoeyongpumeul jurieoya haeyo",
+          "Demi lingkungan, kita harus mengurangi barang sekali pakai.",
+        ],
+        [
+          "이 문제에 대해 어떻게 생각하세요?",
+          "i munjee daehae eotteoke saenggakhaseyo",
+          "Bagaimana pendapat Anda tentang masalah ini?",
+        ],
+        [
+          "장점도 있지만 단점도 무시할 수 없어요.",
+          "jangjeomdo itjiman danjeomdo musihal su eopseoyo",
+          "Ada kelebihannya, tapi kekurangannya tidak bisa diabaikan.",
+        ],
+        [
+          "정부의 정책이 효과가 있을지 의문이에요.",
+          "jeongbuui jeongchaegi hyogwaga isseulji uimunieyo",
+          "Saya ragu apakah kebijakan pemerintah akan efektif.",
+        ],
+      ]);
+
+      add("menengah", "8b. Pekerjaan dan karier", [
+        [
+          "이직을 고민하고 있어요.",
+          "ijigeul gominhago isseoyo",
+          "Saya sedang mempertimbangkan pindah kerja.",
+        ],
+        [
+          "워라밸이 중요해요.",
+          "worabaeri jungyohaeyo",
+          "Keseimbangan kerja dan hidup itu penting.",
+        ],
+        [
+          "야근이 너무 많아서 지쳤어요.",
+          "yageuni neomu manaseo jichyeosseoyo",
+          "Lembur terlalu banyak, jadi saya kelelahan.",
+        ],
+        [
+          "경력을 쌓고 싶어요.",
+          "gyeongnyeogeul ssako sipeoyo",
+          "Saya ingin menambah pengalaman kerja.",
+        ],
+        [
+          "면접에서 긴장해서 실수했어요.",
+          "myeonjeobeseo ginjanghaeseo silsuhaesseoyo",
+          "Saya gugup saat wawancara dan membuat kesalahan.",
+        ],
+      ]);
+
+      add("menengah", "8c. Perasaan yang kompleks", [
+        [
+          "기쁘기도 하지만 한편으로는 불안해요.",
+          "gippeugido hajiman hanpyeoneuroneun buranhaeyo",
+          "Memang senang, tapi di sisi lain juga cemas.",
+        ],
+        [
+          "섭섭하다",
+          "seopseopada",
+          "Kecewa karena orang dekat kurang memperhatikan.",
+        ],
+        [
+          "서운해요.",
+          "seounhaeyo",
+          "Hati terasa kecewa / sedih karena tidak diperhatikan.",
+        ],
+        ["부담스럽다", "budamseureopda", "Merasa terbebani / tidak enak."],
+        ["아쉬워요.", "aswiwoyo", "Sayang sekali / masih ingin lebih."],
+        ["후련해요.", "huryeonhaeyo", "Lega setelah beban hilang."],
+        [
+          "막막해요.",
+          "magmakhaeyo",
+          "Bingung dan buntu, tidak tahu harus bagaimana.",
+        ],
+        ["마음이 복잡해요.", "maeumi bokjaphaeyo", "Perasaan saya rumit."],
+        [
+          "그냥 위로가 필요해요.",
+          "geunyang wirooga piryohaeyo",
+          "Saya hanya butuh dihibur.",
+        ],
+        [
+          "힘들 때 곁에 있어 줘서 고마워요.",
+          "himdeul ttae gyeote isseo jwoseo gomawoyo",
+          "Terima kasih sudah menemani saat saya kesulitan.",
+        ],
+      ]);
+
+      // ---------- BAGIAN 9: MENENGAH-ATAS · TOPIK II Level 4 (Fase 9) ----------
+      add("menengah", "9a. Pengandaian dan Tata Bahasa Level 4", [
+        [
+          "시간이 있다면 여행을 가고 싶다.",
+          "sigani itdamyeon yeohaengeul gago sipda",
+          "Jika ada waktu, saya ingin bepergian.",
+        ],
+        [
+          "실패하더라도 포기하지 않겠다.",
+          "silpaehadeorado pogihaji anketda",
+          "Meskipun gagal, saya tidak akan menyerah.",
+        ],
+        [
+          "그 사람이 거짓말을 했을 리가 없다.",
+          "geu sarami geojitmareul haesseul riga eopda",
+          "Tidak mungkin orang itu berbohong.",
+        ],
+        [
+          "사용자가 점점 늘어 간다.",
+          "sayongjaga jeomjeom neureo ganda",
+          "Pengguna semakin bertambah terus.",
+        ],
+        [
+          "신발을 신은 채로 들어갔다.",
+          "sinbareul sineun chaero deureogatda",
+          "Masuk dalam keadaan tetap memakai sepatu.",
+        ],
+        [
+          "친구가 도와준 덕분에 합격했다.",
+          "chinguga dowajun deokbune hapgyeokhaetda",
+          "Berkat bantuan teman, saya lulus.",
+        ],
+        [
+          "비가 많이 왔으므로 행사를 취소했다.",
+          "biga mani wasseumuro haengsareul chwisohaetda",
+          "Karena hujan deras, acara dibatalkan.",
+        ],
+        [
+          "작년에 비해 매출이 늘었다.",
+          "jangnyeone bihae maechuri neureotda",
+          "Penjualan meningkat dibandingkan tahun lalu.",
+        ],
+      ]);
+
+      add("menengah", "9b. Kosakata Sino-Korea & Berita Level 4", [
+        [
+          "재택근무는 출퇴근 시간을 줄일 수 있다.",
+          "jaetaekgeunmuneun chultoegeun siganeul juril su itda",
+          "Kerja dari rumah dapat mengurangi waktu perjalanan kerja.",
+        ],
+        [
+          "A시는 대중교통 요금을 올릴 예정이다.",
+          "esi-neun daejunggyotong yogeumeul ollil yejeongida",
+          "Kota A berencana menaikkan tarif transportasi umum.",
+        ],
+        [
+          "경제적 문제와 사회적 중요성",
+          "gyeongjejeok munjewa sahoejeok jungyoseong",
+          "Masalah ekonomi dan urgensi sosial.",
+        ],
+        [
+          "개인 정보가 유출될 위험이 있다.",
+          "gaein jeongboga yuchuldoel wiheomi itda",
+          "Ada risiko informasi pribadi bocor.",
+        ],
+      ]);
+
+      // ---------- KAMUS KATA (Bagian 8 & Bagian 9) ----------
+      addW(`요즘=belakangan ini
+물가가=harga barang (subjek)
+올라서=karena naik
+생활이=kehidupan (subjek)
+힘들어요=berat / susah
+저출산=angka kelahiran rendah
+문제가=masalah (subjek)
+심각해지고=makin serius
+환경=lingkungan
+보호를=perlindungan (objek)
+위해=demi / untuk
+일회용품을=barang sekali pakai (objek)
+줄여야=harus dikurangi
+해요=lakukan / harus
+문제에=pada masalah
+대해=tentang
+생각하세요=berpikir (hormat)
+장점도=kelebihan juga
+단점도=kekurangan juga
+무시할=mengabaikan
+없어요=tidak ada / tidak bisa
+정부의=milik pemerintah
+정책이=kebijakan (subjek)
+효과가=efek / hasil (subjek)
+있을지=apakah akan ada
+의문이에요=(adalah) keraguan
+이직을=pindah kerja (objek)
+고민하고=sedang bimbang
+워라밸이=keseimbangan kerja-hidup (subjek)
+중요해요=penting
+야근이=lembur (subjek)
+많아서=karena banyak
+지쳤어요=kelelahan
+경력을=pengalaman kerja (objek)
+쌓고=menumpuk / menambah (lalu...)
+면접에서=di wawancara
+긴장해서=karena gugup
+실수했어요=berbuat kesalahan
+기쁘기도=memang senang
+하지만=tetapi
+한편으로는=di sisi lain
+불안해요=cemas
+섭섭하다=kecewa (orang dekat kurang perhatian)
+서운해요=sedih / kecewa karena kurang diperhatikan
+부담스럽다=terbebani
+아쉬워요=sayang sekali
+마음이=hati (subjek)
+복잡해요=rumit
+위로가=penghiburan (subjek)
+필요해요=butuh
+힘들=sedang susah
+때=saat
+곁에=di sisi
+줘서=karena memberi
+고마워요=terima kasih
+만약=seandainya
+가정하다=mengandaikan
+실패하다=gagal
+포기하다=menyerah
+거짓말=kebohongan
+사용자=pengguna
+점점=semakin
+행사=acara
+취소되다=dibatalkan
+가능성=kemungkinan
+원인=penyebab
+결과=hasil
+영향=pengaruh
+필요하다=perlu
+결심하다=bertekad
+늦잠=bangun kesiangan
+지각하다=terlambat masuk
+사고=kecelakaan
+막히다=macet / tersumbat
+매출=penjualan
+합격하다=lulus
+유출되다=bocor
+위험=bahaya
+의존하다=bergantung
+대신하다=menggantikan
+일자리=lapangan kerja
+정책=kebijakan
+마련하다=menyiapkan
+태도=sikap
+누리다=menikmati
+재택근무=kerja dari rumah
+출퇴근=pergi dan pulang kerja
+의사소통=komunikasi
+살리다=memanfaatkan / menghidupkan
+요금=tarif
+인상=kenaikan
+인건비=biaya tenaga kerja
+밝히다=mengungkapkan
+규칙적=teratur
+안정적=stabil
+취직하다=mendapat pekerjaan
+용기=keberanian
+그만두다=berhenti
+오히려=justru / malah
+대중교통=transportasi umum
+경제적=secara ekonomi
+중요성=urgensi / pentingnya
+세계화=globalisasi
+성공률=tingkat keberhasilan
+경쟁력=daya saing
+책임감=rasa tanggung jawab
+소비자=konsumen
+전문가=pakar / ahli
+발표=presentasi / pengumuman
+대출=peminjaman
+반납=pengembalian
+연체료=denda keterlambatan
+권하다=menyarankan
+발효=fermentasi
+김장=tradisi membuat kimchi
+영수증=struk / kwitansi
+마감=tenggat / deadline
+예상=perkiraan / prediksi
+반대하다=menentang / tidak setuju
+집중하다=berkonsentrasi
+비율=rasa / persentase
+증가하다=meningkat / bertambah
+응답=jawaban / respon
+추세=tren / kecenderungan
+편리하다=praktis / nyaman
+발달하다=berkembang
+지나치게=secara berlebihan
+조절하다=mengatur / mengendalikan
+풍요롭다=makmar / sejahtera
+현명하다=bijaksana`);
+
+      // =========================================================================
+      // DATA KOSAKATA LENGKAP INTERAKTIF (DASAR - MENENGAH ATAS)
+      // =========================================================================
+
+      // ---------- BAGIAN 1: SALAM & UNGKAPAN SEHARI-HARI ----------
+      add("dasar", "1a. Ungkapan & Salam Utama", [
+        ["안녕하세요.", "annyeonghaseyo", "Halo / Selamat pagi/siang/malam."],
+        [
+          "안녕히 계세요.",
+          "annyeonghi gyeseyo",
+          "Selamat tinggal (kepada orang yang tinggal).",
+        ],
+        [
+          "안녕히 가세요.",
+          "annyeonghi gaseyo",
+          "Selamat jalan (kepada orang yang pergi).",
+        ],
+        ["감사합니다.", "gamsahamnida", "Terima kasih (formal)."],
+        ["고맙습니다.", "gomawseumnida", "Terima kasih."],
+        ["죄송합니다.", "joesonghamnida", "Mohon maaf (formal)."],
+        ["미안합니다.", "mianhamnida", "Maaf."],
+        ["괜찮아요.", "gwaenchanayo", "Tidak apa-apa / Baik-baik saja."],
+        ["네 / 예", "ne / ye", "Ya."],
+        ["아니요", "aniyo", "Tidak / Bukan."],
+        [
+          "처음 뵙겠습니다.",
+          "cheoeum boepgetseumnida",
+          "Senang pertama kali bertemu dengan Anda.",
+        ],
+        ["반갑습니다.", "bangapseumnida", "Senang berkenalan dengan Anda."],
+        [
+          "잘 부탁드립니다.",
+          "jal 부탁deurimnida",
+          "Mohon bimbingan / bantuannya.",
+        ],
+        ["축하합니다!", "chukahamnida", "Selamat!"],
+        [
+          "잘 먹겠습니다.",
+          "jal meokgetseumnida",
+          "Selamat makan (saya akan makan dengan baik).",
+        ],
+        [
+          "잘 먹었습니다.",
+          "jal meogeotseumnida",
+          "Terima kasih atas makanannya.",
+        ],
+        [
+          "주말 잘 보내세요.",
+          "jumal jal bonaeseyo",
+          "Selamat menikmati akhir pekan.",
+        ],
+      ]);
+
+      // ---------- BAGIAN 2: ANGKA, WAKTU & HARI ----------
+      add("dasar", "2a. Waktu dan Tanggal", [
+        ["오늘", "oneul", "Hari ini."],
+        ["내일", "naeil", "Besok."],
+        ["어제", "eoje", "Kemarin."],
+        ["모레", "more", "Lusa."],
+        ["지금", "jigeum", "Sekarang."],
+        ["매일", "maeil", "Setiap hari."],
+        ["주말", "jumal", "Akhir pekan."],
+        ["월요일", "woryoil", "Hari Senin."],
+        ["화요일", "hwayoil", "Hari Selasa."],
+        ["수요일", "suyoil", "Hari Rabu."],
+        ["목요일", "mogyoil", "Hari Kamis."],
+        ["금요일", "geumyoil", "Hari Jumat."],
+        ["토요일", "toyoil", "Hari Sabtu."],
+        ["일요일", "iryoil", "Hari Minggu."],
+        ["오전", "ojeon", "AM / Pagi hari."],
+        ["오후", "ohu", "PM / Sore hari."],
+        ["시", "si", "Jam / Pukul."],
+        ["분", "bun", "Menit."],
+        ["초", "cho", "Detik."],
+      ]);
+
+      // ---------- BAGIAN 3: TEMPAT & POSISI ----------
+      add("dasar", "3a. Lokasi dan Bangunan", [
+        ["집", "jip", "Rumah."],
+        ["학교", "hakgyo", "Sekolah."],
+        ["회사", "hoesa", "Perusahaan / Kantor."],
+        ["식당", "sikdang", "Restoran / Tempat makan."],
+        ["병원", "byeongwon", "Rumah sakit."],
+        ["약국", "yakguk", "Apotek."],
+        ["은행", "eonhaeng", "Bank."],
+        ["공항", "gonghang", "Bandara."],
+        ["역", "yeok", "Stasiun."],
+        ["화장실", "hwajangsil", "Toilet / Kamar mandi."],
+        ["시장", "sijang", "Pasar."],
+        ["마트", "mateu", "Supermarket."],
+        ["도서관", "doseogwan", "Perpustakaan."],
+        ["우체국", "ucheguk", "Kantor pos."],
+        ["경찰서", "gyeongchalseo", "Kantor polisi."],
+        ["위", "wi", "Atas."],
+        ["아래 / 밑", "arae / mit", "Bawah."],
+        ["앞", "ap", "Depan."],
+        ["뒤", "dwi", "Belakang."],
+        ["안 / 속", "an / sok", "Dalam."],
+        ["밖", "bak", "Luar."],
+        ["옆", "yeop", "Samping."],
+        ["사이", "sai", "Antara."],
+      ]);
+
+      // ---------- BAGIAN 4: KATA KERJA SEHARI-HARI ----------
+      add("dasar", "4a. Aktivitas Harian", [
+        ["가다", "gada", "Pergi."],
+        ["오다", "oda", "Datang."],
+        ["먹다", "meokda", "Makan."],
+        ["마시다", "masida", "Minum."],
+        ["자다", "jada", "Tidur."],
+        ["일어나다", "ireonada", "Bangun tidur."],
+        ["보다", "boda", "Melihat / Menonton."],
+        ["듣다", "deutda", "Mendengar."],
+        ["읽다", "ikda", "Membaca."],
+        ["쓰다", "sseuda", "Menulis / Memakai / Pahit."],
+        ["말하다", "malhada", "Berbicara."],
+        ["공부하다", "gongbuhada", "Belajar."],
+        ["일하다", "ilhada", "Bekerja."],
+        ["쉬다", "swida", "Istirahat."],
+        ["만나다", "mannada", "Bertemu."],
+        ["사다", "sada", "Membeli."],
+        ["팔다", "palda", "Menjual."],
+        ["알다", "alda", "Tahu / Mengerti."],
+        ["모르다", "moreuda", "Tidak tahu."],
+        ["하다", "hada", "Melakukan."],
+      ]);
+
+      // ---------- BAGIAN 5: KATA SIFAT DASAR ----------
+      add("dasar", "5a. Sifat dan Kondisi", [
+        ["크다", "keuda", "Besar."],
+        ["작다", "jakda", "Kecil."],
+        ["많다", "manta", "Banyak."],
+        ["적다", "jeokda", "Sedikit."],
+        ["좋다", "joda", "Bagus / Baik."],
+        ["나쁘다", "nappeuda", "Buruk / Jelek."],
+        ["비싸다", "bissada", "Mahal."],
+        ["싸다", "ssada", "Murah."],
+        ["어렵다", "eoryeopda", "Sulit / Susah."],
+        ["쉽다", "swipda", "Mudah."],
+        ["바쁘다", "bappeuda", "Sibuk."],
+        ["재미있다", "jaemiitda", "Seru / Menarik."],
+        ["재미없다", "jaemieopda", "Tidak seru / Membosankan."],
+        ["예쁘다", "yeppeuda", "Cantik."],
+        ["가깝다", "gakkapda", "Dekat."],
+        ["멀다", "meolda", "Jauh."],
+        ["맛있다", "masitda", "Enak."],
+        ["맛없다", "maseopda", "Tidak enak."],
+      ]);
+
+      // ---------- BAGIAN 6: DUNIA KERJA & PROFESI ----------
+      add("menengah", "6a. Kantor dan Pekerjaan", [
+        ["사장님", "sajangnim", "Direktur / Pemilik perusahaan."],
+        ["부장님", "bujangnim", "Kepala bagian / Manager."],
+        ["팀장님", "timjangnim", "Ketua tim."],
+        ["동료", "dongryeo", "Rekan kerja."],
+        ["회의", "hoeui", "Rapat / Meeting."],
+        ["출근하다", "chulgeunhada", "Berangkat kerja."],
+        ["퇴근하다", "toegeunhada", "Pulang kerja."],
+        ["야근하다", "yageunhada", "Lembur kerja malam."],
+        ["출장", "chuljang", "Dinas luar kota."],
+        ["휴가", "hyuga", "Cuti / Libur kerja."],
+        ["월급", "wolgeup", "Gaji bulanan."],
+        ["계약서", "gyeyakseo", "Surat kontrak."],
+        ["서류", "seoryu", "Dokumen / Berkas."],
+        ["업무", "eommu", "Tugas / Pekerjaan kantor."],
+        ["결재", "gyeoljae", "Persetujuan / Otorisasi."],
+        ["이직", "ijik", "Pindah kerja."],
+        ["면접", "myeonjeop", "Wawancara kerja."],
+        ["경력", "gyeongnyeok", "Pengalaman kerja."],
+      ]);
+
+      // ---------- BAGIAN 7: ISU SOSIAL & LINGKUNGAN ----------
+      add("menengah", "7a. Opini dan Masyarakat", [
+        ["사회", "sahoe", "Masyarakat / Sosial."],
+        ["경제", "gyeongje", "Ekonomi."],
+        ["정부", "jeongbu", "Pemerintah."],
+        ["정책", "jeongchaek", "Kebijakan."],
+        ["물가", "mulga", "Harga barang."],
+        ["환경", "hwangyeong", "Lingkungan."],
+        ["보호", "boho", "Perlindungan."],
+        ["문제", "munje", "Masalah."],
+        ["원인", "wonin", "Penyebab."],
+        ["결과", "gyeolgwa", "Hasil."],
+        ["영향", "yeonghyang", "Pengaruh."],
+        ["장점", "jangjeom", "Kelebihan / Keunggulan."],
+        ["단점", "danjeom", "Kekurangan / Kelemahan."],
+        ["효과", "hyogwa", "Efek / Efektivitas."],
+        ["저출산", "jeochulsan", "Rendahnya angka kelahiran."],
+        ["일회용품", "ilhoeyongpum", "Barang sekali pakai."],
+      ]);
+
+      // ---------- BAGIAN 8: PERASAAN & KONDISI PSIKOLOGIS ----------
+      add("menengah", "8a. Emosi dan Perasaan Kompleks", [
+        ["기쁘다", "gippeuda", "Senang / Gembira."],
+        ["슬프다", "seulp euda", "Sedih."],
+        ["화나다", "hwanada", "Marah."],
+        ["불안하다", "buranhada", "Cemas / Gelisah."],
+        ["걱정되다", "geokjeongdoeda", "Khawatir."],
+        ["답답하다", "dapdaphada", "Sesak / Frustrasi."],
+        ["섭섭하다", "seopseophada", "Kecewa karena kurang diperhatikan."],
+        ["서운하다", "seounhada", "Kecewa / Sedih hati."],
+        ["부담스럽다", "budamseureopda", "Merasa terbebani."],
+        ["아쉽다", "aswipda", "Sayang sekali / Kurang puas."],
+        ["후련하다", "huryeonhada", "Lega."],
+        ["막막하다", "magmakhada", "Buntu / Bingung."],
+        ["복잡하다", "bokjaphada", "Rumit / Kalut."],
+        ["외롭다", "oeropda", "Kesepian."],
+        ["지치다", "jichida", "Kelelahan / Kehabisan energi."],
+      ]);
+
+      // ---------- BAGIAN 9: TOPIK II LEVEL 4 (FASE 9) ----------
+      add("menengah", "9a. Pengandaian dan Tata Bahasa Lanjut", [
+        ["만약", "manyak", "Seandainya."],
+        ["가정하다", "gajeonghada", "Mengandaikan."],
+        ["실패하다", "silpaehada", "Gagal."],
+        ["포기하다", "pogihada", "Menyerah."],
+        ["거짓말", "geojitmal", "Kebohongan."],
+        ["사용자", "sayongja", "Pengguna."],
+        ["점점", "jeomjeom", "Semakin."],
+        ["행사", "haengsa", "Acara."],
+        ["취소되다", "chwisodoeda", "Dibatalkan."],
+        ["가능성", "ganeungseong", "Kemungkinan."],
+        ["필요하다", "pilyohada", "Perlu / Membutuhkan."],
+        ["결심하다", "gyeolsimhada", "Bertekad."],
+        ["지각하다", "jigakhada", "Terlambat."],
+        ["사고", "sago", "Kecelakaan."],
+        ["막히다", "makhida", "Macet / Tersumbat."],
+        ["매출", "maechul", "Penjualan."],
+        ["합격하다", "hapgyeokhada", "Lulus."],
+        ["유출되다", "yuchuldoeda", "Bocor."],
+        ["위험", "wiheom", "Bahaya."],
+        ["의존하다", "uijonhada", "Bergantung."],
+        ["대신하다", "daesinhada", "Menggantikan."],
+        ["일자리", "iljari", "Lapangan kerja."],
+        ["마련하다", "maryeonhada", "Menyiapkan."],
+        ["태도", "taedo", "Sikap."],
+        ["누리다", "nurida", "Menikmati."],
+      ]);
+
+      add("menengah", "9b. Kosakata Sino-Korea & Berita L4", [
+        ["재택근무", "jaetaekgeunmu", "Kerja dari rumah (WFH)."],
+        ["출퇴근", "chultoegeun", "Pergi dan pulang kerja."],
+        ["의사소통", "uisasotong", "Komunikasi."],
+        ["살리다", "sallida", "Memanfaatkan / Menyelamatkan."],
+        ["요금", "yogeum", "Tarif / Biaya."],
+        ["인상", "insang", "Kenaikan."],
+        ["인건비", "ingeonbi", "Biaya tenaga kerja."],
+        ["밝히다", "balkhida", "Mengungkapkan."],
+        ["규칙적", "gyuchikjeok", "Teratur."],
+        ["안정적", "anjeongjeok", "Stabil."],
+        ["취직하다", "chwijikhada", "Mendapat pekerjaan."],
+        ["용기", "yonggi", "Keberanian."],
+        ["그만두다", "geumanduda", "Berhenti."],
+        ["오히려", "ohiryeo", "Malah / Justru."],
+        ["대중교통", "daejunggyotong", "Transportasi umum."],
+        ["경제적", "gyeongjejeok", "Secara ekonomi."],
+        ["중요성", "jungyoseong", "Pentingnya / Urgensi."],
+        ["세계화", "segyehwa", "Globalisasi."],
+        ["성공률", "seonggongnyul", "Tingkat keberhasilan."],
+        ["경쟁력", "gyeongjaengnyeok", "Daya saing."],
+        ["책임감", "chaekimgam", "Rasa tanggung jawab."],
+        ["소비자", "sobija", "Konsumen."],
+        ["전문가", "jeonmunga", "Pakar / Ahli."],
+        ["발표", "balpyo", "Presentasi / Pengumuman."],
+        ["대출", "daechul", "Peminjaman."],
+        ["반납", "bannap", "Pengembalian."],
+        ["연체료", "yeoncheryo", "Denda keterlambatan."],
+        ["권하다", "gwonhada", "Menyarankan."],
+        ["발효", "balhyo", "Fermentasi."],
+        ["김장", "gimjang", "Tradisi membuat kimchi."],
+        ["영수증", "yeongsujeung", "Struk / Kwitansi."],
+        ["마감", "magam", "Tenggat waktu / Deadline."],
+        ["예상", "yesang", "Perkiraan / Prediksi."],
+        ["반대하다", "bandaehada", "Menentang / Tidak setuju."],
+        ["집중하다", "jipjunghada", "Berkonsentrasi."],
+        ["비율", "biyul", "Rasio / Persentase."],
+        ["증가하다", "jeunggahada", "Meningkat / Bertambah."],
+        ["응답", "eungdap", "Jawaban / Respon."],
+        ["추세", "chuse", "Tren / Kecenderungan."],
+        ["편리하다", "pyeonrihada", "Praktis / Nyaman."],
+        ["발달하다", "baldaldada", "Berkembang."],
+        ["지나치게", "jinachige", "Secara berlebihan."],
+        ["조절하다", "jojeolhada", "Mengatur / Mengendalikan."],
+        ["풍요롭다", "pungyoropda", "Makmur / Sejahtera."],
+        ["현명하다", "hyeonmyeonghada", "Bijaksana."],
+      ]);
+
+      // ---------- KAMUS KATA PENCARIAN CEPAT (addW) ----------
+      addW(`안녕하세요=Halo / Selamat pagi/siang/malam
+감사합니다=Terima kasih
+죄송합니다=Mohon maaf
+네=Ya
+아니요=Tidak
+사람=Orang
+한국=Korea
+집=Rumah
+학교=Sekolah
+책=Buku
+물=Air
+밥=Nasi / Makanan
+친구=Teman
+선생님=Guru
+오늘=Hari ini
+내일=Besok
+어제=Kemarin
+모레=Lusa
+지금=Sekarang
+매일=Setiap hari
+주말=Akhir pekan
+월요일=Hari Senin
+화요일=Hari Selasa
+수요일=Hari Rabu
+목요일=Hari Kamis
+금요일=Hari Jumat
+토요일=Hari Sabtu
+일요일=Hari Minggu
+오전=AM / Pagi hari
+오후=PM / Sore hari
+시=Jam / Pukul
+분=Menit
+초=Detik
+회사=Perusahaan / Kantor
+식당=Restoran / Tempat makan
+병원=Rumah sakit
+약국=Apotek
+은행=Bank
+공항=Bandara
+역=Stasiun
+화장실=Toilet / Kamar mandi
+시장=Pasar
+마트=Supermarket
+도서관=Perpustakaan
+우체국=Kantor pos
+경찰서=Kantor polisi
+위=Atas
+아래=Bawah
+밑=Bawah
+앞=Depan
+뒤=Belakang
+안=Dalam
+속=Dalam
+밖=Luar
+옆=Samping
+사이=Antara
+가다=Pergi
+오다=Datang
+먹다=Makan
+마시다=Minum
+자다=Tidur
+일어나다=Bangun tidur
+보다=Melihat / Menonton
+듣다=Mendengar
+읽다=Membaca
+쓰다=Menulis / Memakai / Pahit
+말하다=Berbicara
+공부하다=Belajar
+일하다=Bekerja
+쉬다=Istirahat
+만나다=Bertemu
+사다=Membeli
+팔다=Menjual
+알다=Tahu / Mengerti
+모르다=Tidak tahu
+하다=Melakukan
+크다=Besar
+작다=Kecil
+많다=Banyak
+적다=Sedikit
+좋다=Bagus / Baik
+나쁘다=Buruk / Jelek
+비싸다=Mahal
+싸다=Murah
+어렵다=Sulit / Susah
+쉽다=Mudah
+바쁘다=Sibuk
+재미있다=Seru / Menarik
+재미없다=Tidak seru / Membosankan
+예쁘다=Cantik
+가깝다=Dekat
+멀다=Jauh
+맛있다=Enak
+맛없다=Tidak enak
+사장님=Direktur / Pemilik perusahaan
+부장님=Kepala bagian / Manager
+팀장님=Ketua tim
+동료=Rekan kerja
+회의=Rapat / Meeting
+출근하다=Berangkat kerja
+퇴근하다=Pulang kerja
+야근하다=Lembur kerja malam
+출장=Dinas luar kota
+휴가=Cuti / Libur kerja
+월급=Gaji bulanan
+계약서=Surat kontrak
+서류=Dokumen / Berkas
+업무=Tugas / Pekerjaan kantor
+결재=Persetujuan / Otorisasi
+이직=Pindah kerja
+면접=Wawancara kerja
+경력=Pengalaman kerja
+사회=Masyarakat / Sosial
+경제=Ekonomi
+정부=Pemerintah
+정책=Kebijakan
+물가=Harga barang
+환경=Lingkungan
+보호=Perlindungan
+문제=Masalah
+원인=Penyebab
+결과=Hasil
+영향=Pengaruh
+장점=Kelebihan / Keunggulan
+단점=Kekurangan / Kelemahan
+효과=Efek / Efektivitas
+저출산=Rendahnya angka kelahiran
+일회용품=Barang sekali pakai
+기쁘다=Senang / Gembira
+슬프다=Sedih
+화나다=Marah
+불안하다=Cemas / Gelisah
+걱정되다=Khawatir
+답답하다=Sesak / Frustrasi
+섭섭하다=Kecewa karena kurang diperhatikan
+서운하다=Kecewa / Sedih hati
+부담스럽다=Merasa terbebani
+아쉽다=Sayang sekali / Kurang puas
+후련하다=Lega
+막막하다=Buntu / Bingung
+복잡하다=Rumit / Kalut
+외롭다=Kesepian
+지치다=Kelelahan / Kehabisan energi
+만약=Seandainya
+가정하다=Mengandaikan
+실패하다=Gagal
+포기하다=Menyerah
+거짓말=Kebohongan
+사용자=Pengguna
+점점=Semakin
+행사=Acara
+취소되다=Dibatalkan
+가능성=Kemungkinan
+필요하다=Perlu / Membutuhkan
+결심하다=Bertekad
+지각하다=Terlambat
+사고=Kecelakaan
+막히다=Macet / Tersumbat
+매출=Penjualan
+합격하다=Lulus
+유출되다=Bocor
+위험=Bahaya
+의존하다=Bergantung
+대신하다=Menggantikan
+일자리=Lapangan kerja
+마련하다=Menyiapkan
+태도=Sikap
+누리다=Menikmati
+재택근무=Kerja dari rumah (WFH)
+출퇴근=Pergi dan pulang kerja
+의사소통=Komunikasi
+살리다=Memanfaatkan / Menyelamatkan
+요금=Tarif / Biaya
+인상=Kenaikan
+인건비=Biaya tenaga kerja
+밝히다=Mengungkapkan
+규칙적=Teratur
+안정적=Stabil
+취직하다=Mendapat pekerjaan
+용기=Keberanian
+그만두다=Berhenti
+오히려=Malah / Justru
+대중교통=Transportasi umum
+경제적=Secara ekonomi
+중요성=Pentingnya / Urgensi
+세계화=Globalisasi
+성공률=Tingkat keberhasilan
+경쟁력=Daya saing
+책임감=Rasa tanggung jawab
+소비자=Konsumen
+전문가=Pakar / Ahli
+발표=Presentasi / Pengumuman
+대출=Peminjaman
+반납=Pengembalian
+연체료=Denda keterlambatan
+권하다=Menyarankan
+발효=Fermentasi
+김장=Tradisi membuat kimchi
+영수증=Struk / Kwitansi
+마감=Tenggat waktu / Deadline
+예상=Perkiraan / Prediksi
+반대하다=Menentang / Tidak setuju
+집중하다=Berkonsentrasi
+비율=Rasio / Persentase
+증가하다=Meningkat / Bertambah
+응답=Jawaban / Respon
+추세=Tren / Kecenderungan
+편리하다=Praktis / Nyaman
+발달하다=Berkembang
+지나치게=Secara berlebihan
+조절하다=Mengatur / Mengendalikan
+풍요롭다=Makmur / Sejahtera
+현명하다=Bijaksana`);
+
+      // =========================================================================
+      // TAMBAHAN KOSAKATA LENGKAP BATCH 2 (BELUM ADA SEBELUMNYA)
+      // =========================================================================
+
+      // ---------- BAGIAN 10: KESEHATAN, GEJALA & MEDIS ----------
+      add("dasar", "10a. Kesehatan dan Gejala Penyakit", [
+        ["감기", "gamgi", "Flu / Demam."],
+        ["열", "yeol", "Demam / Panas tubuh."],
+        ["기침", "gichim", "Batuk."],
+        ["두통", "dutong", "Sakit kepala."],
+        ["복통", "boktong", "Sakit perut."],
+        ["주사", "jusa", "Suntikan."],
+        ["처방전", "cheobangjeon", "Resep obat."],
+        ["치료하다", "chiryo-hada", "Mengobati / Merawat."],
+        ["수술하다", "susul-hada", "Operasi."],
+        ["입원하다", "ibwon-hada", "Rawat inap di rumah sakit."],
+        ["퇴원하다", "toewon-hada", "Keluar dari rumah sakit."],
+        [
+          "건강검진",
+          "geongang-geomjin",
+          "Pemeriksaan kesehatan (Medical Check-up).",
+        ],
+      ]);
+
+      // ---------- BAGIAN 11: TEKNOLOGI, INTERNET & MEDIA ----------
+      add("menengah", "11a. Teknologi dan Komunikasi", [
+        ["인터넷", "inteonet", "Internet."],
+        ["스마트폰", "seumateupon", "Smartphone / HP pintar."],
+        ["전화하다", "jeonhwa-hada", "Menelepon."],
+        ["문자", "munja", "Pesan teks / SMS."],
+        ["검색하다", "geomsaek-hada", "Mencari (search di internet)."],
+        ["다운로드", "daunrodeu", "Unduh / Download."],
+        ["설치하다", "seolchi-hada", "Menginstal / Memasang."],
+        ["접속하다", "jeobsok-hada", "Terhubung / Login / Mengakses."],
+        ["정보", "jeongbo", "Informasi."],
+        ["비밀번호", "bimil-beonho", "Kata sandi / Password."],
+        ["계정", "gyejeong", "Akun."],
+        ["충전하다", "chungjeon-hada", "Mengisi daya / Baterai / Saldo."],
+      ]);
+
+      // ---------- BAGIAN 12: HUKUM, LINGKUNGAN & BUDAYA ----------
+      add("menengah", "12a. Hukum dan Kebudayaan", [
+        ["법률", "beomnyul", "Hukum / Undang-undang."],
+        ["규칙", "gyuchik", "Aturan."],
+        ["위반하다", "wiban-hada", "Melanggar."],
+        ["지키다", "jikida", "Menaati / Menjaga."],
+        ["범죄", "beomjoe", "Kejahatan / Kriminalitas."],
+        ["피해자", "pihaeja", "Korban."],
+        ["가해자", "gahaeja", "Pelaku kejahatan."],
+        ["전통", "jeontong", "Tradisi."],
+        ["문화체험", "munhwa-cheoheom", "Pengalaman budaya."],
+        ["유적지", "yujeokji", "Situs bersejarah."],
+        ["기후변화", "gihu-byeonha", "Perubahan iklim."],
+        ["재활용", "jaehwalyong", "Daur ulang."],
+      ]);
+
+      // ---------- BAGIAN 13: AKADEMIK, UJIAN & TOPIK II ----------
+      add("menengah", "13a. Pembelajaran Akademik & Ujian", [
+        ["시험", "siheom", "Ujian / Tes."],
+        ["성적", "seongjeok", "Nilai / Hasil ujian."],
+        ["장학금", "janghakgeum", "Beasiswa."],
+        ["수업", "sueop", "Kelas / Pelajaran."],
+        ["전공", "jeongong", "Jurusan kuliah."],
+        ["학위", "hagwi", "Gelar akademik."],
+        ["졸업하다", "joreob-hada", "Lulus sekolah / kuliah."],
+        ["입학하다", "iphak-hada", "Masuk sekolah / kuliah."],
+        ["논문", "nonmun", "Skripsi / Tesis / Jurnal ilmiah."],
+        ["연구하다", "yeongu-hada", "Mereset / Meneliti."],
+        ["지원하다", "jiwon-hada", "Mendaftar / Mengajukan diri."],
+        ["자격증", "jagyeokjeung", "Sertifikat kualifikasi."],
+      ]);
+
+      // ---------- KAMUS KATA PENCARIAN CEPAT (addW Batch 2) ----------
+      addW(`감기=Flu / Demam
+열=Demam / Panas tubuh
+기침=Batuk
+두통=Sakit kepala
+복통=Sakit perut
+주사=Suntikan
+처방전=Resep obat
+치료하다=Mengobati / Merawat
+수술하다=Operasi
+입원하다=Rawat inap di rumah sakit
+퇴원하다=Keluar dari rumah sakit
+건강검진=Pemeriksaan kesehatan (Medical Check-up)
+인터넷=Internet
+스마트폰=Smartphone / HP pintar
+전화하다=Menelepon
+문자=Pesan teks / SMS
+검색하다=Mencari (search di internet)
+다운로드=Unduh / Download
+설치하다=Menginstal / Memasang
+접속하다=Terhubung / Login / Mengakses
+정보=Informasi
+비밀번호=Kata sandi / Password
+계정=Akun
+충전하다=Mengisi daya / Baterai / Saldo
+법률=Hukum / Undang-undang
+규칙=Aturan
+위반하다=Melanggar
+지키다=Menaati / Menjaga
+범죄=Kejahatan / Kriminalitas
+피해자=Korban
+가해자=Pelaku kejahatan
+전통=Tradisi
+문화체험=Pengalaman budaya
+유적지=Situs bersejarah
+기후변화=Perubahan iklim
+재활용=Daur ulang
+시험=Ujian / Tes
+성적=Nilai / Hasil ujian
+장학금=Beasiswa
+수업=Kelas / Pelajaran
+전공=Jurusan kuliah
+학위=Gelar akademik
+졸업하다=Lulus sekolah / kuliah
+입학하다=Masuk sekolah / kuliah
+논문=Skripsi / Tesis / Jurnal ilmiah
+연구하다=Mereset / Meneliti
+지원하다=Mendaftar / Mengajukan diri
+자격증=Sertifikat kualifikasi`);
+
+      // =========================================================================
+      // TAMBAHAN KOSAKATA BATCH 3 (BAHASA INFORMAL / BANMAL & PERCAKAPAN SANTAI)
+      // =========================================================================
+
+      // ---------- BAGIAN 14: KATA KERJA & SIFAT BENTUK BANMAL (INFORMAL) ----------
+      add("dasar", "14a. Kata Kerja & Sifat Banmal Sehari-hari", [
+        ["야", "ya", "Hei / Woi (panggilan ke teman sebaya/lebih muda)."],
+        ["응", "eung", "Ya / Ho-oh (banmal dari 네)."],
+        ["어", "eo", "Ya / Oh (variasi banmal dari 네)."],
+        ["아니", "ani", "Enggak / Enggak kok (banmal dari 아니요)."],
+        ["고마워", "gomawo", "Makasih ya (banmal dari 고맙습니다)."],
+        ["미안해", "mianhae", "Maaf ya (banmal dari 미안합니다)."],
+        ["괜찮아", "gwaenchana", "Gak apa-apa / Santai aja."],
+        ["잘 자", "jal ja", "Selamat tidur (banmal dari 안녕히 주무세요)."],
+        ["잘 가", "jal ga", "Dadaah / Selamat jalan."],
+        ["해", "hae", "Lakukan / Kerjain (banmal dari 해요)."],
+        ["하지 마", "haji ma", "Jangan lakukan / Jangan gitu."],
+        ["가지 마", "gaji ma", "Jangan pergi."],
+        ["먹어", "meogeo", "Makan nih / Makanlah."],
+        ["봐", "bwa", "Lihat nih / Coba lihat."],
+        ["알았어", "arasseo", "Paham / Oke, ngerti."],
+        ["몰라", "molla", "Gak tahu / Bodo amat."],
+        ["진짜?", "jinjja", "Beneran? / Masa sih?"],
+        ["정말?", "jeongmal", "Sungguhan?"],
+        ["대박!", "daebak", "Keren banget! / Luar biasa!"],
+        ["헐!", "heol", "Waduh! / Astaga! (ekspresi kaget/heran)."],
+      ]);
+
+      // ---------- BAGIAN 15: SLANG, UNGKAPAN EMOSI & CHATTING (반말/속어) ----------
+      add("menengah", "15a. Bahasa Gaul & Chatting Korea", [
+        ["짱", "jjang", "Paling mantap / Juara."],
+        ["남친", "namchin", "Pacar cowok (singkatan dari 남자친구)."],
+        ["여친", "yeochin", "Pacar cewek (singkatan dari 여자친구)."],
+        ["남사친", "namsachin", "Teman akrab cowok (bukan pacar)."],
+        ["여사친", "yeosachin", "Teman akrab cewek (bukan pacar)."],
+        ["심쿵", "simkung", "Bikin berdebar / Bikin deg-degan."],
+        ["멘붕", "menbung", "Mental breakdown / Stres berat / Buntu."],
+        ["솔까말", "solkkamal", "Jujur aja ya... (솔직히 까놓고 말해서)."],
+        ["답정너", "dapjeongneo", "Nanya tapi udah punya jawaban sendiri."],
+        ["TMI", "tmi", "Terlalu banyak info gak penting (Too Much Info)."],
+        ["ㅋㅋㅋ", "kkk", "Wkwkwk / Tertawa."],
+        ["ㅎㅎㅎ", "hhh", "Hahaha / Tertawa halus."],
+        ["ㅠㅠ / ㅜㅜ", "yuyu", "Nangis / Sedih."],
+        ["ㄱㅅ", "gseu", "Makasih (singkatan dari 감사)."],
+        ["ㄴㄴ", "neuneu", "No no / Enggak (singkatan dari 노노)."],
+        ["ㅇㅇ", "eungeung", "Iya / Ho-oh (singkatan dari 응)."],
+        ["ㅇㅋ", "oke", "Oke (singkatan dari 오케이)."],
+      ]);
+
+      // ---------- KAMUS KATA PENCARIAN CEPAT (addW Batch 3 - Banmal) ----------
+      addW(`야=Hei / Woi
+응=Ya / Ho-oh
+어=Ya / Oh
+아니=Enggak / Enggak kok
+고마워=Makasih ya
+미안해=Maaf ya
+괜찮아=Gak apa-apa / Santai aja
+잘 자=Selamat tidur
+잘 가=Dadaah / Selamat jalan
+해=Lakukan / Kerjain
+하지 마=Jangan lakukan
+가지 마=Jangan pergi
+먹어=Makan nih
+봐=Lihat nih
+알았어=Paham / Oke, ngerti
+몰라=Gak tahu / Bodo amat
+진짜=Beneran? / Masa sih?
+정말=Sungguhan?
+대박=Keren banget / Luar biasa
+헐=Waduh / Astaga
+짱=Paling mantap / Juara
+남친=Pacar cowok
+여친=Pacar cewek
+남사친=Teman akrab cowok
+여사친=Teman akrab cewek
+심쿵=Bikin berdebar / Deg-degan
+멘붕=Mental breakdown / Stres berat
+솔까말=Jujur aja ya
+답정너=Nanya tapi udah punya jawaban sendiri
+TMI=Info gak penting / Kelebihan info`);

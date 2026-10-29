@@ -2,1592 +2,4155 @@
 <html lang="id">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Kamus Interaktif Lengkap - K-Learning Platform</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Kamus Korea · K-Learning Platform</title>
+
+    <!-- Favicon Logo Hangul -->
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23e11d48'/><text x='50%' y='55%' dominant-baseline='central' text-anchor='middle' fill='white' font-size='60' font-family='sans-serif' font-weight='bold'>한</text></svg>"
+    />
+
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap"
       rel="stylesheet"
     />
-
     <style>
       :root {
-        --bg-main: #f8fafc;
-        --panel-bg: #ffffff;
-        --primary: #1e293b;
-        --accent: #e11d48;
-        --border-color: #e2e8f0;
-        --text-muted: #64748b;
-        --text-main: #1e293b;
-        --accent-light: #fff1f2;
+        --navy: #1e293b;
+        --teal: #264653;
+        --red: #e11d48;
+        --green: #10b981;
+        --bg: #f8fafc;
+        --card: #fff;
+        --ink: #0f172a;
+        --mute: #64748b;
+        --line: #e5e7eb;
       }
-
       * {
         box-sizing: border-box;
-        margin: 0;
-        padding: 0;
       }
-
       body {
-        font-family: "Inter", "Noto Sans KR", sans-serif;
-        background-color: var(--bg-main);
-        color: var(--text-main);
-        height: 100vh;
-        overflow: hidden;
-        display: flex;
-        flex-direction: column;
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: "Inter", "Noto Sans KR", system-ui, sans-serif;
+        line-height: 1.45;
+        font-size: 14px;
+      }
+      button,
+      input,
+      select {
+        font: inherit;
+      }
+      button {
+        cursor: pointer;
       }
 
-      header {
-        background-color: var(--panel-bg);
-        border-bottom: 1px solid var(--border-color);
-        padding: 0 24px;
-        height: 60px;
+      /* NAVBAR */
+      .top {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        height: 52px;
+        background: #fff;
+        border-bottom: 1px solid var(--line);
         display: flex;
         align-items: center;
-        justify-content: space-between;
-        flex-shrink: 0;
+        gap: 12px;
+        padding: 0 16px;
       }
-
       .brand {
         display: flex;
         align-items: center;
-        gap: 12px;
-        font-weight: 700;
-        font-size: 1.1rem;
-        color: var(--primary);
-        text-decoration: none;
-      }
-
-      .brand-logo {
-        background: var(--accent);
-        color: white;
-        width: 32px;
-        height: 32px;
-        border-radius: 6px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-weight: bold;
-      }
-
-      nav {
-        display: flex;
-        gap: 16px;
-        align-items: center;
-      }
-
-      nav a {
-        text-decoration: none;
-        color: var(--text-muted);
-        font-weight: 500;
-        font-size: 0.9rem;
-      }
-
-      nav a:hover {
-        color: var(--accent);
-      }
-
-      .nav-dropdown {
-        padding: 6px 12px;
-        border: 1px solid var(--border-color);
-        border-radius: 6px;
-        font-weight: 600;
-        font-size: 0.85rem;
-        background: white;
-        color: var(--primary);
-        outline: none;
-        cursor: pointer;
-      }
-
-      .timer-widget {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        background: #f1f5f9;
-        padding: 4px 12px;
-        border-radius: 6px;
-        border: 1px solid var(--border-color);
-      }
-
-      .timer-display {
-        font-family: monospace;
-        font-size: 1.1rem;
-        font-weight: 700;
-        color: var(--primary);
-      }
-
-      .timer-btn {
-        background: var(--primary);
-        color: white;
-        border: none;
-        padding: 4px 10px;
-        border-radius: 4px;
-        font-size: 0.8rem;
-        cursor: pointer;
-      }
-
-      .timer-btn.stop {
-        background: var(--accent);
-      }
-
-      .workspace {
-        display: flex;
-        flex-direction: column;
-        flex: 1;
-        overflow: hidden;
-        padding: 16px 24px;
-        gap: 16px;
-      }
-
-      .builder-card {
-        background: var(--panel-bg);
-        border: 1px solid var(--border-color);
-        border-radius: 12px;
-        padding: 16px;
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-      }
-
-      .builder-header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-      }
-
-      .builder-title {
-        font-size: 1rem;
-        font-weight: 700;
-        color: var(--primary);
-        display: flex;
-        align-items: center;
-        gap: 8px;
-      }
-
-      .sentence-canvas {
-        min-height: 56px;
-        background: #f8fafc;
-        border: 2px dashed var(--border-color);
-        border-radius: 8px;
-        padding: 10px 14px;
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        gap: 8px;
-      }
-
-      .sentence-placeholder {
-        color: var(--text-muted);
-        font-size: 0.88rem;
-        font-style: italic;
-      }
-
-      .token-chip {
-        background: var(--primary);
-        color: white;
-        padding: 6px 12px;
-        border-radius: 20px;
-        font-size: 0.9rem;
-        font-weight: 600;
-        display: flex;
-        align-items: center;
-        gap: 6px;
-        animation: fadeIn 0.2s ease-in-out;
-      }
-
-      .token-chip.particle {
-        background: var(--accent);
-      }
-
-      .token-chip.custom {
-        background: #0284c7;
-      }
-
-      .token-remove {
-        cursor: pointer;
-        font-weight: bold;
-        opacity: 0.8;
-      }
-
-      .token-remove:hover {
-        opacity: 1;
-      }
-
-      .builder-controls {
-        display: flex;
-        flex-direction: column;
         gap: 10px;
-      }
-
-      .custom-input-row {
-        display: flex;
-        gap: 8px;
-        align-items: center;
-      }
-
-      .custom-input {
-        flex: 1;
-        padding: 8px 12px;
-        border: 1px solid var(--border-color);
-        border-radius: 6px;
-        font-size: 0.88rem;
-        outline: none;
-      }
-
-      .custom-input:focus {
-        border-color: #0284c7;
-      }
-
-      .particles-bar {
-        display: flex;
-        align-items: center;
-        gap: 6px;
-        flex-wrap: wrap;
-      }
-
-      .particle-btn {
-        background: #f1f5f9;
-        border: 1px solid var(--border-color);
-        border-radius: 16px;
-        padding: 4px 10px;
-        font-size: 0.78rem;
-        font-weight: 600;
-        color: var(--primary);
-        cursor: pointer;
-        transition: all 0.2s;
-      }
-
-      .particle-btn:hover {
-        background: var(--accent-light);
-        border-color: var(--accent);
-        color: var(--accent);
-      }
-
-      .action-btns {
-        display: flex;
-        gap: 8px;
-      }
-
-      .btn-primary {
-        background: var(--primary);
-        color: white;
-        border: none;
-        padding: 8px 14px;
-        border-radius: 6px;
-        font-size: 0.85rem;
-        font-weight: 600;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        gap: 6px;
-      }
-
-      .btn-primary:hover {
-        background: #0f172a;
-      }
-
-      .btn-custom-add {
-        background: #0284c7;
-        color: white;
-        border: none;
-        padding: 8px 14px;
-        border-radius: 6px;
-        font-size: 0.85rem;
-        font-weight: 600;
-        cursor: pointer;
-      }
-
-      .btn-custom-add:hover {
-        background: #0369a1;
-      }
-
-      .btn-outline {
-        background: white;
-        color: var(--primary);
-        border: 1px solid var(--border-color);
-        padding: 8px 12px;
-        border-radius: 6px;
-        font-size: 0.85rem;
-        font-weight: 600;
-        cursor: pointer;
-      }
-
-      .btn-outline:hover {
-        background: #f1f5f9;
-      }
-
-      .dictionary-container {
-        flex: 1;
-        background: var(--panel-bg);
-        border: 1px solid var(--border-color);
-        border-radius: 12px;
-        display: flex;
-        flex-direction: column;
-        overflow: hidden;
-      }
-
-      .dictionary-filter-bar {
-        padding: 14px 16px;
-        border-bottom: 1px solid var(--border-color);
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-        background: #f8fafc;
-      }
-
-      .search-box-row {
-        display: flex;
-        gap: 10px;
-      }
-
-      .search-input {
-        flex: 1;
-        padding: 10px 14px;
-        border: 1px solid var(--border-color);
-        border-radius: 8px;
-        font-size: 0.9rem;
-        outline: none;
-      }
-
-      .search-input:focus {
-        border-color: var(--accent);
-      }
-
-      .cat-tabs {
-        display: flex;
-        gap: 8px;
-        overflow-x: auto;
-        padding-bottom: 4px;
-      }
-
-      .cat-tab {
-        padding: 6px 14px;
-        border: 1px solid var(--border-color);
-        background: white;
-        border-radius: 20px;
-        font-size: 0.8rem;
-        font-weight: 600;
-        cursor: pointer;
-        white-space: nowrap;
-        color: var(--text-muted);
-      }
-
-      .cat-tab.active {
-        background: var(--primary);
-        color: white;
-        border-color: var(--primary);
-      }
-
-      .vocab-grid {
-        flex: 1;
-        overflow-y: auto;
-        padding: 16px;
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-        gap: 12px;
-      }
-
-      .vocab-card-item {
-        border: 1px solid var(--border-color);
-        border-radius: 10px;
-        padding: 14px;
-        background: #ffffff;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        gap: 10px;
-        transition:
-          transform 0.15s,
-          box-shadow 0.15s;
-      }
-
-      .vocab-card-item:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
-      }
-
-      .card-top {
-        display: flex;
-        align-items: flex-start;
-        justify-content: space-between;
-      }
-
-      .card-kr {
         font-weight: 700;
         font-size: 1.05rem;
-        color: var(--primary);
+        white-space: nowrap;
       }
-
-      .card-latin {
-        font-size: 0.8rem;
-        color: var(--accent);
-        font-weight: 600;
-        font-style: italic;
-      }
-
-      .card-id {
-        font-size: 0.88rem;
-        color: var(--text-muted);
-        margin-top: 4px;
-      }
-
-      .card-actions {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-top: 6px;
-        padding-top: 8px;
-        border-top: 1px solid #f1f5f9;
-      }
-
-      .btn-audio-circle {
-        background: #f1f5f9;
-        border: 1px solid var(--border-color);
-        border-radius: 50%;
+      .logo {
         width: 32px;
         height: 32px;
+        border-radius: 8px;
+        background: var(--red);
+        color: #fff;
+        display: grid;
+        place-items: center;
+        font-weight: 700;
+        font-size: 0.9rem;
+        font-family: "Noto Sans KR", sans-serif;
+      }
+
+      /* HALAMAN */
+      .wrap {
+        max-width: 100%;
+        margin: 0 auto;
+        padding: 0 16px 80px;
+      }
+      .head {
+        padding: 12px 0 8px;
+      }
+      .searchrow {
+        display: flex;
+        gap: 6px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+      .sbox {
+        position: relative;
+        flex: 1;
+        min-width: 180px;
+      }
+      #q {
+        width: 100%;
+        padding: 8px 32px 8px 12px;
+        border: 1.5px solid var(--line);
+        border-radius: 10px;
+        font-size: 0.95rem;
+        background: #fff;
+        font-family: "Noto Sans KR", "Inter", sans-serif;
+      }
+      #q:focus {
+        outline: 0;
+        border-color: var(--red);
+      }
+      #clr {
+        position: absolute;
+        right: 6px;
+        top: 50%;
+        transform: translateY(-50%);
+        border: 0;
+        background: #f1f5f9;
+        border-radius: 50%;
+        width: 22px;
+        height: 22px;
+        color: var(--mute);
+        font-size: 0.75rem;
+      }
+      .tg {
+        background: var(--navy);
+        color: #fff;
+        border: 1px solid var(--navy);
+        padding: 6px 10px;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 0.76rem;
+        opacity: 0.55;
+        white-space: nowrap;
+      }
+      .tg.on {
+        opacity: 1;
+        background: var(--red);
+        border-color: var(--red);
+      }
+      .tg.plain {
+        background: #fff;
+        color: var(--ink);
+        border-color: var(--line);
+        opacity: 1;
+      }
+      .tg.plain.on {
+        background: var(--navy);
+        color: #fff;
+        border-color: var(--navy);
+      }
+      .tools {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+        align-items: center;
+        margin-top: 8px;
+      }
+      select {
+        padding: 5px 8px;
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        background: #fff;
+        font-size: 0.78rem;
+      }
+      .rate {
+        font-size: 0.75rem;
+        color: var(--mute);
         display: flex;
         align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        font-size: 0.85rem;
-        transition: all 0.2s;
+        gap: 4px;
       }
-
-      .btn-audio-circle:hover {
-        background: var(--accent-light);
-        border-color: var(--accent);
+      .stat {
+        background: #fff;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        padding: 8px 12px;
+        margin: 10px 0 12px;
       }
-
-      .btn-add-sentence {
-        background: #f1f5f9;
-        border: 1px solid var(--border-color);
-        border-radius: 6px;
-        padding: 4px 10px;
+      .stat .row {
+        display: flex;
+        justify-content: space-between;
         font-size: 0.78rem;
+        color: var(--mute);
+        font-weight: 500;
+        margin-bottom: 4px;
+      }
+      .prog {
+        height: 8px;
+        background: #eef2f7;
+        border-radius: 99px;
+        overflow: hidden;
+      }
+      .prog i {
+        display: block;
+        height: 100%;
+        width: 0;
+        background: linear-gradient(90deg, var(--red), #fb7185);
+        transition: width 0.3s;
+      }
+
+      /* KARTU KATA */
+      .grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 8px;
+        align-items: start;
+      }
+      .card {
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        padding: 10px 12px;
+        transition: box-shadow 0.15s;
+      }
+      .card:hover {
+        box-shadow: 0 3px 10px rgba(15, 23, 42, 0.06);
+      }
+      .card.done {
+        border-color: #a7f3d0;
+        background: #f0fdf9;
+      }
+      .main {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 2px 8px;
+        align-items: center;
+      }
+      .ko {
+        font:
+          500 1.25rem "Noto Sans KR",
+          sans-serif;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        flex-wrap: wrap;
+      }
+      .badge {
+        font:
+          600 0.62rem "Inter",
+          sans-serif;
+        padding: 1px 6px;
+        border-radius: 99px;
+        background: #eef2f7;
+        color: var(--mute);
+      }
+      .badge.d {
+        background: #dbeafe;
+        color: #1d4ed8;
+      }
+      .badge.m {
+        background: #fce7f3;
+        color: #be185d;
+      }
+      .rom {
+        color: var(--red);
+        font-style: italic;
+        font-size: 0.8rem;
+        font-weight: 500;
+        min-height: 1.1em;
+      }
+      .id {
+        color: var(--mute);
+        font-size: 0.88rem;
+      }
+      .id.none {
+        color: #cbd5e1;
+        font-style: italic;
+      }
+      .side {
+        grid-column: 2;
+        grid-row: 1/4;
+        display: flex;
+        gap: 6px;
+        align-items: center;
+      }
+      .btn-s {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        border: 1px solid var(--line);
+        background: #f1f5f9;
+        border-radius: 6px;
+        padding: 5px 10px;
         font-weight: 600;
-        color: var(--primary);
+        font-size: 0.78rem;
+        color: var(--ink);
+      }
+      .btn-s:before {
+        content: "";
+        width: 10px;
+        height: 10px;
+        border-radius: 2px;
+        background: var(--green);
+      }
+      .done .btn-s {
+        background: var(--green);
+        border-color: var(--green);
+        color: #fff;
+      }
+      .done .btn-s:before {
+        background: #fff;
+      }
+      .ib {
+        width: 32px;
+        height: 32px;
+        border-radius: 6px;
+        border: 1px solid var(--line);
+        background: #f1f5f9;
+        font-size: 0.88rem;
+      }
+      .ib:hover {
+        background: #e2e8f0;
+      }
+      .ib.on {
+        background: var(--navy);
+        color: #fff;
+        border-color: var(--navy);
+      }
+      .ib small {
+        font-size: 0.65rem;
+        font-weight: 700;
+      }
+      .exs {
+        margin-top: 8px;
+        border-top: 1px dashed var(--line);
+        padding-top: 8px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .ex1 {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 0 8px;
+        align-items: center;
+      }
+      .exk {
+        font:
+          500 0.95rem "Noto Sans KR",
+          sans-serif;
+      }
+      .exk mark {
+        background: #fee2e8;
+        color: inherit;
+        border-radius: 3px;
+        padding: 0 2px;
+      }
+      .exr {
+        color: var(--red);
+        font-style: italic;
+        font-size: 0.75rem;
+      }
+      .exi {
+        color: var(--mute);
+        font-size: 0.8rem;
+      }
+      .say {
+        grid-row: 1/4;
+        grid-column: 2;
+        width: 28px;
+        height: 28px;
+        border-radius: 6px;
+        border: 1px solid var(--line);
+        background: #f1f5f9;
+      }
+      .exsec {
+        font-size: 0.65rem;
+        color: var(--mute);
+      }
+      .more {
+        display: block;
+        margin: 14px auto 0;
+        border: 1px solid var(--line);
+        background: #fff;
+        border-radius: 8px;
+        padding: 8px 18px;
+        font-weight: 600;
+        font-size: 0.82rem;
+      }
+      .more:hover {
+        background: var(--navy);
+        color: #fff;
+      }
+      .empty {
+        text-align: center;
+        color: var(--mute);
+        padding: 40px 16px;
+        background: #fff;
+        border: 1px dashed var(--line);
+        border-radius: 10px;
+        font-size: 0.88rem;
+      }
+
+      /* BLUR */
+      .hide-ko .card .ko:not(.rev),
+      .hide-rom .card .rom:not(.rev),
+      .hide-id .card .id:not(.rev) {
+        filter: blur(6px);
         cursor: pointer;
-        transition: all 0.2s;
+        user-select: none;
       }
 
-      .btn-add-sentence:hover {
-        background: var(--primary);
-        color: white;
+      /* KEYBOARD POPUP (bisa digeser) */
+      #kb {
+        position: fixed;
+        left: 0;
+        top: 0;
+        z-index: 60;
+        width: min(480px, 92vw);
+        background: #e2e8f0;
+        border: 1px solid #94a3b8;
+        border-radius: 14px;
+        box-shadow: 0 20px 50px rgba(15, 23, 42, 0.35);
+        display: none;
+        overflow: hidden;
+      }
+      body.kbopen #kb {
+        display: block;
+      }
+      #kbh {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 10px;
+        background: var(--navy);
+        color: #fff;
+        cursor: grab;
+        touch-action: none;
+        user-select: none;
+        -webkit-user-select: none;
+      }
+      #kbh.drag {
+        cursor: grabbing;
+      }
+      #kbh .grip {
+        letter-spacing: 2px;
+        opacity: 0.6;
+        font-size: 0.9rem;
+      }
+      #kbh .tt {
+        font-weight: 600;
+        font-size: 0.8rem;
+      }
+      #kbh .prev {
+        flex: 1;
+        min-width: 0;
+        text-align: center;
+        font:
+          500 0.9rem "Noto Sans KR",
+          sans-serif;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        opacity: 0.9;
+      }
+      #kbx {
+        border: 0;
+        background: rgba(255, 255, 255, 0.18);
+        color: #fff;
+        border-radius: 6px;
+        width: 26px;
+        height: 26px;
+        font-size: 0.85rem;
+      }
+      #kbx:hover {
+        background: var(--red);
+      }
+      .kbin {
+        padding: 8px 8px 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        user-select: none;
+        -webkit-user-select: none;
+      }
+      .kr {
+        display: flex;
+        gap: 4px;
+        justify-content: center;
+      }
+      .kk {
+        flex: 1;
+        max-width: 46px;
+        height: 40px;
+        border: 0;
+        border-radius: 6px;
+        background: #fff;
+        box-shadow: 0 2px 0 #94a3b8;
+        font:
+          500 1.1rem "Noto Sans KR",
+          sans-serif;
+        color: var(--ink);
+        touch-action: manipulation;
+      }
+      .kk:active {
+        transform: translateY(2px);
+        box-shadow: none;
+        background: #fee2e8;
+      }
+      .kk.fn {
+        flex: none;
+        max-width: none;
+        padding: 0 12px;
+        font:
+          600 0.8rem "Inter",
+          sans-serif;
+        background: #cbd5e1;
+      }
+      .kk.sp {
+        flex: 1;
+        max-width: none;
+        background: #fff;
+        font:
+          500 0.8rem "Inter",
+          sans-serif;
+      }
+      .kk.fn.on {
+        background: var(--red);
+        color: #fff;
       }
 
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-          transform: scale(0.95);
-        }
-        to {
-          opacity: 1;
-          transform: scale(1);
+      @media (max-width: 560px) {
+        .kk {
+          height: 36px;
+          font-size: 1rem;
         }
       }
     </style>
   </head>
   <body>
-    <header>
-      <a href="welcome.html" class="brand">
-        <div class="brand-logo">한</div>
-        <span>K-Learning Platform</span>
-      </a>
-
-      <div class="timer-widget">
-        <span
-          style="font-size: 0.75rem; color: var(--text-muted); font-weight: 600"
-          >POMODORO</span
-        >
-        <div class="timer-display" id="timer">25:00</div>
-        <button class="timer-btn" id="start-timer-btn" onclick="toggleTimer()">
-          Start
-        </button>
-        <button
-          class="timer-btn"
-          onclick="resetTimer()"
-          style="background: #cbd5e1; color: #334155"
-        >
-          Reset
-        </button>
+    <header class="top">
+      <div class="brand">
+        <span class="logo">한</span><span>Kamus Korea</span>
       </div>
-
-      <nav>
-        <select
-          class="nav-dropdown"
-          onchange="if (this.value) window.location.href = this.value;"
-        >
-          <option value="" disabled selected>Pilih Fase Belajar...</option>
-          <option value="fase1.html">Fase 1: Fondasi</option>
-          <option value="fase2.html">Fase 2: Perluasan</option>
-          <option value="fase3.html">Fase 3: Kalimat Kompleks</option>
-          <option value="fase4.html">Fase 4: Tata Bahasa Lanjutan</option>
-          <option value="fase5.html">Fase 5: Simulasi TOPIK I</option>
-          <option value="fase6.html">Fase 6: Menengah Awal</option>
-          <option value="fase7.html">Fase 7: TOPIK II</option>
-        </select>
-
-        <select
-          class="nav-dropdown"
-          style="border-color: rgba(225, 29, 72, 0.4)"
-          onchange="if (this.value) window.location.href = this.value;"
-        >
-          <option value="" disabled>⚡ Fitur & Alat...</option>
-          <option value="latihan.html">📝 Latihan Soal</option>
-          <option value="kamus.html" selected>📖 Kamus Interaktif</option>
-          <option value="tatabahasa.html">📘 Tata Bahasa & Dialog</option>
-          <option value="game.html">🎮 Break Game</option>
-        </select>
-        <a href="welcome.html">Home</a>
-      </nav>
     </header>
 
-    <div class="workspace">
-      <!-- Area Penyusun Kalimat -->
-      <div class="builder-card">
-        <div class="builder-header">
-          <div class="builder-title">
-            <span>✨</span>
-            <span>Penyusun Kalimat Percakapan</span>
+    <div class="wrap">
+      <div class="head">
+        <div class="searchrow">
+          <div class="sbox">
+            <input
+              id="q"
+              type="text"
+              placeholder="Cari kata Korea / arti Indonesia / romanisasi…"
+              autocomplete="off"
+              autocapitalize="off"
+              spellcheck="false"
+            />
+            <button id="clr" title="Hapus">✕</button>
           </div>
-          <div class="action-btns">
-            <button class="btn-primary" onclick="speakAssembledSentence()">
-              🔊 Dengarkan Kalimat
-            </button>
-            <button class="btn-outline" onclick="copySentence()">
-              📋 Salin
-            </button>
-            <button class="btn-outline" onclick="removeLastToken()">
-              🧹 Hapus
-            </button>
-            <button class="btn-outline" onclick="clearCanvas()">
-              ❌ Reset
-            </button>
-          </div>
-        </div>
-
-        <div class="sentence-canvas" id="sentence-canvas">
-          <span class="sentence-placeholder" id="sentence-placeholder"
-            >Klik kosakata di bawah atau ketik kata manual untuk menyusun
-            kalimat...</span
+          <button class="tg plain" id="kbt" title="Keyboard Hangul melayang">
+            ⌨ Keyboard
+          </button>
+          <button
+            class="tg plain"
+            id="hm"
+            title="Ketik huruf latin di keyboard fisik, hasilnya Hangul"
           >
+            한 Ketik
+          </button>
         </div>
-
-        <div class="builder-controls">
-          <!-- Input Teks Korea Custom/Manual -->
-          <div class="custom-input-row">
+        <div class="tools">
+          <button class="tg" data-h="ko">Sembunyi Hangul</button>
+          <button class="tg" data-h="rom">Sembunyi Romanisasi</button>
+          <button class="tg" data-h="id">Sembunyi Arti</button>
+          <button class="tg plain" id="todo">Belum hafal</button>
+          <button class="tg plain" id="mean">Ada arti saja</button>
+          <select id="sort">
+            <option value="abc">Urut abjad</option>
+            <option value="urut">Urut kemunculan</option>
+          </select>
+          <label class="rate"
+            >Speed
             <input
-              type="text"
-              class="custom-input"
-              id="custom-text-input"
-              placeholder="Ketik kata/kalimat Korea buatan sendiri jika tidak ada di kamus..."
-              onkeypress="handleCustomKeyPress(event)"
-            />
-            <button class="btn-custom-add" onclick="addCustomText()">
-              + Masukkan ke Kalimat
-            </button>
-          </div>
-
-          <!-- Partikel & Akhiran (Semua Dipisah) -->
-          <div class="particles-bar">
-            <span
-              style="
-                font-size: 0.8rem;
-                font-weight: 700;
-                color: var(--text-muted);
-              "
-              >Partikel:</span
-            >
-            <button class="particle-btn" onclick="addParticle('은')">은</button>
-            <button class="particle-btn" onclick="addParticle('는')">는</button>
-            <button class="particle-btn" onclick="addParticle('이')">이</button>
-            <button class="particle-btn" onclick="addParticle('가')">가</button>
-            <button class="particle-btn" onclick="addParticle('을')">을</button>
-            <button class="particle-btn" onclick="addParticle('를')">를</button>
-            <button class="particle-btn" onclick="addParticle('에')">에</button>
-            <button class="particle-btn" onclick="addParticle('에서')">
-              에서
-            </button>
-            <button class="particle-btn" onclick="addParticle('하고')">
-              하고
-            </button>
-            <button class="particle-btn" onclick="addParticle('와')">와</button>
-            <button class="particle-btn" onclick="addParticle('과')">과</button>
-            <button class="particle-btn" onclick="addParticle('도')">도</button>
-            <button class="particle-btn" onclick="addParticle('의')">의</button>
-            <span
-              style="
-                font-size: 0.8rem;
-                font-weight: 700;
-                color: var(--text-muted);
-                margin-left: 6px;
-              "
-              >Akhiran:</span
-            >
-            <button class="particle-btn" onclick="addParticle('입니다')">
-              입니다
-            </button>
-            <button class="particle-btn" onclick="addParticle('예요')">
-              예요
-            </button>
-            <button class="particle-btn" onclick="addParticle('이에요')">
-              이에요
-            </button>
-            <button class="particle-btn" onclick="addParticle('습니까')">
-              습니까
-            </button>
-            <button class="particle-btn" onclick="addParticle('ㅂ니까')">
-              ㅂ니까
-            </button>
-            <button class="particle-btn" onclick="addParticle('습니다')">
-              습니다
-            </button>
-            <button class="particle-btn" onclick="addParticle('ㅂ니다')">
-              ㅂ니다
-            </button>
-            <button class="particle-btn" onclick="addParticle('아')">아</button>
-            <button class="particle-btn" onclick="addParticle('어')">어</button>
-            <button class="particle-btn" onclick="addParticle('여요')">
-              여요
-            </button>
-            <button class="particle-btn" onclick="addParticle('그리고')">
-              그리고
-            </button>
-            <button class="particle-btn" onclick="addParticle('그래서')">
-              그래서
-            </button>
-          </div>
+              type="range"
+              id="rate"
+              min=".5"
+              max="1.2"
+              step=".1"
+              value=".8"
+          /></label>
         </div>
       </div>
-
-      <!-- Area Kamus & Pencarian Dataset -->
-      <div class="dictionary-container">
-        <div class="dictionary-filter-bar">
-          <div class="search-box-row">
-            <input
-              type="text"
-              class="search-input"
-              id="search-input"
-              placeholder="Cari kosakata Hangeul, Latin, atau arti Indonesia..."
-              oninput="handleSearch()"
-            />
-          </div>
-          <div class="cat-tabs" id="cat-tabs-container"></div>
+      <div class="stat">
+        <div class="row">
+          <span>Status Hafal (kata)</span><span id="pt"></span>
         </div>
-        <div class="vocab-grid" id="vocab-grid"></div>
+        <div class="prog"><i id="bar"></i></div>
       </div>
+      <p
+        id="sub"
+        style="font-size: 0.78rem; color: var(--mute); margin-bottom: 6px"
+      ></p>
+      <div id="list"></div>
+    </div>
+
+    <div id="kb">
+      <div id="kbh">
+        <span class="grip">⠿</span><span class="tt">Keyboard</span
+        ><span class="prev" id="kbp"></span
+        ><button id="kbx" title="Tutup">✕</button>
+      </div>
+      <div class="kbin" id="kbin"></div>
     </div>
 
     <script>
-      // Database Super Lengkap Kosakata Korea - Indonesia
-      const rawDictionary = [
-        // Bahasa Gaul & Slang
-        {
-          kr: "대박",
-          latin: "dae-bak",
-          id_tr: "Luar biasa / Keren banget",
-          cat: "Bahasa Gaul & Slang",
-        },
-        {
-          kr: "꿀잼",
-          latin: "kkul-jaem",
-          id_tr: "Sangat seru / Asik banget",
-          cat: "Bahasa Gaul & Slang",
-        },
-        {
-          kr: "노잼",
-          latin: "no-jaem",
-          id_tr: "Membosankan / Gak asik",
-          cat: "Bahasa Gaul & Slang",
-        },
-        {
-          kr: "심쿵",
-          latin: "sim-khung",
-          id_tr: "Bikin berdebar / Bikin baper",
-          cat: "Bahasa Gaul & Slang",
-        },
-        {
-          kr: "멘붕",
-          latin: "men-bung",
-          id_tr: "Mental breakdown / Pusing banget",
-          cat: "Bahasa Gaul & Slang",
-        },
-        {
-          kr: "TMI",
-          latin: "thi-em-i",
-          id_tr: "Terlalu banyak informasi tidak penting",
-          cat: "Bahasa Gaul & Slang",
-        },
-        {
-          kr: "치맥",
-          latin: "chi-maek",
-          id_tr: "Ayam goreng dan bir",
-          cat: "Bahasa Gaul & Slang",
-        },
-        {
-          kr: "불금",
-          latin: "bul-geum",
-          id_tr: "Jumat malam yang seru",
-          cat: "Bahasa Gaul & Slang",
-        },
-        {
-          kr: "남친",
-          latin: "nam-chin",
-          id_tr: "Pacar laki-laki",
-          cat: "Bahasa Gaul & Slang",
-        },
-        {
-          kr: "여친",
-          latin: "yeo-chin",
-          id_tr: "Pacar perempuan",
-          cat: "Bahasa Gaul & Slang",
-        },
-
-        // Arah & Posisi
-        { kr: "왼쪽", latin: "oen-jjok", id_tr: "Kiri", cat: "Arah & Posisi" },
-        {
-          kr: "오른쪽",
-          latin: "o-reun-jjok",
-          id_tr: "Kanan",
-          cat: "Arah & Posisi",
-        },
-        { kr: "위", latin: "wi", id_tr: "Atas", cat: "Arah & Posisi" },
-        { kr: "아래", latin: "a-rae", id_tr: "Bawah", cat: "Arah & Posisi" },
-        {
-          kr: "밑",
-          latin: "mit",
-          id_tr: "Bawah / Dasar",
-          cat: "Arah & Posisi",
-        },
-        { kr: "앞", latin: "ap", id_tr: "Depan", cat: "Arah & Posisi" },
-        { kr: "뒤", latin: "dwi", id_tr: "Belakang", cat: "Arah & Posisi" },
-        { kr: "안", latin: "an", id_tr: "Dalam", cat: "Arah & Posisi" },
-        { kr: "밖", latin: "bak", id_tr: "Luar", cat: "Arah & Posisi" },
-        { kr: "옆", latin: "yeop", id_tr: "Samping", cat: "Arah & Posisi" },
-        { kr: "사이", latin: "sa-i", id_tr: "Antara", cat: "Arah & Posisi" },
-        {
-          kr: "건너편",
-          latin: "geon-neo-pyyeon",
-          id_tr: "Seberang",
-          cat: "Arah & Posisi",
-        },
-
-        // Warna
-        {
-          kr: "빨간색",
-          latin: "kkal-gan-saek",
-          id_tr: "Warna Merah",
-          cat: "Warna",
-        },
-        {
-          kr: "파란색",
-          latin: "pha-ran-saek",
-          id_tr: "Warna Biru",
-          cat: "Warna",
-        },
-        {
-          kr: "노란색",
-          latin: "no-ran-saek",
-          id_tr: "Warna Kuning",
-          cat: "Warna",
-        },
-        {
-          kr: "초록색",
-          latin: "cho-rok-saek",
-          id_tr: "Warna Hijau",
-          cat: "Warna",
-        },
-        {
-          kr: "하얀색",
-          latin: "ha-yan-saek",
-          id_tr: "Warna Putih",
-          cat: "Warna",
-        },
-        {
-          kr: "까만색",
-          latin: "kka-man-saek",
-          id_tr: "Warna Hitam",
-          cat: "Warna",
-        },
-        {
-          kr: "보라색",
-          latin: "bo-ra-saek",
-          id_tr: "Warna Ungu",
-          cat: "Warna",
-        },
-        {
-          kr: "분홍색",
-          latin: "bun-hong-saek",
-          id_tr: "Warna Merah Muda / Pink",
-          cat: "Warna",
-        },
-        {
-          kr: "주황색",
-          latin: "ju-hwang-saek",
-          id_tr: "Warna Jingga / Oranye",
-          cat: "Warna",
-        },
-        { kr: "갈색", latin: "gal-saek", id_tr: "Warna Cokelat", cat: "Warna" },
-
-        // Anatomi Tubuh
-        {
-          kr: "머리",
-          latin: "meo-ri",
-          id_tr: "Kepala / Rambut",
-          cat: "Anatomi Tubuh",
-        },
-        { kr: "얼굴", latin: "eol-gul", id_tr: "Wajah", cat: "Anatomi Tubuh" },
-        { kr: "눈", latin: "nun", id_tr: "Mata", cat: "Anatomi Tubuh" },
-        { kr: "코", latin: "ko", id_tr: "Hidung", cat: "Anatomi Tubuh" },
-        { kr: "입", latin: "ip", id_tr: "Mulut", cat: "Anatomi Tubuh" },
-        { kr: "귀", latin: "gwi", id_tr: "Telinga", cat: "Anatomi Tubuh" },
-        {
-          kr: "목",
-          latin: "mok",
-          id_tr: "Leher / Tenggorokan",
-          cat: "Anatomi Tubuh",
-        },
-        { kr: "어깨", latin: "eo-kkae", id_tr: "Bahu", cat: "Anatomi Tubuh" },
-        { kr: "손", latin: "son", id_tr: "Tangan", cat: "Anatomi Tubuh" },
-        {
-          kr: "손가락",
-          latin: "son-ga-rak",
-          id_tr: "Jari tangan",
-          cat: "Anatomi Tubuh",
-        },
-        { kr: "배", latin: "bae", id_tr: "Perut", cat: "Anatomi Tubuh" },
-        {
-          kr: "다리",
-          latin: "da-ri",
-          id_tr: "Kaki / Tungkai",
-          cat: "Anatomi Tubuh",
-        },
-        { kr: "발", latin: "bal", id_tr: "Telapak kaki", cat: "Anatomi Tubuh" },
-        {
-          kr: "몸",
-          latin: "mom",
-          id_tr: "Tubuh / Badan",
-          cat: "Anatomi Tubuh",
-        },
-
-        // Alat Tulis & Kantor
-        {
-          kr: "연필",
-          latin: "yeon-phil",
-          id_tr: "Pensil",
-          cat: "Alat Tulis & Kantor",
-        },
-        {
-          kr: "볼펜",
-          latin: "bol-phen",
-          id_tr: "Pulpen / Ballpoint",
-          cat: "Alat Tulis & Kantor",
-        },
-        {
-          kr: "지우개",
-          latin: "ji-u-gae",
-          id_tr: "Penghapus",
-          cat: "Alat Tulis & Kantor",
-        },
-        {
-          kr: "공책",
-          latin: "gong-chaek",
-          id_tr: "Buku tulis",
-          cat: "Alat Tulis & Kantor",
-        },
-        { kr: "책", latin: "chaek", id_tr: "Buku", cat: "Alat Tulis & Kantor" },
-        {
-          kr: "사전",
-          latin: "sa-jeon",
-          id_tr: "Kamus",
-          cat: "Alat Tulis & Kantor",
-        },
-        {
-          kr: "가위",
-          latin: "ga-wi",
-          id_tr: "Gunting",
-          cat: "Alat Tulis & Kantor",
-        },
-        { kr: "풀", latin: "phul", id_tr: "Lem", cat: "Alat Tulis & Kantor" },
-        {
-          kr: "필통",
-          latin: "phil-thong",
-          id_tr: "Kotak pensil",
-          cat: "Alat Tulis & Kantor",
-        },
-        {
-          kr: "책상",
-          latin: "chaek-sang",
-          id_tr: "Meja belajar / kerja",
-          cat: "Alat Tulis & Kantor",
-        },
-        {
-          kr: "의자",
-          latin: "ui-ja",
-          id_tr: "Kursi",
-          cat: "Alat Tulis & Kantor",
-        },
-        {
-          kr: "시계",
-          latin: "si-gye",
-          id_tr: "Jam",
-          cat: "Alat Tulis & Kantor",
-        },
-        {
-          kr: "달력",
-          latin: "dal-ryeok",
-          id_tr: "Kalender",
-          cat: "Alat Tulis & Kantor",
-        },
-
-        // Angka & Bilangan
-        {
-          kr: "하나",
-          latin: "ha-na",
-          id_tr: "Satu (Native)",
-          cat: "Angka & Bilangan",
-        },
-        {
-          kr: "둘",
-          latin: "dul",
-          id_tr: "Dua (Native)",
-          cat: "Angka & Bilangan",
-        },
-        {
-          kr: "셋",
-          latin: "set",
-          id_tr: "Tiga (Native)",
-          cat: "Angka & Bilangan",
-        },
-        {
-          kr: "넷",
-          latin: "net",
-          id_tr: "Empat (Native)",
-          cat: "Angka & Bilangan",
-        },
-        {
-          kr: "다섯",
-          latin: "da-seot",
-          id_tr: "Lima (Native)",
-          cat: "Angka & Bilangan",
-        },
-        {
-          kr: "여섯",
-          latin: "yeo-seot",
-          id_tr: "Enam (Native)",
-          cat: "Angka & Bilangan",
-        },
-        {
-          kr: "일곱",
-          latin: "il-gop",
-          id_tr: "Tujuh (Native)",
-          cat: "Angka & Bilangan",
-        },
-        {
-          kr: "여덟",
-          latin: "yeo-deolp",
-          id_tr: "Delapan (Native)",
-          cat: "Angka & Bilangan",
-        },
-        {
-          kr: "아홉",
-          latin: "a-hop",
-          id_tr: "Sembilan (Native)",
-          cat: "Angka & Bilangan",
-        },
-        {
-          kr: "열",
-          latin: "yeol",
-          id_tr: "Sepuluh (Native)",
-          cat: "Angka & Bilangan",
-        },
-        {
-          kr: "일",
-          latin: "il",
-          id_tr: "Satu (Sino-Korea)",
-          cat: "Angka & Bilangan",
-        },
-        {
-          kr: "이",
-          latin: "i",
-          id_tr: "Dua (Sino-Korea)",
-          cat: "Angka & Bilangan",
-        },
-        {
-          kr: "삼",
-          latin: "sam",
-          id_tr: "Tiga (Sino-Korea)",
-          cat: "Angka & Bilangan",
-        },
-        {
-          kr: "사",
-          latin: "sa",
-          id_tr: "Empat (Sino-Korea)",
-          cat: "Angka & Bilangan",
-        },
-        {
-          kr: "오",
-          latin: "o",
-          id_tr: "Lima (Sino-Korea)",
-          cat: "Angka & Bilangan",
-        },
-        {
-          kr: "육",
-          latin: "yuk",
-          id_tr: "Enam (Sino-Korea)",
-          cat: "Angka & Bilangan",
-        },
-        {
-          kr: "칠",
-          latin: "chil",
-          id_tr: "Tujuh (Sino-Korea)",
-          cat: "Angka & Bilangan",
-        },
-        {
-          kr: "팔",
-          latin: "phal",
-          id_tr: "Delapan (Sino-Korea)",
-          cat: "Angka & Bilangan",
-        },
-        {
-          kr: "구",
-          latin: "gu",
-          id_tr: "Sembilan (Sino-Korea)",
-          cat: "Angka & Bilangan",
-        },
-        {
-          kr: "십",
-          latin: "sip",
-          id_tr: "Sepuluh (Sino-Korea)",
-          cat: "Angka & Bilangan",
-        },
-        { kr: "백", latin: "baek", id_tr: "Seratus", cat: "Angka & Bilangan" },
-        { kr: "천", latin: "cheon", id_tr: "Seribu", cat: "Angka & Bilangan" },
-        {
-          kr: "만",
-          latin: "man",
-          id_tr: "Sepuluh ribu",
-          cat: "Angka & Bilangan",
-        },
-
-        // Salam & Percakapan
-        {
-          kr: "안녕하세요",
-          latin: "an-nyeong-ha-se-yo",
-          id_tr: "Halo / Apa kabar",
-          cat: "Salam & Percakapan",
-        },
-        {
-          kr: "감사합니다",
-          latin: "gam-sa-ham-ni-da",
-          id_tr: "Terima kasih",
-          cat: "Salam & Percakapan",
-        },
-        {
-          kr: "죄송합니다",
-          latin: "joe-song-ham-ni-da",
-          id_tr: "Mohon maaf",
-          cat: "Salam & Percakapan",
-        },
-        {
-          kr: "괜찮아요",
-          latin: "gwaen-chan-a-yo",
-          id_tr: "Tidak apa-apa",
-          cat: "Salam & Percakapan",
-        },
-        { kr: "네", latin: "ne", id_tr: "Ya", cat: "Salam & Percakapan" },
-        {
-          kr: "아니요",
-          latin: "a-ni-yo",
-          id_tr: "Tidak / Bukan",
-          cat: "Salam & Percakapan",
-        },
-
-        // Keluarga & Orang
-        { kr: "나", latin: "na", id_tr: "Aku", cat: "Keluarga & Orang" },
-        {
-          kr: "저",
-          latin: "jeo",
-          id_tr: "Saya (Formal)",
-          cat: "Keluarga & Orang",
-        },
-        {
-          kr: "우리",
-          latin: "u-ri",
-          id_tr: "Kami / Kita",
-          cat: "Keluarga & Orang",
-        },
-        {
-          kr: "아버지",
-          latin: "a-beo-ji",
-          id_tr: "Ayah",
-          cat: "Keluarga & Orang",
-        },
-        { kr: "아빠", latin: "a-ppa", id_tr: "Papa", cat: "Keluarga & Orang" },
-        {
-          kr: "어머니",
-          latin: "eo-meo-ni",
-          id_tr: "Ibu",
-          cat: "Keluarga & Orang",
-        },
-        { kr: "엄마", latin: "eom-ma", id_tr: "Mama", cat: "Keluarga & Orang" },
-        {
-          kr: "부모님",
-          latin: "bu-mo-nim",
-          id_tr: "Orang tua",
-          cat: "Keluarga & Orang",
-        },
-        {
-          kr: "할아버지",
-          latin: "ha-ra-beo-ji",
-          id_tr: "Kakek",
-          cat: "Keluarga & Orang",
-        },
-        {
-          kr: "할머니",
-          latin: "hal-meo-ni",
-          id_tr: "Nenek",
-          cat: "Keluarga & Orang",
-        },
-        {
-          kr: "형",
-          latin: "hyeong",
-          id_tr: "Kakak laki-laki (pria)",
-          cat: "Keluarga & Orang",
-        },
-        {
-          kr: "오빠",
-          latin: "o-ppa",
-          id_tr: "Kakak laki-laki (wanita)",
-          cat: "Keluarga & Orang",
-        },
-        {
-          kr: "누나",
-          latin: "nu-na",
-          id_tr: "Kakak perempuan (pria)",
-          cat: "Keluarga & Orang",
-        },
-        {
-          kr: "언니",
-          latin: "eon-ni",
-          id_tr: "Kakak perempuan (wanita)",
-          cat: "Keluarga & Orang",
-        },
-        {
-          kr: "동생",
-          latin: "dong-saeng",
-          id_tr: "Adik",
-          cat: "Keluarga & Orang",
-        },
-        {
-          kr: "친구",
-          latin: "chin-gu",
-          id_tr: "Teman",
-          cat: "Keluarga & Orang",
-        },
-        {
-          kr: "학생",
-          latin: "hak-saeng",
-          id_tr: "Siswa / Pelajar",
-          cat: "Keluarga & Orang",
-        },
-        {
-          kr: "선생님",
-          latin: "seon-saeng-nim",
-          id_tr: "Guru",
-          cat: "Keluarga & Orang",
-        },
-        {
-          kr: "회사원",
-          latin: "hoe-sa-won",
-          id_tr: "Karyawan perusahaan",
-          cat: "Keluarga & Orang",
-        },
-        {
-          kr: "의사",
-          latin: "ui-sa",
-          id_tr: "Dokter",
-          cat: "Keluarga & Orang",
-        },
-
-        // Tempat
-        { kr: "집", latin: "jip", id_tr: "Rumah", cat: "Tempat" },
-        { kr: "방", latin: "bang", id_tr: "Kamar", cat: "Tempat" },
-        { kr: "학교", latin: "hak-gyo", id_tr: "Sekolah", cat: "Tempat" },
-        {
-          kr: "대학교",
-          latin: "dae-hak-gyo",
-          id_tr: "Universitas",
-          cat: "Tempat",
-        },
-        { kr: "회사", latin: "hoe-sa", id_tr: "Perusahaan", cat: "Tempat" },
-        { kr: "은행", latin: "eun-haeng", id_tr: "Bank", cat: "Tempat" },
-        {
-          kr: "병원",
-          latin: "byeong-won",
-          id_tr: "Rumah sakit",
-          cat: "Tempat",
-        },
-        { kr: "약국", latin: "yak-guk", id_tr: "Apotek", cat: "Tempat" },
-        { kr: "공항", latin: "gong-hang", id_tr: "Bandara", cat: "Tempat" },
-        { kr: "공원", latin: "gong-won", id_tr: "Taman", cat: "Tempat" },
-        { kr: "식당", latin: "sik-dang", id_tr: "Restoran", cat: "Tempat" },
-        { kr: "카페", latin: "ka-pe", id_tr: "Kafe", cat: "Tempat" },
-        { kr: "화장실", latin: "hwa-jang-sil", id_tr: "Toilet", cat: "Tempat" },
-
-        // Makanan & Minuman
-        { kr: "밥", latin: "bap", id_tr: "Nasi", cat: "Makanan & Minuman" },
-        { kr: "물", latin: "mul", id_tr: "Air", cat: "Makanan & Minuman" },
-        {
-          kr: "고기",
-          latin: "go-gi",
-          id_tr: "Daging",
-          cat: "Makanan & Minuman",
-        },
-        {
-          kr: "생선",
-          latin: "saeng-seon",
-          id_tr: "Ikan",
-          cat: "Makanan & Minuman",
-        },
-        {
-          kr: "채소",
-          latin: "chae-so",
-          id_tr: "Sayur",
-          cat: "Makanan & Minuman",
-        },
-        {
-          kr: "과일",
-          latin: "gwa-il",
-          id_tr: "Buah",
-          cat: "Makanan & Minuman",
-        },
-        {
-          kr: "라면",
-          latin: "ra-myeon",
-          id_tr: "Mi instan",
-          cat: "Makanan & Minuman",
-        },
-        { kr: "우유", latin: "u-yu", id_tr: "Susu", cat: "Makanan & Minuman" },
-        {
-          kr: "커피",
-          latin: "keo-pi",
-          id_tr: "Kopi",
-          cat: "Makanan & Minuman",
-        },
-        { kr: "차", latin: "cha", id_tr: "Teh", cat: "Makanan & Minuman" },
-
-        // Kata Kerja
-        { kr: "가다", latin: "ga-da", id_tr: "Pergi", cat: "Kata Kerja" },
-        { kr: "오다", latin: "o-da", id_tr: "Datang", cat: "Kata Kerja" },
-        { kr: "먹다", latin: "meok-da", id_tr: "Makan", cat: "Kata Kerja" },
-        { kr: "마시다", latin: "ma-si-da", id_tr: "Minum", cat: "Kata Kerja" },
-        { kr: "자다", latin: "ja-da", id_tr: "Tidur", cat: "Kata Kerja" },
-        {
-          kr: "공부하다",
-          latin: "gong-bu-ha-da",
-          id_tr: "Belajar",
-          cat: "Kata Kerja",
-        },
-        {
-          kr: "일하다",
-          latin: "il-ha-da",
-          id_tr: "Bekerja",
-          cat: "Kata Kerja",
-        },
-        {
-          kr: "운동하다",
-          latin: "un-dong-ha-da",
-          id_tr: "Berolahraga",
-          cat: "Kata Kerja",
-        },
-        { kr: "사다", latin: "sa-da", id_tr: "Membeli", cat: "Kata Kerja" },
-        { kr: "팔다", latin: "pal-da", id_tr: "Menjual", cat: "Kata Kerja" },
-        { kr: "보다", latin: "bo-da", id_tr: "Melihat", cat: "Kata Kerja" },
-        { kr: "듣다", latin: "deut-da", id_tr: "Mendengar", cat: "Kata Kerja" },
-        {
-          kr: "말하다",
-          latin: "mal-ha-da",
-          id_tr: "Bicara",
-          cat: "Kata Kerja",
-        },
-        { kr: "읽다", latin: "ilk-da", id_tr: "Membaca", cat: "Kata Kerja" },
-        { kr: "쓰다", latin: "sseu-da", id_tr: "Menulis", cat: "Kata Kerja" },
-        {
-          kr: "만나다",
-          latin: "man-na-da",
-          id_tr: "Bertemu",
-          cat: "Kata Kerja",
-        },
-
-        // Kata Sifat
-        { kr: "크다", latin: "keu-da", id_tr: "Besar", cat: "Kata Sifat" },
-        { kr: "작다", latin: "jak-da", id_tr: "Kecil", cat: "Kata Sifat" },
-        {
-          kr: "좋다",
-          latin: "jo-ta",
-          id_tr: "Bagus / Baik",
-          cat: "Kata Sifat",
-        },
-        {
-          kr: "나쁘다",
-          latin: "na-ppeu-da",
-          id_tr: "Buruk",
-          cat: "Kata Sifat",
-        },
-        { kr: "비싸다", latin: "bi-ssa-da", id_tr: "Mahal", cat: "Kata Sifat" },
-        { kr: "싸다", latin: "ssa-da", id_tr: "Murah", cat: "Kata Sifat" },
-        { kr: "맛있다", latin: "ma-sit-da", id_tr: "Enak", cat: "Kata Sifat" },
-        {
-          kr: "바쁘다",
-          latin: "ba-ppeu-da",
-          id_tr: "Sibuk",
-          cat: "Kata Sifat",
-        },
-        {
-          kr: "예쁘다",
-          latin: "ye-ppeu-da",
-          id_tr: "Cantik",
-          cat: "Kata Sifat",
-        },
-
-        // Waktu
-        { kr: "오늘", latin: "o-neul", id_tr: "Hari ini", cat: "Waktu" },
-        { kr: "내일", latin: "nae-il", id_tr: "Besok", cat: "Waktu" },
-        { kr: "어제", latin: "eo-je", id_tr: "Kemarin", cat: "Waktu" },
-        { kr: "지금", latin: "ji-geum", id_tr: "Sekarang", cat: "Waktu" },
-        { kr: "아침", latin: "a-chim", id_tr: "Pagi", cat: "Waktu" },
-        { kr: "점심", latin: "jeom-sim", id_tr: "Siang", cat: "Waktu" },
-        { kr: "저녁", latin: "jeo-nyeok", id_tr: "Malam", cat: "Waktu" },
-      ];
-
-      let selectedCategory = "Semua";
-      let sentenceTokens = [];
-
-      function speakKorean(text) {
-        if ("speechSynthesis" in window) {
-          window.speechSynthesis.cancel();
-          const utterance = new SpeechSynthesisUtterance(text);
-          utterance.lang = "ko-KR";
-          utterance.rate = 0.85;
-          window.speechSynthesis.speak(utterance);
-        } else {
-          alert("Browser tidak mendukung pengucapan suara.");
-        }
-      }
-
-      window.onload = function () {
-        initCategoryTabs();
-        renderDictionary();
+      // ===== INSIALISASI STRUKTUR DATA (DIPISAH PER LEVEL) =====
+      const DATA = {
+        dasar: { label: "Dasar (해요체)", sections: [] },
+        menengah: { label: "Menengah-Atas", sections: [] },
       };
+      const W = {};
+      const add = (lv, t, items) => DATA[lv].sections.push({ t, items });
+      const addW = (s) =>
+        s
+          .trim()
+          .split("\n")
+          .forEach((l) => {
+            const i = l.indexOf("=");
+            if (i > 0) W[l.slice(0, i).trim()] = l.slice(i + 1).trim();
+          });
 
-      function initCategoryTabs() {
-        const categories = [
-          "Semua",
-          ...new Set(rawDictionary.map((item) => item.cat)),
-        ];
-        const container = document.getElementById("cat-tabs-container");
-        container.innerHTML = "";
+      // =========================================================================
+      // TEMPELKAN SEMUA PEMANGGILAN add(...) DAN addW(...) KAMU DI SINI
+      // =========================================================================
+      // ---------- BAGIAN 1: DASAR · Salam, perkenalan, ungkapan sopan ----------
+      add("dasar", "1a. Salam harian", [
+        ["안녕하세요.", "annyeonghaseyo", "Halo / selamat pagi-siang-sore."],
+        [
+          "안녕하세요? 잘 지내세요?",
+          "annyeonghaseyo? jal jinaeseyo?",
+          "Halo, apa kabar?",
+        ],
+        ["네, 잘 지내요.", "ne, jal jinaeyo", "Ya, saya baik-baik saja."],
+        ["오랜만이에요.", "oraenmanieyo", "Lama tidak bertemu."],
+        ["만나서 반가워요.", "mannaseo bangawoyo", "Senang bertemu denganmu."],
+        ["좋은 아침이에요.", "joeun achimieyo", "Selamat pagi."],
+        [
+          "안녕히 가세요.",
+          "annyeonghi gaseyo",
+          "Selamat jalan (kamu yang pergi).",
+        ],
+        [
+          "안녕히 계세요.",
+          "annyeonghi gyeseyo",
+          "Selamat tinggal (aku yang pergi, kamu tetap).",
+        ],
+        ["잘 자요.", "jal jayo", "Selamat tidur."],
+        ["내일 봐요.", "naeil bwayo", "Sampai jumpa besok."],
+      ]);
 
-        categories.forEach((cat) => {
-          const tab = document.createElement("button");
-          tab.className = `cat-tab ${cat === selectedCategory ? "active" : ""}`;
-          tab.innerText = cat;
-          tab.onclick = () => {
-            document
-              .querySelectorAll(".cat-tab")
-              .forEach((t) => t.classList.remove("active"));
-            tab.classList.add("active");
-            selectedCategory = cat;
-            renderDictionary();
-          };
-          container.appendChild(tab);
-        });
-      }
+      add("dasar", "1b. Perkenalan diri", [
+        [
+          "저는 [nama]이에요 / 예요.",
+          "jeoneun [nama]ieyo / yeyo",
+          "Saya [nama].",
+        ],
+        [
+          "제 이름은 [nama]이에요.",
+          "je ireumeun [nama]ieyo",
+          "Nama saya [nama].",
+        ],
+        ["이름이 뭐예요?", "ireumi mwoyeyo", "Siapa namamu?"],
+        [
+          "저는 인도네시아 사람이에요.",
+          "jeoneun indonesia saramieyo",
+          "Saya orang Indonesia.",
+        ],
+        [
+          "저는 반둥에서 왔어요.",
+          "jeoneun bandungeseo wasseoyo",
+          "Saya berasal dari Bandung.",
+        ],
+        ["어디에서 왔어요?", "eodieseo wasseoyo", "Kamu berasal dari mana?"],
+        [
+          "저는 학생이에요.",
+          "jeoneun hakssaengieyo",
+          "Saya pelajar / mahasiswa.",
+        ],
+        ["직업이 뭐예요?", "jigeobi mwoyeyo", "Pekerjaanmu apa?"],
+        [
+          "한국어를 공부하고 있어요.",
+          "hangugeoreul gongbuhago isseoyo",
+          "Saya sedang belajar bahasa Korea.",
+        ],
+        [
+          "아직 한국어를 잘 못해요.",
+          "ajik hangugeoreul jal mothaeyo",
+          "Saya belum bisa bahasa Korea dengan baik.",
+        ],
+        [
+          "천천히 말해 주세요.",
+          "cheoncheonhi malhae juseyo",
+          "Tolong bicara pelan-pelan.",
+        ],
+        [
+          "다시 한번 말해 주세요.",
+          "dasi hanbeon malhae juseyo",
+          "Tolong katakan sekali lagi.",
+        ],
+        ["무슨 뜻이에요?", "museun tteusieyo", "Apa artinya?"],
+        [
+          "이해했어요. / 이해 못 했어요.",
+          "ihaehaesseoyo / ihae mot haesseoyo",
+          "Saya mengerti. / Saya tidak mengerti.",
+        ],
+        [
+          "영어 할 수 있어요?",
+          "yeongeo hal su isseoyo",
+          "Bisa bahasa Inggris?",
+        ],
+      ]);
 
-      function handleSearch() {
-        renderDictionary();
-      }
+      add("dasar", "2. Ungkapan sopan sehari-hari", [
+        ["감사합니다.", "gamsahamnida", "Terima kasih (formal)."],
+        ["고마워요.", "gomawoyo", "Terima kasih (santai-sopan)."],
+        ["정말 고마워요.", "jeongmal gomawoyo", "Terima kasih banyak."],
+        ["천만에요.", "cheonmaneyo", "Sama-sama."],
+        ["괜찮아요.", "gwaenchanayo", "Tidak apa-apa / baik-baik saja."],
+        ["죄송합니다.", "joesonghamnida", "Mohon maaf (formal)."],
+        ["미안해요.", "mianhaeyo", "Maaf."],
+        ["실례합니다.", "sillyehamnida", "Permisi (mau lewat atau bertanya)."],
+        ["잠깐만요.", "jamkkanmanyo", "Sebentar ya."],
+        ["잠시만요.", "jamsimanyo", "Permisi sebentar (saat minta jalan)."],
+        ["네. / 아니요.", "ne / aniyo", "Ya. / Tidak."],
+        ["맞아요.", "majayo", "Benar."],
+        ["잘 모르겠어요.", "jal moreugesseoyo", "Saya kurang tahu."],
+        [
+          "잘 먹겠습니다.",
+          "jal meokgetseumnida",
+          "Selamat makan (diucapkan sebelum makan).",
+        ],
+        [
+          "잘 먹었습니다.",
+          "jal meogeotseumnida",
+          "Terima kasih atas makanannya (setelah makan).",
+        ],
+        [
+          "수고하셨어요.",
+          "sugohasyeosseoyo",
+          "Terima kasih atas kerja kerasnya.",
+        ],
+        ["축하해요!", "chukahaeyo", "Selamat!"],
+        ["조심하세요.", "josimhaseyo", "Hati-hati."],
+        ["도와주세요.", "dowajuseyo", "Tolong bantu saya."],
+        ["화이팅!", "hwaiting", "Semangat!"],
+      ]);
 
-      function renderDictionary() {
-        const query = document
-          .getElementById("search-input")
-          .value.toLowerCase()
-          .trim();
-        const grid = document.getElementById("vocab-grid");
-        grid.innerHTML = "";
+      // ---------- KAMUS KATA (bagian 1) ----------
+      addW(`안녕하세요=halo / selamat (sopan)
+      
+잘=dengan baik
+지내세요=apakah Anda baik-baik (hormat)
+네=ya
+지내요=baik-baik saja
+오랜만이에요=lama tidak bertemu
+만나서=bertemu (lalu...)
+반가워요=senang
+좋은=bagus
+아침이에요=(adalah) pagi
+안녕히=dengan selamat
+가세요=pergilah
+계세요=tinggallah / tetap di sana
+자요=tidur
+내일=besok
+봐요=lihat / bertemu
+저는=saya (topik)
+[nama]이에요=(adalah) [nama]
+/=atau
+예요=adalah
+제=saya (milik)
+이름은=nama (topik)
+이름이=nama (subjek)
+뭐예요=apa
+인도네시아=Indonesia
+사람이에요=(adalah) orang
+반둥에서=dari Bandung
+왔어요=sudah datang
+어디에서=dari mana
+학생이에요=(adalah) pelajar
+직업이=pekerjaan
+한국어를=bahasa Korea (objek)
+공부하고=sedang belajar
+있어요=ada / sedang
+아직=masih / belum
+못해요=tidak bisa
+천천히=pelan-pelan
+말해=bicara
+주세요=tolong berikan
+다시=lagi
+한번=sekali
+무슨=apa
+뜻이에요=artinya
+이해했어요=saya mengerti
+이해=pengertian
+못=tidak bisa
+했어요=melakukan (lampau)
+영어=bahasa Inggris
+할=melakukan
+수=kemungkinan (할 수 있어요 = bisa)
+감사합니다=terima kasih (formal)
+고마워요=terima kasih (santai-sopan)
+정말=sungguh
+천만에요=sama-sama
+괜찮아요=tidak apa-apa
+죄송합니다=mohon maaf (formal)
+미안해요=maaf
+실례합니다=permisi
+잠깐만요=sebentar ya
+잠시만요=permisi sebentar
+아니요=tidak
+맞아요=benar
+모르겠어요=tidak tahu
+먹겠습니다=akan makan (selamat makan)
+먹었습니다=sudah makan
+수고하셨어요=terima kasih atas kerja kerasnya
+축하해요=selamat
+조심하세요=hati-hati
+도와주세요=tolong bantu
+화이팅=semangat`);
+      // ---------- BAGIAN 2: DASAR · Restoran, kafe, belanja ----------
+      add("dasar", "3a. Restoran: masuk dan memesan", [
+        ["어서 오세요.", "eoseo oseyo", "Selamat datang (diucapkan pegawai)."],
+        ["두 명이에요.", "du myeongieyo", "Berdua."],
+        ["자리 있어요?", "jari isseoyo", "Ada tempat kosong?"],
+        ["저기요!", "jeogiyo", "Permisi! (memanggil pelayan)"],
+        ["메뉴판 주세요.", "menyupan juseyo", "Tolong minta menunya."],
+        [
+          "추천 메뉴가 뭐예요?",
+          "chucheon menyuga mwoyeyo",
+          "Menu rekomendasinya apa?",
+        ],
+        ["이거 주세요.", "igeo juseyo", "Tolong yang ini."],
+        [
+          "김치찌개 하나 주세요.",
+          "gimchijjigae hana juseyo",
+          "Tolong satu kimchi jjigae.",
+        ],
+        ["물 좀 주세요.", "mul jom juseyo", "Tolong minta air."],
+        [
+          "안 맵게 해 주세요.",
+          "an maepge hae juseyo",
+          "Tolong jangan terlalu pedas.",
+        ],
+        [
+          "돼지고기는 못 먹어요.",
+          "dwaejigogineun mot meogeoyo",
+          "Saya tidak bisa makan daging babi.",
+        ],
+        [
+          "이거 뭐가 들어 있어요?",
+          "igeo mwoga deureo isseoyo",
+          "Ini isinya apa saja?",
+        ],
+        [
+          "포장해 주세요.",
+          "pojanghae juseyo",
+          "Tolong dibungkus (dibawa pulang).",
+        ],
+        ["여기서 먹을게요.", "yeogiseo meogeulgeyo", "Saya makan di sini."],
+      ]);
 
-        const filtered = rawDictionary.filter((item) => {
-          const matchCat =
-            selectedCategory === "Semua" || item.cat === selectedCategory;
-          const matchQuery =
-            item.kr.toLowerCase().includes(query) ||
-            item.latin.toLowerCase().includes(query) ||
-            item.id_tr.toLowerCase().includes(query);
-          return matchCat && matchQuery;
-        });
+      add("dasar", "3b. Restoran: makan dan membayar", [
+        ["정말 맛있어요!", "jeongmal masisseoyo", "Enak sekali!"],
+        ["너무 매워요.", "neomu maewoyo", "Terlalu pedas."],
+        [
+          "반찬 더 주세요.",
+          "banchan deo juseyo",
+          "Tolong tambah lauk pendampingnya.",
+        ],
+        ["계산해 주세요.", "gyesanhae juseyo", "Tolong hitung tagihannya."],
+        ["얼마예요?", "eolmayeyo", "Berapa harganya?"],
+        [
+          "카드로 계산할게요.",
+          "kadeuro gyesanhalgeyo",
+          "Saya bayar pakai kartu.",
+        ],
+        ["영수증 주세요.", "yeongsujeung juseyo", "Tolong minta struknya."],
+      ]);
 
-        if (filtered.length === 0) {
-          grid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 30px;">Tidak ditemukan kosakata yang sesuai.</div>`;
-          return;
-        }
+      add("dasar", "3c. Di kafe", [
+        [
+          "아이스 아메리카노 한 잔 주세요.",
+          "aiseu amerikano han jan juseyo",
+          "Tolong satu es americano.",
+        ],
+        [
+          "따뜻한 걸로 주세요.",
+          "ttatteutan geollo juseyo",
+          "Tolong yang panas.",
+        ],
+        [
+          "사이즈는 어떤 걸로 하시겠어요?",
+          "saijeuneun eotteon geollo hasigesseoyo",
+          "Mau ukuran yang mana?",
+        ],
+        [
+          "와이파이 비밀번호가 뭐예요?",
+          "waipai bimilbeonhoga mwoyeyo",
+          "Kata sandi Wi-Fi-nya apa?",
+        ],
+      ]);
 
-        filtered.forEach((item) => {
-          const card = document.createElement("div");
-          card.className = "vocab-card-item";
-          card.innerHTML = `
-            <div>
-              <div class="card-top">
-                <span class="card-kr">${item.kr}</span>
-                <button class="btn-audio-circle" onclick="speakKorean('${item.kr}')" title="Dengarkan Suara">🔊</button>
-              </div>
-              <div class="card-latin">${item.latin}</div>
-              <div class="card-id">${item.id_tr}</div>
-            </div>
-            <div class="card-actions">
-              <span style="font-size: 0.72rem; background: #f1f5f9; padding: 2px 8px; border-radius: 12px; color: var(--text-muted); font-weight: 600;">${item.cat}</span>
-              <button class="btn-add-sentence" onclick="addWordToSentence('${item.kr}', 'vocab')">+ Tambah ke Kalimat</button>
-            </div>
-          `;
-          grid.appendChild(card);
-        });
-      }
+      add("dasar", "4. Belanja dan tawar-menawar", [
+        [
+          "그냥 구경하는 거예요.",
+          "geunyang gugyeonghaneun geoyeyo",
+          "Saya hanya melihat-lihat.",
+        ],
+        ["이거 얼마예요?", "igeo eolmayeyo", "Ini berapa harganya?"],
+        ["너무 비싸요.", "neomu bissayo", "Mahal sekali."],
+        [
+          "좀 깎아 주세요.",
+          "jom kkakka juseyo",
+          "Tolong kurangi sedikit harganya.",
+        ],
+        ["더 싼 거 있어요?", "deo ssan geo isseoyo", "Ada yang lebih murah?"],
+        ["다른 색깔 있어요?", "dareun saekkkal isseoyo", "Ada warna lain?"],
+        [
+          "더 큰 사이즈 있어요?",
+          "deo keun saijeu isseoyo",
+          "Ada ukuran lebih besar?",
+        ],
+        ["입어 봐도 돼요?", "ibeo bwado dwaeyo", "Boleh saya coba pakai?"],
+        ["탈의실이 어디예요?", "taruisiri eodiyeyo", "Ruang ganti di mana?"],
+        ["이걸로 할게요.", "igeollo halgeyo", "Saya ambil yang ini."],
+        ["두 개 주세요.", "du gae juseyo", "Tolong dua buah."],
+        ["봉투 필요해요?", "bongtu piryohaeyo", "Perlu kantong plastik?"],
+        [
+          "봉투는 괜찮아요.",
+          "bongtuneun gwaenchanayo",
+          "Tidak usah pakai kantong.",
+        ],
+        [
+          "환불할 수 있어요?",
+          "hwanbulhal su isseoyo",
+          "Bisa dikembalikan uangnya (refund)?",
+        ],
+        ["면세 되나요?", "myeonse doenayo", "Bisa bebas pajak (tax-free)?"],
+        [
+          "포인트 적립해 드릴까요?",
+          "pointeu jeongnipae deurilkkayo",
+          "Mau dikumpulkan poinnya? (ucapan kasir)",
+        ],
+        ["현금으로 낼게요.", "hyeongeumeuro naelgeyo", "Saya bayar tunai."],
+      ]);
 
-      /* Logika Penyusun Kalimat */
-      function addWordToSentence(text, type = "vocab") {
-        sentenceTokens.push({ text, type });
-        renderSentenceCanvas();
-      }
+      // ---------- KAMUS KATA (bagian 2) ----------
+      addW(`어서=segera / silakan
+오세요=datanglah
+두=dua (penghitung)
+명이에요=(adalah) ... orang
+자리=tempat duduk
+저기요=permisi (memanggil)
+메뉴판=daftar menu
+추천=rekomendasi
+메뉴가=menu (subjek)
+이거=ini
+김치찌개=sup kimchi
+하나=satu
+물=air
+좀=sedikit / tolong
+안=tidak
+맵게=pedas (adv.)
+해=lakukan
+돼지고기는=daging babi (topik)
+먹어요=makan
+뭐가=apa (subjek)
+들어=masuk / terkandung
+포장해=bungkus
+여기서=di / dari sini
+먹을게요=saya makan (niat)
+맛있어요=enak
+너무=terlalu
+매워요=pedas
+반찬=lauk pendamping
+더=lebih / tambah
+계산해=hitung / bayar
+얼마예요=berapa harganya
+카드로=dengan kartu
+계산할게요=saya bayar
+영수증=struk
+아이스=es
+아메리카노=americano
+한=satu (penghitung)
+잔=gelas / cangkir
+따뜻한=hangat / panas
+걸로=dengan yang itu
+사이즈는=ukuran (topik)
+어떤=yang mana
+하시겠어요=mau (hormat)
+와이파이=Wi-Fi
+비밀번호가=kata sandi (subjek)
+그냥=hanya / sekadar
+구경하는=sedang melihat-lihat
+거예요=(adalah) hal / sedang
+비싸요=mahal
+깎아=kurangi harga
+싼=murah
+거=barang / hal
+다른=lain
+색깔=warna
+큰=besar
+사이즈=ukuran
+입어=pakai (baju)
+봐도=boleh dicoba
+돼요=boleh
+탈의실이=ruang ganti
+어디예요=di mana
+이걸로=dengan yang ini
+할게요=saya ambil / lakukan
+개=buah (penghitung)
+봉투=kantong plastik
+필요해요=perlu
+봉투는=kantong (topik)
+환불할=mengembalikan uang
+수=kemungkinan
+면세=bebas pajak
+되나요=bisakah
+포인트=poin
+적립해=kumpulkan
+드릴까요=mau saya (lakukan)?
+현금으로=dengan uang tunai
+낼게요=saya bayar`);
 
-      function addParticle(particleText) {
-        addWordToSentence(particleText, "particle");
-      }
+      // ---------- BAGIAN 3: DASAR · Transportasi, arah, teman, perasaan, basa-basi ----------
+      add("dasar", "5a. Bertanya arah", [
+        [
+          "지하철역이 어디예요?",
+          "jihacheollyeogi eodiyeyo",
+          "Stasiun subway di mana?",
+        ],
+        ["화장실이 어디예요?", "hwajangsiri eodiyeyo", "Toilet di mana?"],
+        [
+          "여기에 어떻게 가요?",
+          "yeogie eotteoke gayo",
+          "Bagaimana cara ke sini?",
+        ],
+        [
+          "서울역에 가고 싶어요.",
+          "seoulyeoge gago sipeoyo",
+          "Saya ingin ke Stasiun Seoul.",
+        ],
+        ["여기서 멀어요?", "yeogiseo meoreoyo", "Jauh dari sini?"],
+        [
+          "걸어서 얼마나 걸려요?",
+          "georeoseo eolmana geollyeoyo",
+          "Berapa lama kalau jalan kaki?",
+        ],
+        ["똑바로 가세요.", "ttokbaro gaseyo", "Lurus saja."],
+        ["오른쪽으로 가세요.", "oreunjjogeuro gaseyo", "Belok kanan."],
+        ["왼쪽으로 가세요.", "oenjjogeuro gaseyo", "Belok kiri."],
+        ["길을 잃어버렸어요.", "gireul ireobeoryeosseoyo", "Saya tersesat."],
+      ]);
 
-      function addCustomText() {
-        const input = document.getElementById("custom-text-input");
-        const val = input.value.trim();
-        if (val) {
-          addWordToSentence(val, "custom");
-          input.value = "";
-        }
-      }
+      add("dasar", "5b. Subway, bus, dan taksi", [
+        [
+          "교통카드 어디서 살 수 있어요?",
+          "gyotongkadeu eodiseo sal su isseoyo",
+          "Di mana beli kartu transportasi?",
+        ],
+        [
+          "이 버스 명동에 가요?",
+          "i beoseu myeongdonge gayo",
+          "Apakah bus ini ke Myeongdong?",
+        ],
+        [
+          "몇 번 출구예요?",
+          "myeot beon chulguyeyo",
+          "Pintu keluar nomor berapa?",
+        ],
+        ["어디서 갈아타요?", "eodiseo garatayo", "Pindah (transit) di mana?"],
+        [
+          "다음 역은 어디예요?",
+          "daeum yeogeun eodiyeyo",
+          "Stasiun berikutnya apa?",
+        ],
+        ["여기서 내릴게요.", "yeogiseo naerilgeyo", "Saya turun di sini."],
+        ["택시 타고 싶어요.", "taeksi tago sipeoyo", "Saya ingin naik taksi."],
+        [
+          "이 주소로 가 주세요.",
+          "i jusoro ga juseyo",
+          "Tolong antar ke alamat ini.",
+        ],
+        [
+          "여기서 세워 주세요.",
+          "yeogiseo sewo juseyo",
+          "Tolong berhenti di sini.",
+        ],
+      ]);
 
-      function handleCustomKeyPress(e) {
-        if (e.key === "Enter") {
-          addCustomText();
-        }
-      }
+      add("dasar", "6a. Teman: ajakan dan rencana", [
+        ["뭐 해요?", "mwo haeyo", "Lagi apa?"],
+        ["오늘 시간 있어요?", "oneul sigan isseoyo", "Hari ini ada waktu?"],
+        ["같이 밥 먹을래요?", "gachi bap meogeullaeyo", "Mau makan bareng?"],
+        [
+          "같이 영화 볼까요?",
+          "gachi yeonghwa bolkkayo",
+          "Nonton film bareng yuk?",
+        ],
+        [
+          "주말에 뭐 할 거예요?",
+          "jumare mwo hal geoyeyo",
+          "Akhir pekan mau ngapain?",
+        ],
+        ["좋아요! 그렇게 해요.", "joayo! geureoke haeyo", "Boleh! Ayo begitu."],
+        [
+          "미안해요, 오늘은 바빠요.",
+          "mianhaeyo, oneureun bappayo",
+          "Maaf, hari ini saya sibuk.",
+        ],
+        [
+          "다음에 같이 가요.",
+          "daeume gachi gayo",
+          "Lain kali kita pergi bareng.",
+        ],
+        [
+          "몇 시에 만날까요?",
+          "myeot sie mannalkkayo",
+          "Kita ketemu jam berapa?",
+        ],
+        ["어디서 만날까요?", "eodiseo mannalkkayo", "Ketemu di mana?"],
+        ["지금 가고 있어요.", "jigeum gago isseoyo", "Saya sedang di jalan."],
+        [
+          "조금 늦을 것 같아요.",
+          "jogeum neujeul geot gatayo",
+          "Sepertinya saya agak terlambat.",
+        ],
+      ]);
 
-      function removeToken(index) {
-        sentenceTokens.splice(index, 1);
-        renderSentenceCanvas();
-      }
+      add("dasar", "6b. Teman: perasaan dan pendapat", [
+        ["기분이 좋아요.", "gibuni joayo", "Saya senang / suasana hati bagus."],
+        ["너무 피곤해요.", "neomu pigonhaeyo", "Capek sekali."],
+        ["배고파요.", "baegopayo", "Saya lapar."],
+        ["졸려요.", "jollyeoyo", "Saya mengantuk."],
+        ["심심해요.", "simsimhaeyo", "Saya bosan."],
+        ["재미있어요!", "jaemiisseoyo", "Seru! / Menarik!"],
+        ["정말요?", "jeongmallyo", "Benarkah?"],
+        ["대박!", "daebak", "Keren banget! / Wah!"],
+        [
+          "저도 그렇게 생각해요.",
+          "jeodo geureoke saenggakhaeyo",
+          "Saya juga berpikir begitu.",
+        ],
+        ["잘 모르겠어요.", "jal moreugesseoyo", "Saya tidak yakin."],
+        ["걱정하지 마세요.", "geokjeonghaji maseyo", "Jangan khawatir."],
+        ["보고 싶어요.", "bogo sipeoyo", "Saya kangen kamu."],
+      ]);
 
-      function removeLastToken() {
-        sentenceTokens.pop();
-        renderSentenceCanvas();
-      }
+      add("dasar", "6c. Teman: basa-basi sehari-hari", [
+        [
+          "밥 먹었어요?",
+          "bap meogeosseoyo",
+          "Sudah makan? (cara menyapa akrab khas Korea)",
+        ],
+        ["오늘 어땠어요?", "oneul eottaesseoyo", "Hari ini bagaimana?"],
+        ["취미가 뭐예요?", "chwimiga mwoyeyo", "Hobimu apa?"],
+        [
+          "한국 음식 좋아해요?",
+          "hanguk eumsik joahaeyo",
+          "Suka makanan Korea?",
+        ],
+        [
+          "한국에는 얼마나 있었어요?",
+          "hangugeneun eolmana isseosseoyo",
+          "Sudah berapa lama di Korea?",
+        ],
+        ["인스타 해요?", "inseuta haeyo", "Kamu main Instagram?"],
+        [
+          "연락처 알려 줄래요?",
+          "yeollakcheo allyeo jullaeyo",
+          "Boleh minta kontakmu?",
+        ],
+      ]);
 
-      function clearCanvas() {
-        sentenceTokens = [];
-        renderSentenceCanvas();
-      }
+      // ---------- KAMUS KATA (bagian 3) ----------
+      addW(`지하철역이=stasiun subway (subjek)
+화장실이=toilet (subjek)
+여기에=ke sini / di sini
+어떻게=bagaimana
+가요=pergi
+서울역에=ke Stasiun Seoul
+가고=pergi (lalu...)
+싶어요=ingin
+멀어요=jauh
+걸어서=dengan berjalan kaki
+얼마나=berapa lama / seberapa
+걸려요=memakan waktu
+똑바로=lurus
+오른쪽으로=ke arah kanan
+왼쪽으로=ke arah kiri
+길을=jalan (objek)
+잃어버렸어요=(sudah) hilang / tersesat
+교통카드=kartu transportasi
+어디서=di mana
+살=membeli (살 수 있어요 = bisa beli)
+이=ini
+버스=bus
+명동에=ke Myeongdong
+몇=berapa
+번=nomor
+출구예요=(adalah) pintu keluar
+갈아타요=berpindah (transit)
+다음=berikutnya
+역은=stasiun (topik)
+택시=taksi
+타고=naik (lalu...)
+주소로=ke alamat
+가=pergi / antar
+세워=hentikan
+뭐=apa
+해요=lakukan / lagi apa
+오늘=hari ini
+시간=waktu
+같이=bareng
+밥=nasi / makan
+먹을래요=mau makan?
+영화=film
+볼까요=mau lihat?
+주말에=pada akhir pekan
+할=akan melakukan
+거예요=akan
+좋아요=bagus / boleh
+그렇게=begitu
+바빠요=sibuk
+오늘은=hari ini (topik)
+다음에=lain kali
+몇=berapa
+시에=pada jam
+만날까요=mau bertemu?
+지금=sekarang
+조금=sedikit
+늦을=akan terlambat
+것=hal
+같아요=sepertinya
+기분이=suasana hati
+피곤해요=capek
+배고파요=lapar
+졸려요=mengantuk
+심심해요=bosan
+재미있어요=seru / menarik
+정말요=benarkah
+대박=keren banget
+저도=saya juga
+생각해요=berpikir
+걱정하지=khawatir (ingkar)
+마세요=jangan
+보고=melihat / merindukan
+먹었어요=sudah makan
+어땠어요=bagaimana (tadi)
+취미가=hobi (subjek)
+한국=Korea
+음식=makanan
+좋아해요=suka
+한국에는=di Korea (topik)
+있었어요=(sudah) berada
+인스타=Instagram
+연락처=kontak
+알려=beri tahu
+줄래요=maukah memberi`);
+      // ---------- BAGIAN 4: DASAR · Hotel, rumah sakit, darurat, angka, waktu ----------
+      add("dasar", "7a. Di hotel", [
+        ["예약했어요.", "yeyakhaesseoyo", "Saya sudah memesan."],
+        ["체크인하고 싶어요.", "chekeuinhago sipeoyo", "Saya ingin check-in."],
+        [
+          "체크아웃은 몇 시예요?",
+          "chekeuauseun myeot siyeyo",
+          "Check-out jam berapa?",
+        ],
+        [
+          "아침 식사 포함이에요?",
+          "achim siksa pohamieyo",
+          "Sudah termasuk sarapan?",
+        ],
+        [
+          "방에 수건이 없어요.",
+          "bange sugeoni eopseoyo",
+          "Di kamar tidak ada handuk.",
+        ],
+        ["에어컨이 안 돼요.", "eeokeoni an dwaeyo", "AC-nya tidak berfungsi."],
+        [
+          "짐을 맡길 수 있어요?",
+          "jimeul matgil su isseoyo",
+          "Bisa titip bagasi?",
+        ],
+      ]);
 
-      function renderSentenceCanvas() {
-        const canvas = document.getElementById("sentence-canvas");
-        if (sentenceTokens.length === 0) {
-          canvas.innerHTML = `<span class="sentence-placeholder" id="sentence-placeholder">Klik kosakata di bawah atau ketik kata manual untuk menyusun kalimat...</span>`;
-          return;
-        }
+      add("dasar", "7b. Di rumah sakit dan apotek", [
+        ["몸이 안 좋아요.", "momi an joayo", "Badan saya tidak enak."],
+        ["머리가 아파요.", "meoriga apayo", "Kepala saya sakit."],
+        ["배가 아파요.", "baega apayo", "Perut saya sakit."],
+        ["열이 나요.", "yeori nayo", "Saya demam."],
+        ["기침이 나요.", "gichimi nayo", "Saya batuk."],
+        ["알레르기가 있어요.", "allereugiga isseoyo", "Saya punya alergi."],
+        [
+          "병원에 가고 싶어요.",
+          "byeongwone gago sipeoyo",
+          "Saya ingin ke rumah sakit.",
+        ],
+        ["약국이 어디예요?", "yakgugi eodiyeyo", "Apotek di mana?"],
+        [
+          "이 약은 어떻게 먹어요?",
+          "i yageun eotteoke meogeoyo",
+          "Obat ini cara minumnya bagaimana?",
+        ],
+      ]);
 
-        canvas.innerHTML = "";
-        sentenceTokens.forEach((token, index) => {
-          const chip = document.createElement("div");
-          chip.className = `token-chip ${token.type}`;
-          chip.innerHTML = `
-            <span>${token.text}</span>
-            <span class="token-remove" onclick="removeToken(${index})">×</span>
-          `;
-          canvas.appendChild(chip);
-        });
-      }
+      add("dasar", "7c. Keadaan darurat", [
+        ["도와주세요!", "dowajuseyo", "Tolong!"],
+        [
+          "경찰을 불러 주세요.",
+          "gyeongchareul bulleo juseyo",
+          "Tolong panggilkan polisi.",
+        ],
+        [
+          "구급차를 불러 주세요.",
+          "gugeupchareul bulleo juseyo",
+          "Tolong panggilkan ambulans.",
+        ],
+        [
+          "지갑을 잃어버렸어요.",
+          "jigabeul ireobeoryeosseoyo",
+          "Dompet saya hilang.",
+        ],
+        [
+          "여권을 잃어버렸어요.",
+          "yeogwoneul ireobeoryeosseoyo",
+          "Paspor saya hilang.",
+        ],
+        ["도둑이야!", "dodugiya", "Pencuri!"],
+      ]);
 
-      function getAssembledText() {
-        return sentenceTokens.map((t) => t.text).join(" ");
-      }
+      add("dasar", "8a. Angka Sino-Korea (uang, tanggal, menit)", [
+        ["일", "il", "1"],
+        ["이", "i", "2"],
+        ["삼", "sam", "3"],
+        ["사", "sa", "4"],
+        ["오", "o", "5"],
+        ["육", "yuk", "6"],
+        ["칠", "chil", "7"],
+        ["팔", "pal", "8"],
+        ["구", "gu", "9"],
+        ["십", "sip", "10"],
+      ]);
 
-      function speakAssembledSentence() {
-        const text = getAssembledText();
-        if (!text) {
-          alert(
-            "Kalimat masih kosong! Silakan tambahkan kosakata terlebih dahulu.",
-          );
-          return;
-        }
-        speakKorean(text);
-      }
+      add("dasar", "8b. Angka asli Korea (jumlah, jam, usia)", [
+        ["하나 / 한", "hana / han", "1"],
+        ["둘 / 두", "dul / du", "2"],
+        ["셋 / 세", "set / se", "3"],
+        ["넷 / 네", "net / ne", "4"],
+        ["다섯", "daseot", "5"],
+        ["여섯", "yeoseot", "6"],
+        ["일곱", "ilgop", "7"],
+        ["여덟", "yeodeol", "8"],
+        ["아홉", "ahop", "9"],
+        ["열", "yeol", "10"],
+      ]);
 
-      function copySentence() {
-        const text = getAssembledText();
-        if (!text) {
-          alert("Kalimat masih kosong!");
-          return;
-        }
-        navigator.clipboard.writeText(text).then(() => {
-          alert("Kalimat berhasil disalin: " + text);
-        });
-      }
+      add("dasar", "8c. Uang", [
+        ["백", "baek", "100"],
+        ["천", "cheon", "1.000"],
+        ["만", "man", "10.000"],
+        ["오천 원", "ocheon won", "5.000 won"],
+      ]);
 
-      /* Timer Functions */
-      let timerInterval = null,
-        timeLeft = 25 * 60,
-        isTimerRunning = false;
+      add("dasar", "8d. Hari dalam seminggu", [
+        ["월요일", "woryoil", "Senin"],
+        ["화요일", "hwayoil", "Selasa"],
+        ["수요일", "suyoil", "Rabu"],
+        ["목요일", "mogyoil", "Kamis"],
+        ["금요일", "geumyoil", "Jumat"],
+        ["토요일", "toyoil", "Sabtu"],
+        ["일요일", "iryoil", "Minggu"],
+      ]);
 
-      function updateTimerDisplay() {
-        const minutes = Math.floor(timeLeft / 60),
-          seconds = timeLeft % 60;
-        document.getElementById("timer").innerText =
-          `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
-      }
+      add("dasar", "8e. Waktu, tanggal, dan usia", [
+        ["지금 몇 시예요?", "jigeum myeot siyeyo", "Sekarang jam berapa?"],
+        ["세 시 삼십 분이에요.", "se si samsip buniyeyo", "Jam 3.30."],
+        [
+          "오늘이 며칠이에요?",
+          "oneuri myeochirieyo",
+          "Hari ini tanggal berapa?",
+        ],
+        [
+          "오늘은 시월 이십구 일이에요.",
+          "oneureun siwol isipgu irieyo",
+          "Hari ini 29 Oktober.",
+        ],
+        ["무슨 요일이에요?", "museun yoirieyo", "Hari apa?"],
+        ["목요일이에요.", "mogyoirieyo", "Hari Kamis."],
+        ["내일", "naeil", "Besok"],
+        ["어제", "eoje", "Kemarin"],
+        ["몇 살이에요?", "myeot sarieyo", "Usiamu berapa?"],
+        ["스물다섯 살이에요.", "seumuldaseot sarieyo", "Usia saya 25 tahun."],
+      ]);
 
-      function toggleTimer() {
-        const btn = document.getElementById("start-timer-btn");
-        if (isTimerRunning) {
-          clearInterval(timerInterval);
-          isTimerRunning = false;
-          btn.innerText = "Start";
-          btn.classList.remove("stop");
-        } else {
-          isTimerRunning = true;
-          btn.innerText = "Pause";
-          btn.classList.add("stop");
-          timerInterval = setInterval(() => {
-            if (timeLeft > 0) {
-              timeLeft--;
-              updateTimerDisplay();
-            } else {
-              clearInterval(timerInterval);
-              alert("Waktu belajar selesai! Istirahat dulu.");
-              resetTimer();
+      // ---------- KAMUS KATA (bagian 4) ----------
+      addW(`예약했어요=sudah memesan
+체크인하고=check-in (lalu...)
+체크아웃은=check-out (topik)
+시예요=(adalah) jam
+아침=pagi
+식사=makan / hidangan
+포함이에요=termasuk
+방에=di kamar
+수건이=handuk
+없어요=tidak ada
+에어컨이=AC
+짐을=bagasi (objek)
+맡길=menitipkan
+몸이=badan
+머리가=kepala
+아파요=sakit
+배가=perut
+열이=demam
+나요=timbul / keluar
+기침이=batuk
+알레르기가=alergi
+병원에=ke rumah sakit
+약국이=apotek
+약은=obat (topik)
+경찰을=polisi (objek)
+불러=panggil
+구급차를=ambulans (objek)
+지갑을=dompet (objek)
+여권을=paspor (objek)
+도둑이야=pencuri
+일=1 (Sino-Korea)
+이=ini / 2 (Sino-Korea)
+삼=3 (Sino-Korea)
+사=4 (Sino-Korea)
+오=5 (Sino-Korea)
+육=6 (Sino-Korea)
+칠=7 (Sino-Korea)
+팔=8 (Sino-Korea)
+구=9 (Sino-Korea)
+십=10 (Sino-Korea)
+둘=2 (asli Korea)
+셋=3 (asli Korea)
+세=3 (sebelum penghitung)
+넷=4 (asli Korea)
+네=ya / 4 (sebelum penghitung)
+다섯=5 (asli Korea)
+여섯=6 (asli Korea)
+일곱=7 (asli Korea)
+여덟=8 (asli Korea)
+아홉=9 (asli Korea)
+열=10 (asli Korea)
+백=100
+천=1.000
+만=10.000
+오천=5.000
+원=won (mata uang Korea)
+월요일=Senin
+화요일=Selasa
+수요일=Rabu
+목요일=Kamis
+금요일=Jumat
+토요일=Sabtu
+일요일=Minggu
+시=jam
+삼십=30
+분이에요=(adalah) menit
+오늘이=hari ini (subjek)
+며칠이에요=tanggal berapa
+시월=Oktober
+이십구=29
+일이에요=(adalah) tanggal ...
+요일이에요=(adalah) hari
+목요일이에요=(adalah) hari Kamis
+어제=kemarin
+살이에요=(berusia) ... tahun
+스물다섯=25 (asli Korea, untuk usia)`);
+
+      // ---------- BAGIAN 5: MENENGAH · Pola penghubung, pendapat, permintaan & negosiasi ----------
+      add("menengah", "1a. Pola penghubung", [
+        [
+          "어제 갔는데 문이 닫혀 있었어요.",
+          "eoje gatneunde muni dachyeo isseosseoyo",
+          "Kemarin saya ke sana, tapi pintunya tutup. (-는데: latar belakang, kontras ringan)",
+        ],
+        [
+          "지금 못 가요. 일이 많거든요.",
+          "jigeum mot gayo. iri mankeodeunyo",
+          "Sekarang saya tidak bisa pergi. Soalnya pekerjaan saya banyak. (-거든요: alasan)",
+        ],
+        [
+          "내일 시험이 있잖아요.",
+          "naeil siheomi itjanayo",
+          "Besok kan ada ujian. (-잖아요: mengingatkan)",
+        ],
+        [
+          "피곤할 텐데 좀 쉬세요.",
+          "pigonhal tende jom swiseyo",
+          "Kamu pasti capek, istirahatlah sebentar. (-(으)ㄹ 텐데: dugaan + saran)",
+        ],
+        [
+          "걷다가 친구를 만났어요.",
+          "geotdaga chingureul mannasseoyo",
+          "Saat berjalan saya bertemu teman. (-다가: tindakan terputus)",
+        ],
+        [
+          "비가 오니까 우산을 가져가세요.",
+          "biga onikka usaneul gajyeogaseyo",
+          "Karena hujan, bawalah payung. (-(으)니까: alasan kuat)",
+        ],
+        [
+          "맛있을 뿐만 아니라 싸요.",
+          "masisseul ppunman anira ssayo",
+          "Tidak hanya enak, tapi juga murah. (-(으)ㄹ 뿐만 아니라)",
+        ],
+      ]);
+
+      add("menengah", "1b. Perbedaan yang sering membingungkan", [
+        [
+          "-아서/어서 vs -(으)니까",
+          "-aseo/eoseo vs -(eu)nikka",
+          "Keduanya berarti 'karena'. -(으)니까 boleh diikuti perintah atau ajakan, -아서/어서 tidak.",
+        ],
+        [
+          "-는데 vs -지만",
+          "-neunde vs -jiman",
+          "-는데 lebih lembut dan sering hanya membuka topik, -지만 lebih tegas menyatakan kontras ('tetapi').",
+        ],
+        [
+          "-거든요 vs -잖아요",
+          "-geodeunyo vs -janayo",
+          "-거든요 memberi informasi baru, -잖아요 mengingatkan hal yang seharusnya sudah diketahui. Hati-hati: -잖아요 bisa terdengar menegur ke orang yang lebih tua.",
+        ],
+      ]);
+
+      add("menengah", "2a. Pola untuk menyatakan pendapat", [
+        [
+          "늦었기 때문에 택시를 탔어요.",
+          "neujeotgi ttaemune taeksireul tasseoyo",
+          "Karena terlambat, saya naik taksi. (-기 때문에: alasan formal)",
+        ],
+        [
+          "배울수록 재미있어요.",
+          "baeulsurok jaemiisseoyo",
+          "Semakin dipelajari, semakin seru. (-(으)ㄹ수록)",
+        ],
+        [
+          "월급이 높은 반면에 일이 힘들어요.",
+          "wolgeubi nopeun banmyeone iri himdeureoyo",
+          "Gajinya tinggi, tetapi kerjaannya berat. (-(으)ㄴ/는 반면에)",
+        ],
+      ]);
+
+      add("menengah", "2b. Menyampaikan pendapat", [
+        [
+          "제 생각에는 이 방법이 더 좋은 것 같아요.",
+          "je saenggageneun i bangbeobi deo joeun geot gatayo",
+          "Menurut saya, cara ini sepertinya lebih baik.",
+        ],
+        [
+          "개인적으로는 반대예요.",
+          "gaeinjeogeuroneun bandaeyeyo",
+          "Secara pribadi saya tidak setuju.",
+        ],
+        [
+          "제가 보기에는 문제가 있어요.",
+          "jega bogieneun munjega isseoyo",
+          "Dari sudut pandang saya, ada masalah.",
+        ],
+        [
+          "솔직히 말하면 잘 모르겠어요.",
+          "soljikhi malhamyeon jal moreugesseoyo",
+          "Jujur saja, saya kurang yakin.",
+        ],
+        [
+          "어떻게 생각하세요?",
+          "eotteoke saenggakhaseyo",
+          "Bagaimana pendapat Anda?",
+        ],
+        [
+          "의견을 들려 주시겠어요?",
+          "uigyeoneul deullyeo jusigesseoyo",
+          "Bolehkah Anda menyampaikan pendapat?",
+        ],
+      ]);
+
+      add("menengah", "2c. Setuju", [
+        [
+          "맞는 말씀이에요.",
+          "manneun malsseumieyo",
+          "Yang Anda katakan benar.",
+        ],
+        [
+          "저도 같은 생각이에요.",
+          "jeodo gateun saenggagieyo",
+          "Saya juga berpikir sama.",
+        ],
+        [
+          "그 점에 동의해요.",
+          "geu jeome donguihaeyo",
+          "Saya setuju dengan poin itu.",
+        ],
+        ["바로 그거예요!", "baro geugeoyeyo", "Nah, itu dia!"],
+        [
+          "듣고 보니까 그렇네요.",
+          "deutgo bonikka geureonneyo",
+          "Setelah dipikir-pikir, memang benar.",
+        ],
+      ]);
+
+      add("menengah", "2d. Tidak setuju dengan halus", [
+        [
+          "그럴 수도 있지만 저는 좀 다르게 생각해요.",
+          "geureol sudo itjiman jeoneun jom dareuge saenggakhaeyo",
+          "Bisa jadi begitu, tapi saya berpikir agak berbeda.",
+        ],
+        [
+          "말씀은 이해하는데 현실적으로 어려울 것 같아요.",
+          "malsseumeun ihaehaneunde hyeonsiljeogeuro eoryeoul geot gatayo",
+          "Saya paham maksud Anda, tapi secara realistis sepertinya sulit.",
+        ],
+        [
+          "그 부분은 좀 다시 생각해 봐야 할 것 같아요.",
+          "geu bubuneun jom dasi saenggakhae bwaya hal geot gatayo",
+          "Bagian itu sepertinya perlu dipikirkan ulang.",
+        ],
+        [
+          "꼭 그런 건 아닌 것 같아요.",
+          "kkok geureon geon anin geot gatayo",
+          "Sepertinya tidak selalu begitu.",
+        ],
+        [
+          "제 입장에서는 받아들이기 어려워요.",
+          "je ipjangeseoneun badadeurigi eoryeowoyo",
+          "Dari posisi saya, itu sulit diterima.",
+        ],
+      ]);
+
+      add("menengah", "2e. Memberi tanggapan sambil mendengarkan", [
+        ["아, 그렇군요.", "a, geureokunyo", "Oh, begitu ya."],
+        [
+          "정말 그런 일이 있었어요?",
+          "jeongmal geureon iri isseosseoyo",
+          "Benarkah ada kejadian seperti itu?",
+        ],
+        [
+          "그래서 어떻게 됐어요?",
+          "geuraeseo eotteoke dwaesseoyo",
+          "Lalu bagaimana akhirnya?",
+        ],
+        [
+          "충분히 이해돼요.",
+          "chungbunhi ihaedwaeyo",
+          "Saya sangat bisa memahaminya.",
+        ],
+        ["그럴 만도 하죠.", "geureol mando hajyo", "Wajar saja kalau begitu."],
+      ]);
+
+      add("menengah", "3a. Meminta dengan halus", [
+        [
+          "혹시 부탁 하나 해도 될까요?",
+          "hoksi butak hana haedo doelkkayo",
+          "Kalau boleh, bisakah saya minta tolong sesuatu?",
+        ],
+        [
+          "이것 좀 도와주실 수 있을까요?",
+          "igeot jom dowajusil su isseulkkayo",
+          "Mungkinkah Anda membantu saya soal ini?",
+        ],
+        [
+          "시간 되시면 한번 봐 주시겠어요?",
+          "sigan doesimyeon hanbeon bwa jusigesseoyo",
+          "Kalau ada waktu, bisakah Anda melihatnya sekali?",
+        ],
+        [
+          "죄송하지만 자리를 좀 바꿔 주실 수 있어요?",
+          "joesonghajiman jarireul jom bakkwo jusil su isseoyo",
+          "Maaf, bisakah kita bertukar tempat duduk?",
+        ],
+        [
+          "가능하면 내일까지 부탁드려요.",
+          "ganeunghamyeon naeilkkaji butakdeuryeoyo",
+          "Kalau memungkinkan, mohon selesai sampai besok.",
+        ],
+        [
+          "괜찮으시면 제가 먼저 해도 될까요?",
+          "gwaenchanheusimyeon jega meonjeo haedo doelkkayo",
+          "Kalau tidak keberatan, bolehkah saya duluan?",
+        ],
+      ]);
+
+      add("menengah", "3b. Menolak tanpa menyinggung", [
+        [
+          "아쉽지만 이번에는 어려울 것 같아요.",
+          "aswipjiman ibeoneneun eoryeoul geot gatayo",
+          "Sayang sekali, kali ini sepertinya sulit.",
+        ],
+        [
+          "마음은 있는데 일정이 안 맞아요.",
+          "maeumeun inneunde iljeongi an majayo",
+          "Niatnya ada, tapi jadwalnya tidak cocok.",
+        ],
+        [
+          "생각해 보고 다시 연락드려도 될까요?",
+          "saenggakhae bogo dasi yeollakdeuryeodo doelkkayo",
+          "Bolehkah saya pikirkan dulu dan menghubungi Anda lagi?",
+        ],
+        [
+          "제안은 감사한데 이번에는 사양할게요.",
+          "jeanen gamsahande ibeoneneun sayanghalgeyo",
+          "Terima kasih atas tawarannya, tapi kali ini saya tolak dulu.",
+        ],
+        [
+          "다음 기회에 꼭 같이 하고 싶어요.",
+          "daeum gihoee kkok gachi hago sipeoyo",
+          "Lain kali saya pasti ingin ikut.",
+        ],
+        [
+          "그건 제가 결정할 수 있는 부분이 아니에요.",
+          "geugeon jega gyeoljeonghal su inneun bubuni anieyo",
+          "Itu bukan bagian yang bisa saya putuskan.",
+        ],
+      ]);
+
+      add("menengah", "3c. Bernegosiasi", [
+        [
+          "조건을 조금 조정할 수 있을까요?",
+          "jogeoneul jogeum jojeonghal su isseulkkayo",
+          "Bisakah syaratnya disesuaikan sedikit?",
+        ],
+        [
+          "중간에서 만나는 건 어떨까요?",
+          "jung-ganeseo mannaneun geon eotteolkkayo",
+          "Bagaimana kalau kita ambil jalan tengah?",
+        ],
+        [
+          "그 가격이면 조금 부담스러워요.",
+          "geu gagyeogimyeon jogeum budamseureowoyo",
+          "Dengan harga itu agak memberatkan bagi saya.",
+        ],
+        [
+          "대신 이 부분을 양보해 주시면 어떨까요?",
+          "daesin i bubuneul yangbohae jusimyeon eotteolkkayo",
+          "Sebagai gantinya, bagaimana kalau Anda mengalah di bagian ini?",
+        ],
+        [
+          "서로 윈윈할 수 있는 방법을 찾아봐요.",
+          "seoro winwinhal su inneun bangbeobeul chajabwayo",
+          "Mari cari cara yang menguntungkan kita berdua.",
+        ],
+        [
+          "일단 이 조건으로 진행해 볼게요.",
+          "ildan i jogeoneuro jinhaenghae bolgeyo",
+          "Untuk sementara saya coba lanjut dengan syarat ini.",
+        ],
+      ]);
+
+      // ---------- KAMUS KATA (bagian 5) ----------
+      addW(`vs=lawan / dibandingkan
+갔는데=sudah pergi, (dan/tapi)
+문이=pintu
+닫혀=tertutup
+일이=pekerjaan / urusan
+많거든요=soalnya banyak
+시험이=ujian
+있잖아요=kan ada
+피곤할=akan capek / pasti capek
+텐데=pasti, (jadi...)
+쉬세요=istirahatlah
+걷다가=saat berjalan
+친구를=teman (objek)
+만났어요=sudah bertemu
+비가=hujan (subjek)
+오니까=karena turun / datang
+우산을=payung (objek)
+가져가세요=bawalah
+맛있을=enak
+뿐만=tidak hanya
+아니라=melainkan
+싸요=murah
+늦었기=karena terlambat
+때문에=karena
+택시를=taksi (objek)
+탔어요=sudah naik
+배울수록=semakin belajar
+월급이=gaji (subjek)
+높은=tinggi
+반면에=sebaliknya / di sisi lain
+힘들어요=berat / susah
+생각에는=menurut pikiran
+방법이=cara (subjek)
+개인적으로는=secara pribadi
+반대예요=(adalah) menentang
+제가=saya (subjek)
+보기에는=dari sudut pandang
+문제가=masalah (subjek)
+있어요=ada
+솔직히=jujur saja
+말하면=kalau berkata
+생각하세요=berpikir (hormat)
+의견을=pendapat (objek)
+들려=perdengarkan
+주시겠어요=bersediakah memberi (hormat)
+맞는=yang benar
+말씀이에요=(adalah) perkataan (hormat)
+같은=sama
+생각이에요=(adalah) pikiran
+그=itu
+점에=pada poin
+동의해요=setuju
+바로=tepat / nah
+그거예요=(adalah) itu
+듣고=mendengar (lalu...)
+보니까=setelah dilihat
+그렇네요=memang begitu ya
+그럴=begitu
+수도=bisa jadi
+있지만=ada, tapi
+다르게=berbeda
+말씀은=perkataan (topik, hormat)
+이해하는데=paham, (tapi...)
+현실적으로=secara realistis
+어려울=akan sulit
+부분은=bagian (topik)
+다시=lagi
+생각해=pikirkan
+봐야=harus mencoba
+할=akan melakukan
+꼭=pasti
+그런=seperti itu
+건=hal (topik, singkatan)
+아닌=yang bukan
+입장에서는=dari posisi
+받아들이기=menerima (nomina)
+어려워요=sulit
+그렇군요=oh begitu ya
+아=oh
+그런=seperti itu
+있었어요=(tadi) ada / terjadi
+그래서=karena itu / lalu
+됐어요=menjadi (lampau)
+충분히=cukup / sepenuhnya
+이해돼요=bisa dipahami
+만도=pantas
+하죠=ya kan / memang
+혹시=kalau boleh
+부탁=permintaan
+해도=boleh melakukan
+될까요=bolehkah
+이것=ini (hal)
+도와주실=membantu (hormat)
+있을까요=mungkinkah ada
+시간=waktu
+되시면=kalau ada / jadi (hormat)
+한번=sekali
+봐=lihat
+죄송하지만=mohon maaf, tapi
+자리를=tempat duduk (objek)
+바꿔=tukar
+주실=memberi (hormat)
+가능하면=kalau memungkinkan
+내일까지=sampai besok
+부탁드려요=mohon (hormat)
+괜찮으시면=kalau tidak keberatan (hormat)
+먼저=duluan
+아쉽지만=sayang sekali, tapi
+이번에는=kali ini
+마음은=hati / niat (topik)
+있는데=ada, (tapi...)
+일정이=jadwal (subjek)
+맞아요=cocok
+연락드려도=boleh menghubungi (hormat)
+제안은=tawaran (topik)
+감사한데=terima kasih, (tapi...)
+사양할게요=saya tolak (halus)
+기회에=pada kesempatan
+그건=itu (topik, singkatan)
+결정할=memutuskan
+있는=yang bisa / ada
+부분이=bagian (subjek)
+아니에요=bukan
+조건을=syarat (objek)
+조정할=menyesuaikan
+중간에서=di tengah
+만나는=bertemu
+어떨까요=bagaimana kalau
+가격이면=kalau harganya
+부담스러워요=terasa memberatkan
+대신=sebagai gantinya
+부분을=bagian (objek)
+양보해=mengalah
+주시면=kalau Anda berikan (hormat)
+서로=satu sama lain
+윈윈할=saling menguntungkan
+방법을=cara (objek)
+찾아봐요=mari cari
+일단=untuk sementara
+조건으로=dengan syarat
+진행해=lanjutkan
+볼게요=saya coba`);
+
+      // ---------- BAGIAN 6: MENENGAH · Bahasa hormat, kantor, kutipan tidak langsung, bercerita ----------
+      add("menengah", "4a. Kata hormat yang wajib hafal", [
+        [
+          "먹다 → 드시다 / 잡수시다",
+          "meokda → deusida / japsusida",
+          "Makan (bentuk hormat)",
+        ],
+        ["자다 → 주무시다", "jada → jumusida", "Tidur (bentuk hormat)"],
+        ["있다 → 계시다", "itda → gyesida", "Ada, untuk orang (bentuk hormat)"],
+        [
+          "말하다 → 말씀하시다",
+          "malhada → malsseumhasida",
+          "Berbicara (bentuk hormat)",
+        ],
+        ["주다 → 드리다", "juda → deurida", "Memberi ke orang yang dihormati"],
+        [
+          "사람 / 이름 / 나이 → 분 / 성함 / 연세",
+          "saram / ireum / nai → bun / seongham / yeonse",
+          "Orang / nama / usia (bentuk hormat)",
+        ],
+      ]);
+
+      add("menengah", "4b. Kalimat di kantor", [
+        [
+          "안녕하십니까? 처음 뵙겠습니다.",
+          "annyeonghasimnikka? cheoeum boepgetseumnida",
+          "Selamat pagi. Senang berkenalan dengan Anda.",
+        ],
+        [
+          "회의 자료는 메일로 보내드리겠습니다.",
+          "hoeui jaryoneun meillo bonaedeurigetseumnida",
+          "Materi rapat akan saya kirim lewat email.",
+        ],
+        [
+          "부장님께서 지금 회의 중이십니다.",
+          "bujangnimkkeseo jigeum hoeui jungisimnida",
+          "Kepala bagian sedang rapat sekarang.",
+        ],
+        [
+          "보고드릴 내용이 있습니다.",
+          "bogodeuril naeyongi itseumnida",
+          "Ada hal yang ingin saya laporkan.",
+        ],
+        [
+          "확인 후 연락드리겠습니다.",
+          "hwagin hu yeollakdeurigetseumnida",
+          "Setelah saya cek, saya akan menghubungi Anda.",
+        ],
+        [
+          "일정을 조정해도 괜찮으시겠습니까?",
+          "iljeongeul jojeonghaedo gwaenchanheusigetseumnikka",
+          "Apakah tidak keberatan jika jadwal diatur ulang?",
+        ],
+        [
+          "말씀하신 대로 진행하겠습니다.",
+          "malsseumhasin daero jinhaenghagetseumnida",
+          "Akan saya lanjutkan sesuai arahan Anda.",
+        ],
+        [
+          "제가 담당하겠습니다.",
+          "jega damdanghagetseumnida",
+          "Saya yang akan menangani.",
+        ],
+        [
+          "마감 기한이 언제입니까?",
+          "magam gihani eonjeimnikka",
+          "Kapan batas waktunya?",
+        ],
+        [
+          "수고하셨습니다. 먼저 퇴근하겠습니다.",
+          "sugohasyeotseumnida. meonjeo toegeunhagetseumnida",
+          "Terima kasih atas kerja kerasnya. Saya pulang duluan.",
+        ],
+      ]);
+
+      add("menengah", "4c. Cara memanggil orang di kantor", [
+        [
+          "팀장님 / 부장님",
+          "timjangnim / bujangnim",
+          "Jabatan + 님: kepala tim / kepala bagian. Jangan panggil nama langsung ke atasan.",
+        ],
+        [
+          "민수 씨",
+          "minsu ssi",
+          "Nama + 씨, untuk rekan setara. Jangan dipakai ke orang yang lebih tua atau atasan.",
+        ],
+        [
+          "선배님 / 선배",
+          "seonbaenim / seonbae",
+          "Untuk senior di sekolah atau kampus.",
+        ],
+      ]);
+
+      add("menengah", "5a. Bentuk kutipan tidak langsung", [
+        [
+          "-다고 했어요 → -대요",
+          "-dago haesseoyo → -daeyo",
+          "Pernyataan: bentuk lengkap → bentuk pendek percakapan.",
+        ],
+        [
+          "-냐고 했어요 → -냬요",
+          "-nyago haesseoyo → -nyaeyo",
+          "Pertanyaan: bentuk lengkap → bentuk pendek percakapan.",
+        ],
+        [
+          "-자고 했어요 → -재요",
+          "-jago haesseoyo → -jaeyo",
+          "Ajakan: bentuk lengkap → bentuk pendek percakapan.",
+        ],
+        [
+          "-(으)라고 했어요 → -래요",
+          "-(eu)rago haesseoyo → -raeyo",
+          "Perintah: bentuk lengkap → bentuk pendek percakapan.",
+        ],
+      ]);
+
+      add("menengah", "5b. Contoh kutipan pendek", [
+        [
+          "내일 비가 온대요.",
+          "naeil biga ondaeyo",
+          "Katanya besok hujan. (pernyataan)",
+        ],
+        [
+          "어디 가냬요.",
+          "eodi ganyaeyo",
+          "Dia tanya mau ke mana. (pertanyaan)",
+        ],
+        [
+          "같이 가재요.",
+          "gachi gajaeyo",
+          "Dia mengajak pergi bareng. (ajakan)",
+        ],
+        [
+          "빨리 오래요.",
+          "ppalli oraeyo",
+          "Dia menyuruh cepat datang. (perintah)",
+        ],
+      ]);
+
+      add("menengah", "5c. Kalimat bercerita", [
+        [
+          "친구가 그러는데 그 식당이 진짜 맛있대요.",
+          "chinguga geureoneunde geu sikdangi jinjja masitdaeyo",
+          "Kata teman saya, restoran itu enak sekali.",
+        ],
+        [
+          "뉴스에서 봤는데 다음 주부터 지하철 요금이 오른대요.",
+          "nyuseueseo bwanneunde daeum jubuteo jihacheol yogeumi oreundaeyo",
+          "Saya lihat di berita, mulai minggu depan tarif subway naik.",
+        ],
+        [
+          "선생님이 숙제를 내일까지 내라고 하셨어요.",
+          "seonsaengnimi sukjereul naeilkkaji naerago hasyeosseoyo",
+          "Guru menyuruh kami mengumpulkan PR sampai besok.",
+        ],
+        [
+          "어제 있었던 일인데 들어 볼래요?",
+          "eoje isseotdeon irinde deureo bollaeyo",
+          "Ini kejadian kemarin, mau dengar?",
+        ],
+        [
+          "처음에는 몰랐는데 알고 보니까 아는 사람이었어요.",
+          "cheoeumeneun mollanneunde algo bonikka aneun saramieosseoyo",
+          "Awalnya saya tidak tahu, tapi ternyata dia orang yang saya kenal.",
+        ],
+        [
+          "그러다가 결국 포기하고 말았어요.",
+          "geureodaga gyeolguk pogihago marasseoyo",
+          "Lalu akhirnya saya menyerah juga.",
+        ],
+        [
+          "결과적으로 잘 해결됐어요.",
+          "gyeolgwajeogeuro jal haegyeoldwaesseoyo",
+          "Pada akhirnya masalahnya terselesaikan dengan baik.",
+        ],
+        [
+          "생각보다 훨씬 어려웠어요.",
+          "saenggakboda hwolssin eoryeowosseoyo",
+          "Ternyata jauh lebih sulit daripada dugaan saya.",
+        ],
+      ]);
+
+      add("menengah", "5d. Kata penyambung cerita", [
+        ["그런데", "geureonde", "Tetapi / ngomong-ngomong"],
+        ["그래서", "geuraeseo", "Karena itu / jadi"],
+        ["그러다가", "geureodaga", "Lalu pada suatu saat"],
+        ["결국", "gyeolguk", "Akhirnya"],
+        ["사실은", "sasireun", "Sebenarnya"],
+        ["게다가", "gedaga", "Lagi pula"],
+        ["어쨌든", "eojjaetdeun", "Bagaimanapun juga"],
+      ]);
+
+      // ---------- KAMUS KATA (bagian 6) ----------
+      addW(`→=menjadi / bentuk hormatnya
+먹다=makan (biasa)
+드시다=makan (hormat)
+잡수시다=makan (hormat tinggi)
+자다=tidur (biasa)
+주무시다=tidur (hormat)
+있다=ada (biasa)
+계시다=ada (hormat, untuk orang)
+말하다=berbicara (biasa)
+말씀하시다=berbicara (hormat)
+주다=memberi (biasa)
+드리다=memberi (ke orang yang dihormati)
+사람=orang
+이름=nama
+나이=usia
+분=orang (hormat)
+성함=nama (hormat)
+연세=usia (hormat)
+안녕하십니까=selamat (sangat formal)
+처음=pertama kali
+뵙겠습니다=akan bertemu (hormat tinggi)
+회의=rapat
+자료는=materi (topik)
+메일로=lewat email
+보내드리겠습니다=akan mengirimkan (hormat)
+부장님께서=kepala bagian (subjek, hormat)
+중이십니다=sedang dalam (proses) (hormat)
+보고드릴=akan melaporkan (hormat)
+내용이=isi / hal (subjek)
+있습니다=ada (formal)
+확인=pengecekan
+후=setelah
+연락드리겠습니다=akan menghubungi (hormat)
+일정을=jadwal (objek)
+조정해도=boleh diatur ulang
+괜찮으시겠습니까=apakah tidak keberatan (hormat)
+말씀하신=yang Anda katakan (hormat)
+대로=sesuai
+진행하겠습니다=akan melanjutkan
+담당하겠습니다=akan menangani
+마감=tenggat
+기한이=batas waktu (subjek)
+언제입니까=kapan (formal)
+수고하셨습니다=terima kasih atas kerja kerasnya (formal)
+퇴근하겠습니다=akan pulang kerja
+팀장님=kepala tim (hormat)
+부장님=kepala bagian (hormat)
+님=akhiran hormat untuk jabatan
+민수=Minsu (nama contoh)
+씨=akhiran sopan setelah nama (rekan setara)
+선배님=senior (hormat)
+선배=senior
+-다고=kutipan pernyataan
+-냐고=kutipan pertanyaan
+-자고=kutipan ajakan
+-(으)라고=kutipan perintah
+-대요=katanya (pernyataan)
+-냬요=dia tanya (pertanyaan)
+-재요=katanya mengajak
+-래요=katanya menyuruh
+온대요=katanya (akan) turun
+어디=di mana / ke mana
+가냬요=dia tanya (mau) pergi
+가재요=katanya mengajak pergi
+빨리=cepat
+오래요=katanya menyuruh datang
+친구가=teman (subjek)
+그러는데=(dia) bilang begitu, (dan...)
+식당이=restoran (subjek)
+진짜=benar-benar
+맛있대요=katanya enak
+뉴스에서=di berita
+봤는데=saya lihat, (dan...)
+주부터=mulai minggu
+지하철=subway
+요금이=tarif (subjek)
+오른대요=katanya naik
+선생님이=guru (subjek)
+숙제를=PR (objek)
+내라고=suruh kumpulkan (kutipan)
+하셨어요=(dia) bilang / melakukan (hormat)
+있었던=yang pernah terjadi
+일인데=kejadiannya, (dan...)
+들어=dengarkan
+볼래요=mau coba
+처음에는=awalnya
+몰랐는데=tidak tahu, (tapi...)
+알고=tahu (lalu...)
+아는=yang (saya) kenal
+사람이었어요=(ternyata) orang
+그러다가=lalu pada suatu saat
+결국=akhirnya
+포기하고=menyerah (lalu...)
+말았어요=akhirnya (melakukan)
+결과적으로=pada akhirnya
+해결됐어요=terselesaikan
+생각보다=daripada dugaan
+훨씬=jauh lebih
+어려웠어요=(tadinya) sulit
+그런데=tetapi / ngomong-ngomong
+사실은=sebenarnya
+게다가=lagi pula
+어쨌든=bagaimanapun juga`);
+
+      // ---------- BAGIAN 7: MENENGAH · Idiom, gaul, 눈치 & 정, telepon, KakaoTalk, singkatan ----------
+      add("menengah", "6a. Idiom populer", [
+        [
+          "발이 넓다",
+          "bari neolbda",
+          "Pergaulannya luas. (harfiah: kakinya lebar)",
+        ],
+        [
+          "손이 크다",
+          "soni keuda",
+          "Royal / suka memberi banyak. (harfiah: tangannya besar)",
+        ],
+        [
+          "입이 무겁다",
+          "ibi mugeopda",
+          "Pandai menyimpan rahasia. (harfiah: mulutnya berat)",
+        ],
+        [
+          "입이 가볍다",
+          "ibi gabyeopda",
+          "Mulut ember. (harfiah: mulutnya ringan)",
+        ],
+        [
+          "눈이 높다",
+          "nuni nopda",
+          "Standarnya tinggi, pemilih. (harfiah: matanya tinggi)",
+        ],
+        [
+          "귀가 얇다",
+          "gwiga yalbda",
+          "Mudah terpengaruh omongan orang. (harfiah: telinganya tipis)",
+        ],
+        [
+          "간이 크다",
+          "gani keuda",
+          "Nekat / berani sekali. (harfiah: hatinya besar)",
+        ],
+        [
+          "하늘의 별 따기",
+          "haneurui byeol ttagi",
+          "Sangat sulit dicapai. (harfiah: memetik bintang di langit)",
+        ],
+        [
+          "식은 죽 먹기",
+          "sigeun juk meokgi",
+          "Gampang sekali. (harfiah: makan bubur dingin)",
+        ],
+        [
+          "누워서 떡 먹기",
+          "nuwoseo tteok meokgi",
+          "Mudah sekali. (harfiah: makan kue beras sambil berbaring)",
+        ],
+        ["배가 아프다", "baega apeuda", "Iri hati. (harfiah: perutnya sakit)"],
+        [
+          "시치미를 떼다",
+          "sichimireul ttaeda",
+          "Pura-pura tidak tahu. (harfiah: mencopot sichimi)",
+        ],
+      ]);
+
+      add("menengah", "6b. Ekspresi gaul (hanya untuk teman sebaya)", [
+        ["헐", "heol", "Hah? / Astaga!"],
+        ["대박", "daebak", "Keren banget / luar biasa"],
+        ["진짜?", "jinjja", "Beneran?"],
+        ["어이없다", "eoieopda", "Tidak habis pikir / konyol"],
+        ["소름 돋았어.", "soreum dodasseo", "Merinding."],
+        ["꿀잼 / 노잼", "kkuljaem / nojaem", "Seru banget / garing"],
+        ["갓생", "gatsaeng", "Hidup produktif dan teratur"],
+        ["존맛", "jonmat", "Enak banget (kasar, hanya ke teman)"],
+        ["인정", "injeong", "Setuju / diakui"],
+        ["아무튼", "amuteun", "Pokoknya / bagaimanapun"],
+        [
+          "눈치가 없다 / 눈치가 빠르다",
+          "nunchiga eopda / nunchiga ppareuda",
+          "Tidak peka / peka membaca situasi",
+        ],
+        ["쏘리", "ssori", "Maaf (dipinjam dari bahasa Inggris, santai)"],
+      ]);
+
+      add("menengah", "6c. Budaya: 눈치 dan 정", [
+        ["눈치", "nunchi", "Kemampuan membaca suasana."],
+        ["눈치 보다", "nunchi boda", "Menjaga perasaan orang."],
+        ["눈치 없다", "nunchi eopda", "Tidak peka."],
+        [
+          "정",
+          "jeong",
+          "Rasa kedekatan dan kasih sayang yang tumbuh dari waktu bersama.",
+        ],
+        ["정이 들다", "jeongi deulda", "Menjadi dekat dan sayang."],
+      ]);
+
+      add("menengah", "7a. Telepon", [
+        ["여보세요?", "yeoboseyo", "Halo? (mengangkat telepon)"],
+        [
+          "저는 [nama]인데요, [nama]씨 계세요?",
+          "jeoneun [nama]indeyo, [nama]ssi gyeseyo",
+          "Saya [nama], apakah [nama] ada?",
+        ],
+        [
+          "잠시만 기다려 주세요.",
+          "jamsiman gidaryeo juseyo",
+          "Mohon tunggu sebentar.",
+        ],
+        [
+          "지금 통화 괜찮으세요?",
+          "jigeum tonghwa gwaenchanheuseyo",
+          "Apakah sekarang tidak mengganggu untuk telepon?",
+        ],
+        [
+          "잘 안 들려요. 다시 말씀해 주시겠어요?",
+          "jal an deullyeoyo. dasi malsseumhae jusigesseoyo",
+          "Suaranya kurang jelas. Bisa diulang?",
+        ],
+        [
+          "나중에 다시 전화드릴게요.",
+          "najunge dasi jeonhwadeurilgeyo",
+          "Nanti saya telepon kembali.",
+        ],
+        [
+          "메시지 남겨 드릴까요?",
+          "mesiji namgyeo deurilkkayo",
+          "Mau meninggalkan pesan?",
+        ],
+        [
+          "전화 잘못 거셨어요.",
+          "jeonhwa jalmot geosyeosseoyo",
+          "Anda salah sambung.",
+        ],
+        [
+          "끊을게요. 들어가세요.",
+          "kkeuneulgeyo. deureogaseyo",
+          "Saya tutup ya. Selamat beristirahat.",
+        ],
+      ]);
+
+      add("menengah", "7b. Chat KakaoTalk (sopan)", [
+        [
+          "확인했습니다. 감사합니다.",
+          "hwaginhaetseumnida. gamsahamnida",
+          "Sudah saya cek. Terima kasih.",
+        ],
+        [
+          "답장이 늦어서 죄송합니다.",
+          "dapjangi neujeoseo joesonghamnida",
+          "Maaf balasnya terlambat.",
+        ],
+        [
+          "오늘 안에 보내 드리겠습니다.",
+          "oneul ane bonae deurigetseumnida",
+          "Akan saya kirim hari ini juga.",
+        ],
+        ["사진 보내 주세요.", "sajin bonae juseyo", "Tolong kirim fotonya."],
+        [
+          "도착하면 연락드릴게요.",
+          "dochakhamyeon yeollakdeurilgeyo",
+          "Kalau sudah sampai, saya kabari.",
+        ],
+        [
+          "읽씹하지 말아 주세요.",
+          "ikssiphaji mara juseyo",
+          "Jangan cuma dibaca tanpa dibalas ya.",
+        ],
+      ]);
+
+      add("menengah", "7c. Singkatan chat dengan teman", [
+        ["ㅇㅋ", "okei", "Oke (dari 오케이)"],
+        ["ㄱㅅ", "gamsa", "Makasih (dari 감사)"],
+        ["ㅊㅋ", "chukha", "Selamat (dari 축하)"],
+        ["ㅇㅇ", "eung", "Iya (dari 응)"],
+        ["ㄴㄴ", "nono", "Tidak, tidak (dari 노노)"],
+        ["ㅋㅋㅋ", "kkk", "Hahaha"],
+        ["ㅠㅠ / ㅜㅜ", "yuyu", "Ekspresi menangis / sedih"],
+        ["ㄱㄱ", "gogo", "Ayo berangkat (dari 고고)"],
+        ["넵", "nep", "Baik (lebih santun dari 네 di chat)"],
+        ["헉", "heok", "Astaga (kaget)"],
+      ]);
+
+      // ---------- KAMUS KATA (bagian 7) ----------
+      addW(`발이=kaki (subjek)
+넓다=lebar / luas
+손이=tangan (subjek)
+크다=besar
+입이=mulut (subjek)
+무겁다=berat
+가볍다=ringan
+눈이=mata (subjek)
+높다=tinggi
+귀가=telinga (subjek)
+얇다=tipis
+간이=hati / nyali (subjek)
+하늘의=milik langit
+별=bintang
+따기=memetik (nomina)
+식은=yang sudah dingin
+죽=bubur
+먹기=makan (nomina)
+누워서=sambil berbaring
+떡=kue beras
+아프다=sakit
+시치미를=sichimi (objek)
+떼다=mencopot / melepas
+헐=hah / astaga
+대박=keren banget
+어이없다=tidak habis pikir
+소름=bulu kuduk
+돋았어=(sudah) muncul
+꿀잼=seru banget
+노잼=garing
+갓생=hidup produktif
+존맛=enak banget (kasar)
+인정=diakui / setuju
+아무튼=pokoknya
+눈치가=nunchi (subjek)
+없다=tidak ada
+빠르다=cepat
+쏘리=maaf (santai)
+눈치=kepekaan membaca suasana
+보다=melihat / menjaga (눈치 보다)
+정=rasa kedekatan
+정이=jeong (subjek)
+들다=masuk / tumbuh
+여보세요=halo (di telepon)
+[nama]인데요=(saya) [nama], (nih)
+[nama]씨=Tuan/Nona [nama]
+잠시만=sebentar saja
+기다려=tunggu
+통화=percakapan telepon
+괜찮으세요=apakah baik-baik saja (hormat)
+들려요=terdengar
+말씀해=katakan (hormat)
+나중에=nanti
+전화드릴게요=akan menelepon (hormat)
+메시지=pesan
+남겨=tinggalkan
+전화=telepon
+잘못=salah
+거셨어요=(Anda) menelepon (hormat)
+끊을게요=saya tutup (telepon)
+들어가세요=silakan masuk / beristirahat
+확인했습니다=sudah saya cek
+답장이=balasan (subjek)
+늦어서=karena terlambat
+안에=di dalam (batas waktu)
+보내=kirim
+드리겠습니다=akan memberikan (hormat)
+사진=foto
+도착하면=kalau sudah tiba
+연락드릴게요=akan menghubungi (hormat)
+읽씹하지=membaca tanpa membalas
+말아=jangan
+ㅇㅋ=oke (singkatan 오케이)
+ㄱㅅ=makasih (singkatan 감사)
+ㅊㅋ=selamat (singkatan 축하)
+ㅇㅇ=iya (singkatan 응)
+ㄴㄴ=tidak (singkatan 노노)
+ㅋㅋㅋ=hahaha
+ㅠㅠ=menangis / sedih
+ㅜㅜ=menangis / sedih
+ㄱㄱ=ayo berangkat (singkatan 고고)
+넵=baik (santun, di chat)
+헉=astaga (kaget)
+보니까=setelah dilihat / ternyata`);
+
+      // ---------- BAGIAN 8: MENENGAH · Topik sosial, karier, perasaan kompleks ----------
+      add("menengah", "8a. Membahas isu sosial", [
+        [
+          "요즘 물가가 너무 올라서 생활이 힘들어요.",
+          "yojeum mulgaga neomu ollaseo saenghwari himdeureoyo",
+          "Belakangan harga naik terus, jadi hidup terasa berat.",
+        ],
+        [
+          "저출산 문제가 심각해지고 있어요.",
+          "jeochulsan munjega simgakhaejigo isseoyo",
+          "Masalah angka kelahiran rendah makin serius.",
+        ],
+        [
+          "환경 보호를 위해 일회용품을 줄여야 해요.",
+          "hwangyeong bohoreul wihae ilhoeyongpumeul jurieoya haeyo",
+          "Demi lingkungan, kita harus mengurangi barang sekali pakai.",
+        ],
+        [
+          "이 문제에 대해 어떻게 생각하세요?",
+          "i munjee daehae eotteoke saenggakhaseyo",
+          "Bagaimana pendapat Anda tentang masalah ini?",
+        ],
+        [
+          "장점도 있지만 단점도 무시할 수 없어요.",
+          "jangjeomdo itjiman danjeomdo musihal su eopseoyo",
+          "Ada kelebihannya, tapi kekurangannya tidak bisa diabaikan.",
+        ],
+        [
+          "정부의 정책이 효과가 있을지 의문이에요.",
+          "jeongbuui jeongchaegi hyogwaga isseulji uimunieyo",
+          "Saya ragu apakah kebijakan pemerintah akan efektif.",
+        ],
+      ]);
+
+      add("menengah", "8b. Pekerjaan dan karier", [
+        [
+          "이직을 고민하고 있어요.",
+          "ijigeul gominhago isseoyo",
+          "Saya sedang mempertimbangkan pindah kerja.",
+        ],
+        [
+          "워라밸이 중요해요.",
+          "worabaeri jungyohaeyo",
+          "Keseimbangan kerja dan hidup itu penting.",
+        ],
+        [
+          "야근이 너무 많아서 지쳤어요.",
+          "yageuni neomu manaseo jichyeosseoyo",
+          "Lembur terlalu banyak, jadi saya kelelahan.",
+        ],
+        [
+          "경력을 쌓고 싶어요.",
+          "gyeongnyeogeul ssako sipeoyo",
+          "Saya ingin menambah pengalaman kerja.",
+        ],
+        [
+          "면접에서 긴장해서 실수했어요.",
+          "myeonjeobeseo ginjanghaeseo silsuhaesseoyo",
+          "Saya gugup saat wawancara dan membuat kesalahan.",
+        ],
+      ]);
+
+      add("menengah", "8c. Perasaan yang kompleks", [
+        [
+          "기쁘기도 하지만 한편으로는 불안해요.",
+          "gippeugido hajiman hanpyeoneuroneun buranhaeyo",
+          "Memang senang, tapi di sisi lain juga cemas.",
+        ],
+        [
+          "섭섭하다",
+          "seopseopada",
+          "Kecewa karena orang dekat kurang memperhatikan.",
+        ],
+        [
+          "서운해요.",
+          "seounhaeyo",
+          "Hati terasa kecewa / sedih karena tidak diperhatikan.",
+        ],
+        ["부담스럽다", "budamseureopda", "Merasa terbebani / tidak enak."],
+        ["아쉬워요.", "aswiwoyo", "Sayang sekali / masih ingin lebih."],
+        ["후련해요.", "huryeonhaeyo", "Lega setelah beban hilang."],
+        [
+          "막막해요.",
+          "magmakhaeyo",
+          "Bingung dan buntu, tidak tahu harus bagaimana.",
+        ],
+        ["마음이 복잡해요.", "maeumi bokjaphaeyo", "Perasaan saya rumit."],
+        [
+          "그냥 위로가 필요해요.",
+          "geunyang wirooga piryohaeyo",
+          "Saya hanya butuh dihibur.",
+        ],
+        [
+          "힘들 때 곁에 있어 줘서 고마워요.",
+          "himdeul ttae gyeote isseo jwoseo gomawoyo",
+          "Terima kasih sudah menemani saat saya kesulitan.",
+        ],
+      ]);
+
+      // ---------- KAMUS KATA (bagian 8) ----------
+      addW(`요즘=belakangan ini
+물가가=harga barang (subjek)
+올라서=karena naik
+생활이=kehidupan (subjek)
+힘들어요=berat / susah
+저출산=angka kelahiran rendah
+문제가=masalah (subjek)
+심각해지고=makin serius
+환경=lingkungan
+보호를=perlindungan (objek)
+위해=demi / untuk
+일회용품을=barang sekali pakai (objek)
+줄여야=harus dikurangi
+해요=lakukan / harus
+문제에=pada masalah
+대해=tentang
+생각하세요=berpikir (hormat)
+장점도=kelebihan juga
+단점도=kekurangan juga
+무시할=mengabaikan
+없어요=tidak ada / tidak bisa
+정부의=milik pemerintah
+정책이=kebijakan (subjek)
+효과가=efek / hasil (subjek)
+있을지=apakah akan ada
+의문이에요=(adalah) keraguan
+이직을=pindah kerja (objek)
+고민하고=sedang bimbang
+워라밸이=keseimbangan kerja-hidup (subjek)
+중요해요=penting
+야근이=lembur (subjek)
+많아서=karena banyak
+지쳤어요=kelelahan
+경력을=pengalaman kerja (objek)
+쌓고=menumpuk / menambah (lalu...)
+면접에서=di wawancara
+긴장해서=karena gugup
+실수했어요=berbuat kesalahan
+기쁘기도=memang senang
+하지만=tetapi
+한편으로는=di sisi lain
+불안해요=cemas
+섭섭하다=kecewa (orang dekat kurang perhatian)
+서운해요=sedih / kecewa karena kurang diperhatikan
+부담스럽다=terbebani
+아쉬워요=sayang sekali
+마음이=hati (subjek)
+복잡해요=rumit
+위로가=penghiburan (subjek)
+필요해요=butuh
+힘들=sedang susah
+때=saat
+곁에=di sisi
+줘서=karena memberi
+고마워요=terima kasih`);
+
+      // ---------- BAGIAN 8: MENENGAH · Topik sosial, karier, perasaan kompleks ----------
+      add("menengah", "8a. Membahas isu sosial", [
+        [
+          "요즘 물가가 너무 올라서 생활이 힘들어요.",
+          "yojeum mulgaga neomu ollaseo saenghwari himdeureoyo",
+          "Belakangan harga naik terus, jadi hidup terasa berat.",
+        ],
+        [
+          "저출산 문제가 심각해지고 있어요.",
+          "jeochulsan munjega simgakhaejigo isseoyo",
+          "Masalah angka kelahiran rendah makin serius.",
+        ],
+        [
+          "환경 보호를 위해 일회용품을 줄여야 해요.",
+          "hwangyeong bohoreul wihae ilhoeyongpumeul jurieoya haeyo",
+          "Demi lingkungan, kita harus mengurangi barang sekali pakai.",
+        ],
+        [
+          "이 문제에 대해 어떻게 생각하세요?",
+          "i munjee daehae eotteoke saenggakhaseyo",
+          "Bagaimana pendapat Anda tentang masalah ini?",
+        ],
+        [
+          "장점도 있지만 단점도 무시할 수 없어요.",
+          "jangjeomdo itjiman danjeomdo musihal su eopseoyo",
+          "Ada kelebihannya, tapi kekurangannya tidak bisa diabaikan.",
+        ],
+        [
+          "정부의 정책이 효과가 있을지 의문이에요.",
+          "jeongbuui jeongchaegi hyogwaga isseulji uimunieyo",
+          "Saya ragu apakah kebijakan pemerintah akan efektif.",
+        ],
+      ]);
+
+      add("menengah", "8b. Pekerjaan dan karier", [
+        [
+          "이직을 고민하고 있어요.",
+          "ijigeul gominhago isseoyo",
+          "Saya sedang mempertimbangkan pindah kerja.",
+        ],
+        [
+          "워라밸이 중요해요.",
+          "worabaeri jungyohaeyo",
+          "Keseimbangan kerja dan hidup itu penting.",
+        ],
+        [
+          "야근이 너무 많아서 지쳤어요.",
+          "yageuni neomu manaseo jichyeosseoyo",
+          "Lembur terlalu banyak, jadi saya kelelahan.",
+        ],
+        [
+          "경력을 쌓고 싶어요.",
+          "gyeongnyeogeul ssako sipeoyo",
+          "Saya ingin menambah pengalaman kerja.",
+        ],
+        [
+          "면접에서 긴장해서 실수했어요.",
+          "myeonjeobeseo ginjanghaeseo silsuhaesseoyo",
+          "Saya gugup saat wawancara dan membuat kesalahan.",
+        ],
+      ]);
+
+      add("menengah", "8c. Perasaan yang kompleks", [
+        [
+          "기쁘기도 하지만 한편으로는 불안해요.",
+          "gippeugido hajiman hanpyeoneuroneun buranhaeyo",
+          "Memang senang, tapi di sisi lain juga cemas.",
+        ],
+        [
+          "섭섭하다",
+          "seopseopada",
+          "Kecewa karena orang dekat kurang memperhatikan.",
+        ],
+        [
+          "서운해요.",
+          "seounhaeyo",
+          "Hati terasa kecewa / sedih karena tidak diperhatikan.",
+        ],
+        ["부담스럽다", "budamseureopda", "Merasa terbebani / tidak enak."],
+        ["아쉬워요.", "aswiwoyo", "Sayang sekali / masih ingin lebih."],
+        ["후련해요.", "huryeonhaeyo", "Lega setelah beban hilang."],
+        [
+          "막막해요.",
+          "magmakhaeyo",
+          "Bingung dan buntu, tidak tahu harus bagaimana.",
+        ],
+        ["마음이 복잡해요.", "maeumi bokjaphaeyo", "Perasaan saya rumit."],
+        [
+          "그냥 위로가 필요해요.",
+          "geunyang wirooga piryohaeyo",
+          "Saya hanya butuh dihibur.",
+        ],
+        [
+          "힘들 때 곁에 있어 줘서 고마워요.",
+          "himdeul ttae gyeote isseo jwoseo gomawoyo",
+          "Terima kasih sudah menemani saat saya kesulitan.",
+        ],
+      ]);
+
+      // ---------- BAGIAN 9: MENENGAH-ATAS · TOPIK II Level 4 (Fase 9) ----------
+      add("menengah", "9a. Pengandaian dan Tata Bahasa Level 4", [
+        [
+          "시간이 있다면 여행을 가고 싶다.",
+          "sigani itdamyeon yeohaengeul gago sipda",
+          "Jika ada waktu, saya ingin bepergian.",
+        ],
+        [
+          "실패하더라도 포기하지 않겠다.",
+          "silpaehadeorado pogihaji anketda",
+          "Meskipun gagal, saya tidak akan menyerah.",
+        ],
+        [
+          "그 사람이 거짓말을 했을 리가 없다.",
+          "geu sarami geojitmareul haesseul riga eopda",
+          "Tidak mungkin orang itu berbohong.",
+        ],
+        [
+          "사용자가 점점 늘어 간다.",
+          "sayongjaga jeomjeom neureo ganda",
+          "Pengguna semakin bertambah terus.",
+        ],
+        [
+          "신발을 신은 채로 들어갔다.",
+          "sinbareul sineun chaero deureogatda",
+          "Masuk dalam keadaan tetap memakai sepatu.",
+        ],
+        [
+          "친구가 도와준 덕분에 합격했다.",
+          "chinguga dowajun deokbune hapgyeokhaetda",
+          "Berkat bantuan teman, saya lulus.",
+        ],
+        [
+          "비가 많이 왔으므로 행사를 취소했다.",
+          "biga mani wasseumuro haengsareul chwisohaetda",
+          "Karena hujan deras, acara dibatalkan.",
+        ],
+        [
+          "작년에 비해 매출이 늘었다.",
+          "jangnyeone bihae maechuri neureotda",
+          "Penjualan meningkat dibandingkan tahun lalu.",
+        ],
+      ]);
+
+      add("menengah", "9b. Kosakata Sino-Korea & Berita Level 4", [
+        [
+          "재택근무는 출퇴근 시간을 줄일 수 있다.",
+          "jaetaekgeunmuneun chultoegeun siganeul juril su itda",
+          "Kerja dari rumah dapat mengurangi waktu perjalanan kerja.",
+        ],
+        [
+          "A시는 대중교통 요금을 올릴 예정이다.",
+          "esi-neun daejunggyotong yogeumeul ollil yejeongida",
+          "Kota A berencana menaikkan tarif transportasi umum.",
+        ],
+        [
+          "경제적 문제와 사회적 중요성",
+          "gyeongjejeok munjewa sahoejeok jungyoseong",
+          "Masalah ekonomi dan urgensi sosial.",
+        ],
+        [
+          "개인 정보가 유출될 위험이 있다.",
+          "gaein jeongboga yuchuldoel wiheomi itda",
+          "Ada risiko informasi pribadi bocor.",
+        ],
+      ]);
+
+      // ---------- KAMUS KATA (Bagian 8 & Bagian 9) ----------
+      addW(`요즘=belakangan ini
+물가가=harga barang (subjek)
+올라서=karena naik
+생활이=kehidupan (subjek)
+힘들어요=berat / susah
+저출산=angka kelahiran rendah
+문제가=masalah (subjek)
+심각해지고=makin serius
+환경=lingkungan
+보호를=perlindungan (objek)
+위해=demi / untuk
+일회용품을=barang sekali pakai (objek)
+줄여야=harus dikurangi
+해요=lakukan / harus
+문제에=pada masalah
+대해=tentang
+생각하세요=berpikir (hormat)
+장점도=kelebihan juga
+단점도=kekurangan juga
+무시할=mengabaikan
+없어요=tidak ada / tidak bisa
+정부의=milik pemerintah
+정책이=kebijakan (subjek)
+효과가=efek / hasil (subjek)
+있을지=apakah akan ada
+의문이에요=(adalah) keraguan
+이직을=pindah kerja (objek)
+고민하고=sedang bimbang
+워라밸이=keseimbangan kerja-hidup (subjek)
+중요해요=penting
+야근이=lembur (subjek)
+많아서=karena banyak
+지쳤어요=kelelahan
+경력을=pengalaman kerja (objek)
+쌓고=menumpuk / menambah (lalu...)
+면접에서=di wawancara
+긴장해서=karena gugup
+실수했어요=berbuat kesalahan
+기쁘기도=memang senang
+하지만=tetapi
+한편으로는=di sisi lain
+불안해요=cemas
+섭섭하다=kecewa (orang dekat kurang perhatian)
+서운해요=sedih / kecewa karena kurang diperhatikan
+부담스럽다=terbebani
+아쉬워요=sayang sekali
+마음이=hati (subjek)
+복잡해요=rumit
+위로가=penghiburan (subjek)
+필요해요=butuh
+힘들=sedang susah
+때=saat
+곁에=di sisi
+줘서=karena memberi
+고마워요=terima kasih
+만약=seandainya
+가정하다=mengandaikan
+실패하다=gagal
+포기하다=menyerah
+거짓말=kebohongan
+사용자=pengguna
+점점=semakin
+행사=acara
+취소되다=dibatalkan
+가능성=kemungkinan
+원인=penyebab
+결과=hasil
+영향=pengaruh
+필요하다=perlu
+결심하다=bertekad
+늦잠=bangun kesiangan
+지각하다=terlambat masuk
+사고=kecelakaan
+막히다=macet / tersumbat
+매출=penjualan
+합격하다=lulus
+유출되다=bocor
+위험=bahaya
+의존하다=bergantung
+대신하다=menggantikan
+일자리=lapangan kerja
+정책=kebijakan
+마련하다=menyiapkan
+태도=sikap
+누리다=menikmati
+재택근무=kerja dari rumah
+출퇴근=pergi dan pulang kerja
+의사소통=komunikasi
+살리다=memanfaatkan / menghidupkan
+요금=tarif
+인상=kenaikan
+인건비=biaya tenaga kerja
+밝히다=mengungkapkan
+규칙적=teratur
+안정적=stabil
+취직하다=mendapat pekerjaan
+용기=keberanian
+그만두다=berhenti
+오히려=justru / malah
+대중교통=transportasi umum
+경제적=secara ekonomi
+중요성=urgensi / pentingnya
+세계화=globalisasi
+성공률=tingkat keberhasilan
+경쟁력=daya saing
+책임감=rasa tanggung jawab
+소비자=konsumen
+전문가=pakar / ahli
+발표=presentasi / pengumuman
+대출=peminjaman
+반납=pengembalian
+연체료=denda keterlambatan
+권하다=menyarankan
+발효=fermentasi
+김장=tradisi membuat kimchi
+영수증=struk / kwitansi
+마감=tenggat / deadline
+예상=perkiraan / prediksi
+반대하다=menentang / tidak setuju
+집중하다=berkonsentrasi
+비율=rasa / persentase
+증가하다=meningkat / bertambah
+응답=jawaban / respon
+추세=tren / kecenderungan
+편리하다=praktis / nyaman
+발달하다=berkembang
+지나치게=secara berlebihan
+조절하다=mengatur / mengendalikan
+풍요롭다=makmar / sejahtera
+현명하다=bijaksana`);
+
+      // =========================================================================
+      // DATA KOSAKATA LENGKAP INTERAKTIF (DASAR - MENENGAH ATAS)
+      // =========================================================================
+
+      // ---------- BAGIAN 1: SALAM & UNGKAPAN SEHARI-HARI ----------
+      add("dasar", "1a. Ungkapan & Salam Utama", [
+        ["안녕하세요.", "annyeonghaseyo", "Halo / Selamat pagi/siang/malam."],
+        [
+          "안녕히 계세요.",
+          "annyeonghi gyeseyo",
+          "Selamat tinggal (kepada orang yang tinggal).",
+        ],
+        [
+          "안녕히 가세요.",
+          "annyeonghi gaseyo",
+          "Selamat jalan (kepada orang yang pergi).",
+        ],
+        ["감사합니다.", "gamsahamnida", "Terima kasih (formal)."],
+        ["고맙습니다.", "gomawseumnida", "Terima kasih."],
+        ["죄송합니다.", "joesonghamnida", "Mohon maaf (formal)."],
+        ["미안합니다.", "mianhamnida", "Maaf."],
+        ["괜찮아요.", "gwaenchanayo", "Tidak apa-apa / Baik-baik saja."],
+        ["네 / 예", "ne / ye", "Ya."],
+        ["아니요", "aniyo", "Tidak / Bukan."],
+        [
+          "처음 뵙겠습니다.",
+          "cheoeum boepgetseumnida",
+          "Senang pertama kali bertemu dengan Anda.",
+        ],
+        ["반갑습니다.", "bangapseumnida", "Senang berkenalan dengan Anda."],
+        [
+          "잘 부탁드립니다.",
+          "jal 부탁deurimnida",
+          "Mohon bimbingan / bantuannya.",
+        ],
+        ["축하합니다!", "chukahamnida", "Selamat!"],
+        [
+          "잘 먹겠습니다.",
+          "jal meokgetseumnida",
+          "Selamat makan (saya akan makan dengan baik).",
+        ],
+        [
+          "잘 먹었습니다.",
+          "jal meogeotseumnida",
+          "Terima kasih atas makanannya.",
+        ],
+        [
+          "주말 잘 보내세요.",
+          "jumal jal bonaeseyo",
+          "Selamat menikmati akhir pekan.",
+        ],
+      ]);
+
+      // ---------- BAGIAN 2: ANGKA, WAKTU & HARI ----------
+      add("dasar", "2a. Waktu dan Tanggal", [
+        ["오늘", "oneul", "Hari ini."],
+        ["내일", "naeil", "Besok."],
+        ["어제", "eoje", "Kemarin."],
+        ["모레", "more", "Lusa."],
+        ["지금", "jigeum", "Sekarang."],
+        ["매일", "maeil", "Setiap hari."],
+        ["주말", "jumal", "Akhir pekan."],
+        ["월요일", "woryoil", "Hari Senin."],
+        ["화요일", "hwayoil", "Hari Selasa."],
+        ["수요일", "suyoil", "Hari Rabu."],
+        ["목요일", "mogyoil", "Hari Kamis."],
+        ["금요일", "geumyoil", "Hari Jumat."],
+        ["토요일", "toyoil", "Hari Sabtu."],
+        ["일요일", "iryoil", "Hari Minggu."],
+        ["오전", "ojeon", "AM / Pagi hari."],
+        ["오후", "ohu", "PM / Sore hari."],
+        ["시", "si", "Jam / Pukul."],
+        ["분", "bun", "Menit."],
+        ["초", "cho", "Detik."],
+      ]);
+
+      // ---------- BAGIAN 3: TEMPAT & POSISI ----------
+      add("dasar", "3a. Lokasi dan Bangunan", [
+        ["집", "jip", "Rumah."],
+        ["학교", "hakgyo", "Sekolah."],
+        ["회사", "hoesa", "Perusahaan / Kantor."],
+        ["식당", "sikdang", "Restoran / Tempat makan."],
+        ["병원", "byeongwon", "Rumah sakit."],
+        ["약국", "yakguk", "Apotek."],
+        ["은행", "eonhaeng", "Bank."],
+        ["공항", "gonghang", "Bandara."],
+        ["역", "yeok", "Stasiun."],
+        ["화장실", "hwajangsil", "Toilet / Kamar mandi."],
+        ["시장", "sijang", "Pasar."],
+        ["마트", "mateu", "Supermarket."],
+        ["도서관", "doseogwan", "Perpustakaan."],
+        ["우체국", "ucheguk", "Kantor pos."],
+        ["경찰서", "gyeongchalseo", "Kantor polisi."],
+        ["위", "wi", "Atas."],
+        ["아래 / 밑", "arae / mit", "Bawah."],
+        ["앞", "ap", "Depan."],
+        ["뒤", "dwi", "Belakang."],
+        ["안 / 속", "an / sok", "Dalam."],
+        ["밖", "bak", "Luar."],
+        ["옆", "yeop", "Samping."],
+        ["사이", "sai", "Antara."],
+      ]);
+
+      // ---------- BAGIAN 4: KATA KERJA SEHARI-HARI ----------
+      add("dasar", "4a. Aktivitas Harian", [
+        ["가다", "gada", "Pergi."],
+        ["오다", "oda", "Datang."],
+        ["먹다", "meokda", "Makan."],
+        ["마시다", "masida", "Minum."],
+        ["자다", "jada", "Tidur."],
+        ["일어나다", "ireonada", "Bangun tidur."],
+        ["보다", "boda", "Melihat / Menonton."],
+        ["듣다", "deutda", "Mendengar."],
+        ["읽다", "ikda", "Membaca."],
+        ["쓰다", "sseuda", "Menulis / Memakai / Pahit."],
+        ["말하다", "malhada", "Berbicara."],
+        ["공부하다", "gongbuhada", "Belajar."],
+        ["일하다", "ilhada", "Bekerja."],
+        ["쉬다", "swida", "Istirahat."],
+        ["만나다", "mannada", "Bertemu."],
+        ["사다", "sada", "Membeli."],
+        ["팔다", "palda", "Menjual."],
+        ["알다", "alda", "Tahu / Mengerti."],
+        ["모르다", "moreuda", "Tidak tahu."],
+        ["하다", "hada", "Melakukan."],
+      ]);
+
+      // ---------- BAGIAN 5: KATA SIFAT DASAR ----------
+      add("dasar", "5a. Sifat dan Kondisi", [
+        ["크다", "keuda", "Besar."],
+        ["작다", "jakda", "Kecil."],
+        ["많다", "manta", "Banyak."],
+        ["적다", "jeokda", "Sedikit."],
+        ["좋다", "joda", "Bagus / Baik."],
+        ["나쁘다", "nappeuda", "Buruk / Jelek."],
+        ["비싸다", "bissada", "Mahal."],
+        ["싸다", "ssada", "Murah."],
+        ["어렵다", "eoryeopda", "Sulit / Susah."],
+        ["쉽다", "swipda", "Mudah."],
+        ["바쁘다", "bappeuda", "Sibuk."],
+        ["재미있다", "jaemiitda", "Seru / Menarik."],
+        ["재미없다", "jaemieopda", "Tidak seru / Membosankan."],
+        ["예쁘다", "yeppeuda", "Cantik."],
+        ["가깝다", "gakkapda", "Dekat."],
+        ["멀다", "meolda", "Jauh."],
+        ["맛있다", "masitda", "Enak."],
+        ["맛없다", "maseopda", "Tidak enak."],
+      ]);
+
+      // ---------- BAGIAN 6: DUNIA KERJA & PROFESI ----------
+      add("menengah", "6a. Kantor dan Pekerjaan", [
+        ["사장님", "sajangnim", "Direktur / Pemilik perusahaan."],
+        ["부장님", "bujangnim", "Kepala bagian / Manager."],
+        ["팀장님", "timjangnim", "Ketua tim."],
+        ["동료", "dongryeo", "Rekan kerja."],
+        ["회의", "hoeui", "Rapat / Meeting."],
+        ["출근하다", "chulgeunhada", "Berangkat kerja."],
+        ["퇴근하다", "toegeunhada", "Pulang kerja."],
+        ["야근하다", "yageunhada", "Lembur kerja malam."],
+        ["출장", "chuljang", "Dinas luar kota."],
+        ["휴가", "hyuga", "Cuti / Libur kerja."],
+        ["월급", "wolgeup", "Gaji bulanan."],
+        ["계약서", "gyeyakseo", "Surat kontrak."],
+        ["서류", "seoryu", "Dokumen / Berkas."],
+        ["업무", "eommu", "Tugas / Pekerjaan kantor."],
+        ["결재", "gyeoljae", "Persetujuan / Otorisasi."],
+        ["이직", "ijik", "Pindah kerja."],
+        ["면접", "myeonjeop", "Wawancara kerja."],
+        ["경력", "gyeongnyeok", "Pengalaman kerja."],
+      ]);
+
+      // ---------- BAGIAN 7: ISU SOSIAL & LINGKUNGAN ----------
+      add("menengah", "7a. Opini dan Masyarakat", [
+        ["사회", "sahoe", "Masyarakat / Sosial."],
+        ["경제", "gyeongje", "Ekonomi."],
+        ["정부", "jeongbu", "Pemerintah."],
+        ["정책", "jeongchaek", "Kebijakan."],
+        ["물가", "mulga", "Harga barang."],
+        ["환경", "hwangyeong", "Lingkungan."],
+        ["보호", "boho", "Perlindungan."],
+        ["문제", "munje", "Masalah."],
+        ["원인", "wonin", "Penyebab."],
+        ["결과", "gyeolgwa", "Hasil."],
+        ["영향", "yeonghyang", "Pengaruh."],
+        ["장점", "jangjeom", "Kelebihan / Keunggulan."],
+        ["단점", "danjeom", "Kekurangan / Kelemahan."],
+        ["효과", "hyogwa", "Efek / Efektivitas."],
+        ["저출산", "jeochulsan", "Rendahnya angka kelahiran."],
+        ["일회용품", "ilhoeyongpum", "Barang sekali pakai."],
+      ]);
+
+      // ---------- BAGIAN 8: PERASAAN & KONDISI PSIKOLOGIS ----------
+      add("menengah", "8a. Emosi dan Perasaan Kompleks", [
+        ["기쁘다", "gippeuda", "Senang / Gembira."],
+        ["슬프다", "seulp euda", "Sedih."],
+        ["화나다", "hwanada", "Marah."],
+        ["불안하다", "buranhada", "Cemas / Gelisah."],
+        ["걱정되다", "geokjeongdoeda", "Khawatir."],
+        ["답답하다", "dapdaphada", "Sesak / Frustrasi."],
+        ["섭섭하다", "seopseophada", "Kecewa karena kurang diperhatikan."],
+        ["서운하다", "seounhada", "Kecewa / Sedih hati."],
+        ["부담스럽다", "budamseureopda", "Merasa terbebani."],
+        ["아쉽다", "aswipda", "Sayang sekali / Kurang puas."],
+        ["후련하다", "huryeonhada", "Lega."],
+        ["막막하다", "magmakhada", "Buntu / Bingung."],
+        ["복잡하다", "bokjaphada", "Rumit / Kalut."],
+        ["외롭다", "oeropda", "Kesepian."],
+        ["지치다", "jichida", "Kelelahan / Kehabisan energi."],
+      ]);
+
+      // ---------- BAGIAN 9: TOPIK II LEVEL 4 (FASE 9) ----------
+      add("menengah", "9a. Pengandaian dan Tata Bahasa Lanjut", [
+        ["만약", "manyak", "Seandainya."],
+        ["가정하다", "gajeonghada", "Mengandaikan."],
+        ["실패하다", "silpaehada", "Gagal."],
+        ["포기하다", "pogihada", "Menyerah."],
+        ["거짓말", "geojitmal", "Kebohongan."],
+        ["사용자", "sayongja", "Pengguna."],
+        ["점점", "jeomjeom", "Semakin."],
+        ["행사", "haengsa", "Acara."],
+        ["취소되다", "chwisodoeda", "Dibatalkan."],
+        ["가능성", "ganeungseong", "Kemungkinan."],
+        ["필요하다", "pilyohada", "Perlu / Membutuhkan."],
+        ["결심하다", "gyeolsimhada", "Bertekad."],
+        ["지각하다", "jigakhada", "Terlambat."],
+        ["사고", "sago", "Kecelakaan."],
+        ["막히다", "makhida", "Macet / Tersumbat."],
+        ["매출", "maechul", "Penjualan."],
+        ["합격하다", "hapgyeokhada", "Lulus."],
+        ["유출되다", "yuchuldoeda", "Bocor."],
+        ["위험", "wiheom", "Bahaya."],
+        ["의존하다", "uijonhada", "Bergantung."],
+        ["대신하다", "daesinhada", "Menggantikan."],
+        ["일자리", "iljari", "Lapangan kerja."],
+        ["마련하다", "maryeonhada", "Menyiapkan."],
+        ["태도", "taedo", "Sikap."],
+        ["누리다", "nurida", "Menikmati."],
+      ]);
+
+      add("menengah", "9b. Kosakata Sino-Korea & Berita L4", [
+        ["재택근무", "jaetaekgeunmu", "Kerja dari rumah (WFH)."],
+        ["출퇴근", "chultoegeun", "Pergi dan pulang kerja."],
+        ["의사소통", "uisasotong", "Komunikasi."],
+        ["살리다", "sallida", "Memanfaatkan / Menyelamatkan."],
+        ["요금", "yogeum", "Tarif / Biaya."],
+        ["인상", "insang", "Kenaikan."],
+        ["인건비", "ingeonbi", "Biaya tenaga kerja."],
+        ["밝히다", "balkhida", "Mengungkapkan."],
+        ["규칙적", "gyuchikjeok", "Teratur."],
+        ["안정적", "anjeongjeok", "Stabil."],
+        ["취직하다", "chwijikhada", "Mendapat pekerjaan."],
+        ["용기", "yonggi", "Keberanian."],
+        ["그만두다", "geumanduda", "Berhenti."],
+        ["오히려", "ohiryeo", "Malah / Justru."],
+        ["대중교통", "daejunggyotong", "Transportasi umum."],
+        ["경제적", "gyeongjejeok", "Secara ekonomi."],
+        ["중요성", "jungyoseong", "Pentingnya / Urgensi."],
+        ["세계화", "segyehwa", "Globalisasi."],
+        ["성공률", "seonggongnyul", "Tingkat keberhasilan."],
+        ["경쟁력", "gyeongjaengnyeok", "Daya saing."],
+        ["책임감", "chaekimgam", "Rasa tanggung jawab."],
+        ["소비자", "sobija", "Konsumen."],
+        ["전문가", "jeonmunga", "Pakar / Ahli."],
+        ["발표", "balpyo", "Presentasi / Pengumuman."],
+        ["대출", "daechul", "Peminjaman."],
+        ["반납", "bannap", "Pengembalian."],
+        ["연체료", "yeoncheryo", "Denda keterlambatan."],
+        ["권하다", "gwonhada", "Menyarankan."],
+        ["발효", "balhyo", "Fermentasi."],
+        ["김장", "gimjang", "Tradisi membuat kimchi."],
+        ["영수증", "yeongsujeung", "Struk / Kwitansi."],
+        ["마감", "magam", "Tenggat waktu / Deadline."],
+        ["예상", "yesang", "Perkiraan / Prediksi."],
+        ["반대하다", "bandaehada", "Menentang / Tidak setuju."],
+        ["집중하다", "jipjunghada", "Berkonsentrasi."],
+        ["비율", "biyul", "Rasio / Persentase."],
+        ["증가하다", "jeunggahada", "Meningkat / Bertambah."],
+        ["응답", "eungdap", "Jawaban / Respon."],
+        ["추세", "chuse", "Tren / Kecenderungan."],
+        ["편리하다", "pyeonrihada", "Praktis / Nyaman."],
+        ["발달하다", "baldaldada", "Berkembang."],
+        ["지나치게", "jinachige", "Secara berlebihan."],
+        ["조절하다", "jojeolhada", "Mengatur / Mengendalikan."],
+        ["풍요롭다", "pungyoropda", "Makmur / Sejahtera."],
+        ["현명하다", "hyeonmyeonghada", "Bijaksana."],
+      ]);
+
+      // ---------- KAMUS KATA PENCARIAN CEPAT (addW) ----------
+      addW(`안녕하세요=Halo / Selamat pagi/siang/malam
+감사합니다=Terima kasih
+죄송합니다=Mohon maaf
+네=Ya
+아니요=Tidak
+사람=Orang
+한국=Korea
+집=Rumah
+학교=Sekolah
+책=Buku
+물=Air
+밥=Nasi / Makanan
+친구=Teman
+선생님=Guru
+오늘=Hari ini
+내일=Besok
+어제=Kemarin
+모레=Lusa
+지금=Sekarang
+매일=Setiap hari
+주말=Akhir pekan
+월요일=Hari Senin
+화요일=Hari Selasa
+수요일=Hari Rabu
+목요일=Hari Kamis
+금요일=Hari Jumat
+토요일=Hari Sabtu
+일요일=Hari Minggu
+오전=AM / Pagi hari
+오후=PM / Sore hari
+시=Jam / Pukul
+분=Menit
+초=Detik
+회사=Perusahaan / Kantor
+식당=Restoran / Tempat makan
+병원=Rumah sakit
+약국=Apotek
+은행=Bank
+공항=Bandara
+역=Stasiun
+화장실=Toilet / Kamar mandi
+시장=Pasar
+마트=Supermarket
+도서관=Perpustakaan
+우체국=Kantor pos
+경찰서=Kantor polisi
+위=Atas
+아래=Bawah
+밑=Bawah
+앞=Depan
+뒤=Belakang
+안=Dalam
+속=Dalam
+밖=Luar
+옆=Samping
+사이=Antara
+가다=Pergi
+오다=Datang
+먹다=Makan
+마시다=Minum
+자다=Tidur
+일어나다=Bangun tidur
+보다=Melihat / Menonton
+듣다=Mendengar
+읽다=Membaca
+쓰다=Menulis / Memakai / Pahit
+말하다=Berbicara
+공부하다=Belajar
+일하다=Bekerja
+쉬다=Istirahat
+만나다=Bertemu
+사다=Membeli
+팔다=Menjual
+알다=Tahu / Mengerti
+모르다=Tidak tahu
+하다=Melakukan
+크다=Besar
+작다=Kecil
+많다=Banyak
+적다=Sedikit
+좋다=Bagus / Baik
+나쁘다=Buruk / Jelek
+비싸다=Mahal
+싸다=Murah
+어렵다=Sulit / Susah
+쉽다=Mudah
+바쁘다=Sibuk
+재미있다=Seru / Menarik
+재미없다=Tidak seru / Membosankan
+예쁘다=Cantik
+가깝다=Dekat
+멀다=Jauh
+맛있다=Enak
+맛없다=Tidak enak
+사장님=Direktur / Pemilik perusahaan
+부장님=Kepala bagian / Manager
+팀장님=Ketua tim
+동료=Rekan kerja
+회의=Rapat / Meeting
+출근하다=Berangkat kerja
+퇴근하다=Pulang kerja
+야근하다=Lembur kerja malam
+출장=Dinas luar kota
+휴가=Cuti / Libur kerja
+월급=Gaji bulanan
+계약서=Surat kontrak
+서류=Dokumen / Berkas
+업무=Tugas / Pekerjaan kantor
+결재=Persetujuan / Otorisasi
+이직=Pindah kerja
+면접=Wawancara kerja
+경력=Pengalaman kerja
+사회=Masyarakat / Sosial
+경제=Ekonomi
+정부=Pemerintah
+정책=Kebijakan
+물가=Harga barang
+환경=Lingkungan
+보호=Perlindungan
+문제=Masalah
+원인=Penyebab
+결과=Hasil
+영향=Pengaruh
+장점=Kelebihan / Keunggulan
+단점=Kekurangan / Kelemahan
+효과=Efek / Efektivitas
+저출산=Rendahnya angka kelahiran
+일회용품=Barang sekali pakai
+기쁘다=Senang / Gembira
+슬프다=Sedih
+화나다=Marah
+불안하다=Cemas / Gelisah
+걱정되다=Khawatir
+답답하다=Sesak / Frustrasi
+섭섭하다=Kecewa karena kurang diperhatikan
+서운하다=Kecewa / Sedih hati
+부담스럽다=Merasa terbebani
+아쉽다=Sayang sekali / Kurang puas
+후련하다=Lega
+막막하다=Buntu / Bingung
+복잡하다=Rumit / Kalut
+외롭다=Kesepian
+지치다=Kelelahan / Kehabisan energi
+만약=Seandainya
+가정하다=Mengandaikan
+실패하다=Gagal
+포기하다=Menyerah
+거짓말=Kebohongan
+사용자=Pengguna
+점점=Semakin
+행사=Acara
+취소되다=Dibatalkan
+가능성=Kemungkinan
+필요하다=Perlu / Membutuhkan
+결심하다=Bertekad
+지각하다=Terlambat
+사고=Kecelakaan
+막히다=Macet / Tersumbat
+매출=Penjualan
+합격하다=Lulus
+유출되다=Bocor
+위험=Bahaya
+의존하다=Bergantung
+대신하다=Menggantikan
+일자리=Lapangan kerja
+마련하다=Menyiapkan
+태도=Sikap
+누리다=Menikmati
+재택근무=Kerja dari rumah (WFH)
+출퇴근=Pergi dan pulang kerja
+의사소통=Komunikasi
+살리다=Memanfaatkan / Menyelamatkan
+요금=Tarif / Biaya
+인상=Kenaikan
+인건비=Biaya tenaga kerja
+밝히다=Mengungkapkan
+규칙적=Teratur
+안정적=Stabil
+취직하다=Mendapat pekerjaan
+용기=Keberanian
+그만두다=Berhenti
+오히려=Malah / Justru
+대중교통=Transportasi umum
+경제적=Secara ekonomi
+중요성=Pentingnya / Urgensi
+세계화=Globalisasi
+성공률=Tingkat keberhasilan
+경쟁력=Daya saing
+책임감=Rasa tanggung jawab
+소비자=Konsumen
+전문가=Pakar / Ahli
+발표=Presentasi / Pengumuman
+대출=Peminjaman
+반납=Pengembalian
+연체료=Denda keterlambatan
+권하다=Menyarankan
+발효=Fermentasi
+김장=Tradisi membuat kimchi
+영수증=Struk / Kwitansi
+마감=Tenggat waktu / Deadline
+예상=Perkiraan / Prediksi
+반대하다=Menentang / Tidak setuju
+집중하다=Berkonsentrasi
+비율=Rasio / Persentase
+증가하다=Meningkat / Bertambah
+응답=Jawaban / Respon
+추세=Tren / Kecenderungan
+편리하다=Praktis / Nyaman
+발달하다=Berkembang
+지나치게=Secara berlebihan
+조절하다=Mengatur / Mengendalikan
+풍요롭다=Makmur / Sejahtera
+현명하다=Bijaksana`);
+
+      // =========================================================================
+      // TAMBAHAN KOSAKATA LENGKAP BATCH 2 (BELUM ADA SEBELUMNYA)
+      // =========================================================================
+
+      // ---------- BAGIAN 10: KESEHATAN, GEJALA & MEDIS ----------
+      add("dasar", "10a. Kesehatan dan Gejala Penyakit", [
+        ["감기", "gamgi", "Flu / Demam."],
+        ["열", "yeol", "Demam / Panas tubuh."],
+        ["기침", "gichim", "Batuk."],
+        ["두통", "dutong", "Sakit kepala."],
+        ["복통", "boktong", "Sakit perut."],
+        ["주사", "jusa", "Suntikan."],
+        ["처방전", "cheobangjeon", "Resep obat."],
+        ["치료하다", "chiryo-hada", "Mengobati / Merawat."],
+        ["수술하다", "susul-hada", "Operasi."],
+        ["입원하다", "ibwon-hada", "Rawat inap di rumah sakit."],
+        ["퇴원하다", "toewon-hada", "Keluar dari rumah sakit."],
+        [
+          "건강검진",
+          "geongang-geomjin",
+          "Pemeriksaan kesehatan (Medical Check-up).",
+        ],
+      ]);
+
+      // ---------- BAGIAN 11: TEKNOLOGI, INTERNET & MEDIA ----------
+      add("menengah", "11a. Teknologi dan Komunikasi", [
+        ["인터넷", "inteonet", "Internet."],
+        ["스마트폰", "seumateupon", "Smartphone / HP pintar."],
+        ["전화하다", "jeonhwa-hada", "Menelepon."],
+        ["문자", "munja", "Pesan teks / SMS."],
+        ["검색하다", "geomsaek-hada", "Mencari (search di internet)."],
+        ["다운로드", "daunrodeu", "Unduh / Download."],
+        ["설치하다", "seolchi-hada", "Menginstal / Memasang."],
+        ["접속하다", "jeobsok-hada", "Terhubung / Login / Mengakses."],
+        ["정보", "jeongbo", "Informasi."],
+        ["비밀번호", "bimil-beonho", "Kata sandi / Password."],
+        ["계정", "gyejeong", "Akun."],
+        ["충전하다", "chungjeon-hada", "Mengisi daya / Baterai / Saldo."],
+      ]);
+
+      // ---------- BAGIAN 12: HUKUM, LINGKUNGAN & BUDAYA ----------
+      add("menengah", "12a. Hukum dan Kebudayaan", [
+        ["법률", "beomnyul", "Hukum / Undang-undang."],
+        ["규칙", "gyuchik", "Aturan."],
+        ["위반하다", "wiban-hada", "Melanggar."],
+        ["지키다", "jikida", "Menaati / Menjaga."],
+        ["범죄", "beomjoe", "Kejahatan / Kriminalitas."],
+        ["피해자", "pihaeja", "Korban."],
+        ["가해자", "gahaeja", "Pelaku kejahatan."],
+        ["전통", "jeontong", "Tradisi."],
+        ["문화체험", "munhwa-cheoheom", "Pengalaman budaya."],
+        ["유적지", "yujeokji", "Situs bersejarah."],
+        ["기후변화", "gihu-byeonha", "Perubahan iklim."],
+        ["재활용", "jaehwalyong", "Daur ulang."],
+      ]);
+
+      // ---------- BAGIAN 13: AKADEMIK, UJIAN & TOPIK II ----------
+      add("menengah", "13a. Pembelajaran Akademik & Ujian", [
+        ["시험", "siheom", "Ujian / Tes."],
+        ["성적", "seongjeok", "Nilai / Hasil ujian."],
+        ["장학금", "janghakgeum", "Beasiswa."],
+        ["수업", "sueop", "Kelas / Pelajaran."],
+        ["전공", "jeongong", "Jurusan kuliah."],
+        ["학위", "hagwi", "Gelar akademik."],
+        ["졸업하다", "joreob-hada", "Lulus sekolah / kuliah."],
+        ["입학하다", "iphak-hada", "Masuk sekolah / kuliah."],
+        ["논문", "nonmun", "Skripsi / Tesis / Jurnal ilmiah."],
+        ["연구하다", "yeongu-hada", "Mereset / Meneliti."],
+        ["지원하다", "jiwon-hada", "Mendaftar / Mengajukan diri."],
+        ["자격증", "jagyeokjeung", "Sertifikat kualifikasi."],
+      ]);
+
+      // ---------- KAMUS KATA PENCARIAN CEPAT (addW Batch 2) ----------
+      addW(`감기=Flu / Demam
+열=Demam / Panas tubuh
+기침=Batuk
+두통=Sakit kepala
+복통=Sakit perut
+주사=Suntikan
+처방전=Resep obat
+치료하다=Mengobati / Merawat
+수술하다=Operasi
+입원하다=Rawat inap di rumah sakit
+퇴원하다=Keluar dari rumah sakit
+건강검진=Pemeriksaan kesehatan (Medical Check-up)
+인터넷=Internet
+스마트폰=Smartphone / HP pintar
+전화하다=Menelepon
+문자=Pesan teks / SMS
+검색하다=Mencari (search di internet)
+다운로드=Unduh / Download
+설치하다=Menginstal / Memasang
+접속하다=Terhubung / Login / Mengakses
+정보=Informasi
+비밀번호=Kata sandi / Password
+계정=Akun
+충전하다=Mengisi daya / Baterai / Saldo
+법률=Hukum / Undang-undang
+규칙=Aturan
+위반하다=Melanggar
+지키다=Menaati / Menjaga
+범죄=Kejahatan / Kriminalitas
+피해자=Korban
+가해자=Pelaku kejahatan
+전통=Tradisi
+문화체험=Pengalaman budaya
+유적지=Situs bersejarah
+기후변화=Perubahan iklim
+재활용=Daur ulang
+시험=Ujian / Tes
+성적=Nilai / Hasil ujian
+장학금=Beasiswa
+수업=Kelas / Pelajaran
+전공=Jurusan kuliah
+학위=Gelar akademik
+졸업하다=Lulus sekolah / kuliah
+입학하다=Masuk sekolah / kuliah
+논문=Skripsi / Tesis / Jurnal ilmiah
+연구하다=Mereset / Meneliti
+지원하다=Mendaftar / Mengajukan diri
+자격증=Sertifikat kualifikasi`);
+
+      // =========================================================================
+      // TAMBAHAN KOSAKATA BATCH 3 (BAHASA INFORMAL / BANMAL & PERCAKAPAN SANTAI)
+      // =========================================================================
+
+      // ---------- BAGIAN 14: KATA KERJA & SIFAT BENTUK BANMAL (INFORMAL) ----------
+      add("dasar", "14a. Kata Kerja & Sifat Banmal Sehari-hari", [
+        ["야", "ya", "Hei / Woi (panggilan ke teman sebaya/lebih muda)."],
+        ["응", "eung", "Ya / Ho-oh (banmal dari 네)."],
+        ["어", "eo", "Ya / Oh (variasi banmal dari 네)."],
+        ["아니", "ani", "Enggak / Enggak kok (banmal dari 아니요)."],
+        ["고마워", "gomawo", "Makasih ya (banmal dari 고맙습니다)."],
+        ["미안해", "mianhae", "Maaf ya (banmal dari 미안합니다)."],
+        ["괜찮아", "gwaenchana", "Gak apa-apa / Santai aja."],
+        ["잘 자", "jal ja", "Selamat tidur (banmal dari 안녕히 주무세요)."],
+        ["잘 가", "jal ga", "Dadaah / Selamat jalan."],
+        ["해", "hae", "Lakukan / Kerjain (banmal dari 해요)."],
+        ["하지 마", "haji ma", "Jangan lakukan / Jangan gitu."],
+        ["가지 마", "gaji ma", "Jangan pergi."],
+        ["먹어", "meogeo", "Makan nih / Makanlah."],
+        ["봐", "bwa", "Lihat nih / Coba lihat."],
+        ["알았어", "arasseo", "Paham / Oke, ngerti."],
+        ["몰라", "molla", "Gak tahu / Bodo amat."],
+        ["진짜?", "jinjja", "Beneran? / Masa sih?"],
+        ["정말?", "jeongmal", "Sungguhan?"],
+        ["대박!", "daebak", "Keren banget! / Luar biasa!"],
+        ["헐!", "heol", "Waduh! / Astaga! (ekspresi kaget/heran)."],
+      ]);
+
+      // ---------- BAGIAN 15: SLANG, UNGKAPAN EMOSI & CHATTING (반말/속어) ----------
+      add("menengah", "15a. Bahasa Gaul & Chatting Korea", [
+        ["짱", "jjang", "Paling mantap / Juara."],
+        ["남친", "namchin", "Pacar cowok (singkatan dari 남자친구)."],
+        ["여친", "yeochin", "Pacar cewek (singkatan dari 여자친구)."],
+        ["남사친", "namsachin", "Teman akrab cowok (bukan pacar)."],
+        ["여사친", "yeosachin", "Teman akrab cewek (bukan pacar)."],
+        ["심쿵", "simkung", "Bikin berdebar / Bikin deg-degan."],
+        ["멘붕", "menbung", "Mental breakdown / Stres berat / Buntu."],
+        ["솔까말", "solkkamal", "Jujur aja ya... (솔직히 까놓고 말해서)."],
+        ["답정너", "dapjeongneo", "Nanya tapi udah punya jawaban sendiri."],
+        ["TMI", "tmi", "Terlalu banyak info gak penting (Too Much Info)."],
+        ["ㅋㅋㅋ", "kkk", "Wkwkwk / Tertawa."],
+        ["ㅎㅎㅎ", "hhh", "Hahaha / Tertawa halus."],
+        ["ㅠㅠ / ㅜㅜ", "yuyu", "Nangis / Sedih."],
+        ["ㄱㅅ", "gseu", "Makasih (singkatan dari 감사)."],
+        ["ㄴㄴ", "neuneu", "No no / Enggak (singkatan dari 노노)."],
+        ["ㅇㅇ", "eungeung", "Iya / Ho-oh (singkatan dari 응)."],
+        ["ㅇㅋ", "oke", "Oke (singkatan dari 오케이)."],
+      ]);
+
+      // ---------- KAMUS KATA PENCARIAN CEPAT (addW Batch 3 - Banmal) ----------
+      addW(`야=Hei / Woi
+응=Ya / Ho-oh
+어=Ya / Oh
+아니=Enggak / Enggak kok
+고마워=Makasih ya
+미안해=Maaf ya
+괜찮아=Gak apa-apa / Santai aja
+잘 자=Selamat tidur
+잘 가=Dadaah / Selamat jalan
+해=Lakukan / Kerjain
+하지 마=Jangan lakukan
+가지 마=Jangan pergi
+먹어=Makan nih
+봐=Lihat nih
+알았어=Paham / Oke, ngerti
+몰라=Gak tahu / Bodo amat
+진짜=Beneran? / Masa sih?
+정말=Sungguhan?
+대박=Keren banget / Luar biasa
+헐=Waduh / Astaga
+짱=Paling mantap / Juara
+남친=Pacar cowok
+여친=Pacar cewek
+남사친=Teman akrab cowok
+여사친=Teman akrab cewek
+심쿵=Bikin berdebar / Deg-degan
+멘붕=Mental breakdown / Stres berat
+솔까말=Jujur aja ya
+답정너=Nanya tapi udah punya jawaban sendiri
+TMI=Info gak penting / Kelebihan info`);
+      // ===== HANGUL ENGINE =====
+      const CHO = [..."ㄱㄲㄴㄷㄸㄹㅁㅂㅃㅅㅆㅇㅈㅉㅊㅋㅌㅍㅎ"];
+      const JUNG = [..."ㅏㅐㅑㅒㅓㅔㅕㅖㅗㅘㅙㅚㅛㅜㅝㅞㅟㅠㅡㅢㅣ"];
+      const JONG = [
+        "",
+        ..."ㄱㄲㄳㄴㄵㄶㄷㄹㄺㄻㄼㄽㄾㄿㅀㅁㅂㅄㅅㅆㅇㅈㅊㅋㅌㅍㅎ",
+      ];
+      const VCOMB = {
+        ㅗㅏ: "ㅘ",
+        ㅗㅐ: "ㅙ",
+        ㅗㅣ: "ㅚ",
+        ㅜㅓ: "ㅝ",
+        ㅜㅔ: "ㅞ",
+        ㅜㅣ: "ㅟ",
+        ㅡㅣ: "ㅢ",
+      };
+      const JCOMB = {
+        ㄱㅅ: "ㄳ",
+        ㄴㅈ: "ㄵ",
+        ㄴㅎ: "ㄶ",
+        ㄹㄱ: "ㄺ",
+        ㄹㅁ: "ㄻ",
+        ㄹㅂ: "ㄼ",
+        ㄹㅅ: "ㄽ",
+        ㄹㅌ: "ㄾ",
+        ㄹㅍ: "ㄿ",
+        ㄹㅎ: "ㅀ",
+        ㅂㅅ: "ㅄ",
+      };
+      const inv = (o) =>
+        Object.fromEntries(Object.entries(o).map(([k, v]) => [v, [...k]]));
+      const VSPLIT = inv(VCOMB),
+        JSPLIT = inv(JCOMB);
+      const dec = (ch) => {
+        const c = ch.charCodeAt(0) - 0xac00;
+        return c < 0 || c > 11171
+          ? null
+          : {
+              c: Math.floor(c / 588),
+              v: Math.floor((c % 588) / 28),
+              t: c % 28,
+            };
+      };
+      const mk = (c, v, t) =>
+        String.fromCharCode(0xac00 + c * 588 + v * 28 + t);
+      const isV = (j) => JUNG.includes(j);
+
+      function typeJamo(s, j) {
+        const last = s.slice(-1),
+          head = s.slice(0, -1),
+          d = last ? dec(last) : null;
+        if (isV(j)) {
+          if (d) {
+            if (d.t) {
+              const tj = JONG[d.t],
+                sp = JSPLIT[tj];
+              if (sp)
+                return (
+                  head +
+                  mk(d.c, d.v, JONG.indexOf(sp[0])) +
+                  mk(CHO.indexOf(sp[1]), JUNG.indexOf(j), 0)
+                );
+              return (
+                head + mk(d.c, d.v, 0) + mk(CHO.indexOf(tj), JUNG.indexOf(j), 0)
+              );
             }
-          }, 1000);
+            const cb = VCOMB[JUNG[d.v] + j];
+            return cb ? head + mk(d.c, JUNG.indexOf(cb), 0) : s + j;
+          }
+          if (last && CHO.includes(last))
+            return head + mk(CHO.indexOf(last), JUNG.indexOf(j), 0);
+          return s + j;
+        }
+        if (d) {
+          if (!d.t) {
+            const ti = JONG.indexOf(j);
+            return ti > 0 ? head + mk(d.c, d.v, ti) : s + j;
+          }
+          const cb = JCOMB[JONG[d.t] + j];
+          if (cb) return head + mk(d.c, d.v, JONG.indexOf(cb));
+        }
+        return s + j;
+      }
+      function backspace(s) {
+        if (!s) return s;
+        const last = s.slice(-1),
+          head = s.slice(0, -1),
+          d = dec(last);
+        if (!d) return head;
+        if (d.t) {
+          const sp = JSPLIT[JONG[d.t]];
+          return head + mk(d.c, d.v, sp ? JONG.indexOf(sp[0]) : 0);
+        }
+        const vs = VSPLIT[JUNG[d.v]];
+        if (vs) return head + mk(d.c, JUNG.indexOf(vs[0]), 0);
+        return head + CHO[d.c];
+      }
+      const toJamo = (s) =>
+        [...String(s)]
+          .map((ch) => {
+            const d = dec(ch);
+            return d ? CHO[d.c] + JUNG[d.v] + JONG[d.t] : ch.toLowerCase();
+          })
+          .join("");
+
+      // susunan 두벌식
+      const QMAP = {
+        q: "ㅂ",
+        w: "ㅈ",
+        e: "ㄷ",
+        r: "ㄱ",
+        t: "ㅅ",
+        y: "ㅛ",
+        u: "ㅕ",
+        i: "ㅑ",
+        o: "ㅐ",
+        p: "ㅔ",
+        a: "ㅁ",
+        s: "ㄴ",
+        d: "ㅇ",
+        f: "ㄹ",
+        g: "ㅎ",
+        h: "ㅗ",
+        j: "ㅓ",
+        k: "ㅏ",
+        l: "ㅣ",
+        z: "ㅋ",
+        x: "ㅌ",
+        c: "ㅊ",
+        v: "ㅍ",
+        b: "ㅠ",
+        n: "ㅜ",
+        m: "ㅡ",
+      };
+      const QUP = {
+        q: "ㅃ",
+        w: "ㅉ",
+        e: "ㄸ",
+        r: "ㄲ",
+        t: "ㅆ",
+        o: "ㅒ",
+        p: "ㅖ",
+      };
+      const jamoOf = (k, sh) => (sh && QUP[k] ? QUP[k] : QMAP[k]);
+
+      // ===== INDEX KAMUS (dibangun dari DATA + W) =====
+      const HAN = /[\uAC00-\uD7A3\u3131-\u318E]/;
+      const clean = (t) => String(t).replace(/[.?!,;:"'“”‘’()]/g, "");
+      let IDX = [],
+        EM = new Map();
+      function build() {
+        EM = new Map();
+        const get = (k) => {
+          let e = EM.get(k);
+          if (!e) {
+            e = {
+              ko: k,
+              id: W[k] || "",
+              rom: "",
+              ex: [],
+              lv: new Set(),
+              n: EM.size,
+            };
+            EM.set(k, e);
+          }
+          return e;
+        };
+        Object.keys(W).forEach((k) => {
+          if (HAN.test(k)) get(k);
+        });
+        Object.entries(DATA).forEach(([lv, L]) =>
+          L.sections.forEach((s) =>
+            s.items.forEach((it) => {
+              const kt = String(it[0]).split(/\s+/),
+                rt = String(it[1]).split(/\s+/),
+                al = kt.length === rt.length,
+                seen = new Set();
+              kt.forEach((t, i) => {
+                const k = clean(t);
+                if (!HAN.test(k)) return;
+                const e = get(k);
+                if (!e.rom && al) e.rom = clean(rt[i]).toLowerCase();
+                e.lv.add(lv);
+                if (!seen.has(k)) {
+                  seen.add(k);
+                  e.ex.push({ ko: it[0], rom: it[1], id: it[2], sec: s.t, lv });
+                }
+              });
+            }),
+          ),
+        );
+        IDX = [...EM.values()];
+      }
+
+      // ===== STATE =====
+      const $ = (s) => document.querySelector(s),
+        list = $("#list"),
+        inp = $("#q");
+      const store = {
+        get(k, d) {
+          try {
+            return JSON.parse(localStorage.getItem(k)) ?? d;
+          } catch (e) {
+            return d;
+          }
+        },
+        set(k, v) {
+          try {
+            localStorage.setItem(k, JSON.stringify(v));
+          } catch (e) {}
+        },
+      };
+      const esc = (s) =>
+        String(s)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;");
+      let q = "",
+        onlyTodo = false,
+        onlyMean = false,
+        limit = 40,
+        kbOpen = false,
+        hmode = false,
+        shift = false;
+      const done = new Set(store.get("kk-done", [])),
+        hide = new Set(store.get("kk-hide", [])),
+        open = new Set();
+
+      // ===== AUDIO =====
+      function speak(t) {
+        if (!("speechSynthesis" in window))
+          return alert("Browser kamu belum mendukung audio. Coba Chrome/Edge.");
+        speechSynthesis.cancel();
+        const u = new SpeechSynthesisUtterance(
+          String(t).replace(/\[.*?\]/g, ""),
+        );
+        u.lang = "ko-KR";
+        u.rate = +$("#rate").value;
+        const v = speechSynthesis
+          .getVoices()
+          .find((v) => v.lang.replace("_", "-").startsWith("ko"));
+        if (v) u.voice = v;
+        speechSynthesis.speak(u);
+      }
+      speechSynthesis.onvoiceschanged = () => {};
+
+      // ===== PENCARIAN DUA ARAH (KOREA <-> INDONESIA <-> ROMANISASI) =====
+      function match(e, s) {
+        if (!s) return true;
+        const l = s.toLowerCase().trim();
+
+        // 1. Jika input mengandung karakter Hangul (Pencarian Korea)
+        if (HAN.test(s)) {
+          return toJamo(e.ko).includes(toJamo(s));
+        }
+
+        // 2. Jika input huruf Latin (Pencarian Arti Bahasa Indonesia, Romanisasi, atau Kata Korea)
+        const matchArti = e.id && e.id.toLowerCase().includes(l);
+        const matchRomanisasi = e.rom && e.rom.toLowerCase().includes(l);
+        const matchKataKorea = e.ko && e.ko.toLowerCase().includes(l);
+
+        return matchArti || matchRomanisasi || matchKataKorea;
+      }
+      const hl = (ko, k) =>
+        esc(ko)
+          .split(esc(k))
+          .join("<mark>" + esc(k) + "</mark>");
+
+      // ===== RENDER =====
+      function render() {
+        let L = IDX.filter(
+          (e) =>
+            (!onlyTodo || !done.has(e.ko)) &&
+            (!onlyMean || e.id) &&
+            match(e, q),
+        );
+        L =
+          $("#sort").value === "abc"
+            ? L.sort((a, b) => a.ko.localeCompare(b.ko, "ko"))
+            : L.sort((a, b) => a.n - b.n);
+        const shown = L.slice(0, limit);
+
+        list.innerHTML = shown.length
+          ? `<div class="grid">${shown.map(card).join("")}</div>` +
+            (L.length > limit
+              ? `<button class="more">Tampilkan lebih banyak (${L.length - limit} lagi)</button>`
+              : "")
+          : `<p class="empty">${IDX.length ? "Tidak ada kata yang cocok." : "Data kosakata masih kosong."}</p>`;
+
+        $("#sub").textContent =
+          `${L.length} kata ditampilkan dari ${IDX.length}.`;
+        const okN = IDX.filter((e) => done.has(e.ko)).length;
+        $("#bar").style.width =
+          (IDX.length ? (okN / IDX.length) * 100 : 0) + "%";
+        $("#pt").textContent =
+          `${okN}/${IDX.length} (${IDX.length ? Math.round((okN / IDX.length) * 100) : 0}%)`;
+
+        document
+          .querySelectorAll("[data-h]")
+          .forEach((b) => b.classList.toggle("on", hide.has(b.dataset.h)));
+        ["ko", "rom", "id"].forEach((h) =>
+          document.body.classList.toggle("hide-" + h, hide.has(h)),
+        );
+      }
+      function card(e) {
+        const d = done.has(e.ko),
+          o = open.has(e.ko);
+        const bd = [...e.lv]
+          .map(
+            (l) =>
+              `<span class="badge ${l === "dasar" ? "d" : "m"}">${esc(DATA[l].label)}</span>`,
+          )
+          .join("");
+        const exs = o
+          ? `<div class="exs">${
+              e.ex
+                .slice(0, 5)
+                .map(
+                  (x) =>
+                    `<div class="ex1"><div class="exk">${hl(x.ko, e.ko)}</div><div class="exr">${esc(x.rom)}</div><div class="exi">${esc(x.id)} <span class="exsec">· ${esc(x.sec)}</span></div><button class="say" data-t="${esc(x.ko)}" title="Putar kalimat">🔊</button></div>`,
+                )
+                .join("") || '<div class="exi">Belum ada contoh kalimat.</div>'
+            }</div>`
+          : "";
+        return `<article class="card ${d ? "done" : ""}" data-k="${esc(e.ko)}">
+  <div class="main">
+   <div class="ko" data-p="ko">${esc(e.ko)} ${bd}</div>
+   <div class="rom" data-p="rom">${esc(e.rom)}</div>
+   <div class="id ${e.id ? "" : "none"}" data-p="id">${e.id ? esc(e.id) : "Arti belum ada"}</div>
+   <div class="side"><button class="btn-s ck">${d ? "Hafal" : "Belum"}</button><button class="ib play" title="Putar kata">🔊</button><button class="ib ex ${o ? "on" : ""}" title="Contoh kalimat"><small>${e.ex.length}</small></button></div>
+  </div>${exs}</article>`;
+      }
+
+      // ===== KEYBOARD POPUP =====
+      const kb = $("#kb"),
+        kbh = $("#kbh");
+      function buildKb() {
+        const rows = ["qwertyuiop", "asdfghjkl", "zxcvbnm"];
+        $("#kbin").innerHTML =
+          rows
+            .map(
+              (r, i) =>
+                `<div class="kr">` +
+                (i === 2
+                  ? `<button class="kk fn ${shift ? "on" : ""}" data-f="shift">⇧</button>`
+                  : "") +
+                [...r]
+                  .map(
+                    (k) =>
+                      `<button class="kk" data-j="${jamoOf(k, shift)}">${jamoOf(k, shift)}</button>`,
+                  )
+                  .join("") +
+                (i === 2
+                  ? `<button class="kk fn" data-f="bs">⌫</button>`
+                  : "") +
+                `</div>`,
+            )
+            .join("") +
+          `<div class="kr"><button class="kk fn" data-f="clr">Hapus</button><button class="kk sp" data-f="sp">Spasi</button></div>`;
+      }
+      function setVal(v) {
+        inp.value = v;
+        q = v.trim();
+        limit = 40;
+        $("#kbp").textContent = v;
+        render();
+      }
+      $("#kbin").addEventListener("mousedown", (e) => e.preventDefault());
+      $("#kbin").addEventListener("click", (e) => {
+        const b = e.target.closest("button");
+        if (!b) return;
+        if (b.dataset.j) {
+          setVal(typeJamo(inp.value, b.dataset.j));
+          if (shift) {
+            shift = false;
+            buildKb();
+          }
+          return;
+        }
+        const f = b.dataset.f;
+        if (f === "shift") {
+          shift = !shift;
+          buildKb();
+        } else if (f === "bs") setVal(backspace(inp.value));
+        else if (f === "clr") setVal("");
+        else if (f === "sp") setVal(inp.value + " ");
+      });
+      function clampPos(x, y) {
+        const w = kb.offsetWidth,
+          h = kb.offsetHeight;
+        return {
+          x: Math.min(Math.max(0, x), Math.max(0, innerWidth - w)),
+          y: Math.min(Math.max(0, y), Math.max(0, innerHeight - h)),
+        };
+      }
+      function placeKb(x, y) {
+        const p = clampPos(x, y);
+        kb.style.left = p.x + "px";
+        kb.style.top = p.y + "px";
+        return p;
+      }
+      function toggleKb(on) {
+        kbOpen = on;
+        document.body.classList.toggle("kbopen", on);
+        $("#kbt").classList.toggle("on", on);
+        inp.setAttribute("inputmode", on ? "none" : "text");
+        if (on) {
+          buildKb();
+          $("#kbp").textContent = inp.value;
+          const s = store.get("kk-kbpos", null);
+          if (s) placeKb(s.x, s.y);
+          else
+            placeKb(
+              (innerWidth - kb.offsetWidth) / 2,
+              innerHeight - kb.offsetHeight - 24,
+            );
         }
       }
 
-      function resetTimer() {
-        clearInterval(timerInterval);
-        isTimerRunning = false;
-        timeLeft = 25 * 60;
-        document.getElementById("start-timer-btn").innerText = "Start";
-        document.getElementById("start-timer-btn").classList.remove("stop");
-        updateTimerDisplay();
-      }
+      let dr = null;
+      kbh.addEventListener("pointerdown", (e) => {
+        if (e.target.closest("#kbx")) return;
+        dr = { dx: e.clientX - kb.offsetLeft, dy: e.clientY - kb.offsetTop };
+        kbh.setPointerCapture(e.pointerId);
+        kbh.classList.add("drag");
+      });
+      kbh.addEventListener("pointermove", (e) => {
+        if (dr) placeKb(e.clientX - dr.dx, e.clientY - dr.dy);
+      });
+      const endDrag = () => {
+        if (!dr) return;
+        dr = null;
+        kbh.classList.remove("drag");
+        store.set("kk-kbpos", { x: kb.offsetLeft, y: kb.offsetTop });
+      };
+      kbh.addEventListener("pointerup", endDrag);
+      kbh.addEventListener("pointercancel", endDrag);
+      $("#kbx").onclick = () => toggleKb(false);
+      addEventListener("resize", () => {
+        if (kbOpen) placeKb(kb.offsetLeft, kb.offsetTop);
+      });
 
-      updateTimerDisplay();
+      // ===== EVENTS =====
+      list.addEventListener("click", (ev) => {
+        if (ev.target.closest(".more")) {
+          limit += 40;
+          return render();
+        }
+        const sb = ev.target.closest(".say");
+        if (sb) return speak(sb.dataset.t);
+        const card = ev.target.closest(".card");
+        if (!card) return;
+        const k = card.dataset.k,
+          part = ev.target.closest("[data-p]");
+        if (
+          part &&
+          document.body.classList.contains("hide-" + part.dataset.p) &&
+          !part.classList.contains("rev")
+        ) {
+          part.classList.add("rev");
+          return;
+        }
+        if (ev.target.closest(".ck")) {
+          done.has(k) ? done.delete(k) : done.add(k);
+          store.set("kk-done", [...done]);
+          return render();
+        }
+        if (ev.target.closest(".play")) return speak(k);
+        if (ev.target.closest(".ex")) {
+          open.has(k) ? open.delete(k) : open.add(k);
+          return render();
+        }
+        if (ev.target.closest(".ko")) speak(k);
+      });
+      inp.addEventListener("input", () => {
+        q = inp.value.trim();
+        limit = 40;
+        $("#kbp").textContent = inp.value;
+        render();
+      });
+      inp.addEventListener("keydown", (e) => {
+        if (!hmode || e.ctrlKey || e.metaKey || e.altKey) return;
+        if (e.key === "Backspace") {
+          e.preventDefault();
+          return setVal(backspace(inp.value));
+        }
+        if (/^[a-zA-Z]$/.test(e.key)) {
+          e.preventDefault();
+          setVal(typeJamo(inp.value, jamoOf(e.key.toLowerCase(), e.shiftKey)));
+        }
+      });
+      $("#clr").onclick = () => {
+        setVal("");
+        inp.focus();
+      };
+      $("#kbt").onclick = () => toggleKb(!kbOpen);
+      $("#hm").onclick = (e) => {
+        hmode = !hmode;
+        e.currentTarget.classList.toggle("on", hmode);
+        e.currentTarget.textContent = hmode ? "한 Mode: AKTIF" : "한 Ketik";
+        inp.focus();
+      };
+      $("#todo").onclick = (e) => {
+        onlyTodo = !onlyTodo;
+        e.currentTarget.classList.toggle("on", onlyTodo);
+        limit = 40;
+        render();
+      };
+      $("#mean").onclick = (e) => {
+        onlyMean = !onlyMean;
+        e.currentTarget.classList.toggle("on", onlyMean);
+        limit = 40;
+        render();
+      };
+      $("#sort").onchange = () => {
+        limit = 40;
+        render();
+      };
+      document.querySelectorAll("[data-h]").forEach(
+        (b) =>
+          (b.onclick = () => {
+            const h = b.dataset.h;
+            hide.has(h) ? hide.delete(h) : hide.add(h);
+            store.set("kk-hide", [...hide]);
+            render();
+          }),
+      );
+
+      build();
+      render();
     </script>
   </body>
 </html>

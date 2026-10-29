@@ -4,6 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Welcome - K-Learning Platform</title>
+    <!-- Favicon / Logo Tab Browser (SVG Inline) -->
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23e11d48'/><text x='50%' y='55%' dominant-baseline='central' text-anchor='middle' fill='white' font-size='60' font-family='sans-serif' font-weight='bold'>한</text></svg>"
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -570,9 +576,7 @@
           onsubmit="handleStep2(event)"
         >
           <div class="form-group">
-            <label for="creator-name"
-              >Siapa nama pacar pembuat sistem ini?</label
-            >
+            <label for="creator-name">Verifikasi</label>
             <input
               type="text"
               id="creator-name"
@@ -605,7 +609,7 @@
       // =========================================================
       const VALID_USER = "admin";
       const VALID_PASS = "korea2026";
-      const VALID_CREATOR = "jomblo";
+      const VALID_CREATOR = "belajar#korea";
       // =========================================================
 
       const modal = document.getElementById("login-modal");

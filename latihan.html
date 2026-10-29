@@ -3,7 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Latihan Kosakata - K-Learning Platform</title>
+    <title>Latihan Kosakata · K-Learning Platform</title>
+
+    <!-- Favicon Logo Hangul -->
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23e11d48'/><text x='50%' y='55%' dominant-baseline='central' text-anchor='middle' fill='white' font-size='60' font-family='sans-serif' font-weight='bold'>한</text></svg>"
+    />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -20,7 +28,8 @@
         --accent-hover: #be123c;
         --border-color: rgba(255, 255, 255, 0.1);
         --text-muted: #94a3b8;
-        --success: #22c55e;
+        --success: #10b981;
+        --danger: #ef4444;
       }
 
       * {
@@ -43,7 +52,7 @@
         backdrop-filter: blur(12px);
         border-bottom: 1px solid var(--border-color);
         padding: 0 32px;
-        height: 70px;
+        height: 64px;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -57,7 +66,7 @@
         align-items: center;
         gap: 12px;
         font-weight: 800;
-        font-size: 1.25rem;
+        font-size: 1.15rem;
         color: var(--primary);
         text-decoration: none;
       }
@@ -65,8 +74,8 @@
       .brand-logo {
         background: linear-gradient(135deg, var(--accent), #f43f5e);
         color: white;
-        width: 38px;
-        height: 38px;
+        width: 36px;
+        height: 36px;
         border-radius: 8px;
         display: flex;
         align-items: center;
@@ -81,16 +90,17 @@
         font-size: 0.9rem;
         transition: color 0.2s;
       }
+
       nav a:hover {
         color: var(--primary);
       }
 
       main {
         flex: 1;
-        max-width: 900px;
+        max-width: 850px;
         width: 100%;
         margin: 0 auto;
-        padding: 32px 24px;
+        padding: 32px 20px;
       }
 
       /* Selection Screen */
@@ -108,50 +118,45 @@
         font-size: 0.95rem;
       }
 
-      .phase-group {
-        margin-bottom: 28px;
-      }
-
-      .phase-title {
-        font-size: 1.1rem;
-        font-weight: 700;
-        color: var(--accent);
-        margin-bottom: 12px;
-        padding-bottom: 6px;
-        border-bottom: 1px solid var(--border-color);
-      }
-
-      .weeks-grid {
+      .category-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 16px;
+      }
+
+      .category-card {
+        background: var(--panel-bg);
+        border: 1px solid var(--border-color);
+        padding: 20px;
+        border-radius: 14px;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
         gap: 12px;
       }
 
-      .week-card {
-        background: var(--panel-bg);
-        border: 1px solid var(--border-color);
-        padding: 16px;
-        border-radius: 12px;
-        text-align: center;
-        cursor: pointer;
-        transition: all 0.2s ease;
-      }
-
-      .week-card:hover {
+      .category-card:hover {
         border-color: var(--accent);
-        transform: translateY(-2px);
-        box-shadow: 0 8px 20px rgba(225, 29, 72, 0.2);
+        transform: translateY(-3px);
+        box-shadow: 0 10px 25px rgba(225, 29, 72, 0.25);
       }
 
-      .week-name {
+      .category-name {
         font-weight: 700;
-        font-size: 1rem;
-        margin-bottom: 4px;
+        font-size: 1.1rem;
       }
 
-      .week-count {
+      .category-count {
         font-size: 0.8rem;
-        color: var(--text-muted);
+        color: #f43f5e;
+        background: rgba(244, 63, 94, 0.1);
+        padding: 4px 10px;
+        border-radius: 20px;
+        display: inline-block;
+        font-weight: 600;
       }
 
       /* Quiz Screen */
@@ -174,32 +179,35 @@
       }
 
       .quiz-title {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
         font-weight: 700;
+        color: var(--text-muted);
       }
 
       .quiz-progress {
         font-size: 0.9rem;
-        font-weight: 600;
+        font-weight: 700;
         color: var(--accent);
       }
 
       .question-box {
         text-align: center;
-        margin: 36px 0 40px 0;
+        margin: 30px 0 36px 0;
       }
 
       .question-kr {
-        font-size: 2.6rem;
+        font-size: 2.8rem;
         font-weight: 800;
         color: var(--primary);
         letter-spacing: 0.02em;
+        margin-bottom: 8px;
+        font-family: "Noto Sans KR", sans-serif;
       }
 
       .options-grid {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 12px;
+        gap: 14px;
         margin-bottom: 24px;
       }
 
@@ -207,18 +215,49 @@
         background: rgba(15, 23, 42, 0.6);
         border: 1px solid var(--border-color);
         color: var(--primary);
-        padding: 18px;
+        padding: 18px 20px;
         border-radius: 12px;
         font-size: 1rem;
         font-weight: 600;
         cursor: pointer;
         transition: all 0.2s ease;
         text-align: left;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
       }
 
-      .option-btn:hover {
+      .option-btn:hover:not(:disabled) {
         border-color: var(--accent);
-        background: rgba(225, 29, 72, 0.1);
+        background: rgba(225, 29, 72, 0.15);
+      }
+
+      .option-btn.correct {
+        background: rgba(16, 185, 129, 0.2) !important;
+        border-color: var(--success) !important;
+        color: #6ee7b7 !important;
+      }
+
+      .option-btn.wrong {
+        background: rgba(239, 68, 68, 0.2) !important;
+        border-color: var(--danger) !important;
+        color: #fca5a5 !important;
+      }
+
+      .audio-btn {
+        background: rgba(255, 255, 255, 0.1);
+        border: none;
+        color: white;
+        padding: 6px 14px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        cursor: pointer;
+        margin-top: 10px;
+        transition: background 0.2s;
+      }
+
+      .audio-btn:hover {
+        background: var(--accent);
       }
 
       /* Result Screen */
@@ -247,26 +286,28 @@
       }
 
       .score-label {
-        font-size: 0.8rem;
+        font-size: 0.75rem;
         color: var(--text-muted);
+        font-weight: 700;
       }
 
       .result-stats {
         display: flex;
         justify-content: center;
-        gap: 24px;
+        gap: 16px;
         margin-bottom: 32px;
       }
 
       .stat-item {
         background: rgba(15, 23, 42, 0.6);
         padding: 12px 20px;
-        border-radius: 10px;
+        border-radius: 12px;
         border: 1px solid var(--border-color);
+        min-width: 100px;
       }
 
       .stat-val {
-        font-size: 1.2rem;
+        font-size: 1.3rem;
         font-weight: 700;
       }
 
@@ -312,7 +353,7 @@
           grid-template-columns: 1fr;
         }
         .question-kr {
-          font-size: 2rem;
+          font-size: 2.2rem;
         }
       }
     </style>
@@ -329,25 +370,28 @@
     </header>
 
     <main>
-      <!-- TAMPILAN 1: PILIH MINGGU -->
+      <!-- TAMPILAN 1: PILIH PAKET LATIHAN -->
       <div id="selection-screen">
-        <h1 class="section-title">Pilih Minggu Latihan</h1>
+        <h1 class="section-title">Pilih Topik Latihan</h1>
         <p class="section-desc">
-          Uji hafalan karakter Hangul dan kosakata kamu per minggu.
+          Uji hafalan dan pemahaman kosakata bahasa Korea kamu per paket.
         </p>
 
-        <div id="weeks-container"></div>
+        <div id="category-container" class="category-grid"></div>
       </div>
 
-      <!-- TAMPILAN 2: AREA KUIS MURNI HANGUL -->
+      <!-- TAMPILAN 2: AREA KUIS -->
       <div id="quiz-screen" class="quiz-container">
         <div class="quiz-header">
-          <div class="quiz-title" id="quiz-week-label">Minggu 1</div>
+          <div class="quiz-title" id="quiz-category-label">Kategori</div>
           <div class="quiz-progress" id="quiz-progress">Soal 1 / 10</div>
         </div>
 
         <div class="question-box">
-          <div class="question-kr" id="question-kr">안녕하세요</div>
+          <div class="question-kr" id="question-kr">한국어</div>
+          <button class="audio-btn" onclick="speakCurrentQuestion()">
+            🔊 Dengarkan
+          </button>
         </div>
 
         <div class="options-grid" id="options-container"></div>
@@ -355,14 +399,12 @@
 
       <!-- TAMPILAN 3: HASIL & SKOR -->
       <div id="result-screen" class="quiz-container result-box">
-        <h2 style="font-size: 1.8rem; margin-bottom: 8px">
-          Hasil Latihan Selesai! 🎉
-        </h2>
+        <h2 style="font-size: 1.8rem; margin-bottom: 8px">Selesai! 🎉</h2>
         <p
           style="color: var(--text-muted); margin-bottom: 24px"
-          id="result-week-subtitle"
+          id="result-subtitle"
         >
-          Minggu 1
+          Hasil Latihan
         </p>
 
         <div class="score-circle">
@@ -383,7 +425,7 @@
           </div>
           <div class="stat-item">
             <div style="color: var(--text-muted); font-size: 0.8rem">Salah</div>
-            <div class="stat-val" style="color: var(--accent)" id="stat-wrong">
+            <div class="stat-val" style="color: var(--danger)" id="stat-wrong">
               0
             </div>
           </div>
@@ -397,610 +439,883 @@
 
         <div class="btn-group">
           <button class="btn-action btn-secondary" onclick="restartQuiz()">
-            Ulangi Minggu Ini
+            Ulangi Paket Ini
           </button>
           <button class="btn-action" onclick="showSelectionScreen()">
-            Pilih Minggu Lain
+            Pilih Paket Lain
           </button>
         </div>
       </div>
     </main>
 
     <footer>
-      <p>&copy; 2026 K-Learning Platform. Master Hangul step-by-step!</p>
+      <p>&copy; 2026 K-Learning Platform. Master Korean Step-by-Step!</p>
     </footer>
 
     <script>
-      // DATA KOSAKATA LENGKAP MINGGU 1 - 28
-      const fullVocabData = {
-        // FASE 1
-        "Minggu 1": [
-          { kr: "안녕하세요", id: "Halo / selamat (umum)" },
-          { kr: "안녕히 가세요", id: "Selamat jalan (ke yang pergi)" },
-          { kr: "안녕히 계세요", id: "Selamat tinggal (ke yang tinggal)" },
-          { kr: "만나서 반갑습니다", id: "Senang bertemu dengan Anda" },
-          { kr: "감사합니다", id: "Terima kasih" },
-          { kr: "죄송합니다", id: "Minta maaf" },
-          { kr: "네 / 예", id: "Ya" },
-          { kr: "아니요", id: "Tidak / bukan" },
-          { kr: "이름", id: "Nama" },
-          { kr: "사람", id: "Orang" },
-          { kr: "한국", id: "Korea" },
-          { kr: "인도네시아", id: "Indonesia" },
-          { kr: "선생님", id: "Guru" },
-          { kr: "학생", id: "Siswa / pelajar" },
-          { kr: "회사원", id: "Karyawan perusahaan" },
-        ],
-        "Minggu 2": [
-          { kr: "책", id: "Buku" },
-          { kr: "공책", id: "Buku tulis" },
-          { kr: "연필", id: "Pensil" },
-          { kr: "볼펜", id: "Pulpen" },
-          { kr: "지우개", id: "Penghapus" },
-          { kr: "시계", id: "Jam" },
-          { kr: "가방", id: "Tas" },
-          { kr: "모자", id: "Topi" },
-          { kr: "안경", id: "Kacamata" },
-          { kr: "우산", id: "Payung" },
-          { kr: "이것", id: "Ini (benda dekat)" },
-          { kr: "그것", id: "Itu (dekat lawan bicara)" },
-          { kr: "저것", id: "Itu (jauh dari keduanya)" },
-          { kr: "무엇 / 뭐", id: "Apa" },
-          { kr: "누구", id: "Siapa" },
-        ],
-        "Minggu 3": [
-          { kr: "자다", id: "Tidur" },
-          { kr: "일어나다", id: "Bangun tidur" },
-          { kr: "먹다", id: "Makan" },
-          { kr: "마시다", id: "Minum" },
-          { kr: "가다", id: "Pergi" },
-          { kr: "오다", id: "Datang" },
-          { kr: "보다", id: "Melihat / menonton" },
-          { kr: "듣다", id: "Mendengar" },
-          { kr: "읽다", id: "Membaca" },
-          { kr: "쓰다", id: "Menulis" },
-          { kr: "공부하다", id: "Belajar" },
-          { kr: "일하다", id: "Bekerja" },
-          { kr: "쉬다", id: "Istirahat" },
-          { kr: "운동하다", id: "Berolahraga" },
-          { kr: "만나다", id: "Bertemu" },
-        ],
-        "Minggu 4": [
-          { kr: "오늘", id: "Hari ini" },
-          { kr: "어제", id: "Kemarin" },
-          { kr: "내일", id: "Besok" },
-          { kr: "지금", id: "Sekarang" },
-          { kr: "아침", id: "Pagi" },
-          { kr: "점심", id: "Siang" },
-          { kr: "저녁", id: "Malam / sore" },
-          { kr: "월요일", id: "Senin" },
-          { kr: "화요일", id: "Selasa" },
-          { kr: "수요일", id: "Rabu" },
-          { kr: "목요일", id: "Kamis" },
-          { kr: "금요일", id: "Jumat" },
-          { kr: "토요일", id: "Sabtu" },
-          { kr: "일요일", id: "Minggu" },
-          { kr: "주말", id: "Akhir pekan" },
-        ],
+      // =========================================================================
+      // PENGERUK DATA OTOMATIS & PENYIMPANAN
+      // =========================================================================
+      const RAW_VOCAB_DATA = [];
+      const vocabMap = new Map();
 
-        // FASE 2
-        "Minggu 5": [
-          { kr: "집", id: "Rumah" },
-          { kr: "학교", id: "Sekolah" },
-          { kr: "회사", id: "Perusahaan" },
-          { kr: "식당", id: "Restoran" },
-          { kr: "카페", id: "Kafe" },
-          { kr: "시장", id: "Pasar" },
-          { kr: "마트", id: "Supermarket" },
-          { kr: "병원", id: "Rumah sakit" },
-          { kr: "약국", id: "Apotek" },
-          { kr: "은행", id: "Bank" },
-          { kr: "우체국", id: "Kantor pos" },
-          { kr: "공원", id: "Taman" },
-          { kr: "공항", id: "Bandara" },
-          { kr: "도서관", id: "Perpustakaan" },
-          { kr: "화장실", id: "Toilet" },
-        ],
-        "Minggu 6": [
-          { kr: "공부하다", id: "Belajar" },
-          { kr: "일하다", id: "Bekerja" },
-          { kr: "운동하다", id: "Berolahraga" },
-          { kr: "수영하다", id: "Berenang" },
-          { kr: "산책하다", id: "Jalan-jalan" },
-          { kr: "쇼핑하다", id: "Berbelanja" },
-          { kr: "노래하다", id: "Bernyanyi" },
-          { kr: "요리하다", id: "Memasak" },
-          { kr: "전화하다", id: "Menelepon" },
-          { kr: "청소하다", id: "Membersihkan" },
-          { kr: "빨래하다", id: "Mencuci pakaian" },
-          { kr: "이야기하다", id: "Berbicara" },
-          { kr: "질문하다", id: "Bertanya" },
-          { kr: "대답하다", id: "Menjawab" },
-          { kr: "주문하다", id: "Memesan" },
-        ],
-        "Minggu 7": [
-          { kr: "영", id: "Nol (Sino)" },
-          { kr: "일", id: "Satu (Sino)" },
-          { kr: "이", id: "Dua (Sino)" },
-          { kr: "삼", id: "Tiga (Sino)" },
-          { kr: "사", id: "Empat (Sino)" },
-          { kr: "오", id: "Lima (Sino)" },
-          { kr: "육", id: "Enam (Sino)" },
-          { kr: "칠", id: "Tujuh (Sino)" },
-          { kr: "팔", id: "Delapan (Sino)" },
-          { kr: "구", id: "Sembilan (Sino)" },
-          { kr: "십", id: "Sepuluh (Sino)" },
-          { kr: "백", id: "Ratus" },
-          { kr: "천", id: "Ribu" },
-          { kr: "만", id: "Puluh ribu" },
-          { kr: "원", id: "Won (Mata uang Korea)" },
-        ],
-        "Minggu 8": [
-          { kr: "하나 / 한", id: "Satu (Asli)" },
-          { kr: "둘 / 두", id: "Dua (Asli)" },
-          { kr: "셋 / 세", id: "Tiga (Asli)" },
-          { kr: "넷 / 네", id: "Empat (Asli)" },
-          { kr: "다섯", id: "Lima (Asli)" },
-          { kr: "여섯", id: "Enam (Asli)" },
-          { kr: "일곱", id: "Tujuh (Asli)" },
-          { kr: "여덟", id: "Delapan (Asli)" },
-          { kr: "아홉", id: "Sembilan (Asli)" },
-          { kr: "열", id: "Sepuluh (Asli)" },
-          { kr: "시", id: "Jam (titik waktu)" },
-          { kr: "분", id: "Menit" },
-          { kr: "시간", id: "Jam (durasi)" },
-          { kr: "개", id: "Buah (satuan umum)" },
-          { kr: "명", id: "Orang (satuan)" },
-        ],
+      // Pengeruk Otomatis untuk format add(...)
+      function add(level, category, items) {
+        if (Array.isArray(items)) {
+          items.forEach((item) => {
+            if (Array.isArray(item) && item.length >= 3) {
+              const kr = item[0].replace(/[.?!,;:"'“”‘’()]/g, "").trim();
+              const id = item[2].trim();
+              if (kr && id && !vocabMap.has(kr)) {
+                vocabMap.set(kr, id);
+                RAW_VOCAB_DATA.push({ kr, id });
+              }
+            }
+          });
+        }
+      }
 
-        // FASE 3
-        "Minggu 9": [
-          { kr: "크다", id: "Besar" },
-          { kr: "작다", id: "Kecil" },
-          { kr: "많다", id: "Banyak" },
-          { kr: "적다", id: "Sedikit" },
-          { kr: "좋다", id: "Bagus / baik" },
-          { kr: "나쁘다", id: "Buruk" },
-          { kr: "비싸다", id: "Mahal" },
-          { kr: "싸다", id: "Murah" },
-          { kr: "맛있다", id: "Enak" },
-          { kr: "맛없다", id: "Tidak enak" },
-          { kr: "재미있다", id: "Seru" },
-          { kr: "재미없다", id: "Membosankan" },
-          { kr: "어렵다", id: "Sulit" },
-          { kr: "쉽다", id: "Mudah" },
-          { kr: "바쁘다", id: "Sibuk" },
-        ],
-        "Minggu 10": [
-          { kr: "날씨", id: "Cuaca" },
-          { kr: "봄", id: "Musim semi" },
-          { kr: "여름", id: "Musim panas" },
-          { kr: "가을", id: "Musim gugur" },
-          { kr: "겨울", id: "Musim dingin" },
-          { kr: "덥다", id: "Panas" },
-          { kr: "춥다", id: "Dingin" },
-          { kr: "따뜻하다", id: "Hangat" },
-          { kr: "시원하다", id: "Sejuk" },
-          { kr: "비가 오다", id: "Hujan turun" },
-          { kr: "눈이 오다", id: "Salju turun" },
-          { kr: "바람이 불다", id: "Angin berhembus" },
-          { kr: "맑다", id: "Cerah" },
-          { kr: "흐리다", id: "Mendung" },
-          { kr: "구름", id: "Awan" },
-        ],
-        "Minggu 11": [
-          { kr: "머리", id: "Kepala / rambut" },
-          { kr: "눈", id: "Mata" },
-          { kr: "귀", id: "Telinga" },
-          { kr: "코", id: "Hidung" },
-          { kr: "입", id: "Mulut" },
-          { kr: "얼굴", id: "Wajah" },
-          { kr: "손", id: "Tangan" },
-          { kr: "발", id: "Kaki (telapak)" },
-          { kr: "다리", id: "Kaki (tungkai)" },
-          { kr: "배", id: "Perut" },
-          { kr: "아프다", id: "Sakit" },
-          { kr: "감기", id: "Flu / pilek" },
-          { kr: "열", id: "Demam" },
-          { kr: "약", id: "Obat" },
-          { kr: "주사", id: "Suntikan" },
-        ],
-        "Minggu 12": [
-          { kr: "버스", id: "Bus" },
-          { kr: "지하철", id: "Kereta bawah tanah" },
-          { kr: "택시", id: "Taksi" },
-          { kr: "기차", id: "Kereta api" },
-          { kr: "비행기", id: "Pesawat" },
-          { kr: "자전거", id: "Sepeda" },
-          { kr: "타다", id: "Naik (kendaraan)" },
-          { kr: "내리다", id: "Turun (kendaraan)" },
-          { kr: "갈아타다", id: "Transit / berganti" },
-          { kr: "걸어가다", id: "Jalan kaki" },
-          { kr: "정류장", id: "Halte bus" },
-          { kr: "역", id: "Stasiun" },
-          { kr: "표", id: "Tiket" },
-          { kr: "가깝다", id: "Dekat" },
-          { kr: "멀다", id: "Jauh" },
-        ],
+      // Pengeruk Otomatis untuk format addW(...)
+      function addW(text) {
+        if (typeof text === "string") {
+          text
+            .trim()
+            .split("\n")
+            .forEach((line) => {
+              const eqIdx = line.indexOf("=");
+              if (eqIdx > 0) {
+                const kr = line.slice(0, eqIdx).trim();
+                const id = line.slice(eqIdx + 1).trim();
+                if (kr && id && !vocabMap.has(kr)) {
+                  vocabMap.set(kr, id);
+                  RAW_VOCAB_DATA.push({ kr, id });
+                }
+              }
+            });
+        }
+      }
 
-        // FASE 4
-        "Minggu 13": [
-          { kr: "옷", id: "Pakaian" },
-          { kr: "입다", id: "Memakai (baju)" },
-          { kr: "신다", id: "Memakai (sepatu/kaos kaki)" },
-          { kr: "쓰다", id: "Memakai (topi/kacamata)" },
-          { kr: "벗다", id: "Melepas pakaian" },
-          { kr: "신발", id: "Sepatu" },
-          { kr: "바지", id: "Celana" },
-          { kr: "치마", id: "Rok" },
-          { kr: "안경", id: "Kacamata" },
-          { kr: "길다", id: "Panjang" },
-          { kr: "짧다", id: "Pendek" },
-          { kr: "무겁다", id: "Berat" },
-          { kr: "가볍다", id: "Ringan" },
-          { kr: "어둡다", id: "Gelap" },
-          { kr: "밝다", id: "Terang" },
+      // =========================================================================
+      // INTEGRASI DATA KOSAKATA DARI DATA KAMUS.TXT
+      // =========================================================================
+      add("dasar", "1a. Salam harian", [
+        ["안녕하세요.", "annyeonghaseyo", "Halo / selamat pagi-siang-sore."],
+        [
+          "안녕하세요? 잘 지내세요?",
+          "annyeonghaseyo? jal jinaeseyo?",
+          "Halo, apa kabar?",
         ],
-        "Minggu 14": [
-          { kr: "여행", id: "Perjalanan / liburan" },
-          { kr: "준비하다", id: "Menyiapkan" },
-          { kr: "예약하다", id: "Memesan / reservasi" },
-          { kr: "호텔", id: "Hotel" },
-          { kr: "방", id: "Kamar" },
-          { kr: "사진", id: "Foto" },
-          { kr: "찍다", id: "Memotret" },
-          { kr: "구경하다", id: "Melihat-lihat" },
-          { kr: "바다", id: "Laut" },
-          { kr: "산", id: "Gunung" },
-          { kr: "온천", id: "Pemandian air panas" },
-          { kr: "여권", id: "Paspor" },
-          { kr: "비행기 표", id: "Tiket pesawat" },
-          { kr: "짐을 싸다", id: "Mengepak barang" },
-          { kr: "도착하다", id: "Tiba" },
+        ["네, 잘 지내요.", "ne, jal jinaeyo", "Ya, saya baik-baik saja."],
+        ["오랜만이에요.", "oraenmanieyo", "Lama tidak bertemu."],
+        ["만나서 반가워요.", "mannaseo bangawoyo", "Senang bertemu denganmu."],
+        ["좋은 아침이에요.", "joeun achimieyo", "Selamat pagi."],
+        [
+          "안녕히 가세요.",
+          "annyeonghi gaseyo",
+          "Selamat jalan (kamu yang pergi).",
         ],
-        "Minggu 15": [
-          { kr: "약속", id: "Janji" },
-          { kr: "시간이 있다", id: "Ada waktu" },
-          { kr: "시간이 없다", id: "Tidak ada waktu" },
-          { kr: "늦다", id: "Terlambat" },
-          { kr: "기다리다", id: "Menunggu" },
-          { kr: "취소하다", id: "Membatalkan" },
-          { kr: "바꾸다", id: "Mengubah / mengganti" },
-          { kr: "미안하다", id: "Maaf" },
-          { kr: "괜찮다", id: "Tidak apa-apa" },
-          { kr: "장소", id: "Tempat" },
-          { kr: "앞", id: "Depan" },
-          { kr: "뒤", id: "Belakang" },
-          { kr: "옆", id: "Samping" },
-          { kr: "안", id: "Dalam" },
-          { kr: "밖", id: "Luar" },
+        [
+          "안녕히 계세요.",
+          "annyeonghi gyeseyo",
+          "Selamat tinggal (aku yang pergi, kamu tetap).",
         ],
-        "Minggu 16": [
-          { kr: "음식", id: "Makanan" },
-          { kr: "밥", id: "Nasi" },
-          { kr: "국", id: "Sup" },
-          { kr: "김치", id: "Kimchi" },
-          { kr: "고기", id: "Daging" },
-          { kr: "물", id: "Air" },
-          { kr: "차", id: "Teh" },
-          { kr: "커피", id: "Kopi" },
-          { kr: "달다", id: "Manis" },
-          { kr: "쓰다", id: "Pahit" },
-          { kr: "짜다", id: "Asin" },
-          { kr: "싱겁다", id: "Hambar" },
-          { kr: "맵다", id: "Pedas" },
-          { kr: "시고 달다", id: "Asam manis" },
-          { kr: "배가 고프다", id: "Lapar" },
-        ],
-        "Minggu 17": [
-          { kr: "취미", id: "Hobi" },
-          { kr: "독서하다", id: "Membaca buku" },
-          { kr: "음악을 듣다", id: "Mendengar musik" },
-          { kr: "영화를 보다", id: "Menonton film" },
-          { kr: "게임하다", id: "Bermain game" },
-          { kr: "등산하다", id: "Mendaki gunung" },
-          { kr: "사진을 찍다", id: "Memotret" },
-          { kr: "자주", id: "Sering" },
-          { kr: "가끔", id: "Kadang-kadang" },
-          { kr: "항상", id: "Selalu" },
-          { kr: "전혀", id: "Sama sekali tidak" },
-          { kr: "잘하다", id: "Mahir / pandai" },
-          { kr: "못하다", id: "Tidak bisa / tidak mahir" },
-          { kr: "축구", id: "Sepak bola" },
-          { kr: "농구", id: "Bola basket" },
-        ],
+        ["잘 자요.", "jal jayo", "Selamat tidur."],
+        ["내일 봐요.", "naeil bwayo", "Sampai jumpa besok."],
+      ]);
 
-        // FASE 5
-        "Minggu 18": [
-          { kr: "신청하다", id: "Mendaftar" },
-          { kr: "이용하다", id: "Menggunakan" },
-          { kr: "문의하다", id: "Bertanya / berkonsultasi" },
-          { kr: "확인하다", id: "Mengecek" },
-          { kr: "무료", id: "Gratis" },
-          { kr: "유료", id: "Berbayar" },
-          { kr: "할인", id: "Diskon" },
-          { kr: "안내", id: "Panduan" },
-          { kr: "위치", id: "Lokasi" },
-          { kr: "일시", id: "Tanggal dan waktu" },
-          { kr: "대상", id: "Target / peserta" },
-          { kr: "요금", id: "Biaya" },
-          { kr: "장소", id: "Tempat" },
-          { kr: "기간", id: "Periode" },
-          { kr: "행사", id: "Acara" },
+      add("dasar", "1b. Perkenalan diri", [
+        [
+          "저는 [nama]이에요 / 예요.",
+          "jeoneun [nama]ieyo / yeyo",
+          "Saya [nama].",
         ],
-        "Minggu 19": [
-          { kr: "생일", id: "Ulang tahun" },
-          { kr: "선물", id: "Hadiah" },
-          { kr: "파티", id: "Pesta" },
-          { kr: "초대하다", id: "Mengundang" },
-          { kr: "축하하다", id: "Selamat / merayakan" },
-          { kr: "모임", id: "Perkumpulan" },
-          { kr: "회비", id: "Iuran anggota" },
-          { kr: "참석하다", id: "Hadir" },
-          { kr: "불참하다", id: "Tidak hadir" },
-          { kr: "케이크", id: "Kue" },
-          { kr: "꽃다발", id: "Buket bunga" },
-          { kr: "카드", id: "Kartu" },
-          { kr: "준비물", id: "Barang persiapan" },
-          { kr: "연락처", id: "Kontak" },
-          { kr: "약속 장소", id: "Tempat janjian" },
+        [
+          "제 이름은 [nama]이에요.",
+          "je ireumeun [nama]ieyo",
+          "Nama saya [nama].",
         ],
-        "Minggu 20": [
-          { kr: "시험", id: "Ujian" },
-          { kr: "문제", id: "Soal / masalah" },
-          { kr: "풀다", id: "Mengerjakan / memecahkan" },
-          { kr: "맞다", id: "Benar" },
-          { kr: "틀리다", id: "Salah" },
-          { kr: "점수", id: "Nilai / skor" },
-          { kr: "합격하다", id: "Lulus" },
-          { kr: "불합격하다", id: "Tidak lulus" },
-          { kr: "복습하다", id: "Mengulas pelajaran" },
-          { kr: "예습하다", id: "Mempelajari lebih dulu" },
-          { kr: "단어", id: "Kosakata" },
-          { kr: "문법", id: "Tata bahasa" },
-          { kr: "듣기", id: "Mendengar" },
-          { kr: "읽기", id: "Membaca" },
-          { kr: "쓰기", id: "Menulis" },
+        ["이름이 뭐예요?", "ireumi mwoyeyo", "Siapa namamu?"],
+        [
+          "저는 인도네시아 사람이에요.",
+          "jeoneun indonesia saramieyo",
+          "Saya orang Indonesia.",
         ],
+        [
+          "저는 반둥에서 왔어요.",
+          "jeoneun bandungeseo wasseoyo",
+          "Saya berasal dari Bandung.",
+        ],
+        ["어디에서 왔어요?", "eodieseo wasseoyo", "Kamu berasal dari mana?"],
+        [
+          "저는 학생이에요.",
+          "jeoneun hakssaengieyo",
+          "Saya pelajar / mahasiswa.",
+        ],
+        ["직업이 뭐예요?", "jigeobi mwoyeyo", "Pekerjaanmu apa?"],
+        [
+          "한국어를 공부하고 있어요.",
+          "hangugeoreul gongbuhago isseoyo",
+          "Saya sedang belajar bahasa Korea.",
+        ],
+        [
+          "아직 한국어를 잘 못해요.",
+          "ajik hangugeoreul jal mothaeyo",
+          "Saya belum bisa bahasa Korea dengan baik.",
+        ],
+        [
+          "천천히 말해 주세요.",
+          "cheoncheonhi malhae juseyo",
+          "Tolong bicara pelan-pelan.",
+        ],
+        [
+          "다시 한번 말해 주세요.",
+          "dasi hanbeon malhae juseyo",
+          "Tolong katakan sekali lagi.",
+        ],
+        ["무슨 뜻이에요?", "museun tteusieyo", "Apa artinya?"],
+        [
+          "이해했어요. / 이해 못 했어요.",
+          "ihaehaesseoyo / ihae mot haesseoyo",
+          "Saya mengerti. / Saya tidak mengerti.",
+        ],
+        [
+          "영어 할 수 있어요?",
+          "yeongeo hal su isseoyo",
+          "Bisa bahasa Inggris?",
+        ],
+      ]);
 
-        // FASE 6
-        "Minggu 21": [
-          { kr: "건강", id: "Kesehatan" },
-          { kr: "결정하다", id: "Memutuskan" },
-          { kr: "습관", id: "Kebiasaan" },
-          { kr: "약속하다", id: "Berjanji" },
-          { kr: "목표", id: "Tujuan / target" },
-          { kr: "설명하다", id: "Menjelaskan" },
-          { kr: "의견", id: "Pendapat" },
-          { kr: "열심히", id: "Dengan giat" },
-          { kr: "성격", id: "Karakter" },
-          { kr: "특히", id: "Terutama" },
-          { kr: "키", id: "Tinggi badan" },
-          { kr: "보통", id: "Biasanya" },
-          { kr: "돈을 모으다", id: "Menabung" },
-          { kr: "운전하다", id: "Mengemudi" },
-          { kr: "취직하다", id: "Mendapat kerja" },
+      add("dasar", "2. Ungkapan sopan sehari-hari", [
+        ["감사합니다.", "gamsahamnida", "Terima kasih (formal)."],
+        ["고마워요.", "gomawoyo", "Terima kasih (santai-sopan)."],
+        ["정말 고마워요.", "jeongmal gomawoyo", "Terima kasih banyak."],
+        ["천만에요.", "cheonmaneyo", "Sama-sama."],
+        ["괜찮아요.", "gwaenchanayo", "Tidak apa-apa / baik-baik saja."],
+        ["죄송합니다.", "joesonghamnida", "Mohon maaf (formal)."],
+        ["미안해요.", "mianhaeyo", "Maaf."],
+        ["실례합니다.", "sillyehamnida", "Permisi (mau lewat atau bertanya)."],
+        ["잠깐만요.", "jamkkanmanyo", "Sebentar ya."],
+        ["잠시만요.", "jamsimanyo", "Permisi sebentar (saat minta jalan)."],
+        ["네. / 아니요.", "ne / aniyo", "Ya. / Tidak."],
+        ["맞아요.", "majayo", "Benar."],
+        ["잘 모르겠어요.", "jal moreugesseoyo", "Saya kurang tahu."],
+        [
+          "잘 먹겠습니다.",
+          "jal meokgetseumnida",
+          "Selamat makan (diucapkan sebelum makan).",
         ],
-        "Minggu 22": [
-          { kr: "변하다", id: "Berubah" },
-          { kr: "침대", id: "Tempat tidur" },
-          { kr: "늘다", id: "Bertambah" },
-          { kr: "불", id: "Lampu / api" },
-          { kr: "줄다", id: "Berkurang" },
-          { kr: "켜다 / 끄다", id: "Menyalakan / mematikan" },
-          { kr: "점점", id: "Semakin" },
-          { kr: "이사하다", id: "Pindah rumah" },
-          { kr: "갑자기", id: "Tiba-tiba" },
-          { kr: "개월", id: "Bulan (durasi)" },
-          { kr: "드디어", id: "Akhirnya (hal baik)" },
-          { kr: "깨끗하다", id: "Bersih" },
-          { kr: "결국", id: "Pada akhirnya" },
-          { kr: "즐겁다", id: "Menyenangkan" },
-          { kr: "미리", id: "Sebelumnya" },
+        [
+          "잘 먹었습니다.",
+          "jal meogeotseumnida",
+          "Terima kasih atas makanannya (setelah makan).",
         ],
-        "Minggu 23": [
-          { kr: "말하다", id: "Berkata" },
-          { kr: "생각하다", id: "Berpikir" },
-          { kr: "묻다 / 물어보다", id: "Bertanya" },
-          { kr: "충고하다", id: "Menasihati" },
-          { kr: "대답하다", id: "Menjawab" },
-          { kr: "거절하다", id: "Menolak" },
-          { kr: "부탁하다", id: "Meminta tolong" },
-          { kr: "동의하다", id: "Setuju" },
-          { kr: "소식", id: "Kabar" },
-          { kr: "제안하다", id: "Mengusulkan" },
-          { kr: "뉴스", id: "Berita" },
-          { kr: "숙제", id: "PR" },
-          { kr: "소문", id: "Kabar angin" },
-          { kr: "의사 선생님", id: "Dokter" },
-          { kr: "전하다", id: "Menyampaikan" },
+        [
+          "수고하셨어요.",
+          "sugohasyeosseoyo",
+          "Terima kasih atas kerja kerasnya.",
         ],
-        "Minggu 24": [
-          { kr: "도착하다", id: "Tiba" },
-          { kr: "노력하다", id: "Berusaha" },
-          { kr: "출발하다", id: "Berangkat" },
-          { kr: "걱정하다", id: "Khawatir" },
-          { kr: "아무리", id: "Seberapa pun" },
-          { kr: "놓치다", id: "Ketinggalan" },
-          { kr: "이렇게", id: "Seperti ini" },
-          { kr: "그렇게", id: "Seperti itu" },
-          { kr: "떨어지다", id: "Gagal / jatuh" },
-          { kr: "가져오다", id: "Membawa kemari" },
-          { kr: "졸업하다", id: "Lulus kuliah" },
-          { kr: "가져가다", id: "Membawa pergi" },
-          { kr: "연습하다", id: "Berlatih" },
-        ],
-        "Minggu 25": [
-          { kr: "편리하다", id: "Praktis" },
-          { kr: "문화", id: "Budaya" },
-          { kr: "복잡하다", id: "Ramai / rumit" },
-          { kr: "사회", id: "Masyarakat" },
-          { kr: "유명하다", id: "Terkenal" },
-          { kr: "경제", id: "Ekonomi" },
-          { kr: "넘어지다", id: "Terjatuh" },
-          { kr: "교육", id: "Pendidikan" },
-          { kr: "기술", id: "Teknologi" },
-          { kr: "도시", id: "Kota" },
-          { kr: "중요하다", id: "Penting" },
-          { kr: "시골", id: "Desa" },
-          { kr: "필요하다", id: "Perlu" },
-          { kr: "환경", id: "Lingkungan" },
-        ],
+        ["축하해요!", "chukahaeyo", "Selamat!"],
+        ["조심하세요.", "josimhaseyo", "Hati-hati."],
+        ["도와주세요.", "dowajuseyo", "Tolong bantu saya."],
+        ["화이팅!", "hwaiting", "Semangat!"],
+      ]);
 
-        // FASE 7
-        "Minggu 26": [
-          { kr: "학 (學)", id: "Akar: Belajar (학교, 학생, 대학)" },
-          { kr: "국 (國)", id: "Akar: Negara (한국, 외국, 국가)" },
-          { kr: "인 (人)", id: "Akar: Orang (외국인, 한국인, 인기)" },
-          { kr: "실 (室)", id: "Akar: Ruangan (교실, 화장실, 사무실)" },
-          { kr: "장 (場)", id: "Akar: Tempat (시장, 공장, 주차장)" },
-          {
-            kr: "회 (會)",
-            id: "Akar: Pertemuan / Masyarakat (회사, 회의, 사회)",
-          },
-          {
-            kr: "전 / 후 (前 / 後)",
-            id: "Akar: Sebelum / Sesudah (오전, 오후, 식후)",
-          },
-          { kr: "화 (話)", id: "Akar: Bicara (전화, 대화, 통화)" },
-          {
-            kr: "문 (文 / 問)",
-            id: "Akar: Tulisan / Tanya (문장, 문화, 질문)",
-          },
-          { kr: "드시다", id: "Makan (Bentuk Hormat)" },
-          { kr: "주무시다", id: "Tidur (Bentuk Hormat)" },
-          { kr: "계시다", id: "Ada / Tinggal (Bentuk Hormat)" },
-          { kr: "수강생", id: "Peserta kursus" },
-          { kr: "모집", id: "Perekrutan" },
-          { kr: "재료", id: "Bahan" },
-        ],
-        "Minggu 27": [
-          { kr: "보여 주세요", id: "Tolong tunjukkan" },
-          { kr: "시설", id: "Fasilitas" },
-          { kr: "공사", id: "Konstruksi" },
-          { kr: "반납하다", id: "Mengembalikan" },
-          { kr: "문을 닫다", id: "Tutup (pintu/tempat)" },
-          { kr: "후회하다", id: "Menyesal" },
-          { kr: "추천하다", id: "Merekomendasikan" },
-          { kr: "취소하다", id: "Membatalkan" },
-          { kr: "별로", id: "Tidak begitu" },
-          { kr: "-아/어 보이다", id: "Tampak / Terlihat" },
-          { kr: "일주일에 세 번", id: "Tiga kali seminggu" },
-          { kr: "이제", id: "Sekarang, kini" },
-          { kr: "기분", id: "Suasana hati" },
-          { kr: "꾸준히", id: "Dengan konsisten" },
-          { kr: "따라서", id: "Oleh karena itu" },
-        ],
-        "Minggu 28": [
-          { kr: "분실물", id: "Barang hilang" },
-          { kr: "지갑", id: "Dompet" },
-          { kr: "학생증", id: "Kartu mahasiswa/pelajar" },
-          { kr: "연락주다", id: "Menghubungi" },
-          { kr: "조사 결과", id: "Hasil survei" },
-          { kr: "증가하다", id: "Meningkat / bertambah" },
-          { kr: "감소하다", id: "Menurun / berkurang" },
-          { kr: "반면에", id: "Sebaliknya" },
-          { kr: "첫째 / 둘째 / 셋째", id: "Pertama / Kedua / Ketiga" },
-          { kr: "결론적으로", id: "Kesimpulannya" },
-          { kr: "중요성", id: "Pentingnya" },
-          { kr: "환경 보호", id: "Perlindungan lingkungan" },
-        ],
-      };
+      addW(`안녕하세요=halo / selamat (sopan)
+잘=dengan baik
+지내세요=apakah Anda baik-baik (hormat)
+네=ya
+지내요=baik-baik saja
+오랜만이에요=lama tidak bertemu
+만나서=bertemu (lalu...)
+반가워요=senang
+좋은=bagus
+아침이에요=(adalah) pagi
+안녕히=dengan selamat
+가세요=pergilah
+계세요=tinggallah / tetap di sana
+자요=tidur
+내일=besok
+봐요=lihat / bertemu
+저는=saya (topik)
+제=saya (milik)
+이름은=nama (topik)
+이름이=nama (subjek)
+뭐예요=apa
+인도네시아=Indonesia
+사람이에요=(adalah) orang
+반둥에서=dari Bandung
+왔어요=sudah datang
+어디에서=dari mana
+학생이에요=(adalah) pelajar
+직업이=pekerjaan
+한국어를=bahasa Korea (objek)
+공부하고=sedang belajar
+있어요=ada / sedang
+아직=masih / belum
+못해요=tidak bisa
+천천히=pelan-pelan
+말해=bicara
+주세요=tolong berikan
+다시=lagi
+한번=sekali
+무슨=apa
+뜻이에요=artinya
+이해했어요=saya mengerti
+이해=pengertian
+못=tidak bisa
+했어요=melakukan (lampau)
+영어=bahasa Inggris
+할=melakukan
+수=kemungkinan
+감사합니다=terima kasih (formal)
+고마워요=terima kasih (santai-sopan)
+정말=sungguh
+천만에요=sama-sama
+괜찮아요=tidak apa-apa
+죄송합니다=mohon maaf (formal)
+미안해요=maaf
+실례합니다=permisi
+잠깐만요=sebentar ya
+잠시만요=permisi sebentar
+아니요=tidak
+맞아요=benar
+모르겠어요=tidak tahu
+먹겠습니다=akan makan (selamat makan)
+먹었습니다=sudah makan
+수고하셨어요=terima kasih atas kerja kerasnya
+축하해요=selamat
+조심하세요=hati-hati
+도와주세요=tolong bantu
+화이팅=semangat`);
 
-      // Pengelompokan Fase
-      const phaseMapping = {
-        "Fase 1: Fondasi Bahasa Korea": [
-          "Minggu 1",
-          "Minggu 2",
-          "Minggu 3",
-          "Minggu 4",
+      add("dasar", "3a. Restoran: masuk dan memesan", [
+        ["어서 오세요.", "eoseo oseyo", "Selamat datang (diucapkan pegawai)."],
+        ["두 명이에요.", "du myeongieyo", "Berdua."],
+        ["자리 있어요?", "jari isseoyo", "Ada tempat kosong?"],
+        ["저기요!", "jeogiyo", "Permisi! (memanggil pelayan)"],
+        ["메뉴판 주세요.", "menyupan juseyo", "Tolong minta menunya."],
+        [
+          "추천 메뉴가 뭐예요?",
+          "chucheon menyuga mwoyeyo",
+          "Menu rekomendasinya apa?",
         ],
-        "Fase 2: Perluasan Tata Bahasa": [
-          "Minggu 5",
-          "Minggu 6",
-          "Minggu 7",
-          "Minggu 8",
+        ["이거 주세요.", "igeo juseyo", "Tolong yang ini."],
+        [
+          "김치찌개 하나 주세요.",
+          "gimchijjigae hana juseyo",
+          "Tolong satu kimchi jjigae.",
         ],
-        "Fase 3: Kalimat Kompleks": [
-          "Minggu 9",
-          "Minggu 10",
-          "Minggu 11",
-          "Minggu 12",
+        ["물 좀 주세요.", "mul jom juseyo", "Tolong minta air."],
+        [
+          "안 맵게 해 주세요.",
+          "an maepge hae juseyo",
+          "Tolong jangan terlalu pedas.",
         ],
-        "Fase 4: Tata Bahasa Lanjutan": [
-          "Minggu 13",
-          "Minggu 14",
-          "Minggu 15",
-          "Minggu 16",
-          "Minggu 17",
+        [
+          "돼지고기는 못 먹어요.",
+          "dwaejigogineun mot meogeoyo",
+          "Saya tidak bisa makan daging babi.",
         ],
-        "Fase 5: Simulasi TOPIK I": ["Minggu 18", "Minggu 19", "Minggu 20"],
-        "Fase 6: Menengah Awal": [
-          "Minggu 21",
-          "Minggu 22",
-          "Minggu 23",
-          "Minggu 24",
-          "Minggu 25",
+        [
+          "이거 뭐가 들어 있어요?",
+          "igeo mwoga deureo isseoyo",
+          "Ini isinya apa saja?",
         ],
-        "Fase 7: Persiapan TOPIK II": ["Minggu 26", "Minggu 27", "Minggu 28"],
-      };
+        [
+          "포장해 주세요.",
+          "pojanghae juseyo",
+          "Tolong dibungkus (dibawa pulang).",
+        ],
+        ["여기서 먹을게요.", "yeogiseo meogeulgeyo", "Saya makan di sini."],
+      ]);
 
-      // STATE KUIS
-      let selectedWeek = "";
+      addW(`어서=segera / silakan
+오세요=datanglah
+두=dua
+명이에요=(adalah) ... orang
+자리=tempat duduk
+저기요=permisi (memanggil)
+메뉴판=daftar menu
+추천=rekomendasi
+메뉴가=menu (subjek)
+이거=ini
+김치찌개=sup kimchi
+하나=satu
+물=air
+좀=sedikit / tolong
+안=tidak
+맵게=pedas (adv.)
+해=lakukan
+돼지고기는=daging babi (topik)
+먹어요=makan
+뭐가=apa (subjek)
+들어=masuk / terkandung
+포장해=bungkus
+여기서=di / dari sini
+먹을게요=saya makan (niat)
+맛있어요=enak
+너무=terlalu
+매워요=pedas
+반찬=lauk pendamping
+더=lebih / tambah
+계산해=hitung / bayar
+얼마예요=berapa harganya
+카드로=dengan kartu
+계산할게요=saya bayar
+영수증=struk
+아이스=es
+아메리카노=americano
+한=satu
+잔=gelas / cangkir
+따뜻한=hangat / panas
+걸로=dengan yang itu
+사이즈는=ukuran (topik)
+어떤=yang mana
+하시겠어요=mau (hormat)
+와이파이=Wi-Fi
+비밀번호가=kata sandi (subjek)
+그냥=hanya / sekadar
+구경하는=sedang melihat-lihat
+거예요=(adalah) hal / sedang
+비싸요=mahal
+깎아=kurangi harga
+싼=murah
+거=barang / hal
+다른=lain
+색깔=warna
+큰=besar
+사이즈=ukuran
+입어=pakai (baju)
+봐도=boleh dicoba
+돼요=boleh
+탈의실이=ruang ganti
+어디예요=di mana
+이걸로=dengan yang ini
+할게요=saya ambil / lakukan
+개=buah
+봉투=kantong plastik
+필요해요=perlu
+봉투는=kantong (topik)
+환불할=mengembalikan uang
+면세=bebas pajak
+되나요=bisakah
+포인트=poin
+적립해=kumpulkan
+드릴까요=mau saya (lakukan)?
+현금으로=dengan uang tunai
+낼게요=saya bayar`);
+
+      addW(`지하철역이=stasiun subway (subjek)
+화장실이=toilet (subjek)
+여기에=ke sini / di sini
+어떻게=bagaimana
+가요=pergi
+서울역에=ke Stasiun Seoul
+가고=pergi (lalu...)
+싶어요=ingin
+멀어요=jauh
+걸어서=dengan berjalan kaki
+얼마나=berapa lama / seberapa
+걸려요=memakan waktu
+똑바로=lurus
+오른쪽으로=ke arah kanan
+왼쪽으로=ke arah kiri
+길을=jalan (objek)
+잃어버렸어요=(sudah) hilang / tersesat
+교통카드=kartu transportasi
+어디서=di mana
+살=membeli
+이=ini
+버스=bus
+명동에=ke Myeongdong
+몇=berapa
+번=nomor
+출구예요=(adalah) pintu keluar
+갈아타요=berpindah (transit)
+다음=berikutnya
+역은=stasiun (topik)
+택시=taksi
+타고=naik (lalu...)
+주소로=ke alamat
+가=pergi / antar
+세워=hentikan
+뭐=apa
+해요=lakukan / lagi apa
+오늘=hari ini
+시간=waktu
+같이=bareng
+밥=nasi / makan
+먹을래요=mau makan?
+영화=film
+볼까요=mau lihat?
+주말에=pada akhir pekan
+할=akan melakukan
+좋아요=bagus / boleh
+그렇게=begitu
+바빠요=sibuk
+오늘은=hari ini (topik)
+다음에=lain kali
+시에=pada jam
+만날까요=mau bertemu?
+지금=sekarang
+조금=sedikit
+늦을=akan terlambat
+것=hal
+같아요=sepertinya
+기분이=suasana hati
+피곤해요=capek
+배고파요=lapar
+졸려요=mengantuk
+심심해요=bosan
+재미있어요=seru / menarik
+정말요=benarkah
+대박=keren banget
+저도=saya juga
+생각해요=berpikir
+걱정하지=khawatir
+마세요=jangan
+보고=melihat / merindukan
+먹었어요=sudah makan
+어땠어요=bagaimana
+취미가=hobi (subjek)
+한국=Korea
+음식=makanan
+좋아해요=suka
+한국에는=di Korea (topik)
+있었어요=(sudah) berada
+인스타=Instagram
+연락처=kontak
+알려=beri tahu
+줄래요=maukah memberi`);
+
+      addW(`예약했어요=sudah memesan
+체크인하고=check-in
+체크아웃은=check-out (topik)
+시예요=(adalah) jam
+아침=pagi
+식사=makan / hidangan
+포함이에요=termasuk
+방에=di kamar
+수건이=handuk
+없어요=tidak ada
+에어컨이=AC
+짐을=bagasi (objek)
+맡길=menitipkan
+몸이=badan
+머리가=kepala
+아파요=sakit
+배가=perut
+열이=demam
+나요=timbul / keluar
+기침이=batuk
+알레르기가=alergi
+병원에=ke rumah sakit
+약국이=apotek
+약은=obat (topik)
+경찰을=polisi (objek)
+불러=panggil
+구급차를=ambulans (objek)
+지갑을=dompet (objek)
+여권을=paspor (objek)
+도둑이야=pencuri
+일=1 (Sino-Korea)
+삼=3 (Sino-Korea)
+사=4 (Sino-Korea)
+오=5 (Sino-Korea)
+육=6 (Sino-Korea)
+칠=7 (Sino-Korea)
+팔=8 (Sino-Korea)
+구=9 (Sino-Korea)
+십=10 (Sino-Korea)
+둘=2 (asli Korea)
+셋=3 (asli Korea)
+세=3 (sebelum penghitung)
+넷=4 (asli Korea)
+다섯=5 (asli Korea)
+여섯=6 (asli Korea)
+일곱=7 (asli Korea)
+여덟=8 (asli Korea)
+아홉=9 (asli Korea)
+백=100
+천=1.000
+만=10.000
+오천=5.000
+원=won (mata uang Korea)
+월요일=Senin
+화요일=Selasa
+수요일=Rabu
+목요일=Kamis
+금요일=Jumat
+토요일=Sabtu
+일요일=Minggu
+삼십=30
+분이에요=(adalah) menit
+오늘이=hari ini (subjek)
+며칠이에요=tanggal berapa
+시월=Oktober
+이십구=29
+일이에요=(adalah) tanggal
+요일이에요=(adalah) hari
+목요일이에요=(adalah) hari Kamis
+어제=kemarin
+살이에요=(berusia) ... tahun
+스물다섯=25 (asli Korea, untuk usia)`);
+
+      addW(`발이=kaki (subjek)
+넓다=lebar / luas
+손이=tangan (subjek)
+크다=besar
+입이=mulut (subjek)
+무겁다=berat
+가볍다=ringan
+눈이=mata (subjek)
+높다=tinggi
+귀가=telinga (subjek)
+얇다=tipis
+간이=hati / nyali (subjek)
+하늘의=milik langit
+별=bintang
+따기=memetik (nomina)
+식은=yang sudah dingin
+죽=bubur
+먹기=makan (nomina)
+누워서=sambil berbaring
+떡=kue beras
+시치미를=sichimi (objek)
+떼다=mencopot / melepas
+헐=hah / astaga
+어이없다=tidak habis pikir
+소름=bulu kuduk
+돋았어=(sudah) muncul
+꿀잼=seru banget
+노잼=garing
+갓생=hidup produktif
+존맛=enak banget (kasar)
+인정=diakui / setuju
+아무튼=pokoknya
+눈치가=nunchi (subjek)
+빠르다=cepat
+쏘리=maaf (santai)
+눈치=kepekaan membaca suasana
+보다=melihat / menjaga
+정=rasa kedekatan
+정이=jeong (subjek)
+들다=masuk / tumbuh
+여보세요=halo (di telepon)
+잠시만=sebentar saja
+기다려=tunggu
+통화=percakapan telepon
+괜찮으세요=apakah baik-baik saja (hormat)
+들려요=terdengar
+말씀해=katakan (hormat)
+나중에=nanti
+전화드릴게요=akan menelepon (hormat)
+메시지=pesan
+남겨=tinggalkan
+전화=telepon
+잘못=salah
+거셨어요=(Anda) menelepon (hormat)
+끊을게요=saya tutup (telepon)
+들어가세요=silakan masuk / beristirahat
+확인했습니다=sudah saya cek
+답장이=balasan (subjek)
+늦어서=karena terlambat
+안에=di dalam (batas waktu)
+보내=kirim
+드리겠습니다=akan memberikan (hormat)
+사진=foto
+도착하면=kalau sudah tiba
+연락드릴게요=akan menghubungi (hormat)
+읽씹하지=membaca tanpa membalas
+말아=jangan
+ㅇㅋ=oke
+ㄱㅅ=makasih
+ㅊㅋ=selamat
+ㅇㅇ=iya
+ㄴㄴ=tidak
+ㅋㅋㅋ=hahaha
+ㅠㅠ=menangis / sedih
+ㅜㅜ=menangis / sedih
+ㄱㄱ=ayo berangkat
+넵=baik (santun, di chat)
+헉=astaga (kaget)
+보니까=setelah dilihat / ternyata`);
+
+      addW(`요즘=belakangan ini
+물가가=harga barang (subjek)
+올라서=karena naik
+생활이=kehidupan (subjek)
+힘들어요=berat / susah
+저출산=angka kelahiran rendah
+문제가=masalah (subjek)
+심각해지고=makin serius
+환경=lingkungan
+보호를=perlindungan (objek)
+위해=demi / untuk
+일회용품을=barang sekali pakai (objek)
+줄여야=harus dikurangi
+해요=lakukan / harus
+문제에=pada masalah
+대해=tentang
+생각하세요=berpikir (hormat)
+장점도=kelebihan juga
+단점도=kekurangan juga
+무시할=mengabaikan
+정부의=milik pemerintah
+정책이=kebijakan (subjek)
+효과가=efek / hasil (subjek)
+있을지=apakah akan ada
+의문이에요=(adalah) keraguan
+이직을=pindah kerja (objek)
+고민하고=sedang bimbang
+워라밸이=keseimbangan kerja-hidup (subjek)
+중요해요=penting
+야근이=lembur (subjek)
+많아서=karena banyak
+지쳤어요=kelelahan
+경력을=pengalaman kerja (objek)
+쌓고=menumpuk / menambah (lalu...)
+면접에서=di wawancara
+긴장해서=karena gugup
+실수했어요=berbuat kesalahan
+기쁘기도=memang senang
+하지만=tetapi
+한편으로는=di sisi lain
+불안해요=cemas
+섭섭하다=kecewa
+서운해요=sedih / kecewa
+부담스럽다=terbebani
+아쉬워요=sayang sekali
+마음이=hati (subjek)
+복잡해요=rumit
+위로가=penghiburan (subjek)
+필요해요=butuh
+힘들=sedang susah
+때=saat
+곁에=di sisi
+줘서=karena memberi
+고마워요=terima kasih
+만약=seandainya
+가정하다=mengandaikan
+실패하다=gagal
+포기하다=menyerah
+거짓말=kebohongan
+사용자=pengguna
+점점=semakin
+행사=acara
+취소되다=dibatalkan
+가능성=kemungkinan
+원인=penyebab
+결과=hasil
+영향=pengaruh
+필요하다=perlu
+결심하다=bertekad
+늦잠=bangun kesiangan
+지각하다=terlambat masuk
+사고=kecelakaan
+막히다=macet / tersumbat
+매출=penjualan
+합격하다=lulus
+유출되다=bocor
+위험=bahaya
+의존하다=bergantung
+대신하다=menggantikan
+일자리=lapangan kerja
+정책=kebijakan
+마련하다=menyiapkan
+태도=sikap
+누리다=menikmati
+재택근무=kerja dari rumah
+출퇴근=pergi dan pulang kerja
+의사소통=komunikasi
+살리다=memanfaatkan / menghidupkan
+요금=tarif
+인상=kenaikan
+인건비=biaya tenaga kerja
+밝히다=mengungkapkan
+규칙적=teratur
+안정적=stabil
+취직하다=mendapat pekerjaan
+용기=keberanian
+그만두다=berhenti
+오히려=justru / malah
+대중교통=transportasi umum
+경제적=secara ekonomi
+중요성=urgensi / pentingnya
+세계화=globalisasi
+성공률=tingkat keberhasilan
+경쟁력=daya saing
+책임감=rasa tanggung jawab
+소비자=konsumen
+전문가=pakar / ahli
+발표=presentasi / pengumuman
+대출=peminjaman
+반납=pengembalian
+연체료=denda keterlambatan
+권하다=menyarankan
+발효=fermentasi
+김장=tradisi membuat kimchi
+영수증=struk / kwitansi
+마감=tenggat / deadline
+예상=perkiraan / prediksi
+반대하다=menentang / tidak setuju
+집중하다=berkonsentrasi
+비율=rasa / persentase
+증가하다=meningkat / bertambah
+응답=jawaban / respon
+추세=tren / kecenderungan
+편리하다=praktis / nyaman
+발달하다=berkembang
+지나치게=secara berlebihan
+조절하다=mengatur / mengendalikan
+풍요롭다=makmar / sejahtera
+현명하다=bijaksana`);
+
+      addW(`감기=Flu / Demam
+열=Demam / Panas tubuh
+기침=Batuk
+두통=Sakit kepala
+복통=Sakit perut
+주사=Suntikan
+처방전=Resep obat
+치료하다=Mengobati / Merawat
+수술하다=Operasi
+입원하다=Rawat inap di rumah sakit
+퇴원하다=Keluar dari rumah sakit
+건강검진=Pemeriksaan kesehatan
+인터넷=Internet
+스마트폰=Smartphone / HP pintar
+전화하다=Menelepon
+문자=Pesan teks / SMS
+검색하다=Mencari (search di internet)
+다운로드=Unduh / Download
+설치하다=Menginstal / Memasang
+접속하다=Terhubung / Login / Mengakses
+정보=Informasi
+비밀번호=Kata sandi / Password
+계정=Akun
+충전하다=Mengisi daya / Baterai / Saldo
+법률=Hukum / Undang-undang
+규칙=Aturan
+위반하다=Melanggar
+지키다=Menaati / Menjaga
+범죄=Kejahatan / Kriminalitas
+피해자=Korban
+가해자=Pelaku kejahatan
+전통=Tradisi
+문화체험=Pengalaman budaya
+유적지=Situs bersejarah
+기후변화=Perubahan iklim
+재활용=Daur ulang
+시험=Ujian / Tes
+성적=Nilai / Hasil ujian
+장학금=Beasiswa
+수업=Kelas / Pelajaran
+전공=Jurusan kuliah
+학위=Gelar akademik
+졸업하다=Lulus sekolah / kuliah
+입학하다=Masuk sekolah / kuliah
+논문=Skripsi / Tesis / Jurnal ilmiah
+연구하다=Mereset / Meneliti
+지원하다=Mendaftar / Mengajukan diri
+자격증=Sertifikat kualifikasi
+야=Hei / Woi
+응=Ya / Ho-oh
+어=Ya / Oh
+아니=Enggak / Enggak kok
+고마워=Makasih ya
+미안해=Maaf ya
+괜찮아=Gak apa-apa / Santai aja
+잘 자=Selamat tidur
+잘 가=Dadaah / Selamat jalan
+해=Lakukan / Kerjain
+하지 마=Jangan lakukan
+가지 마=Jangan pergi
+먹어=Makan nih
+봐=Lihat nih
+알았어=Paham / Oke, ngerti
+몰라=Gak tahu / Bodo amat
+짱=Paling mantap / Juara
+남친=Pacar cowok
+여친=Pacar cewek
+남사친=Teman akrab cowok
+여사친=Teman akrab cewek
+심쿵=Bikin berdebar / Deg-degan
+멘붕=Mental breakdown / Stres berat
+솔까말=Jujur aja ya
+답정너=Nanya tapi udah punya jawaban sendiri
+TMI=Info gak penting / Kelebihan info`);
+
+      // =========================================================================
+      // STATE & LOGIKA KUIS
+      // =========================================================================
+      let selectedCategory = "Paket Latihan 1";
       let quizQuestions = [];
       let currentQuestionIdx = 0;
       let scoreCorrect = 0;
       let scoreWrong = 0;
+      let isAnswered = false;
 
       window.onload = function () {
         renderSelectionScreen();
       };
 
       function renderSelectionScreen() {
-        const container = document.getElementById("weeks-container");
+        const container = document.getElementById("category-container");
         container.innerHTML = "";
 
-        Object.keys(phaseMapping).forEach((phaseTitle) => {
-          const groupDiv = document.createElement("div");
-          groupDiv.className = "phase-group";
-
-          const title = document.createElement("div");
-          title.className = "phase-title";
-          title.innerText = phaseTitle;
-          groupDiv.appendChild(title);
-
-          const grid = document.createElement("div");
-          grid.className = "weeks-grid";
-
-          phaseMapping[phaseTitle].forEach((week) => {
-            const count = fullVocabData[week] ? fullVocabData[week].length : 0;
-            const card = document.createElement("div");
-            card.className = "week-card";
-            card.innerHTML = `
-            <div class="week-name">${week}</div>
-            <div class="week-count">${count} Kosakata</div>
-          `;
-            card.onclick = () => startQuiz(week);
-            grid.appendChild(card);
-          });
-
-          groupDiv.appendChild(grid);
-          container.appendChild(groupDiv);
-        });
-      }
-
-      function startQuiz(week) {
-        selectedWeek = week;
-        const vocabList = [...fullVocabData[week]];
-
-        if (!vocabList || vocabList.length === 0) {
-          alert("Kosakata untuk minggu ini belum tersedia.");
+        if (RAW_VOCAB_DATA.length === 0) {
+          container.innerHTML = `<p style="text-align:center; grid-column:1/-1; color:var(--text-muted)">Belum ada data kosakata yang dimuat.</p>`;
           return;
         }
 
+        // Bagi seluruh kosakata menjadi paket-paket kuis (15 kata/paket)
+        const CHUNK_SIZE = 15;
+        const totalBatches = Math.ceil(RAW_VOCAB_DATA.length / CHUNK_SIZE);
+
+        for (let i = 0; i < totalBatches; i++) {
+          const batchItems = RAW_VOCAB_DATA.slice(
+            i * CHUNK_SIZE,
+            (i + 1) * CHUNK_SIZE,
+          );
+          const batchName = `Paket Latihan ${i + 1}`;
+
+          const card = document.createElement("div");
+          card.className = "category-card";
+          card.innerHTML = `
+            <div class="category-name">${batchName}</div>
+            <div>
+              <span class="category-count">${batchItems.length} Kosakata</span>
+            </div>
+          `;
+          card.onclick = () => startQuiz(batchItems, batchName);
+          container.appendChild(card);
+        }
+      }
+
+      function speakCurrentQuestion() {
+        if ("speechSynthesis" in window) {
+          window.speechSynthesis.cancel();
+          const item = quizQuestions[currentQuestionIdx];
+          if (item) {
+            const utterance = new SpeechSynthesisUtterance(item.kr);
+            utterance.lang = "ko-KR";
+            utterance.rate = 0.85;
+            window.speechSynthesis.speak(utterance);
+          }
+        }
+      }
+
+      function startQuiz(vocabList, titleName) {
+        if (!vocabList || vocabList.length === 0) {
+          alert("Tidak ada kosakata di paket ini.");
+          return;
+        }
+
+        selectedCategory = titleName;
+
         // Acak urutan soal (Shuffle)
-        vocabList.sort(() => Math.random() - 0.5);
-        quizQuestions = vocabList;
+        quizQuestions = [...vocabList].sort(() => Math.random() - 0.5);
 
         currentQuestionIdx = 0;
         scoreCorrect = 0;
@@ -1010,13 +1325,14 @@
         document.getElementById("result-screen").style.display = "none";
         document.getElementById("quiz-screen").style.display = "block";
 
-        document.getElementById("quiz-week-label").innerText =
-          `Latihan: ${selectedWeek}`;
+        document.getElementById("quiz-category-label").innerText =
+          selectedCategory;
 
         renderQuestion();
       }
 
       function renderQuestion() {
+        isAnswered = false;
         const currentItem = quizQuestions[currentQuestionIdx];
         const total = quizQuestions.length;
 
@@ -1024,17 +1340,17 @@
           `Soal ${currentQuestionIdx + 1} / ${total}`;
         document.getElementById("question-kr").innerText = currentItem.kr;
 
-        // Buat pilihan jawaban (1 Benar + 3 Pengecoh)
-        const currentWeekList = fullVocabData[selectedWeek];
-        let wrongOptions = currentWeekList
-          .filter((item) => item.id !== currentItem.id)
-          .map((item) => item.id);
+        // Putar suara secara otomatis
+        speakCurrentQuestion();
 
-        // Acak pengecoh
-        wrongOptions.sort(() => Math.random() - 0.5);
+        // Cari 3 pilihan jawaban salah dari seluruh database kosakata
+        let pool = RAW_VOCAB_DATA.filter((item) => item.id !== currentItem.id);
+        pool.sort(() => Math.random() - 0.5);
 
-        // Ambil 3 pengecoh + 1 jawaban benar
-        let choices = [currentItem.id, ...wrongOptions.slice(0, 3)];
+        let choices = [
+          currentItem.id,
+          ...pool.slice(0, 3).map((item) => item.id),
+        ];
         choices.sort(() => Math.random() - 0.5);
 
         const optionsContainer = document.getElementById("options-container");
@@ -1044,25 +1360,38 @@
           const btn = document.createElement("button");
           btn.className = "option-btn";
           btn.innerText = choiceText;
-          btn.onclick = () => handleAnswer(choiceText, currentItem.id);
+          btn.onclick = () => handleAnswer(btn, choiceText, currentItem.id);
           optionsContainer.appendChild(btn);
         });
       }
 
-      function handleAnswer(selectedChoice, correctChoice) {
+      function handleAnswer(selectedBtn, selectedChoice, correctChoice) {
+        if (isAnswered) return;
+        isAnswered = true;
+
+        const buttons = document.querySelectorAll(".option-btn");
+        buttons.forEach((btn) => {
+          btn.disabled = true;
+          if (btn.innerText === correctChoice) {
+            btn.classList.add("correct");
+          }
+        });
+
         if (selectedChoice === correctChoice) {
           scoreCorrect++;
         } else {
           scoreWrong++;
+          selectedBtn.classList.add("wrong");
         }
 
-        currentQuestionIdx++;
-
-        if (currentQuestionIdx < quizQuestions.length) {
-          renderQuestion();
-        } else {
-          showResults();
-        }
+        setTimeout(() => {
+          currentQuestionIdx++;
+          if (currentQuestionIdx < quizQuestions.length) {
+            renderQuestion();
+          } else {
+            showResults();
+          }
+        }, 1200);
       }
 
       function showResults() {
@@ -1072,8 +1401,8 @@
         const total = quizQuestions.length;
         const finalScore = Math.round((scoreCorrect / total) * 100);
 
-        document.getElementById("result-week-subtitle").innerText =
-          `Hasil Latihan ${selectedWeek}`;
+        document.getElementById("result-subtitle").innerText =
+          `Hasil ${selectedCategory}`;
         document.getElementById("final-score").innerText = finalScore;
         document.getElementById("stat-correct").innerText = scoreCorrect;
         document.getElementById("stat-wrong").innerText = scoreWrong;
@@ -1081,7 +1410,14 @@
       }
 
       function restartQuiz() {
-        startQuiz(selectedWeek);
+        const CHUNK_SIZE = 15;
+        const batchIndex =
+          parseInt(selectedCategory.replace("Paket Latihan ", "")) - 1;
+        const batchItems = RAW_VOCAB_DATA.slice(
+          batchIndex * CHUNK_SIZE,
+          (batchIndex + 1) * CHUNK_SIZE,
+        );
+        startQuiz(batchItems, selectedCategory);
       }
 
       function showSelectionScreen() {

@@ -4,6 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Fase 7: Persiapan TOPIK II - K-Learning Platform</title>
+    <!-- Favicon / Logo Tab Browser (SVG Inline) -->
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23e11d48'/><text x='50%' y='55%' dominant-baseline='central' text-anchor='middle' fill='white' font-size='60' font-family='sans-serif' font-weight='bold'>한</text></svg>"
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -20,6 +26,8 @@
         --border-color: #e2e8f0;
         --text-muted: #64748b;
         --text-main: #1e293b;
+        --success: #16a34a;
+        --success-bg: #f0fdf4;
       }
 
       * {
@@ -27,6 +35,7 @@
         margin: 0;
         padding: 0;
       }
+
       body {
         font-family: "Inter", "Noto Sans KR", sans-serif;
         background-color: var(--bg-main);
@@ -75,15 +84,6 @@
         gap: 16px;
         align-items: center;
       }
-      nav a {
-        text-decoration: none;
-        color: var(--text-muted);
-        font-weight: 500;
-        font-size: 0.9rem;
-      }
-      nav a:hover {
-        color: var(--accent);
-      }
 
       .nav-dropdown {
         padding: 6px 12px;
@@ -123,6 +123,7 @@
         font-size: 0.8rem;
         cursor: pointer;
       }
+
       .timer-btn.stop {
         background: var(--accent);
       }
@@ -143,6 +144,10 @@
         transition: all 0.3s ease;
       }
 
+      .left-panel.hidden-modul {
+        display: none !important;
+      }
+
       .panel-header {
         padding: 10px 16px;
         border-bottom: 1px solid var(--border-color);
@@ -156,28 +161,40 @@
         flex: 1;
         background: #525659;
       }
+
       .pdf-container iframe {
         width: 100%;
         height: 100%;
         border: none;
       }
 
-      /* Panel Kanan (Kosakata) & Fitur Collapse */
+      /* Panel Kanan (Kosakata) */
       .right-panel {
-        width: 400px;
+        width: 420px;
         background: var(--panel-bg);
         display: flex;
         flex-direction: column;
         flex-shrink: 0;
-        transition:
-          margin-right 0.3s ease,
-          opacity 0.2s ease;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       }
 
       .right-panel.collapsed {
-        margin-right: -400px;
+        margin-right: -420px;
         opacity: 0;
         pointer-events: none;
+      }
+
+      .right-panel.fullscreen {
+        width: 100% !important;
+        flex: 1 !important;
+      }
+
+      .right-panel.fullscreen .vocab-list.grid-view {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        align-content: start;
+        gap: 14px;
+        padding: 20px 24px;
       }
 
       .vocab-header {
@@ -186,6 +203,7 @@
         display: flex;
         flex-direction: column;
         gap: 10px;
+        background: #f8fafc;
       }
 
       .vocab-title-bar {
@@ -197,17 +215,21 @@
       .vocab-title {
         font-size: 1rem;
         font-weight: 700;
+        display: flex;
+        align-items: center;
+        gap: 8px;
       }
 
       .control-btns {
         display: flex;
         gap: 6px;
+        align-items: center;
       }
 
       .action-btn {
         font-size: 0.75rem;
         padding: 5px 10px;
-        background: #f1f5f9;
+        background: #ffffff;
         border: 1px solid var(--border-color);
         border-radius: 6px;
         cursor: pointer;
@@ -233,11 +255,30 @@
         display: flex;
         align-items: center;
         gap: 6px;
-        transition: background-color 0.2s;
       }
 
-      .toggle-panel-btn:hover {
-        background: var(--accent);
+      .progress-container {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 0.78rem;
+        font-weight: 600;
+        color: var(--text-muted);
+      }
+
+      .progress-bar-bg {
+        flex: 1;
+        height: 6px;
+        background: #e2e8f0;
+        border-radius: 10px;
+        overflow: hidden;
+      }
+
+      .progress-bar-fill {
+        height: 100%;
+        background: var(--success);
+        width: 0%;
+        transition: width 0.3s ease;
       }
 
       .week-filter {
@@ -250,7 +291,7 @@
       .week-btn {
         padding: 4px 12px;
         border: 1px solid var(--border-color);
-        background: #f1f5f9;
+        background: #ffffff;
         border-radius: 16px;
         font-size: 0.8rem;
         font-weight: 500;
@@ -273,6 +314,101 @@
         gap: 10px;
       }
 
+      /* Flashcard Quiz View Styles */
+      .flashcard-container {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+        background: var(--bg-main);
+      }
+
+      .quiz-card {
+        width: 100%;
+        max-width: 500px;
+        background: white;
+        border: 2px solid var(--border-color);
+        border-radius: 16px;
+        padding: 32px 24px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 16px;
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+        position: relative;
+        transition: all 0.3s ease;
+      }
+
+      .quiz-card.memorized {
+        border-color: #22c55e;
+        background-color: var(--success-bg);
+      }
+
+      .quiz-counter {
+        font-size: 0.8rem;
+        font-weight: 700;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .quiz-kr {
+        font-size: 2.2rem;
+        font-weight: 800;
+        color: var(--primary);
+      }
+
+      .quiz-latin {
+        font-size: 1.1rem;
+        color: var(--accent);
+        font-weight: 600;
+        font-style: italic;
+      }
+
+      .quiz-id {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--text-main);
+        padding: 12px 20px;
+        background: #f1f5f9;
+        border-radius: 8px;
+        width: 100%;
+        min-height: 54px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .quiz-nav-btns {
+        display: flex;
+        gap: 12px;
+        margin-top: 10px;
+        width: 100%;
+        max-width: 500px;
+      }
+
+      .quiz-nav-btn {
+        flex: 1;
+        padding: 12px;
+        background: white;
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        font-weight: 700;
+        font-size: 0.9rem;
+        cursor: pointer;
+        color: var(--primary);
+        transition: all 0.2s;
+      }
+
+      .quiz-nav-btn:hover {
+        background: var(--primary);
+        color: white;
+      }
+
+      /* Card Kosakata Standard View */
       .vocab-card {
         border: 1px solid var(--border-color);
         border-radius: 8px;
@@ -280,19 +416,23 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        gap: 10px;
+        gap: 12px;
         background: #ffffff;
-        transition: background-color 0.2s;
+        transition: all 0.2s ease;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
       }
-      .vocab-card:hover {
-        background-color: #f8fafc;
+
+      .vocab-card.memorized {
+        border-color: #86efac;
+        background-color: var(--success-bg);
       }
 
       .vocab-content {
         display: flex;
         flex-direction: column;
-        gap: 2px;
+        gap: 3px;
         flex: 1;
+        min-width: 0;
       }
 
       .vocab-kr-row {
@@ -303,36 +443,38 @@
 
       .vocab-kr {
         font-weight: 700;
-        font-size: 0.98rem;
+        font-size: 1.05rem;
         color: var(--primary);
+        word-break: break-word;
       }
 
       .vocab-latin {
-        font-size: 0.75rem;
+        font-size: 0.78rem;
         color: var(--accent);
         font-weight: 600;
         font-style: italic;
       }
 
       .vocab-id {
-        font-size: 0.85rem;
+        font-size: 0.88rem;
         color: var(--text-muted);
-        margin-top: 2px;
+        margin-top: 1px;
+      }
+
+      .card-right-actions {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        flex-shrink: 0;
       }
 
       .btn-audio-sm {
         background: #f1f5f9;
         border: 1px solid var(--border-color);
         border-radius: 6px;
-        padding: 2px 6px;
+        padding: 4px 8px;
         font-size: 0.75rem;
         cursor: pointer;
-        transition: all 0.2s;
-      }
-
-      .btn-audio-sm:hover {
-        background: #e2e8f0;
-        transform: scale(1.05);
       }
 
       .blur-text {
@@ -344,23 +486,25 @@
         padding: 0 4px;
       }
 
-      .item-toggle-btn {
+      .item-toggle-btn,
+      .memorize-btn {
         background: #f1f5f9;
         border: 1px solid var(--border-color);
-        border-radius: 50%;
-        width: 30px;
-        height: 30px;
+        border-radius: 6px;
+        padding: 6px 10px;
         display: flex;
         align-items: center;
         justify-content: center;
         cursor: pointer;
-        font-size: 0.85rem;
+        font-size: 0.82rem;
         flex-shrink: 0;
-        transition: background-color 0.2s;
+        font-weight: 600;
       }
 
-      .item-toggle-btn:hover {
-        background: #e2e8f0;
+      .memorize-btn.done {
+        background: #22c55e;
+        color: white;
+        border-color: #16a34a;
       }
     </style>
   </head>
@@ -370,6 +514,7 @@
         <div class="brand-logo">한</div>
         <span>K-Learning Platform</span>
       </a>
+      <script src="kamus-widget.js"></script>
 
       <div class="timer-widget">
         <span
@@ -394,6 +539,7 @@
           class="nav-dropdown"
           onchange="window.location.href = this.value"
         >
+          <option value="hangeul.html">Hangeul</option>
           <option value="fase1.html">Fase 1: Fondasi</option>
           <option value="fase2.html">Fase 2: Perluasan</option>
           <option value="fase3.html">Fase 3: Kalimat Kompleks</option>
@@ -401,6 +547,9 @@
           <option value="fase5.html">Fase 5: Simulasi TOPIK I</option>
           <option value="fase6.html">Fase 6: Menengah Awal</option>
           <option value="fase7.html" selected>Fase 7: TOPIK II</option>
+          <option value="fase8.html">Fase 8: Dunia Kerja</option>
+          <option value="fase9.html">Fase 9: Menuju Level 4</option>
+          <option value="gabungan.html">Review Gabungan Fase 1-8</option>
         </select>
         <a href="welcome.html">Home</a>
       </nav>
@@ -408,7 +557,7 @@
 
     <div class="workspace">
       <!-- Panel Kiri: Modul PDF Fase 7 -->
-      <div class="left-panel">
+      <div class="left-panel" id="left-panel">
         <div class="panel-header">
           <span style="font-weight: 700; color: var(--primary)"
             >Fase 7: Persiapan TOPIK II (Minggu 26 - 28)</span
@@ -419,7 +568,7 @@
             id="toggle-panel-btn"
           >
             <span id="panel-btn-icon">📖</span>
-            <span id="panel-btn-text">Sembunyikan Kosakata</span>
+            <span id="panel-btn-text">Tampilkan Kosakata</span>
           </button>
         </div>
         <div class="pdf-container">
@@ -429,31 +578,121 @@
         </div>
       </div>
 
-      <!-- Panel Kanan: Kuis & Hafalan Kosakata -->
-      <div class="right-panel" id="right-panel">
+      <!-- Panel Kanan: Kosakata -->
+      <div class="right-panel collapsed" id="right-panel">
         <div class="vocab-header">
           <div class="vocab-title-bar">
-            <span class="vocab-title">Hafalan Kosakata</span>
+            <span class="vocab-title">
+              <span>🏆</span>
+              <span id="vocab-view-title">Hafalan Kosakata</span>
+            </span>
             <div class="control-btns">
-              <button class="action-btn" onclick="toggleHideTarget()">
+              <button
+                class="action-btn"
+                onclick="toggleViewMode()"
+                id="view-mode-btn"
+              >
+                🎴 Mode Flashcard
+              </button>
+              <button
+                class="action-btn"
+                onclick="toggleFullVocabMode()"
+                id="full-vocab-btn"
+              >
+                ↔️ Focus Mode
+              </button>
+              <button
+                class="action-btn"
+                onclick="toggleHideAll()"
+                id="hide-all-btn"
+              >
+                🙈 Sembunyi Semua
+              </button>
+              <button
+                class="action-btn"
+                onclick="toggleHideTarget()"
+                id="hide-target-btn"
+              >
                 Mode:
                 <span id="hide-mode-label" style="color: var(--accent)"
                   >Sembunyi ID</span
                 >
               </button>
-              <button class="action-btn" onclick="toggleHideAll()">
-                Sembunyi Semua
+            </div>
+          </div>
+
+          <div class="progress-container">
+            <span>Status Hafal:</span>
+            <div class="progress-bar-bg">
+              <div class="progress-bar-fill" id="progress-bar-fill"></div>
+            </div>
+            <span id="progress-text">0/0 (0%)</span>
+          </div>
+
+          <div class="week-filter" id="week-filter-container"></div>
+        </div>
+
+        <!-- Tampilan Daftar Keseluruhan Kata -->
+        <div class="vocab-list grid-view" id="vocab-list"></div>
+
+        <!-- Tampilan Kuis / Flashcard (Satu Kata) -->
+        <div
+          class="flashcard-container"
+          id="flashcard-container"
+          style="display: none"
+        >
+          <div class="quiz-card" id="quiz-card">
+            <div class="quiz-counter" id="quiz-counter">KATA 1 DARI 30</div>
+
+            <div style="display: flex; align-items: center; gap: 10px">
+              <span class="quiz-kr" id="quiz-kr">학 (學)</span>
+              <button
+                class="btn-audio-sm"
+                onclick="speakCurrentQuiz()"
+                style="font-size: 1rem; padding: 6px 10px"
+              >
+                🔊
+              </button>
+            </div>
+            <div class="quiz-latin" id="quiz-latin">hak</div>
+
+            <div class="quiz-id" id="quiz-id">
+              <span id="quiz-id-text">Akar: Belajar (학교, 학생, 대학)</span>
+            </div>
+
+            <div style="display: flex; gap: 10px; width: 100%; margin-top: 8px">
+              <button
+                class="action-btn"
+                style="flex: 1; padding: 10px"
+                onclick="toggleQuizAnswer()"
+                id="quiz-toggle-ans-btn"
+              >
+                🙈 Sembunyikan Jawaban
+              </button>
+              <button
+                class="memorize-btn"
+                style="flex: 1; padding: 10px"
+                onclick="toggleQuizMemorized()"
+                id="quiz-memorize-btn"
+              >
+                🟩 Belum Hafal
               </button>
             </div>
           </div>
-          <div class="week-filter" id="week-filter-container"></div>
+
+          <div class="quiz-nav-btns">
+            <button class="quiz-nav-btn" onclick="prevQuizCard()">
+              ⬅️ Sebelumnya
+            </button>
+            <button class="quiz-nav-btn" onclick="nextQuizCard()">
+              Berikutnya ➡️
+            </button>
+          </div>
         </div>
-        <div class="vocab-list" id="vocab-list"></div>
       </div>
     </div>
 
     <script>
-      // Data Kosakata Lengkap Fase 7 Dipisah (Tanpa Tanda Miring '/')
       const vocabData = {
         "Minggu 26": [
           {
@@ -605,9 +844,15 @@
       let currentWeek = Object.keys(vocabData)[0];
       let hideTarget = "ID";
       let hideStates = {};
-      let isPanelCollapsed = false;
+      let isPanelCollapsed = true;
+      let isFullVocabMode = false;
+      let isFlashcardMode = false;
+      let currentQuizIndex = 0;
+      let isQuizAnsVisible = false;
 
-      // FUNGSI SUARA WEBSPEECH API
+      const STORAGE_KEY = "k_learning_fase7_memorized";
+      let memorizedData = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+
       function speakKorean(text) {
         if ("speechSynthesis" in window) {
           window.speechSynthesis.cancel();
@@ -650,6 +895,54 @@
         }
       }
 
+      function toggleFullVocabMode() {
+        const leftPanel = document.getElementById("left-panel");
+        const rightPanel = document.getElementById("right-panel");
+        const fullBtn = document.getElementById("full-vocab-btn");
+
+        isFullVocabMode = !isFullVocabMode;
+
+        if (isFullVocabMode) {
+          leftPanel.classList.add("hidden-modul");
+          rightPanel.classList.add("fullscreen");
+          fullBtn.innerText = "📑 Tampilkan Modul";
+          fullBtn.style.background = "var(--primary)";
+          fullBtn.style.color = "white";
+        } else {
+          leftPanel.classList.remove("hidden-modul");
+          rightPanel.classList.remove("fullscreen");
+          fullBtn.innerText = "↔️ Focus Mode";
+          fullBtn.style.background = "#ffffff";
+          fullBtn.style.color = "var(--primary)";
+        }
+      }
+
+      function toggleViewMode() {
+        isFlashcardMode = !isFlashcardMode;
+        const viewBtn = document.getElementById("view-mode-btn");
+        const listContainer = document.getElementById("vocab-list");
+        const flashcardContainer = document.getElementById(
+          "flashcard-container",
+        );
+        const hideAllBtn = document.getElementById("hide-all-btn");
+
+        if (isFlashcardMode) {
+          viewBtn.innerText = "📋 Mode Daftar All";
+          listContainer.style.display = "none";
+          flashcardContainer.style.display = "flex";
+          hideAllBtn.style.display = "none";
+          currentQuizIndex = 0;
+          isQuizAnsVisible = false;
+          renderQuizCard();
+        } else {
+          viewBtn.innerText = "🎴 Mode Flashcard";
+          listContainer.style.display = "flex";
+          flashcardContainer.style.display = "none";
+          hideAllBtn.style.display = "inline-block";
+          renderVocab();
+        }
+      }
+
       function selectWeek(week, btnElement) {
         document
           .querySelectorAll(".week-btn")
@@ -657,14 +950,27 @@
         btnElement.classList.add("active");
         currentWeek = week;
         hideStates = {};
-        renderVocab();
+        currentQuizIndex = 0;
+        isQuizAnsVisible = false;
+
+        if (isFlashcardMode) {
+          renderQuizCard();
+        } else {
+          renderVocab();
+        }
       }
 
       function toggleHideTarget() {
         hideTarget = hideTarget === "ID" ? "KR" : "ID";
         document.getElementById("hide-mode-label").innerText =
           hideTarget === "ID" ? "Sembunyi ID" : "Sembunyi KR";
-        renderVocab();
+
+        if (isFlashcardMode) {
+          isQuizAnsVisible = false;
+          renderQuizCard();
+        } else {
+          renderVocab();
+        }
       }
 
       function toggleSingleItem(index) {
@@ -679,7 +985,45 @@
         currentList.forEach((_, idx) => {
           hideStates[idx] = !allHidden;
         });
+
+        const hideAllBtn = document.getElementById("hide-all-btn");
+        hideAllBtn.innerText = allHidden
+          ? "🙈 Sembunyi Semua"
+          : "👁️ Tampilkan Semua";
+
         renderVocab();
+      }
+
+      function toggleMemorized(itemKey) {
+        memorizedData[itemKey] = !memorizedData[itemKey];
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(memorizedData));
+
+        if (isFlashcardMode) {
+          renderQuizCard();
+        } else {
+          renderVocab();
+        }
+      }
+
+      function updateProgressBar() {
+        const currentList = vocabData[currentWeek];
+        let memorizedCount = 0;
+
+        currentList.forEach((item) => {
+          const itemKey = `${currentWeek}_${item.kr}`;
+          if (memorizedData[itemKey]) {
+            memorizedCount++;
+          }
+        });
+
+        const total = currentList.length;
+        const percentage =
+          total > 0 ? Math.round((memorizedCount / total) * 100) : 0;
+
+        document.getElementById("progress-bar-fill").style.width =
+          `${percentage}%`;
+        document.getElementById("progress-text").innerText =
+          `${memorizedCount}/${total} (${percentage}%)`;
       }
 
       function renderVocab() {
@@ -688,39 +1032,146 @@
 
         vocabData[currentWeek].forEach((item, index) => {
           const isHidden = hideStates[index] || false;
-
           const isKrHidden = isHidden && hideTarget === "KR";
           const isIdHidden = isHidden && hideTarget === "ID";
 
+          const itemKey = `${currentWeek}_${item.kr}`;
+          const isMemorized = memorizedData[itemKey] || false;
+
           const card = document.createElement("div");
-          card.className = "vocab-card";
+          card.className = `vocab-card ${isMemorized ? "memorized" : ""}`;
           card.innerHTML = `
-          <div class="vocab-content">
-            <div class="vocab-kr-row">
-              <span class="vocab-kr ${isKrHidden ? "blur-text" : ""}">${item.kr}</span>
-              <button class="btn-audio-sm" onclick="speakKorean('${item.kr.replace(/ \(.*\)/, "")}')" title="Dengarkan pengucapan">🔊</button>
+            <div class="vocab-content">
+              <div class="vocab-kr-row">
+                <span class="vocab-kr ${isKrHidden ? "blur-text" : ""}">${item.kr}</span>
+                <button class="btn-audio-sm" onclick="speakKorean('${item.kr.replace(/ \(.*\)/, "").replace(/ \/ .*/, "")}')" title="Dengarkan pengucapan">🔊</button>
+              </div>
+              <div class="vocab-latin ${isKrHidden ? "blur-text" : ""}">${item.latin}</div>
+              <div class="vocab-id ${isIdHidden ? "blur-text" : ""}">${item.id}</div>
             </div>
-            <div class="vocab-latin ${isKrHidden ? "blur-text" : ""}">${item.latin}</div>
-            <div class="vocab-id ${isIdHidden ? "blur-text" : ""}">${item.id}</div>
-          </div>
-          <button class="item-toggle-btn" onclick="toggleSingleItem(${index})" title="Sembunyikan/Tampilkan Item Ini">
-            ${isHidden ? "👁️" : "🙈"}
-          </button>
-        `;
+            <div class="card-right-actions">
+              <button class="memorize-btn ${isMemorized ? "done" : ""}" onclick="toggleMemorized('${itemKey}')" title="Tandai Sudah Hafal">
+                ${isMemorized ? "✅ Hafal" : "🟩 Belum"}
+              </button>
+              <button class="item-toggle-btn" onclick="toggleSingleItem(${index})" title="Sembunyikan/Tampilkan">
+                ${isHidden ? "👁️" : "🙈"}
+              </button>
+            </div>
+          `;
           vocabList.appendChild(card);
         });
+
+        updateProgressBar();
+      }
+
+      function renderQuizCard() {
+        const currentList = vocabData[currentWeek];
+        if (!currentList || currentList.length === 0) return;
+
+        const item = currentList[currentQuizIndex];
+        const itemKey = `${currentWeek}_${item.kr}`;
+        const isMemorized = memorizedData[itemKey] || false;
+
+        document.getElementById("quiz-counter").innerText =
+          `KATA ${currentQuizIndex + 1} DARI ${currentList.length}`;
+
+        const quizKr = document.getElementById("quiz-kr");
+        const quizLatin = document.getElementById("quiz-latin");
+        const quizIdText = document.getElementById("quiz-id-text");
+        const toggleAnsBtn = document.getElementById("quiz-toggle-ans-btn");
+
+        quizKr.innerText = item.kr;
+        quizLatin.innerText = item.latin;
+        quizIdText.innerText = item.id;
+
+        if (hideTarget === "ID") {
+          quizKr.classList.remove("blur-text");
+          quizLatin.classList.remove("blur-text");
+
+          if (isQuizAnsVisible) {
+            quizIdText.classList.remove("blur-text");
+            toggleAnsBtn.innerText = "🙈 Sembunyikan Arti";
+          } else {
+            quizIdText.classList.add("blur-text");
+            toggleAnsBtn.innerText = "👁️ Tampilkan Arti";
+          }
+        } else {
+          quizIdText.classList.remove("blur-text");
+
+          if (isQuizAnsVisible) {
+            quizKr.classList.remove("blur-text");
+            quizLatin.classList.remove("blur-text");
+            toggleAnsBtn.innerText = "🙈 Sembunyikan Korea";
+          } else {
+            quizKr.classList.add("blur-text");
+            quizLatin.classList.add("blur-text");
+            toggleAnsBtn.innerText = "👁️ Tampilkan Korea";
+          }
+        }
+
+        const quizCard = document.getElementById("quiz-card");
+        const memBtn = document.getElementById("quiz-memorize-btn");
+
+        if (isMemorized) {
+          quizCard.classList.add("memorized");
+          memBtn.innerText = "✅ Sudah Hafal";
+          memBtn.classList.add("done");
+        } else {
+          quizCard.classList.remove("memorized");
+          memBtn.innerText = "🟩 Belum Hafal";
+          memBtn.classList.remove("done");
+        }
+
+        updateProgressBar();
+      }
+
+      function speakCurrentQuiz() {
+        const item = vocabData[currentWeek][currentQuizIndex];
+        if (item)
+          speakKorean(item.kr.replace(/ \(.*\)/, "").replace(/ \/ .*/, ""));
+      }
+
+      function toggleQuizAnswer() {
+        isQuizAnsVisible = !isQuizAnsVisible;
+        renderQuizCard();
+      }
+
+      function toggleQuizMemorized() {
+        const item = vocabData[currentWeek][currentQuizIndex];
+        if (item) {
+          toggleMemorized(`${currentWeek}_${item.kr}`);
+        }
+      }
+
+      function nextQuizCard() {
+        const currentList = vocabData[currentWeek];
+        if (currentQuizIndex < currentList.length - 1) {
+          currentQuizIndex++;
+          isQuizAnsVisible = false;
+          renderQuizCard();
+        }
+      }
+
+      function prevQuizCard() {
+        if (currentQuizIndex > 0) {
+          currentQuizIndex--;
+          isQuizAnsVisible = false;
+          renderQuizCard();
+        }
       }
 
       /* Timer Functions */
       let timerInterval = null,
         timeLeft = 25 * 60,
         isTimerRunning = false;
+
       function updateTimerDisplay() {
         const minutes = Math.floor(timeLeft / 60),
           seconds = timeLeft % 60;
         document.getElementById("timer").innerText =
           `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
       }
+
       function toggleTimer() {
         const btn = document.getElementById("start-timer-btn");
         if (isTimerRunning) {
@@ -744,6 +1195,7 @@
           }, 1000);
         }
       }
+
       function resetTimer() {
         clearInterval(timerInterval);
         isTimerRunning = false;
@@ -752,6 +1204,7 @@
         document.getElementById("start-timer-btn").classList.remove("stop");
         updateTimerDisplay();
       }
+
       updateTimerDisplay();
     </script>
   </body>
